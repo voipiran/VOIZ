@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<module> 
+  <menulist> 
+    <menuitem menuid="adminer-db" desc="Adminer DB Management"
+parent="system" module="no" link="" order="11"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+
+<menuitem menuid="adminer" desc="Adminer"
+parent="adminer-db" module="no" link="adminer/" order="71"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+  
+<menuitem menuid="editor" desc="Adminer Editor"
+parent="adminer-db" module="no" link="adminer/adminer.php" order="72"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+	
+  </menulist> 
+</module>

@@ -1,0 +1,119 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 0.5                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.2 2007/08/09 00:31:28 jmartinez Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+'Agent Console' => 'کنسول اپراتور',
+'Agent log-in failed!' => 'ورود نا موفق',
+'Agent login process not started' => 'ورود اپراتور شروع نشده است',
+'Agent log-in terminated.' => 'ورود اپراتور قطع شد',
+'Agent not authorized for ECCP - ECCP password not set' => 'Agent not authorized for ECCP - ECCP password not set',
+'Agent not found' => 'اپراتوری یافت نشد',
+'Agent not handling an incoming call' => 'اپراتور تماس های ورودی را مدیریت نمی کند',
+'Agent Number' => 'شماره اپراتور',
+'Call at end of campaign' => 'تماس در انتهای تبلیغات',
+'Call Form' => 'فرم تماس',
+'Call Information' => 'اطلاعات مکالمه',
+'Call Script' => 'اسکریپت تماس',
+'Call successfully scheduled' => 'تماس با موفقیت زمانبندی شد',
+'Cannot start agent login' => 'عدم موفقیت در ورود',
+'Confirm contact' => 'تائید مشخصات',
+'Connected to call' => 'به تماس متصل شد',
+'Contact' => 'مشخصات تماس',
+'Contact successfully confirmed' => 'مشخصات با موفقیت تائید شد',
+'Dismiss' => 'انصراف',
+'End Break' => 'پایان استراحت',
+'End date' => 'تاریخ پایان',
+'End Hold' => 'پایان پشت خط',
+'End session' => 'خروج',
+'End time' => 'زمان پایان',
+'Enter' => 'ورود',
+'Error while confirming contact' => 'Error while confirming contact',
+'Error while hanging up call' => 'Error while hanging up call',
+'Error while logging out agent' => 'Error while logging out agent',
+'Error while saving form data' => 'Error while saving form data',
+'Error while scheduling call' => 'Error while scheduling call',
+'Error while starting break' => 'Error while starting break',
+'Error while stopping break' => 'Error while stopping break',
+'Error while transferring call' => 'Error while transferring call',
+'Extension' => 'داخلی',
+'Failed to retrieve agent password' => 'Failed to retrieve agent password',
+'Form data successfully saved' => 'فرم اطلاعات با موفقیت ذخیره شد',
+'Hangup' => 'قطع مکالمه',
+'Hold' => 'پشت خط',
+'Invalid agent number' => 'شماره اپراتور نا معتبر است',
+'Invalid extension number' => 'شماره داخلی نا معتبر است',
+'Invalid or incomplete form data' => 'Invalid or incomplete form data',
+'Invalid or incomplete schedule' => 'Invalid or incomplete schedule',
+'Invalid or missing break ID' => 'Invalid or missing break ID',
+'Invalid or missing contact ID' => 'Invalid or missing contact ID',
+'Invalid or missing extension to transfer' => 'Invalid or missing extension to transfer',
+'Logging agent in. Please wait...' => 'ورود اپراتور، منتظر بمانید',
+'Names' => 'نام',
+'No active call' => 'تماس فعالی وجود ندارد',
+'No forms available for this call' => 'فرمی برای این تماس وجود ندارد',
+'No information available for this call' => 'اطلاعاتی برای این تماس وجود ندارد',
+'(no matching contacts)' => '(مشخصاتی یافت نشد)',
+'(No script available)' => '(اسکریپتی وجود ندارد)',
+'On break' => 'در استراحت',
+'Phone number' => 'شماره تلفم',
+'Please select your agent number and your extension' => 'لطفا شماره اپراتور و داخلی خود را انتخاب نمایید',
+'Save data' => 'ذخیره',
+'Schedule at date' => 'زمانبندی در تاریخ',
+'Schedule call' => 'زمانبندی تماس',
+'Schedule' => 'زمانبندی',
+'Schedule to same agent' => 'زمانبندی به اپراتور مشابه',
+'Select break type' => 'نوع استراحت را انتخاب کنید',
+'Select extension to transfer to' => 'یک داخلی برای انتقال مکالمه انتخاب نمایید',
+'Specified agent already connected to extension' => 'Specified agent already connected to extension',
+'Start and end date are required for date scheduling.' => 'Start and end date are required for date scheduling.',
+'Start date' => 'تاریخ شروع',
+'Start time' => 'زمان شروع',
+'Take Break' => 'گرفتن استراحت',
+'There are no agents available. At least one agent is required for agent login.' => 'There are no agents available. At least one agent is required for agent login.',
+'There are no extensions available. At least one extension is required for agent login.' => 'There are no extensions available. At least one extension is required for agent login.',
+'Transfer' => 'انتقال مکالمه',
+'Unable to fetch break types' => 'Unable to fetch break types',
+'Unable to hangup call' => 'ناتوانی در قطع مکالمه',
+'Unable to read call information' => 'Unable to read call information',
+'Unable to read queue script' => 'Unable to read queue script',
+'Unable to save form data' => 'Unable to save form data',
+'Unable to schedule call' => 'Unable to schedule call',
+'Unable to set contact' => 'Unable to set contact',
+'Unable to start break' => 'ناتوانی در گرفتن استراحت',
+'Unable to stop break' => 'ناتوانی در توقف استراحت',
+'Unable to transfer call' => 'ناتوانی در انتقال مکالمه',
+'(unavailable)' => '(موجود نیست)',
+'VTiger CRM' => 'ویتایگر',
+'Welcome to Agent Console' => 'به کنسول اپراتور خوش آمدید',
+
+'First name' => 'نام',
+'Last name' => 'نام خانوادگی',
+'National ID' => 'کد ملی',
+);
+?>

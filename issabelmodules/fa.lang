@@ -1,0 +1,369 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Farhad Kouhfallah                                      |
+  | Email: farhad@cytco.net                                              |
+  |                                                                      |
+  +----------------------------------------------------------------------+
+  $Id: fa.lang,v 2.0 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLang;
+$arrLang=array(
+/*System Info*/
+"Disk usage" => "میزان استفاده شده از هارد دیسک",
+"Used space" => "فضای استفاده شده",
+"Free space" => "فضاهای خالی",
+"Simultaneous calls, memory and CPU" => "مکالمات همزمان، حافظه و پردازنده",
+"Sim. calls" => "مکالمات همزمان",
+"CPU usage (%)" => "میزان استفاده از پردازنده (%)",
+"Mem. usage (MB)" => "میزان استفاده از حافظه (%)",
+"Export" => "خروجی گرفتن",
+"Start" => "شروع",
+"End" => "پایان",
+"Next" => "بعدی",
+"Previous" => "قبلی",
+
+"Group" => "گروه",
+"administrator" => "مدير سيستم",
+"operator" => "اپراتور",
+"extension" => "شماره داخلي",
+
+
+"Group List" => "لیست گروه",
+"User List" => "لیست کاربران",
+"Logout" => "خروج",
+"Change" => "تغيير",
+"Title" => "عنوان",
+"Language"=>"زبان",
+"Load Module" => "بارگزاري ماژول",
+
+"Required field" => "فيلد مورد نياز",
+"Cancel" => "انصراف",
+"Apply changes" => "ثبت تغييرات",
+"Save" => "ذخيره",
+"Edit" => "ويرايش",
+"Delete" => "حذف",
+"Are you sure you wish to continue?" => "آيا مطمئن به ادامه هستيد؟",
+"The following fields contain errors" => "اين فيلدها داراري خطا هستند",
+"Validation Error" => "خطاي اعتبار",
+
+
+/*Login to Issabel*/
+"Welcome to Elastix"=>"به voiz خوش آمدید",
+"Please enter your username and password"=>"لطفا شناسه کاربري و رمز عبور خود را وارد نماييد",
+"Username"=>"شناسه کاربري",
+"Password"=>"رمز عبور",
+"Submit"=>"ورود",
+"Login page"=>"صفحه ورود",
+/*end Login to Issabel*/
+
+
+
+
+/*start menu*/
+"System"=>"سيستم",
+"System Info"=>"اطلاعات سيستم",
+"User Management"=>"مديريت کاربران",
+"Menu Administrator"=>"منوي مديريت",
+"Group Permission" => "مجوزهاي گروه",
+/*end menu*/
+
+/*version 0.7*/
+/*start paloSantoValidar.class.php*/
+"Options" => "گزینه ها",
+"Empty field" => "فیلد خالی",
+"Bad Format" => "قالب اشتباه",
+"No option was selected" => "گزینه ای انتخاب نشد",
+"Octets out of range" => "هشتایی خارج از محدوده",
+"Undefined validation type" => "Undefined validation type",
+/*end paloSantoValidar.class.php*/
+
+/*version 0.8*/
+/*start user*/
+"View User" => "مشاهده کاربر",
+/*end  user*/
+
+/*system - date/time*/
+"Date/Time" => "تاریخ/زمان",
+/*end system - date/time*/
+
+/*load module*/
+"ID for new module (folder name)" => "شناسه کاربری برای ماژول جدید (نام پوشه)",
+"Choose Menu" => "منو را انتخاب کنید",
+"ID for new menu" => "شناسه کاربری برای منوی جدید",
+"Menu Name" => "نام منو",
+"Defined Menu" => "منوی تعریف شده",
+"New Menu" => "منوی جدید",
+"Module sucessfully loaded" => "ماژول با موفقیت لود شد",
+"Folder name doesn't exist in module file" => "نام پوشه در فایل ماژول وجود ندارد",
+"Folder configs doesn't exist in module file" => "پوشه configs در فایل ماژول وجود ندارد",
+"Folder themes doesn't exist in module file" => "پوشه themes در فایل ماژول وجود ندارد",
+"File index.php doesn't exist in module file" => "فایل index.php در فایل ماژول وجود ندارد",
+"File install.php doesn't exist in module file" => "فايل install.php در فايل ماژول وجود ندارد",
+/*end load module*/
+
+// Elastix 0.9 
+/*Start SubModule Themes*/
+"Themes" =>"پوسته ها",
+"Change Theme" => "تغییر پوسته",
+/*end SubModule Themes*/
+
+/*Module IM*/
+"IM" => "پیام فوری",
+"OpenFire" => "سرور پیام فوری",
+"The service Openfire No running" => "در حال حاضر سرویس پيام فوري فعال نیست در صورت تمایل برای فعال سازی لطفا",
+"Webmin" => "Webmin مدیریت لینوکس با",
+"The service Webmin No running" => "سرويس پنل سيستم عامل فعال نيست. براي فعال سازي لطفا",
+/*vTigerCRM*/
+"vTigerCRM" => "ارتباط با مشتري وي تايگر",
+"The vTiger installation is almost done. To complete it please" => "نصب برنامه ارتباط با مشتری در حال اتمام است لطفا برای اتمام",
+"click here" => "اینجا را کلیک کنید",
+
+/*Sugarcrm*/
+"SugarCRM" => "ارتباط با مشتری شوگر",
+"The SugarCRM installation is almost done. To complete it please" => "نصب نرم افزار ارتباط با مشتری به اتمام رسید، برای تکمیل آن لطفا",
+
+/* Preferences*/
+"Preferences" => "تنظیمات",
+
+
+/* Start About Issabel */
+"About Issabel"=>"درباره voiz",
+"About Issabel2"=>"درباره ویپ ایران",
+"HELP"=>"کمک",
+"About Issabel Content"=>" voiz محبوب ترین سیستم تلفنی ویپ فارسی زبان است که توسط گروه ویپ ایران ارائه و پشتیبانی می گردد.",
+"About Issabel Closed"=>"بستن",
+/* End About Issabel */
+
+"Search" => "جستجو",
+"Show"   => "نمايش",
+'View' => 'مشاهده',
+'Status' => 'وضعيت',
+'Type' => 'نوع',
+'Active' => 'فعال',
+'Filter' => 'فيلتر',
+'md_message_title' => 'انفصال',
+"ERROR" => "خطا",
+
+/*missing  strings  - persian - */
+"Agenda" => "برنامه کاري",
+"Email" => "ايميل",
+"Fax" => "فکس",
+"PBX" => "مرکز تلفن",
+"Reports" => "گزارشات",
+"Extras" => "برنامه هاي جانبي",
+"Call Center" => "مرکز تماس",
+"Addons" => "افزونه ها",
+"Dashboard" => "میز کار",
+"Network" => "تنظیمات شبکه",
+"Shutdown" => "کنترل سرور",
+"Hardware Detector" => "يافتن سخت افزار",
+"Updates" => "به روز رسانی",
+"Backup/Restore" => "پشتيبان گيري",
+"Calendar" => "تقويم",
+"Address Book" => "دفترچه تلفن",
+"Recordings" => "ضبط فايل صوتي",
+"Network Parameters" => "تنظيمات شبکه",
+"DHCP Server" => "سرور DHCP",
+"DHCP Client List" => "ليست کلاينت ها",
+"Assign IP Address to Host" => "اختصاص آدرس IP به ميزبان",
+"Groups" => "گروه ها",
+"Users" => "کاربران",
+"Packages" => "بسته ها",
+"Repositories" => "مخازن",
+"Currency" => "پول رايج",
+"Dashboard Applet Admin" => "مدیریت میز کار",
+"Domains" => "دامنه ها",
+"Accounts" => "حساب ها",
+"Relay" => "رله",
+"Webmail" => "ايميل تحت وب",
+"Antispam" => "ضد هرزنامه",
+"Remote SMTP" => "SMTP خارجي",
+"Email list" => "ليست ايميل",
+"Virtual Fax" => "فکس مجازي",
+"Fax Master" => "فکس اصلي",
+"Fax Clients" => "کاربران فکس",
+"Fax Viewer" => "مشاهده فکس",
+"Email Template" => "قالب ايميل",
+"Virtual Fax List" => "ليست فکس مجازي",
+"New Virtual Fax" => "فکس مجازي جديد",
+"Send Fax" => "ارسال فکس",
+"PBX Configuration" => "تنظیمات تلفنی",
+"Operator Panel" => "پنل اپراتور",
+"Voicemail" => "صندوق صوتي",
+"Monitoring" => "مکالمات ضبط شده",
+"Calls Recordings" => "مکالمات ضبط شده",
+"Batch Configurations" => "تنظیمات دسته ای",
+"Festival" => "برنامه فستیوال",
+"Security" => "امنیت",
+"Settings" => "تنظیمات",
+"Summary" => "گزارش داخلی ها",
+"Missed Calls" => "تماس های بی پاسخ",
+"Hide Filter" => "پنهان کردن فیلتر",
+"Show Filter" => "نمایش فیلتر",
+"Queue" => "صف",
+"Default" => "پیش فرض",
+"No records match the filter criteria" => "رکوردی یافت نشد",
+"Filter applied" => "فیلتر اعمال شده",
+"Download" => "دریافت",
+"Billing Setup" => "تنظیمات صورت حساب",
+"Billing Report" => "گزارش کارکرد",
+"Destination Distribution" => "توزیع مقصد",
+"Rates" => "نرخ مقاصد",
+"Showing" => "نمایش",
+"Page" => "صفحه",
+"Advanced Settings" => "تنظیمات پیشرفته",
+"Weak Keys" => "رمز های ضعیف",
+"Audit" => "گزارش کاربران",
+"Port Knocking Users" => "کاربران پورت ناکینگ",
+"Port Knocking Interfaces" => "کارت شبکه پورت ناکینگ",
+"Define Ports" => "تعریف پورت",
+"Firewall" => "فایروال",
+"Fax Queue" => "صف فکس های خروجی",
+"Email stats" => "گزارش ایمیل ها",
+"Vacations" => "تعطیلات",
+"Firewall Rules" => "قوانین فایروال",
+"SmartFink" => "اسمارت فینک",
+"SmartFink User" => "کاربر اسمارت فینک",
+"Asterisk User" => "کاربر مدیریت استریسک",
+"License" => "لایسنس",
+"About SmartFink" => "درباره اسمارت فینک",
+"Issabel Meet" => "ویدئو کنفرانس",
+"End Date" => "تاریخ پایان",
+"Start Date" => "تاریخ شروع",
+"Filter applied: " => "فیلتر شده بر اساس:  ",
+"bulkdids: " => "ساخت گروهی did",
+"Developer" => "ماژول توسعه",
+"Build Module" => "ساخت ماژول",
+"Delete Module" => "حذف ماژول",
+"Language Admin" => "مدیریت زبان وب",
+"Filter applied" => "فیلتر شده بر اساس:  ",
+"bulkdids" => "ساخت گروهی did",
+
+
+"Endpoint Configurator" => "تنظيم گوشي ها",
+"Conference" => "کنفرانس صوتی",
+"Batch of Extensions" => "ليست کامل داخلي ها",
+"Tools" => "ابزار",
+"Flash Operator Panel" => "پنل اپراتور فلش",
+"VoIP Provider" => "سرويس دهندگان VoIP",
+"My Extension" => "داخلي من",
+"Asterisk-Cli" => "خط فرمان استريسک",
+"Asterisk File Editor" => "ويرايشگر فايل",
+"Text to Wav" => "تبديل متن به صدا",
+"CDR Report" => "ريز مکالمات",
+"Channels Usage" => "استفاده کانال ها",
+"Billing" => "صورت حساب",
+"Asterisk Logs" => "گزارشات استريسک",
+"Graphic Report" => "گزارش گرافيکي",
+"Summary by Extension" => "گزارش خلاصه بر اساس داخلي",
+"Calling Cards" => "کارت هاي تلفن",
+"Downloads" => "دانلودها",
+"Boss Secretary" => "مدیر منشی (Boss Secretary)",
+"Class of Service" => "گروه بندی (Class of Service)",
+"Bulk DIDs" => "DID گروهی (Bulk DIDs)",
+"Call Recording" => "ضبط مکالمه (Call Recording)",
+"CID Superfecta" => "یافتن CID (CID Superfecta)",
+"Set CallerID" => "تغییر CID (Set CallerID)",
+"Asterisk Info" => "اطلاعات استریسک",
+"Admin" => "مدیریت",
+"Banned IPs" => "آی پی های مسدود شده",
+"HTTPS Certificate (Let's Encryp)" => "نصب لایسنس Let's Encrypt",
+
+
+/*CallCenter*/
+"Agent Console" => "کنسول اپراتور",
+"Outgoing Calls" => "تماس خروجی",
+"Ingoing Calls" => "تماس ورودی",
+"Agents" => "اپراتور",
+"Breaks" => "زمان استراحت",
+"Forms" => "فرم ساز",
+"Configuration" => "تنظیمات عمومی",
+"Campaigns" => "کمپین تماس",
+"Do not Call List" => "شماره های ممنوعه",
+"Queues" => "صف",
+"Clients" => "مخاطبین",
+"Form Designer" => "طراحي فرم",
+"Form Preview" => "پيش مشاهده فرم",
+"Reports Break" => "گزارشات زمان استراحت",
+"Calls Detail" => "جزييات تماس",
+"Calls per hour" => "تماس ها در ساعت",
+"Calls per Agent" => "تماس هاي هر اپراتور",
+"Hold Time" => "زمان انتظار",
+"Login Logout" => "ورود خروج",
+"Ingoing Calls Success" => "تماس هاي ورودي موفق",
+"Graphic Calls per hour" => "نمودار گرافيکي تماس ها در ساعت",
+"Agent Information" => "زمان اتصال اپراتورها",
+"Agents Monitoring" => "گزارش اپراتورها",
+"Trunks used per hour" => "زمان استفاده از ترانک ها در ساعت",
+"Agents connection time" => "زمان اتصال اپراتورها",
+"Incoming calls monitoring" => "گزارش تماس هاي ورودي",
+"VersionDetails" => "جزئیات نسخه",
+"VersionPackage" => "جزئیات بسته های نصب شده",
+"textMode" => "حالت متنی",
+"htmlMode" => "Html حالت",
+"Register" => "ثبت نام",
+"Registered" => "ثبت شده",
+"Unauthorized" => "بدون تاییدیه",
+"Agent Options" => "تنظیمات اپراتور",
+"Campaign monitoring" => "نظارت بر کمپین",
+"External URLs" => "لینک های وب خروجی",
+"Ingoing Campaigns" => "کمپین تماس های ورودی",
+"Callback Extensions" => "اپراتور کال بک",
+
+
+"Change Issabel Password" => "تغییر رمز voiz",
+"You are not authorized to access to this page" => "شما اجازه دسترسی به این صفحه را ندارید.",
+"You need administrator privileges" => "شما به مجوز مدیریت احتیاج دارید",
+"Issabel Authentication" => "احراز هویت voiz",
+"Unauthorized" => "بدون اهزار هویت",
+"You are not authorized to access this page." => "شما اجازه دسترسی به این صفحه را ندارید",
+"You have not permissions to access to Flash Operator Panel. Please contact your administrator." => "اجازه دسترسی به پنل نظارتی را ندارید لطفا با مدیریت تماس بگیرید.",
+"Advice" => "فعال",
+/*new*/
+"History" => "تاریخچه",
+"Change Issabel Password" => "تغییر رمز ورود voiz",
+"Current Password" => "رمز جاری",
+"New Password" => "رمز جدید",
+"Issabel Website" => "رمز جدید",
+"Retype New Password" => "ورود دوباره رمز",
+"Search modules" => "جستجوی منو",
+
+
+/*VOIPIRN*/
+"CRM" => "ارتباط با مشتری",
+"VI CRM" => "CRM ویپ ایران",
+"VI Lookup" => "جستجوی تماس گیرنده",
+"Unembedded IssabelPBX" => "تنظیمات",
+"VI Options" => "تنظیمات",
+"VI Permission" => "مجوز کاربران",
+"VI Lookup Test" => "آزمایش جستجو",
+"VI AddressBook" => "دفترچه تلفن",
+"VI Mysql" => "دیتابیس Mysql",
+"VI Vtiger" => "ویتایگر",
+
+);
+?>

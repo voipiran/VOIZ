@@ -1,0 +1,172 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- https://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- ERIC MEYER'S RESET CSS ---------- */
+/* ---------- https://meyerweb.com/eric/tools/css/reset/ ---------- */
+
+@import url(https://meyerweb.com/eric/tools/css/reset/reset.css);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+@font-face{font-family:iransans;font-style:normal;font-weight:300;src:url("../fonts/font/eot/IRANSansWeb(FaNum)_Light.eot");src:url("../fonts/font/eot/IRANSansWeb(FaNum)_Light.eot?#iefix") format("embedded-opentype"),url("../fonts/font/woff2/IRANSansWeb(FaNum)_Light.woff2") format("woff2"),url("../fonts/font/woff/IRANSansWeb(FaNum)_Light.woff") format("woff"),url("../fonts/font/ttf/IRANSansWeb(FaNum)_Light.ttf") format("truetype")}
+@font-face{font-family:iransans;font-style:normal;font-weight:200;src:url("../fonts/font/eot/IRANSansWeb(FaNum)_UltraLight.eot");src:url("../fonts/font/eot/IRANSansWeb(FaNum)_UltraLight.eot?#iefix") format("embedded-opentype"),url("../fonts/font/woff2/IRANSansWeb(FaNum)_UltraLight.woff2") format("woff2"),url("../fonts/font/woff/IRANSansWeb(FaNum)_UltraLight.woff") format("woff"),url("../fonts/font/ttf/IRANSansWeb(FaNum)_UltraLight.ttf") format("truetype")}
+
+body {
+    background: #999;
+
+    /*    background: #f4f4f4 !important;*/
+    color: #5a5656 !important;
+    font: 100%/1.5em iransans,'Open Sans', sans-serif !important;
+    margin: 0 !important;
+
+}
+
+a { text-decoration: none; }
+
+h1 { font-size: 1em; }
+
+h1, p {
+    margin-bottom: 10px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.uppercase { text-transform: uppercase; }
+
+/* ---------- LOGIN ---------- */
+
+#login {
+    margin:170px auto 30px;
+    width: 339px;
+    /*    background: #444444;*/
+    padding: 20px;
+    /*    box-shadow: 0 0 10px;*/
+    border-radius: 3px;
+    position:relative;
+}
+.logovoiz img{width:150px;margin: 0 auto;}
+.logovoiz{  
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 45px;}
+.fotter{ overflow: hidden;
+         position: fixed;
+         bottom: 0;
+         width: 100%;
+         background:#212124;
+}
+.copyr{width:1000px;margin:0 auto;text-align:center;padding:10px 0;}
+.copyr p{font:12px tahoma;color:#bbb;padding:0;margin:0;}
+.copyr a{color:#7FC2E5;}
+form fieldset input[type="text"], input[type="password"] {
+    background: #e5e5e5;
+    border: none;
+    border-radius: 3px;
+    color: #5a5656;
+    font-family: inherit;
+    font-size: 14px;
+    height: 50px;
+    outline: none;
+    padding: 0px 10px;
+    width:100%;
+    -webkit-appearance:none;
+    text-align:center
+}
+
+form fieldset input[type="submit"] {
+    background-color: #7fc2e5;
+    border: none;
+    border-radius: 3px;
+    color: #f4f4f4;
+    cursor: pointer;
+    font-family: inherit;
+    height: 50px;
+    text-transform: uppercase;
+    width:100%;
+    -webkit-appearance:none;
+}
+
+form fieldset a {
+    color: #5a5656;
+    font-size: 10px;
+}
+
+form fieldset a:hover { text-decoration: underline; }
+
+.btn-round {
+    background: #5a5656;
+    border-radius: 50%;
+    color: #f4f4f4;
+    display: block;
+    font-size: 12px;
+    height: 50px;
+    line-height: 50px;
+    margin: 30px 125px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 50px;
+}
+
+.facebook-before {
+    background: #0064ab;
+    border-radius: 3px 0px 0px 3px;
+    color: #f4f4f4;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+.facebook {
+    background: #0079ce;
+    border: none;
+    border-radius: 0px 3px 3px 0px;
+    color: #f4f4f4;
+    cursor: pointer;
+    height: 50px;
+    text-transform: uppercase;
+    width: 250px;
+}
+
+.twitter-before {
+    background: #189bcb;
+    border-radius: 3px 0px 0px 3px;
+    color: #f4f4f4;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+
+.twitter {
+    background: #1bb2e9;
+    border: none;
+    border-radius: 0px 3px 3px 0px;
+    color: #f4f4f4;
+    cursor: pointer;
+    height: 50px;
+    text-transform: uppercase;
+    width: 250px;
+}
+@media (max-width: 768px) {
+    .copyr{width:auto}
+}

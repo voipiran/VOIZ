@@ -1,0 +1,96 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 0.5                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.2 2007/08/09 00:31:28 jmartinez Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Desactivate" => "غیر فعال کن",  
+"New Field" => "فيلد جديد",   
+"Add Field" => "افزودن فيلد",   
+"Update Field" => "به روز رساني فيلد",  
+"Are you sure you wish to delete form?"=>"آيا مطمئنيد که مي خواهيد فرم را حذف کنيد؟",
+"Form Name" => "نام",  
+"Form Description" => "توضیحات",    
+"Field Name" => "فيلد نام",  
+"CSV Column" => "ستون CSV", 
+"Column Number" => "شماره ستون",  
+"Lines Number" => "شماره خطوط",  
+"Field Validation" => "خطاي اعتبار",  
+"Order" => "سفارش",  
+"List Item" => "ليست اقلام",  
+"Add Item" => "افزودن",  
+"Remove Item" => "پاک کردن",  
+"New Form" => "فرم جديد",  
+"View Form" => "نمايش فرم",  
+"Edit Form" => "ويرايش فرم",  
+"Activate" => "فعال نمودن",
+"Form List" => "ليست فرم",   
+"Form Designer" => "طراح فرم",
+"Create New Form" => "ايجاد فرم جديد",   
+"Activate Error" => "خطاي فعال سازي",  
+"Error when Activating the form" => "خطا در هنگام فعال نمودن فرم",  
+"Error when deleting the Form"=>"خطا در هنگام حذف فرم",
+"This field is been used by any campaign"=>"اين فيلد براي هر اقدام تبليغاتي استفاده مي شود",
+"This form is been used by any campaign"=>"اين فرم براي هر اقدام تبليغاتي استفاده مي شود",
+"Add Field Successfully" => "فيلد با موفقيت افزوده شد",  
+"Field could not be added in the Form" => "خطا در افزودن فيلد داخل فرم",  
+"Form could not be added" => "خطا در افزودن فرم",  
+"Values Field" => "ارزش ها",   
+"Form could not be cancelled" => "خطا در هنگام لغو فرم",  
+"Error Id Form" => "خطا در شناسه فرم",   
+"Error Form Name is empty" => "خطا! نام فرم بايد درج شود",   
+"Error Field Name is empty" => "خطا! فيلد نام بايد درج شود",   
+"Error List is empty" => "ليست خطا خالي است",  
+"Error in Order is empty or is not numeric" => "خطا! سفارش درج نشده يا مقدار آن عددي نيست", 
+"Order already exists" => "سفارش از پيش وجود دارد",  
+"Edit Field" => "ويرايش فيلد",  
+"Update Field Successfully" => "فيلد با موفقيت به روز رساني شد",  
+"Field could not be updated in the Form" => "خطا در به روز رساني فيلد در داخل فرم",
+"Form could not be updated" => "خطا در به روز رساني فرم",  
+"Desactivate Error" => "خطاي غيرفعال سازي",  
+"Error when eliminating the form" => "خطا در هنگام حذف فرم",
+"Delete Field Successfully" => "فيلد با موفقيت حذف شد",  
+"Type Label" => "دستورالعمل",  
+"TEXT" => "متن",  
+"LABEL" => "دستور العمل",  
+"TEXTAREA" => "محدوده متن",  
+"LIST" => "ليست",  
+"DATE" => "تاريخ",  
+"Type Label"=>"نوع برچسب",
+"Type Text"=>"نوع متن",
+"Type List"=>"نوع ليست",
+"Type Date"=>"نوع تاريخ",
+"Type Text Area"=>"نوع محدوده متن",
+"Type" => "نوع",
+"Status" => "وضعيت",
+"Active" => "فعال",
+"Inactive" => "غيرفعال",
+"View" => "مشاهده",
+"All" => "همه",
+"No Data Found" => "داده ای پیدا نشد",
+);
+?>

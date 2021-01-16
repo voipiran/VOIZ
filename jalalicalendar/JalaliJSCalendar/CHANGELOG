@@ -1,0 +1,85 @@
+-------------------- 1.4 [2009-04-15] ---------------------
+2009-04-15  Ali Farhadi <ali@farhadi.ir>
+	* calendar-setup.js: Applying patch from 'Emil Sedgh' fixing some bugs.
+	* calendar.js: Adding ability to select an entire row or column just with one click in multiple mode. 
+	
+2009-03-09  Ali Farhadi <ali@farhadi.ir>
+	* calendar.js: applying patch from 'Sina Salek' fixing position bug in IE7
+
+-------------------- 1.3 [2009-02-04] ---------------------
+2009-02-04  Ali Farhadi <ali@farhadi.ir>
+	* calendar-setup.js: ability to automatically fill input field and display area on initialize.
+
+	* calendar-setup.js: bug fixed in setting initial date value for calendar.
+
+-------------------- 1.2 [2008-09-11] ---------------------
+2008-09-11  Ali Farhadi <ali@farhadi.ir>
+	* calendar-setup.js: ability to set a different dateType for input field added.
+
+	* calendar.js: bug fixed in setDateType method.
+
+-------------------- 1.1.5 [2008-07-27] ---------------------
+2008-07-27  Ali Farhadi <ali@farhadi.ir>
+	* calendar-setup.js: new feature added to show popup calendars when their input field gets focus
+
+-------------------- 1.1 (Stable Release) [2008-07-11] ---------------------
+2008-07-11  Ali Farhadi <ali@farhadi.ir>
+	* calendar.js: Implementation of getJalaliUTCWeekNumber method corrected.
+	
+	* calendar.js: Bug fixed in getJalaliUTCDayOfYear method.
+	
+	* calendar.js: getLocalDay method added and used instead of getDay where needed.
+	
+	* calendar.js: Some bugs fixed in print and _init methods.
+
+	* calendar.js: Some other minor bugs fixed.
+
+	* jalali.js: getJalaliDay and getJalaliUTCDay methods added.
+	
+2008-06-12  Ali Farhadi <ali@farhadi.ir>
+	* calendar.js: parseDate bug fixed (now handles miliseconds correctly).
+	
+-------------------- 1.1 beta [2008-06-07] ---------------------
+2008-06-07  Ali Farhadi <ali@farhadi.ir>
+	* calendar.js: some methods added to handle the calendar more dynamically.
+
+	* calendar.js: direction of calendar can be defined in language files.
+	
+	* calendar.js: fixed bug in keyboard navigation with right to left languages.
+	
+	* calendar.js: fixed bug in parseDate function with hours greater that 19.
+
+	* calendar-setup.js: now setup function returns the calendar object.
+
+	* calendar-setup.js: cache parameter removed.
+
+-------------------- 1.0 beta [2008-06-03] ---------------------
+2008-06-03  Ali Farhadi <ali@farhadi.ir>
+	JalaliJSCalendar project started based on code from Mihai Bazon (http://dynarch.com/mishoo/)
+	Folders are restructured.
+	Examples are rewritten.
+	
+	* calendar.php: removed.
+
+	* calendar.js: Totally rewritten with UTC functions.
+	since using local functions when DST is active will produce some bugs, I replaced the functions with UTC alternatives.
+
+	* calendar.js: "am" and "pm" Strings moved to language files.
+
+	* calendar.js: parseDate method is rewritten because it was very buggy.
+
+	* calendar.js: setFullYear patch replaced with _CalSetFullYear function.
+	Since we should not change original JavaScript functions, I used our custom function instead of changeing the original one.
+
+	* calendar.js: dateType property added to Calendar class.
+
+	* calendar.js: langNumbers property added to Calendar class.
+	Number characters can be defined in language files.
+	
+	* calendar-setup.js: dateType property added to setup parameters.
+
+	* calendar-setup.js: langNumbers property added to setup parameters.
+
+	* calendar-setup.js: fixed bug on creating a flat calendar with hidden input.
+	
+	* jalali.js: Jalali Extensions for Date Object.

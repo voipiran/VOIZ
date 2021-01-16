@@ -1,0 +1,66 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.2                                               |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.2 2010-12-10 03:09:33 Alberto Santos asantos@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Port- Service" => "پورت-سرويس",
+"Ports" => "پورت",
+"Port" => "پورت",
+"Option" => "ويژگي",
+"Name" => "نام",
+"Protocol" => "پروتكل",
+"Port(s)" => "پورت",
+"Delete" => "حذف",
+"View" => "نمايش",
+"Edit" => "ويرايش",
+"New Port" => "پورت جديد",
+"Comment" => "توضيحات",
+"Save correctly" => "به درستي ذخيره شد",
+"Delete correctly" => "به درستي حذف شد",
+"Update correctly" => "به درستي به روز رساني شد",
+"Details" => "جزئيات",
+"Message" => "پيام",
+"Error" => "خطا",
+"Are you sure you wish to delete the port(s)." => "آيا شما مطمئن به حذف پورت هستيد؟",
+"Filter by" => "فيلتر توسط",
+"Name" => "نام",
+"Define Ports" => "تعريف پورت",
+"Define Port" => "تعريف پورت",
+"Edit Port" => "ويرايش پورت",
+"View Port" => "ديدن پورت",
+"Protocol Number" => "شماره پروتكل",
+"Type" => "نوع",
+"Code" => "كد",
+"This port had already been defined" => "اين پورت قبلا تعريف شده است",
+"The name and the port can not be empty fields" => "نام و پورت نمي تواند خالي باشد",
+"The name, type and code can not be empty fields" => "نام، نوع و كد نمي تواند خالي باشد",
+"The name and the protocol number can not be empty fields" => "نام و شماره پروتكل نمي تواند خالي باشد",
+"The following fields contain errors" => "فيلد هاي زير داراي خطا هستند",
+"Validation Error" => "خطا در اعتبار سنجي",
+);
+?>

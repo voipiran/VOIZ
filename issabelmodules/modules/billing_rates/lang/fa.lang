@@ -1,0 +1,90 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.0-12                                                 |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                         |
+  | Email: k.haamed@gmail.com                                     |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2010-01-27 02:01:42 Eduardo Cueva ecueva@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Billing Rates" => "نرخ‌هاي صورت حساب",
+"Prefix"=>"پيش شماره",
+"Rate"=>"نرخ",
+"Rate Offset"=>"نرخ تراز",
+"None" => "هيچ كدام",
+"New Rate"=>"نرج جديد",
+"Edit Rate"=>"تغيير نرخ",
+"View Rate"=>"نمايش نرخ",
+"View"=>"نمايش",
+"Rates List"=>"ليست نرخ ها",
+"(by min)" => " (دقيقه)",
+"Create New Rate"=>"ايجاد نرخ جديد",
+"Import File"=>"وارد كردن فايل",
+"Trunk"=>"ترانك",
+"Name"=>"نام",
+"Are you sure you wish to continue?"=>"؟ آيا براي ادامه مطمئن هستيد",
+"create_rate"=>"ايجاد نرخ جديد",
+"import_rate"=>"وارد كردن فايل",
+"Creation Date" => "تاريخ ايجاد",
+"Closing Date" => "تاريخ اتمام",
+"Default" => "پيش فرض",
+"New_rate" => "نرخ جديد",
+"CANCEL" => "انصراف",
+"SAVE" => "ذخيره",
+"REQUIRED_FIELD" => "فيلد‌هاي اجباري",
+"EDIT" => "ويرايش",
+"DELETE" => "حذف",
+"Rate_offset" => "نرخ تراز",
+"Error_new" => "شما بايد تمامي فيلد‌ها را پر نماييد",
+"Error_edit" => "شما بايد تمامي فيلد‌ها را پر نماييد",
+"error_name" => "اين نرخ وجود دارد",
+"File_error" => "خطا در ايجاد نرخ با فايل",
+"Error on line" => "خطا بر روي خط",
+"Invalid_file_extension" => "<b>فرمت فايل نا معتبر-</b> بايد CSV باشد",
+"create_new_rate" => "نرخ جديد ايجاد شد",
+"edit_rate" => "نرخ ويرايش شد",
+"error_prefix" => "پيش شماره با ترانك انتخابي وجود دارد",
+"error" => "خطا در ذخيره سازي، لطفا در وارد كردن اطلاعات دقت نماييد",
+"CONFIRM_CONTINUE" => "آيا مطمئن به حذف نرخ هستيد",
+"deleted" => "نرخ حذف شد",
+"deleted_error" => "بروز مشكل در حذف نرخ‌ها",
+"Hidden_Digits" => "ارقام مخفي",
+"APPLY_CHANGES" => "انجام تغييرات",
+"Validation Error" => "خطاي اعتبار سنجي",
+"error_CVS" => "خطا در ذخيره سازي، لطفا در وارد كردن اطلاعات دقت نماييد",
+"by_min" => "(دقيقه)",
+"alert_import" => "[!]File.csv[/!]&quot;Prefix&quot;,&quot;Name&quot;,&quot;Rate&quot;,&quot;Rate Offset&quot;,&quot;Hidden Digits&quot;,&quot;Trunk&quot;",
+"Date close" => "تاريخ اتمام",
+"Rate History" => "تاريخچه نرخ",
+"Keep history of the current rate" => "تاريخچه اين نرخ را نگهدار",
+"This option allow to create a new rate and keep the history of their rates, or if not only edit the current rate values." => "This option allows to modify the current rate while keeping the history of the different values this rate has adopted through time (good for keeping the records reflecting the actual value the rate had at a particular time).",
+"errorUpdateParent" => "خطا در ذخيره سازي، لطفا در وارد كردن اطلاعات دقت نماييد",
+"Status" => "وضعيت",
+"Obsolete" => "غير قابل استفاده",
+"Current" => "درحال حاضر",
+);
+?>

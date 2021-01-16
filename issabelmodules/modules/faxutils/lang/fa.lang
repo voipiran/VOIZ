@@ -1,0 +1,36 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 2.4.0-9                                               |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2013-08-12 08:08:53 Jose Briones jbriones@elastix.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Fax Utilities" => "برنامه های فکس",
+"Developer Description" => "Developer Description",
+"Developer" => "توسعه دهنده",
+"Download Link" => "دریافت",
+
+"jhylafax_software_description" => "JHylafax y a Hylafax frontend written in Java. It can be installed in Linux, Windows and MacOS.",
+"jhylafax_manufacturer_description" => "A Java client licensed under the GPL for the HylaFAX fax server. JHylaFAX is purely written in Java and runs on any Java 6.0 enabled platform. It has a small footprint, starts up fast and features a sleek user interface.",
+
+"winprint_software_description" => "Winprint HylaFAX is a utility created to send faxes from any Windows machine through a HylaFAX Server.",
+"winprint_manufacturer_description" => "Winprint HylaFAX is a Windows print monitor designed to send its output directly to a HylaFAX Server. Once installed, you can print to a HylaFAX Server from any application, and it will pop up a simple dialog box, allowing you to enter the destination FAX number. It's not intended to be fancy or all encompassing, just a quick and easy way to send FAXes from any Windows application.",
+);
+?>

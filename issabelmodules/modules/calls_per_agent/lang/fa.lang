@@ -1,0 +1,27 @@
+<?php
+global $arrLangModule;
+$arrLangModule = array(
+    "Calls per Agent"  => "تماس ها براي هر اپراتور",
+    "Start Date"    => "تاريخ شروع",
+    "End Date"      => "تاريخ پايان",
+    "Query"         => "دريافت اطلاعات",
+    "No.Agent"      => "اپراتوري وجود ندارد",
+    "Agent"         => "اپراتور",
+    "Queue"         => "صف",
+    "Type"          => "نوع",
+    "Column"        => "ستون",
+    "Text"          => "متن",
+    "Error"         => "خطا",
+    "Transfer"      => "انتقال",
+    "Duration"      => "مدت",
+    "Average"       => "ميانگين",
+    "Total"         => "همه",
+    "Call longest"  => "طولاني ترين تماس",
+    "Calls answered" => "تماس هاي پاسخ داده شده",
+    "Error when connecting to database"    => "خطا در هنگام اتصال به ديتابيس",
+    "Debe ingresar una fecha"   => "بايد يک تاريخ را وارد کنيد",
+    "Debe ingresar una fecha valida"    => "بايد يک تاريخ معتبر را وارد کنيد",
+    'Total'         => 'همه',
+);
+
+?>

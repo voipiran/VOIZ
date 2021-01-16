@@ -1,0 +1,23 @@
+/* inline tables */
+table.inline {
+  background-color: #ffffff;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+table.inline th {
+  padding: 3px;
+  border: 1px solid #aaaaaa;
+  background-color: #eeeeee;
+  font-size: 11px;
+}
+
+table.inline td {
+  padding: 3px;
+  border: 1px solid #aaaaaa;
+  font-size: 11px;
+}
+
+.mainHelp{
+   background-color:#FAFAFA;
+}

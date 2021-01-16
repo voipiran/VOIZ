@@ -1,0 +1,93 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel Version 4.0                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2017 Issabel Foundation                                |
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on "AS IS"     |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Jonathan Vega                                          |
+  | Email: jvega@palosanto.com                                           |
+  +----------------------------------------------------------------------+
+  $Id: fa.lang,v 1.7 2008/06/11 17:30:00 afigueroa Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Build Module" => "ساخت ماژول",
+"Module Id" => "مشخه ماژول",
+"Module Level" => "سطح ماژول",
+"Level 1 Parent Exists" => "پدر سطح 1 دارد",
+"Level 2 Parent Exists" => "پدر سطح 2 دارد",
+"Level 1 Parent Name" => "نام پدر سطح 1",
+"Level 2 Parent Name" => "نام پدر سطح 2",
+"Level 1 Parent Id" => "مشخصه پدر سطح 1",
+"Level 2 Parent Id" => "مشخصه پدرسطح 2",
+"Level 1 Parent" => "پدر سطح 1",
+"Level 2 Parent" => "پدر سطح 2",
+"Parent Name" => "نام پدر",
+"Yes" => "بله",
+"No" => "خیر",
+"Level 2" => "سطح 1",
+"Level 3" => "سطح 3",
+"Module Id already exists" => "شناسه این ماژول وجود دارد",
+"Folders can't be created" => "امکان ساخت فولدر ها وجود ندارد",
+"Folder already exists" => "شناسه فولدر وجود دارد",
+"Your Name" => "نام شما",
+"Filter Example" => "فیلتر مثال",
+"Example" => "مثال",
+"Module Type" => "نوع ماژول",
+"Grid" => "جدول و ردیف",
+"Form" => "فرم",
+"The module was crated successfully" => "ماژول با موفقیت ساخته شد.",
+"Group Permission"=>"مجوز گروه",
+"Save"=>"ذخیره",
+"Module Name" => "نام ماژول",
+"Required field" => "فیلد الزامی",
+"The following fields contain errors" => "فیلد های زیر دارای خطا هستند.",
+"Validation Error" => "خطای اعتبار سنجی",
+"ERROR" => "خطا",
+"General Information" => "اطلاعات عمومی",
+"Location" => "موقعیت",
+"Module Description" => "توضیحات ماژول",
+"Module Description is empty" => "توضیحات ماژول خالی است",
+"LIST" => "لیست انتخابی",
+"DATE" => "تاریخ",
+"Type Label" => "نوع برچست",
+"Type Text" => "نوع متن",
+"Type Select" => "نوع انتخابی",
+"Type Date" => "نوع تاریخ",
+"Type Text Area" => "نوع متن بلند",
+"Type CheckBox" => "نوع چک باکس",
+"Type Radio" => "نوع رادیو",
+"Type Password" => "نوع رمز",
+"Type Hidden" => "نوع مخفی",
+"Type File" => "نوع فایل",
+"Your e-mail" => "نوع ایمیل",
+"Framed" => "دارای قاب",
+"URL is empty" => "لینک خالی است",
+"Field Name" => "نام فیلد",
+"Type Field" => "نوع فیلد",
+"Url" => "Url (Example: http://www.voipiran.io or http://{IP_SERVER}/mail)",
+"Module Id is empty" => "شناسه ماژول خالی است، حداقل چند حرف به عنوان نام وارد کنید.",
+"Level 1 Parent Id is empty" => "شناسه پدر سطح 1 را وارد کنید.",
+"Level 2 Parent Id is empty" => "شناسه پدر سطح 2 را وارد کنید.",
+"Message" => "پیام",
+"here" => "اینجا",
+"If you are not redirected to your new module in a few seconds, you can click" => "If you are not redirected to your new module in a few seconds, you can click",
+"Example: http://www.voipiran.io" => "Example: http://www.voipiran.io",
+
+);
+?>

@@ -1,0 +1,53 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.0-31                                               |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2011-08-09 10:08:51 Eduardo Cueva ecueva@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Contact Name" => "نام",
+"Email" => "ايميل",
+"Phone" => "تلفن",
+"Country" => "كشور",
+"Company" => "شركت",
+"Address" => "آدرس",
+"City" => "شهر",
+"idPartner" => "شناسه شراكت",
+"registration" => "فرم ثبت نام الستيكس",
+"alert_message" => "با ثبت نام در الستيكس مي‌توانيد افزونه‌هاي آن را خريداري يا دريافت نماييد.",
+"Activate registration" => "فعال سازي ثبت نام",
+"Update Information" => "به روز رساني اطلاعات",
+"Cancel" => "انصراف",
+"Save information and sending data" => "ذخيره اطلاعات و ارسال داده‌ها",
+"Not user allowed to access this content" => "كاربر اجازه دسترسي به اين محتوا را ندارد",
+"Your information cannot be saved. Please try again." => "اطلاعات شما ذخيره نشد، لطفا دوباره تلاش كنيد",
+"Your information has been saved." => "اطلاعات شما ذخيره شد",
+"Impossible connect to Elastix Web services. Please check your internet connection." => "امكان دسترسي به سرور هاي الستيكس نيست، اينترنت خود را بررسي نماييد",
+"Your Server ID" => "شناسه سرور شما",
+"Getting infomation from Elastix Web Services." => "گرفتن اطلاعات از سرويس‌هاي الستيكس",
+"Your Server ID is not valid. Please update your information to generate a new Server ID." => "شناسه سرور شما معتبر نيست، با به روز رساني اطلاعات خود شناسه جديد بگيريد",
+);
+?>

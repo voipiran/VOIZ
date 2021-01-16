@@ -1,0 +1,52 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                      |
+  | Email: k.haamed@gmail.com                                          |                                                                    |
+  +----------------------------------------------------------------------+
+   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Recordings" => "ضبط فایل صوتی",
+"Record Name" => "نام فایل صوتی ضبط شده",
+"Record" => "ضبط",
+"Insert the Recording Name" => "نام فایل صوتی ضبط شده را وارد کنید",
+"The recording couldn't be realized" => " فایل صوتی قابل تشخیص نیست",
+"The recording was saved" => "فایل صوتی ذخیره شد",
+"To continue: record a message then click on save" => "برای ادامه پیام صوتی را ضبط کرده و روی دگمه ذخیره کلیک کنید",
+"Recording File" => "ضبط فایل صوتی",
+"Destiny directory couldn't be created" => "خطا در ایجاد دایرکتوری مقصد",
+"File Upload" => "ارسال فایل",
+"ERROR" => "خطا",
+"You don't have extension number associated with user" => "کد کاربری شما داخلی وابسته ندارد، می توانید از طریق لینک روبرو یک داخلی انتخاب نمایید. <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">اینجا</a>",
+"The call couldn't be realized" => "تماس شناسایی نشد",
+"Error copying the file" => "خطا در کپی فایل",
+"Message" => "پیام ",
+"Possible file upload attack" => "Possible file upload attack",
+"contact_admin" => "شما داخلی وابسته ندارید، لطفا با مدیریت سیستم تماس بگیرید."
+);
+?>

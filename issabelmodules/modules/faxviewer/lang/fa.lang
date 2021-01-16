@@ -1,0 +1,73 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+
+
+  | Translate by: Haamed Kouhfallah                                      |
+  | Email: k.haamed@gmail.com                                             |                                                                    |
+  +----------------------------------------------------------------------+
+   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+
+
+
+
+
+
+
+
+"Fax Viewer" => "مشاهده فکس",
+"Search" => "جستجو",
+"Company Name" => "نام شرکت فرستنده",
+"Company Fax" => "شماره فكس",
+"Fax Date" => "تاریخ",
+"File" => "فایل",
+"Fax Destiny" => "مقصد فکس",
+"No Data Found" => "داده ای پیدا نشد",
+"Are you sure you wish to delete fax (es)?" => "آیا مطمئن به حذف فکس (ها) هستید؟",
+"Unable to eliminate pdf file from the path." => "شكست از حذف فايل از مسير ",
+"Unable to eliminate pdf file from the database." => "شکست در حذف فایل از پایگاه داده",
+"Type Fax" => "نوع فكس",
+"All" => "همه",
+"in" => "دريافتي",
+"out" => "ارسالي",
+"ERROR" => "خطا",
+"Type" => "نوع",
+"Status" => "وضعیت",
+"cardNumber" => "شماره كارت" ,
+"Successfully Done" => "با موفقيت ارسال شد",
+"No carrier detected" => "دستگاه فكسي يافت نشد",
+"Busy signal detected; too many attempts to dial" => "خط مشغول مي باشد",   
+"No answer from remote; too many attempts to dial" => "پاسخي دريافت نشد",
+"COMREC invalid response received to PPS.; too many attempts to dial" => "خطا در ارسال فكس",
+"No response to PPS repeated 3 times.; Giving up after 3 attempts to send same page" => "پاسخي دريافت نشد",
+"Kill time expired" => "نا موفق",
+"Filter applied " => "فیلتر شده بر اساس: ",
+
+);
+?>

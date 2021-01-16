@@ -1,0 +1,81 @@
+<?php
+
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                      |
+  | Email: k.haamed@gmail.com                                            |                                                                    |
+  +----------------------------------------------------------------------+
+   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Option" => "گزینه انتخابی",
+"Unembedded IssabelPBX" => "پنل مدیریت تلفنی",
+"Unembedded FreePBX®"=> "برنامه Freepbx",
+"Basic" => "موارد پایه",
+"Extensions" => "داخلی (Extensions)",
+"Feature Codes" => "کدهای ویژه (Feature Codes)",
+"General Settings" => "تنظیمات عمومی (General Settings)",
+"Outbound Routes" => "مسیر خروجی (Outbound Routes)",
+"Trunks" => "ترانک (Trunks)",
+"Inbound Call Control" => " کنترل تماس های ورودی",
+"Inbound Routes" => "مسیر ورودی (Inbound Routes)",
+"DAHDI Channel DIDs" => "تعیین DID برای خطوط شهری",
+"Announcements" => "اعلان های صوتی (Announcements)",
+"Blacklist" => "ليست ممنوعه (Blacklist)",
+"CallerID Lookup Sources" => "منابع جستجوي كالر آي دي",
+"Day/Night Control" => "كنترل روز/شب (Day/Night Control)",
+"Call Flow Control" => " کنترل جریان تماس (Call Flow Control)",
+"Follow Me" => " مرا دنبال کن (Follow Me)",
+"IVR" => "منوی منشی (IVR)",
+"Queue Priorities" => "اولويت‌هاي صف (Queue Priorities)",
+"Misc Destinations" => " مقاصد مختلف (Misc Destinations)",
+"Queues" => "صف انتظار (Queues)",
+"Ring Groups" => "گروه پاسخگو (Ring Groups)",
+"Time Conditions" => "شرط زمانی (Time Conditions)",
+"Time Groups" => "بازه زماني (Time Groups)",
+"Internal Options & Configuration" => "تنظیمات و گزینه های داخلی",
+"Conferences" => "كنفرانس صوتي (Conferences)",
+"Languages" => "تعيين زبان (Languages)",
+"Misc Applications" => "برنامه‌هاي مختلف (Misc Applications)",
+"Music on Hold" => "موزیک انتظار",
+"PIN Sets" => "تعریف یک دسته رمز (PIN Sets)",
+"Paging and Intercom" => "فراخوان (Paging and Intercom)",
+"Parking Lot" => "پارکینگ تماس (Parking Lot)",
+"System Recordings" => "ضبط فایل صوتی (System Recordings)",
+"VoiceMail Blasting" => " ارسال گروهی پیام صوتی (VoiceMail Blasting)",
+"Remote Access" => "دسترسی راه دور",
+"Callback" => "تماس برگشتی (Callback)",
+"DISA" => "دسترسی بیرونی به سیستم (DISA)",
+"Warning: Updating FreePBX® through its web interface will cause it to install versions that may have not yet been properly integrated with Elastix. To avoid conflicts, it is always recommended to search/install updates only through the linux command \"yum update freePBX\"." => "Warning: Updating FreePBX® through its web interface will cause it to install versions that may have not yet been properly integrated with Elastix. <br />FreePBX® is a Registered Trademark of Schmooze Com, Inc. For more details visit www.freepbx.org and www.schmoozecom.com. To avoid conflicts with Elastix, it is always recommended to search/install updates only through the linux command \"yum update freePBX\".",
+"PBX Configuration" => "PBX Configuration",
+"CUSTOMCONTEXTS_define" => "تعریف گروه داخلی (CustomContexts)",
+"CUSTOMCONTEXTS_admin" => "مدیریت گروه داخلی (CustomC. Admin)",
+" is a register trademark of " => "is a register trademark of",
+"BULKDIDS" => "ساخت گروهی DID"
+
+);
+?>

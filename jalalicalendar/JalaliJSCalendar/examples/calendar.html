@@ -1,0 +1,37 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <link rel="stylesheet" type="text/css" media="all" href="../skins/aqua/theme.css" title="Aqua" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-blue.css" title="winter" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-blue2.css" title="blue" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-brown.css" title="summer" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-green.css" title="green" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-win2k-1.css" title="win2k-1" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-win2k-2.css" title="win2k-2" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-win2k-cold-1.css" title="win2k-cold-1" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-win2k-cold-2.css" title="win2k-cold-2" />
+		<link rel="alternate stylesheet" type="text/css" media="all" href="../skins/calendar-system.css" title="system" />
+
+
+<script type="text/javascript" src="../jalali.js"></script>
+		
+		<!-- import the calendar script -->
+		<script type="text/javascript" src="../calendar.js"></script>
+		
+		<!-- import the calendar script -->
+		<script type="text/javascript" src="../calendar-setup.js"></script>
+		
+		<!-- import the language module -->
+		<script type="text/javascript" src="../lang/calendar-fa.js"></script>
+	<div >
+			Jalali Date Input with visible days from other months : 
+			<input id="date_input_10" type="text" /><img id="date_btn_10" src="cal.png" style="vertical-align: top;" />
+			<script type="text/javascript">
+				Calendar.setup({
+					inputField  : "date_input_10",   // id of the input field
+					button      : "date_btn_10",   // trigger for the calendar (button ID)
+		       		ifFormat    : "%Y-%m-%d",       // format of the input field
+        			dateType	: 'jalali',
+        			showOthers	: true,
+					weekNumbers : true
+				});
+			</script>
+		</div>

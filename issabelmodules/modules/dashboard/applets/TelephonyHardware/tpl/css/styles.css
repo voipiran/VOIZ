@@ -1,0 +1,41 @@
+a.telephonyhardware_editregister
+{
+	text-decoration:none;
+	color:white;
+	cursor:pointer;
+}
+
+.tabFormTable {
+    color:#333333;
+    font-size: 12px;
+}
+
+.services{
+    clear:both;
+    width:80%;
+    float:left;
+    margin-bottom:3px;
+    margin-top:3px;
+    padding-bottom:2px;
+    padding-top:2px;
+}
+
+.status{
+    width:85px;
+    float:left;
+    margin-top:3px;
+    margin-bottom:3px;
+    padding-bottom:2px;
+    padding-top:2px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.loading
+{
+	display: none;
+	float: right;
+	position: absolute;
+	top: 87px;
+	left: 115px;
+}

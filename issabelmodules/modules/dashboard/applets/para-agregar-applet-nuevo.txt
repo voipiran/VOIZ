@@ -1,0 +1,157 @@
+Integración de un applet nuevo en el Dashboard de Issabel
+---------------------------------------------------------
+
+En la actualización a issabel-system-2.4.0-9 se ha reorganizado el módulo 
+Dashboard de Issabel. En esta reorganización se ha limpiado el código del módulo
+y se lo ha dividido en subdirectorios que representan a los applets 
+implementados. Esta estructura permite que un addon de terceros pueda construir
+un nuevo applet para ser agregado al sistema, y el dashboard lo mostrará de la
+misma manera en que muestra los applets del núcleo de Issabel.
+
+Para los siguientes ejemplos, se asumira que el applet a agregar se llama
+SuperMaravillosoApplet. Reemplace en su desarrollo según corresponda.
+
+Base de datos
+-------------
+
+El registro de los applets se mantiene en la base SQLITE ubicada en 
+/var/www/db/dashboard.db . La tabla applet contiene la referencia al applet a
+mostrar. Para instalar un nuevo applet:
+
+INSERT INTO applet (code, name, icon) 
+VALUES ('Applet_SuperMaravillosoApplet', 'El supermaravilloso applet', 'sm.png');
+
+La inserción de arriba asume que el applet será descrito como 'El 
+supermaravilloso applet' y que el applet provee un icono en el archivo sm.png.
+
+El applet puede proveer capacidades administrativas o exponer información sensible
+que sólo debería ser vista por un administrador del sistema. En este caso, se
+debe insertar en la tabla default_applet_by_user de la siguiente manera. Se asume
+que $ID_APPLET es el ID de inserción en la tabla applet para el applet nuevo:
+
+INSERT INTO default_applet_by_user (id_applet, username)
+VALUES ($ID_APPLET, 'admin');
+
+Si el applet debe ser visto por usuarios no administradores:
+
+INSERT INTO default_applet_by_user (id_applet, username)
+VALUES ($ID_APPLET, 'no_admin');
+
+Si el applet puede verlo tanto administradores como no-administradores, se 
+requieren las dos inserciones.
+
+Luego de realizadas estas inserciones, el applet debe de aparecer en el módulo
+Dashboard Applet Admin, donde se podrá activar para el administrador o
+no-administrador según corresponda.
+
+Organización del applet
+-----------------------
+La organización estándar de un applet es la de un directorio debajo de 
+/var/www/html/modules/dashboard/applets/ . El directorio debe contener la 
+siguiente estructura de archivos y directorios:
+
+SuperMaravillosoApplet/
+    images/
+    js/
+    lang/
+    tpl/
+        css/
+            styles.css
+    index.php
+
+Los archivos de traducciones para su applet deben estar en lang/, y si existen,
+serán cargados automáticamente por el módulo dashboard. Si se usan traducciones,
+debe ofrecerse como mínimo en.lang para inglés, ya que se verifica la existencia
+de este archivo para concluir que existen traducciones por cargar. El formato de
+los archivos de traducciones es idéntico al de un módulo ordinario de Issabel.
+
+Las imágenes usadas por el applet deben estar debajo de images/ . En este lugar
+también se debe de ubicar el archivo de icono asociado con el applet, el cual
+es sm.png en nuestro ejemplo.
+
+Si el applet usa plantillas, se las debe de colocar debajo de tpl/. Si se 
+requieren CSS personalizados, en este directorio también debe de crearse un 
+directorio css donde se coloque el archivo de las definicioes CSS. Este archivo
+debe entonces referenciarse desde la plantilla con una etiqueta <link>.
+
+Si el applet requiere javascript, las rutinas de javascript deben de colocarse
+en archivos debajo del directorio js/, y referenciadas desde la plantilla con
+una etiqueta <script>.
+
+La implementación de lado del servidor se coloca en el archivo index.php.
+
+Estándar de implementación
+--------------------------
+Todo applet del dashboard debe definir en index.php una clase, la cual debe de
+llamarse Applet_SuperMaravillosoApplet (o Applet_NOMBREDEAPPLET para el caso
+general). Esta clase debe de definir obligatoriamente el siguiente método:
+
+function handleJSON_getContent($smarty, $module_name, $appletlist);
+
+Este método es el encargado de generar el contenido HTML que se muestra cuando
+el módulo dashboard requiere mostrar el applet. El método debe de generar y 
+devolver como su resultado un contenido JSON que tiene la siguiente estructura:
+
+{
+    "status": "success",
+    "message": "(no message)",
+    "html": ... 
+}
+
+El applet debe de devolver en el campo "status" la cadena "success" si la 
+respuesta contiene el contenido normal del applet a mostrar, o "error" si 
+ocurrió algún problema que impide la generación del contenido. El contenido en
+sí está dentro del campo "html". En caso de error, el detalle del error debe 
+devolverse en el campo "message", el cual se mostrará en lugar del contenido
+del applet. El Content-Type de la respuesta debe establecerse siempre a 
+application/json para que el javascript del módulo dashboard reconozca la 
+respuesta y la procese correctamente.
+
+Si el applet require definir acciones adicionales invocables desde el navegador,
+se deben definir de la siguiente manera. Para una acción hipotética 
+"ejecutarMaravilla" del applet SuperMaravillosoApplet, se debe de definir un 
+método de la clase Applet_SuperMaravillosoApplet en index.php, de la siguiente
+manera:
+
+function handleJSON_ejecutarMaravilla($smarty, $module_name, $appletlist);
+
+A diferencia del método handleJSON_getContent(), y a pesar del prefijo 
+handleJSON_ , los métodos que implementan acciones adicionales del applet no 
+están obligados a devolver JSON. El método puede devolver cualquier contenido
+pertinente a la acción que realiza, o emitirlo directamente como salida si el
+acto de devolverlo es engorroso.
+
+Para llamar a la acción del applet, se debe de generar una petición GET o POST
+que contenga como mínimo los siguientes parámetros:
+
+menu:       módulo que sirve al applet, en este caso 'dashboard'.
+rawmode:    'yes'
+applet:     'SuperMaravillosoApplet'
+action:     'ejecutarMaravilla'
+
+A esta petición se le agregan los parámetros adicionales que requiera la acción.
+Para que la implementación sea robusta, se recomienda que el parámetro menu se
+lo proporcione llamando a la función getCurrentIssabelModule().
+
+Por ejemplo, si la acción adicional es la generación de una imagen, se debe
+construir una etiqueta imagen de la siguiente manera:
+
+<img src="?menu=dashboard&rawmode=yes&applet=SuperMaravillosoApplet&action=ejecutarMaravilla"/>
+
+Si la acción adicional es una petición AJAX, se puede construir la petición de
+la siguiente manera (asumiendo uso de jQuery):
+
+$.post('index.php', {
+    menu:       getCurrentIssabelModule(), 
+    rawmode:    'yes',
+    applet:     'SuperMaravillosoApplet',
+    action:     'ejecutarMaravilla'
+},
+
+function (respuesta) {
+    if (respuesta.status == 'error') {
+        alert(respuesta.message);
+    } else {
+        /* acción a tomar en caso de éxito */
+    }
+});
