@@ -182,6 +182,7 @@ echo "     "
 echo "-------------Installing VTIGER CRM----------------"
 sleep 1
 #yes | cp -arf vtiger/crm /var/www/html
+cat vtiger/crma* > vtiger/crm.tar.gz
 yes | tar -zxvf vtiger/crm.tar.gz -C /var/www/html >/dev/null 2>&1
 touch -r /var/www/html/crm/*
 chmod -R 777 /var/www/html/crm

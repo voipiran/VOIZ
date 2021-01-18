@@ -1,9 +1,0 @@
-<?php
-
-
-//This is the access privilege file
-$is_admin=true;
-
-$user_info=array('user_name'=>'hamed','is_admin'=>'on','user_password'=>'$1$ha000000$vxpbEqo5N0t7d0uwxohlh/','confirm_password'=>'$1$ha000000$vxpbEqo5N0t7d0uwxohlh/','first_name'=>'حامد','last_name'=>'کوه فلاح','roleid'=>'H2','email1'=>'k.haamed@gmail.com','status'=>'Active','activity_view'=>'This Week','lead_view'=>'Today','hour_format'=>'24','end_hour'=>'','start_hour'=>'08:00','is_owner'=>'','title'=>'','phone_work'=>'','department'=>'','phone_mobile'=>'09122103250','reports_to_id'=>'','phone_other'=>'','email2'=>'','phone_fax'=>'','secondaryemail'=>'','phone_home'=>'','date_format'=>'yyyy-mm-dd','signature'=>'','description'=>'','address_street'=>'','address_city'=>'','address_state'=>'','address_postalcode'=>'','address_country'=>'','accesskey'=>'KaJDFhpYrDZ4vgoq','time_zone'=>'Asia/Tehran','currency_id'=>'1','currency_grouping_pattern'=>'123,456,789','currency_decimal_separator'=>'.','currency_grouping_separator'=>',','currency_symbol_placement'=>'$1.0','imagename'=>'','internal_mailer'=>'0','theme'=>'softed','language'=>'fa_ir','reminder_interval'=>'1 Minute','phone_crm_extension'=>'','no_of_currency_decimals'=>'2','truncate_trailing_zeros'=>'0','dayoftheweek'=>'Saturday','callduration'=>'10','othereventduration'=>'60','calendarsharedtype'=>'public','default_record_view'=>'Summary','leftpanelhide'=>'1','rowheight'=>'medium','defaulteventstatus'=>'Planned','defaultactivitytype'=>'Meeting','hidecompletedevents'=>'0','defaultcalendarview'=>'MyCalendar','currency_name'=>'Iran, Rials','currency_code'=>'IRR','currency_symbol'=>'﷼','conv_rate'=>'1.00000','record_id'=>'','record_module'=>'','id'=>'5');
-
-?>
