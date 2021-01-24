@@ -188,9 +188,11 @@ touch -r /var/www/html/crm/*
 chmod -R 777 /var/www/html/crm
 
 if ! mysql -uroot -p$rootpw -e 'use voipirancrm'; then
-echo "-------------َADDING VTIGER DATABASE"
+echo "-------------َADDING VTIGER DATABASE1"
 mysql -uroot -p$rootpw -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;"
+echo "-------------َADDING VTIGER DATABASE2"
 mysql -uroot -p$rootpw -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';"
+echo "-------------َADDING VTIGER DATABASE3"
 mysql -uroot -p$rootpw voipirancrm < vtiger/crm.db
 fi
 
