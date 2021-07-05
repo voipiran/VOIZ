@@ -196,7 +196,6 @@ echo "-------------َADDING VTIGER DATABASE3"
 mysql -uroot -p$rootpw voipirancrm < vtiger/crm.db
 fi
 
-
 #Config config.inc.php file
 sed -i "s/123456/$rootpw/g" /var/www/html/crm/config.inc.php  >/dev/null 2>&1
 
