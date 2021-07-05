@@ -57,7 +57,7 @@ $arrLang=array(
 "Logout" => "خروج",
 "Change" => "تغيير",
 "Title" => "عنوان",
-"Language"=>"زبان",
+"Language"=>"زبان و پوسته",
 "Load Module" => "بارگزاري ماژول",
 
 "Required field" => "فيلد مورد نياز",
@@ -169,7 +169,7 @@ $arrLang=array(
 "ERROR" => "خطا",
 
 /*missing  strings  - persian - */
-"Agenda" => "برنامه کاري",
+"Agenda" => "برنامه های کاربردی",
 "Email" => "ايميل",
 "Fax" => "فکس",
 "PBX" => "مرکز تلفن",
@@ -360,7 +360,7 @@ $arrLang=array(
 "Unembedded IssabelPBX" => "تنظیمات",
 "VI Options" => "تنظیمات",
 "VI Permission" => "مجوز کاربران",
-"VI Lookup Test" => "آزمایش جستجو",
+"VI Lookup Test" => "جستجوی شماره تلفن",
 "VI AddressBook" => "دفترچه تلفن",
 "VI Mysql" => "دیتابیس Mysql",
 "VI Vtiger" => "ویتایگر",
