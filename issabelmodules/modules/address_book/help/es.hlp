@@ -1,0 +1,51 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+<p>La opción "Libreta de Direcciones" del menú "Agenda" muestra un directorio telefónico que contiene números de teléfono internos y externos. Las extensiones internas son aquellas que han sido creadas en el módulo PBX y por lo tanto no pueden ser modificadas desde este módulo. Los números de teléfono externos son los que han sido creados por el usuario desde este módulo y no pertenecen a Issabel. Para agregar un número de teléfono externo haga click en el botón "Nuevo Contacto".</p>
+<p>La siguiente figura muestra una lista de extensiones internas:</p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_address1.png" border="0" />
+<p>Figura 1</p></div>
+<br/>
+<p>La figura 2 muestra una lista de números de teléfono externos. Usted puede modificar o eliminar estos números de teléfono:</p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_address2.png" border="0" />
+<p>Figura 2</p></div>
+<br />
+
+<p>A continuación una breve descripción de cada campo:</p>
+<table class="inline">
+<tr><th>Nombre</th><th>Descripción</th></tr>
+<tr><td>Nombre</td><td>Nombre de la extensión</td></tr>
+<tr><td>Extensión</td><td>Número de extensión</td></tr>
+<tr><td>Correo electrónico</td><td>Dirección de correo electrónico</td></tr>
+<tr><td>Llamar</td><td>Al hacer click en el ícono de aquí se procederá a llamar a la extensión. Recuerde que el usuario actual debe asociar un número de extensión a su cuenta con el fin de realizar llamadas desde aquí (para hacerlo vaya a "Sistema -> Usuarios"</td></tr>
+<tr><td>Transferir</td><td>Transfiere la llamada a otra extensión</td></tr>
+<tr>
+	<td>Tipo de Contacto</td>
+	<td>
+		<p><img src="../modules/{$node_id}/images/public.png" border="0" /> Contacto público: Creado por otro usuario (no editable)</p>
+		<p><img src="../modules/{$node_id}/images/public_edit.png" border="0" /> Contacto público: Editable por el usuario quien lo creó.</p>
+		<p><img src="../modules/{$node_id}/images/contact.png" border="0" /> Contacto privado: Editable por el usuario quien lo creó.</p>
+	</td>
+</tr>
+</table>
+<br />
+<h2>Creación de nuevo contacto</h2>
+<p>Para crear un nuevo contacto usted debe hacer click en el botón "Nuevo Contacto" y llenar el formulario. Estos contactos no son considerados como extensiones internas. <i>Figura 3</i></p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_address3.png" border="0" />
+<p>Figura 3</p></div>
+<br />
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_address4.png" border="0" />
+<p>Figura 4</p></div>
+<br />
+<p>Usted también puede agregar nuevos contactos importando un archivo CSV con la información de los contactos. Los campos que debe contener este archivo son: Name, Last Name, Phone Number. Estos nombres deben estar como cabecera del archivo y separados con coma, así como sus valores.</p>
+<p>También puede exportar la lista de contactos actual haciendo click en el botón "Descargar Libreta de Direcciones".</p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_address5.png" border="0" />
+<p>Figura 5</p></div>
+<br />
+</body>
+</html>

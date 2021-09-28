@@ -55,7 +55,8 @@
                                 </tr>
                             {/if}
                             <tr id='tr_phone'>
-                                <td align="left" width="25%"><b>{$work_phone.LABEL}: {if ($mode ne 'view') and ($TYPE ne 'internal') }<span id="span_phone" class="required">*</span>{/if}</b></td>
+                                <!--td align="left" width="25%"><b>{$work_phone.LABEL}: {if ($mode ne 'view') and ($TYPE ne 'internal') }<span id="span_phone" class="required">*</span>{/if}</b></td-->
+                                <td align="left" width="25%"><b>{$work_phone.LABEL}: {if ($mode ne 'view') and ($TYPE ne 'internal') }<span id="span_phone"></span>{/if}</b></td>
                                 <td class="required" align="left">{$work_phone.INPUT}</td>             
                             </tr>       
                             {if $TYPE eq 'internal'}

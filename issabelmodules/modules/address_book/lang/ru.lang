@@ -1,0 +1,102 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 4.0                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Bruno Macias                                           |
+  | Email: bmacias@palosanto.com                                         |
+  +----------------------------------------------------------------------+
+  $Id: ru.lang,v 1.0 2015/10/17 15:11:00 Andrey Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"New Contact"	=> "Новый Контакт",
+"Address Book"	=> "Адресная Книга",
+"Are you sure you wish to delete the contact." => "Вы уверенны что хотите удалить контакт?",
+"First Name"	=> "Имя",
+"Last Name"	=> "Фамилия",
+"Phone Number"	=> "Номер Телефона",
+"Extension" => "Внутренний номер",
+"The call couldn't be realized" => "Вызов не может быть реализован",
+"Internal" => "Внутренний",
+"External" => "Внешний",
+"Call" => "Вызов",
+"Phone Directory" => "Телефонный Справочник",
+"CSV" => "CSV",
+"Download Address Book" => "Скачать Адресную Книгу",
+"Can't exist a Name empty. Line" => "Поле 'Имя' не может быть пустым. Строка",
+"Can't exist a Last Name empty. Line" => "Поле 'Фамилия' не может быть пустым. Строка",
+"Can't exist a Phone Number/Job Phone Number empty. Line" => "Поля 'Телефон/Рабочий Телефон' не могут быть пустыми.Строка",
+"Total contacts created" => "Всего создано контактов",
+"Contact Data already exists" => "Данные Контакта уже существуют",
+"Header File Address Book" => "Заголовок файла должен быть в первой строке и содержать как минимум три столбца: Имя, Фамилия, Телефонный Номер",
+"About Address Book" => "Если вы загружаете файл с данными контакта, которые уже существуют, то данные такого контакта не будут использоваться.",
+"Invalid file extension.- It must be csv" => "Недействительное расширение файла.- Должно быть csv",
+"There aren't contacts" => "Нет контактов",
+"Address Book from CSV" => "Адресная книга из CSV",
+"Name" => "Имя",
+"Page" => "Страница",
+"Filter" => "Фильтр",
+"Show" => "Показать",
+"Email" => "Электронная почта",
+"File" => "Файл",
+"Possible file upload attack. Filename" => "Возможно атака загрузки файла. Имя файла",
+"Please read the lines in the footer" => "Пожалуйста, ознакомтесь с информацией внизу страницы",
+"Verify the header" => "Проверьте заголовок",
+"At minimum there must be the columns" => "Должно быть как минимум три столбца",
+"Incomplete Columns" => "Incomplete Columns",
+"The file is incorrect or empty" => "Некорректный или пустой файл",
+"You don't have extension number associated with user" => "Нет внутреннего номера ассоциированного с текущим пользователем. Вы можете ассоциировать внутрений номер с вашим пользователем  <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">здесь</a>",
+"ERROR" => "ОШИБКА",
+"Transfer" => "Перевод",
+"The transfer couldn't be realized, maybe you don't have any conversation now." => "Перевод не может быть выполнен, возможно сейчас у вас нет активного вызова.",
+"Not_allowed_change" => "Эти изменения запрещены вашему пользователю.Этот контакт не ассоциирован с вашей адресной книгой",
+"picture" => "Фото",
+"Address" => "Адрес",
+"Company" => "Компания",
+"Department" => "Отдел",
+"Cell Phone Number (SMS)" => "Мобильный Телефон (СМС)",
+"Home Phone Number" => "Домашний Телефон",
+"Work's Phone Number" => "Рабочий Телефон",
+"Contact person in your Company" => "Контактное лицо в вашей Компании",
+"Contact person's current position" => "Должность Контактного лица",
+"FAX Number 1" => "Факс 1",
+"FAX Number 2" => "Факс 2",
+"Address IM (XMPP, Openfire)" => "Мгновенные Сообщения (XMPP, Openfire)",
+"Province" => "Область",
+"City" => "Город",
+"Manager" => "Руководитель",
+"Current position" => "Должность",
+"Notes" => "Заметки",
+"Status" => "Статус",
+"Private Contact" => "Личный Контакт",
+"Public Contact" => "Общий Контакт",
+"Invalid file extension.- It must be png or jpg or jpeg" => "Неверное расширение файла.- Должно быть png, jpg or jpeg и не содержать специальных символов",
+"Validation Error" => "Ошибка Валидации",
+"Error to Upload" => "Ожибка Загрузки файла",
+"Type Contact" => "Тип Контакта",
+"Internal Error" => "Пожалйста убедитесь что параметры корректны",
+"Not_allowed_contact" => "Этого контакта нет в вашей Адресной Книге",
+"Public editable" => "Общий редактируемый",
+"Public not editable" => "Общий нередактируемый",
+"Private" => "Личный",
+"contact_admin" => "Нет внутреннего номера ассоциированного с текущим пользователем. Пожалуйста, свяжитесь с администратором.",
+"Show Filter" => "Показать Фильтр",
+"Hide Filter" => "Скрыть Фильтр"
+);
+?>

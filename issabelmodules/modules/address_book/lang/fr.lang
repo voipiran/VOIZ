@@ -1,0 +1,86 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version: 4.0                                           |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by:Dannarz                                             |
+  | Email: sesshomarurin7@palosanto.com                                                       |
+  +----------------------------------------------------------------------+
+  $Id: fr.lang, October 25, 2010, 5:39 pm kleber andres loayza Exp $ */
+global $arrLangModule;
+$arrLangModule=array(  
+"New Contact" => "Nouveau contact",
+"Address Book" => "Carnet d'adresses",
+"Are you sure you wish to delete the contact." => "Êtes-vous sûr de vouloir supprimer le contact ?",
+"First Name" => "Prénom",
+"Last Name" => "Nom",
+"Phone Number" => "Numéro de téléphone",
+"Extension" => "Numéro de poste",
+"The call couldn't be realized" => "L'appel ne peut être réalisé.",
+"Internal" => "Interne",
+"External" => "Externe",
+"Call" => "Appel",
+"Phone Directory" => "Répertoire téléphonique",
+"CSV" => "CSV",
+"Download Address Book" => "Téléchargement du carnet d'adresses.",
+"Can't exist a Name empty. Line" => "Il ne peut exister de nom vide à la ligne",
+"Can't exist a Last Name empty. Line" => "Il ne peut exister de nom de famille vide à la ligne",
+"Can't exist a Phone Number/Job Phone Number empty. Line" => "Il ne peut exister de numéro de téléphone vide à la ligne",
+"Total contacts created" => "Total de contactes créés",
+"Contact Data already exists" => "Données du contat déjà existant",
+"Header File Address Book" => "L'en-tête du fichier doit être dans la première ligne et il doit avoir au moins trois colonnes: Nom, Prénom, Numéro de téléphone",
+"About Address Book" => "Si vous chargez un fichier de données de contacts déjà créé, ce contact ne sera pas utilisé",
+"Invalid file extension.- It must be csv" => "Extension fichier invalide.- Elle doit être en csv",
+"There aren't contacts" => "Il n'y a pas de contacts",
+"Address Book from CSV" => "Carnet d'adresses depuis un fichier CSV",
+"Name" => "Nom",
+"Filter" => "Filtre",
+"Show" => "Afficher",
+"Email" => "Email",
+"File" => "Fichier",
+"Possible file upload attack. Filename" => "Tentative d'attaque par upload de fichier possible",
+"Please read the lines in the footer" => "Veuillez lire les lignes dans le bas de page",
+"Verify the header" => "Vérifier l'entête",
+"At minimum there must be the columns" => "Au minimum il doit y avoir les colonnes",
+"Incomplete Columns" => "Colonnes Incomplètes",
+"The file is incorrect or empty" => "Le fichier est incorrect ou vide",
+"You don't have extension number associated with user" => "Votre compte utilisateur n'est associé à aucune extension. Vous pouvez lui en associer une en cliquant <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">ici</a>",
+"ERROR" => "ERREUR",
+"Transfer" => "Transfert",
+"The transfer couldn't be realized, maybe you don't have any conversation now." => "Le transfert n'a pas pu être réalisé, peut-être n'êtes-vous pas en conversation en ce moment.",
+"Not_allowed_change" => "Vous n'avez pas la permission d'effectuer ce changement. Ce contact n'est pas associé à votre carnet d'adresses.",
+"picture" => "Image",
+"Address" => "Addresse",
+"Company" => "Société",
+"Notes" => "Notes",
+"Status" => "Statut",
+"Private Contact" => "Contact privé",
+"Public Contact" => "Contact public",
+"Invalid file extension.- It must be png or jpg or jpeg" => "Extension de fichier invalide.- Elle doit être en png, jpg ou jpeg sans contenir de caractères spéciaux.",
+"Validation Error" => "Erreur de validation",
+"Error to Upload" => "Chargement du fichier impossible",
+"Type Contact" => "Type de contact",
+"Internal Error" => "Veuillez vous assurer que les paramètres soient corrects",
+"Not_allowed_contact" => "Ce contact n'existe pas dans votre carnet d'adresses",
+"Public editable" => "Public modifiable",
+"Public not editable" => "Public non modifiable",
+"Private" => "Privé",
+"contact_admin" => "Votre compte utilisateur n'est associé à aucune extension. Veuillez demander à l'administrateur de vous en assigner une."
+);
+?>
