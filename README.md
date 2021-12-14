@@ -6,4 +6,4 @@ How to  Netinstall:
 
 2. Run This command on your Linux CLI:
 
-curl https://github.com/voipiran/VOIZ/voizNetinstall.sh | bash
+curl https://github.com/voipiran/VOIZ/blob/main/voizNetinstall.sh | bash
