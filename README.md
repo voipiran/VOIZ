@@ -13,6 +13,13 @@ curl https://github.com/voipiran/VOIZ/blob/main/voizNetinstall.sh | bash
 
 
 ## TODO List (امکانات آینده)
-- [x] #Add Documentations Menu
-- [ ] https://github.com/octo-org/octo-repo/issues/740
-- [ ] Add delight to the experience when all tasks are complete :tada:
+- [ ] Add Documentations Menu
+- [ ] Transfer Webmin and Download file to Menus
+- [ ] Define Default SIP Trunks
+- [ ] add Installation GUI
+- [ ] VOIZ Installation script on Centos7 minimal
+- [ ] Improve English Theme
+- [ ] Configure Linux Firewall and set APIBAN
+- [ ] Show Faxes by Groups
+- [ ] Add Glances System Monitoring Tools
+- [ ] Add Webrtc Webphone
