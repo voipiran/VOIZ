@@ -1,7 +1,7 @@
-# VOIZ
+## VOIZ
  Persian Unified Communication 
 
-# Instalation
+## Instalation
 How to  Netinstall:
 1. install Centos7 Minimal:
 
@@ -9,7 +9,10 @@ How to  Netinstall:
 
 curl https://github.com/voipiran/VOIZ/blob/main/voizNetinstall.sh | bash
 
-# Features (امکانات)
+## Features (امکانات)
 
-# TODO List (امکانات آینده)
 
+## TODO List (امکانات آینده)
+- [x] #Add Documentations Menu
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
