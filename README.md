@@ -7,6 +7,7 @@ There are two ways to install VOIZ.
 
 ### 1. How to Install on Issabel ISO:
 -install issabel iso file with Asterisk 16 or 18
+
 -update issabel
 ```
 yum update
