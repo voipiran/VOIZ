@@ -3,8 +3,9 @@
 
 
 ## Instalation (نصب)
+There are two ways to install VOIZ.
 
-1.How to Install on Issabel ISO:
+### 1. How to Install on Issabel ISO:
 -install issabel iso file with Asterisk 16 or 18
 -update issabel
 ```
@@ -15,7 +16,7 @@ yum update
 yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.git && cd voiz && chmod 777 installVoizOnIssabel.sh && ./installVoizOnIssabel.sh
 ```
 
-2.How to  Netinstall:
+### 2. How to  Netinstall (install on centos7 minimal):
 -install Centos7 Minimal:
 -Run This command on your Linux CLI:
 ```
