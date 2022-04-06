@@ -1,22 +1,36 @@
 ## VOIZ
  Persian Unified Communication 
 
+
 ## Instalation (نصب)
-1.How to  Netinstall:
+
+1.How to Install on Issabel ISO:
+-install issabel iso file with Asterisk 16 or 18
+-update issabel
+```
+yum update
+```
+-Run This command on your Linux CLI:
+```
+yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.git && cd voiz && chmod 777 installVoizOnIssabel.sh && ./installVoizOnIssabel.sh
+```
+
+2.How to  Netinstall:
 -install Centos7 Minimal:
 -Run This command on your Linux CLI:
 ```
 curl https://github.com/voipiran/VOIZ/blob/main/voizNetinstall.sh | bash
 ```
 
-2.How to Install on Issabel ISO:
-```
-```
 
 ## Documents (مطالب راهنما و آموزش)
+
 https://forum.voipiran.io/t/voiz-documents
 
+
+
 ## Features (امکانات)
+
 
 
 ## TODO List (امکانات آینده)
