@@ -1,13 +1,20 @@
 ## VOIZ
  Persian Unified Communication 
 
-## Instalation
-How to  Netinstall:
-1. install Centos7 Minimal:
-
-2. Run This command on your Linux CLI:
-
+## Instalation (نصب)
+1.How to  Netinstall:
+-install Centos7 Minimal:
+-Run This command on your Linux CLI:
+```
 curl https://github.com/voipiran/VOIZ/blob/main/voizNetinstall.sh | bash
+```
+
+2.How to Install on Issabel ISO:
+```
+```
+
+## Documents (مطالب راهنما و آموزش)
+https://forum.voipiran.io/t/voiz-documents
 
 ## Features (امکانات)
 
