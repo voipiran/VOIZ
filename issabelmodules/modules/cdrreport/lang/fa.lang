@@ -34,7 +34,7 @@ $arrLangModule=array(
 "Field Name" => "نام فیلد",
 "Field" => "فیلد ",
 "CDR Report List" => "گزارش ریز مکالمات",
-"Account Code" => "کد کاربری",
+"Account Code" => "نظرسنجی/صف",
 "Date" =>"تاریخ",
 "Source" =>"تماس گيرنده",
 "Destination" => "مقصد",
@@ -58,7 +58,7 @@ $arrLangModule=array(
 "contact_admin" => "کد کاربری شما داخلی وابسته ندارد، لطفا با مدیر سیستم تماس بگیرید.",
 "no_extension" => "کد کاربری شما داخلی وابسته ندارد، می توانید از طریق لینک روبرو یک داخلی انتخاب نمایید. <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">اینجا</a>",
 "uniqueid" => "كد تماس",
-"User Field" => "فیلد کاربر",
+"User Field" => "کارشناس#نظر",
 "Only administrators can delete CDRs" => "فقط مدیر امکان حذف ریز مکالمات را دارد."
 
 );

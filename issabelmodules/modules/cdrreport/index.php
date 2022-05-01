@@ -390,7 +390,7 @@ function _moduleContent(&$smarty, $module_name)
                 $iDuracion = $value[8];
                 $iSec = $iDuracion % 60; $iDuracion = (int)(($iDuracion - $iSec) / 60);
                 $iMin = $iDuracion % 60; $iDuracion = (int)(($iDuracion - $iMin) / 60);
-                $sTiempo = "{$value[8]} ثانیه";
+                $sTiempo = "ثانیه {$value[8]}";
                 if ($value[8] >= 60) {
                       if ($iDuracion > 0) $sTiempo .= " ({$iDuracion}ساعت {$iMin}دقیقه {$iSec}ثانیه)";
                       elseif ($iMin > 0)  $sTiempo .= " ({$iMin}دقیقه {$iSec}ثانیه)";
@@ -464,7 +464,7 @@ function _moduleContent(&$smarty, $module_name)
                 $iDuracion = $value[8];
                 $iSec = $iDuracion % 60; $iDuracion = (int)(($iDuracion - $iSec) / 60);
                 $iMin = $iDuracion % 60; $iDuracion = (int)(($iDuracion - $iMin) / 60);
-                $sTiempo = "{$value[8]} ثانیه";
+                $sTiempo = "ثانیه {$value[8]}";
                 if ($value[8] >= 60) {
                       if ($iDuracion > 0) $sTiempo .= " ({$iDuracion} ساعت {$iMin} دقیقه {$iSec} ثانیه)";
                       elseif ($iMin > 0)  $sTiempo .= " ({$iMin} دقیقه {$iSec} ثانیه)";

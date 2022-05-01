@@ -1,8 +1,21 @@
 #!/bin/bash
+version=4.5
 echo "Install voipiran VOIZ PBX"
 echo "VOIPIRAN.io"
-echo "VOIPIRAN VOIZ Version 4.3"
+echo "VOIPIRAN VOIZ Version $version"
 sleep 1
+
+#Set VOIZ tag
+file="/etc/voiz.conf"
+if [ -f "$file" ]
+then
+    #find version and replace
+	sed -i -e "s/.*version.*/version=$version/g" /etc/voiz.conf
+
+else
+	cp voiz-installation/voiz.conf /etc
+    sed -i -e "s/.*version.*/version=$version/g" /etc/voiz.conf
+fi
 
 ###Fetch DB root PASSWORD
 rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
@@ -25,7 +38,7 @@ echo "     "
 echo "     "
 echo "------------Installing WEBMIN-----------------"
 sleep 1
-rpm -U rpms/webmin/webmin-1.953-1.noarch.rpm
+rpm -U rpms/webmin/webmin-1.984-1.noarch.rpm
 
 ###Install Webmin - 4.0.0-3
 echo "     "
@@ -157,11 +170,15 @@ sed -i '/\[from\-internal\-custom\]/a include \=\> voipiran\-features' /etc/aste
 echo "" >> /etc/asterisk/extensions_custom.conf
 echo "#include extensions_voipiran_featurecodes.conf" >> /etc/asterisk/extensions_custom.conf
 
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIPIRAN-بیان تاریخ و زمان شمسی','*20',NULL,'1','1')"
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIZ-بیان تاریخ و زمان شمسی','*200',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*200'"
 mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATE-Jalali','VOIPIRAN-بیان تاریخ به شمسی','*21',NULL,'1','1')"
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATE-Jalali','VOIZ-بیان تاریخ به شمسی','*201',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*201'"
 mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-TIME-Jalali','VOIPIRAN-بیان زمان به فارسی','*22',NULL,'1','1')"
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-TIME-Jalali','VOIZ-بیان زمان به فارسی','*202',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*202'"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chanspy-Simple','VOIZ-شنود ساده، کد + شماره مقصد','*30',NULL,'1','1')"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Whisper','VOIZ-شنود و نجوا، کد + شماره مقصد','*31',NULL,'1','1')"
 mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
 
 echo "     "
@@ -170,11 +187,14 @@ echo "-------------Installing EsayVPN Module----------------"
 sleep 1
 yum install issabel-easyvpn –nogpgcheck -y
 
-
 echo "     "
-echo "     "
-echo "-------------Installing Let's Ecrypt----------------"
+echo "-------------Installing VOIPIRAN Survey----------------"
 sleep 1
+cp -rf voipiranagi /var/lib/asterisk/agi-bin
+chmod -R 777 /var/lib/asterisk/agi-bin/voipiranagi
+
+query="REPLACE INTO miscdests (id,description,destdial) VALUES('101','نظرسنجی-ویز','4454')"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
 
 
 echo "     "
@@ -196,17 +216,25 @@ echo "-------------َADDING VTIGER DATABASE3"
 mysql -uroot -p$rootpw voipirancrm < vtiger/crm.db
 fi
 
-
 #Config config.inc.php file
 sed -i "s/123456/$rootpw/g" /var/www/html/crm/config.inc.php  >/dev/null 2>&1
-
 issabel-menumerge crm-menu.xml
 
 echo "     "
 echo "     "
 echo "-------------Installing Network Utils----------------"
+#Installing htop
 yum install htop traceroute -y
 
+#Installing SNGREP
+yum install -y git ncurses-devel libpcap-devel
+git clone https://github.com/irontec/sngrep.git
+cd sngrep
+./bootstrap.sh
+./configure
+make
+make install
+cd ..
 
 
 echo "     "
@@ -215,6 +243,10 @@ sleep 1
 service httpd restart
 echo "Apache has Restarted Sucsessfully"
 sleep 1
+
+echo "     "
+echo "-------------Amportal Restart----------------"
+amportal a r  2>&1
 
 
 echo "-----------FINISHED (voipiran.io)-----------"

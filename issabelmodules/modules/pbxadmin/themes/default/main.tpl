@@ -10,7 +10,7 @@
   /* all headers color  */
   #nav ul li{
     background:  #8bc34a;
-    padding : 0 4px 0 0 ; 
+    /*padding : 0 4px 0 0 ; */
   }
   /* active header color  */
   #nav ul li a.current{
@@ -25,7 +25,7 @@
 
 <table cellspacing="0" cellpadding="0" border="0" width="100%" >
   <tr>
-    <td valign="top" width="220" style="text-align:right;direction:rtl;">
+    <td valign="top" width="220" style="text-align:left;direction:rtl;">
       <div id="nav">
         <div id="nav-setup" class="tabs-container">
 

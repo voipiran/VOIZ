@@ -7,6 +7,7 @@
 body.page-body.login-page.login-form-fall {
     background: none;
 	background-image: url('../images/1.jpg');
+	background-size: cover;
 }
 
 .logovoiz img {

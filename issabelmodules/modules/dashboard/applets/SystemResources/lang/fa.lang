@@ -24,6 +24,10 @@ global $arrLangModule;
 $arrLangModule = array(
     "CPU Info" => "اطلاعات پردازنده",
     "Uptime" => "زمان فعال بودن سيستم",
+	"CPU Speed" => "سرعت پردازنده",
     "Memory usage" => "ميزان استفاده از حافظه",
+    "minute(s)" => "دقیقه",
+    "hour(s)" => "ساعت",
+    "day(s)" => "روز",
 );
 ?>

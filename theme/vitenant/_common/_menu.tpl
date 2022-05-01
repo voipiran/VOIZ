@@ -140,6 +140,21 @@
                 }
         );
 		
+        function gotowebphone() {
+            var obj = $("#webphone_link");
+            var xaddr = "https://" + window.location.hostname + "/webphone/phone.php";
+            $(obj).attr("href", xaddr);
+        }
+		
+        $(document).ready(
+                function ()
+                {
+                    gotowebphone();
+                }
+        );
+				
+		
+		
 		
     </script>
 {/literal}
@@ -161,6 +176,7 @@
 <input type="hidden" id="get_note_label" value="{$MSG_GET_NOTE}" />
 <input type="hidden" id="issabel_theme_name" value="{$THEMENAME}" />
 <input type="hidden" id="lbl_no_description" value="{$LBL_NO_STICKY}" />
+<input type="hidden" id="version" value="{$VERSION}" />
 
 <!-- inicio del menú tipo acordeon-->
 <div class="sidebar-menu">
@@ -293,6 +309,15 @@
         <span style='float:right; width:400px;'>
             <ul style="padding-top:12px;" class="list-inline links-list pull-right neo-topbar-notification">
 
+
+                <li id="header_notification_bar" class="webphone-button">
+                    <a target="_blank" id="webphone_link"  class="" href="">
+                        <i class="fa fa-phone"></i>
+					</a> 
+                </li>
+
+
+
 			<!------- voipiran Download ---->
 
         <li id="header_notification_bar" class="profile-info dropdown">
@@ -313,7 +338,7 @@
 
 <!------ end doubledup code ----->
 			
-			
+
 
                 <!--li id="header_notification_bar" class="dropdown">
                     <a {*data-toggle="dropdown"*} class="" href="index.php?menu=addons">
@@ -330,13 +355,13 @@
 
                 <li id="header_notification_bar" class="profile-info dropdown">
                     <a target="_blank" id="webmin_link"  class="" href="">
-                        <img style="width:17px;" src="{$WEBPATH}themes/{$THEMENAME}/images/webmin.png" />
+                        <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/webmin.png" />
                     </a> 
                 </li>
 				
                 <li id="header_notification_bar" class="profile-info dropdown">
                     <a target="_blank" id="crm_link"  class="" href="">
-                        <img style="width:17px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" />
+                        <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" />
                     </a> 
                 </li>
 				
@@ -356,6 +381,7 @@
                         <li><a href="#" id="dialogaboutissabel"><i class="fa fa-info-circle"></i>{$ABOUT_ISSABEL2}</a></li>
                     </ul>
                 </li>
+				
                 <!-- notification dropdown end -->
                 <li id="header_notification_bar" class="profile-info dropdown" style="float: none !important;">
                     <a data-toggle="dropdown" class="" href="#">
@@ -403,9 +429,15 @@
         </span>
         <div class="logo">
             <a href="#">
-                <img style="padding:10px 0;height:60px;" src="{$WEBPATH}themes/{$THEMENAME}/images/logo-light.png"  alt="voiz" />
-            </a>
-        </div>
+                <img style="height:60px;" src="{$WEBPATH}themes/{$THEMENAME}/images/logo-light.png"  alt="voiz" />
+			</a>
+			<!------ VOIPIRAN version ----->
+			<kbd>version {$VERSION}</kbd>
+			 
+
+			  
+		</div>
+		
 
     </div>
 
@@ -426,7 +458,7 @@
             {/foreach}
         <li id="tenant-help">
             <a class="" href="#" onclick="popUp('help/?id_nodo={if !empty($idSubMenu2Selected)}{$idSubMenu2Selected}&name_nodo={$nameSubMenu2Selected}{else}{$idSubMenuSelected}&name_nodo={$nameSubMenuSelected}{/if}', '1000', '460')"> 
-                <!--a href="http://help.issabel.org" target="_bank"-->
+                <!--a href="https://www.voipiran.io" target="_bank"-->
                 <i class="fa fa-support"></i>
             </a>
         </li>

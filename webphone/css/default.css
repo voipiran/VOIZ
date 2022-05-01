@@ -1,0 +1,724 @@
+/*
+******************************************************************************
+*
+*	CSS File for the Vicidial WebRTC Phone
+*
+*	Copyright (C) 2016  Michael Cargile
+*
+*	This program is free software: you can redistribute it and/or modify
+*	it under the terms of the GNU Affero General Public License as
+*	published by the Free Software Foundation, either version 3 of the
+*	License, or (at your option) any later version.
+*
+*	This program is distributed in the hope that it will be useful,
+*	but WITHOUT ANY WARRANTY; without even the implied warranty of
+*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*	GNU Affero General Public License for more details.
+*
+*	You should have received a copy of the GNU Affero General Public License
+*	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+* 
+******************************************************************************
+*/
+
+
+.wephone-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+#logo {
+  width: 250px;
+  height: 59px;
+  position: absolute;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #323641;
+  border: none;
+  top: 460px;
+  left: -100px;
+}
+
+#logo_img {
+  width: 232px;
+  height: 42px;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#controls {
+  width: 249px;
+  height: 147px;
+  position: absolute;
+  top: 73px;
+  left: 6px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #323641;
+  border: 1px solid #323641;
+  top: 50px;
+    left: -128px;
+}
+
+#registration_control {
+  width: 232px;
+  height: 39px;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  background-color: #4a698e;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #041830;
+}
+
+#reg_status {
+  margin: 4px 4px 4px 4px;
+  width: 134px;
+  height: 20px;
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  border: 1px solid #2a4a6f;
+  background: #7691b1;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  color: #e0e0e0;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+}
+
+#register {
+  position: absolute;
+  left: 148px;
+  top: 0px;
+}
+
+#unregister {
+  position: absolute;
+  left: 190px;
+  top: 0px;
+}
+
+#dial_control {
+  width: 232px;
+  height: 39px;
+  position: absolute;
+  left: 8px;
+  top: 53px;
+  /* background-color: #4A698E; */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #041830;
+}
+
+#digits {
+  margin: 4px 4px 4px 4px;
+  width: 176px;
+  height: 25px;
+  text-align: center;
+  border: 1px solid #2a4a6f;
+  background: #f0f0f0;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  color: #2a4a6f;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+}
+
+#dial {
+  position: absolute;
+  left: 190px;
+  top: 0px;
+}
+
+#audio_control {
+  width: 232px;
+  height: 39px;
+  position: absolute;
+  left: 8px;
+  top: 99px;
+  background-color: #4a698e;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #041830;
+}
+
+#mic_mute {
+  position: absolute;
+  left: 5px;
+  top: 0px;
+}
+
+#vol_up {
+  position: absolute;
+  left: 45px;
+  top: 0px;
+}
+
+#vol_down {
+  position: absolute;
+  left: 87px;
+  top: 0px;
+}
+
+#dialpad {
+  height: 214px;
+  width: 250px;
+  background-color: #323641;
+  border: none;
+  position: absolute;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  top: 195px;
+  left: -124px;
+}
+
+.button {
+  margin-top: 4px;
+  margin-left: 1px;
+  margin-right: 0px;
+  min-width: 30px;
+  height: 30px;
+  border: 1px solid #041830;
+  background: #2a4a6f;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7691b1), to(#2a4a6f));
+  background: -webkit-linear-gradient(top, #7691b1, #2a4a6f);
+  background: -moz-linear-gradient(top, #7691b1, #2a4a6f);
+  background: -ms-linear-gradient(top, #7691b1, #2a4a6f);
+  background: -o-linear-gradient(top, #7691b1, #2a4a6f);
+  background-image: -ms-linear-gradient(top, #7691b1 0%, #2a4a6f 100%);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  -moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  text-shadow: #122e4f 0 1px 0;
+  color: #e0e0e0;
+  font-size: 14px;
+  font-family: helvetica, serif;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.button:hover {
+  border: 1px solid #041830;
+  text-shadow: #122e4f 0 1px 0;
+  background: #2a4b84;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7692bc), to(#2a4b84));
+  background: -webkit-linear-gradient(top, #7692bc, #2a4b84);
+  background: -moz-linear-gradient(top, #7692bc, #2a4b84);
+  background: -ms-linear-gradient(top, #7692bc, #2a4b84);
+  background: -o-linear-gradient(top, #7692bc, #2a4b84);
+  background-image: -ms-linear-gradient(top, #7692bc 0%, #2a4b84 100%);
+  color: #fff;
+}
+.button:active {
+  text-shadow: #122e4f 0 1px 0;
+  border: 1px solid #041830;
+  background: #243f5e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#687f99), to(#2a4b84));
+  background: -webkit-linear-gradient(top, #687f99, #243f5e);
+  background: -moz-linear-gradient(top, #687f99, #243f5e);
+  background: -ms-linear-gradient(top, #687f99, #243f5e);
+  background: -o-linear-gradient(top, #687f99, #243f5e);
+  background-image: -ms-linear-gradient(top, #687f99 0%, #243f5e 100%);
+  color: #fff;
+}
+
+.dialpad_button {
+  min-width: 38px;
+  height: 38px;
+  border: 1px solid #041830;
+  background: #2a4a6f;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7691b1), to(#2a4a6f));
+  background: -webkit-linear-gradient(top, #7691b1, #2a4a6f);
+  background: -moz-linear-gradient(top, #7691b1, #2a4a6f);
+  background: -ms-linear-gradient(top, #7691b1, #2a4a6f);
+  background: -o-linear-gradient(top, #7691b1, #2a4a6f);
+  background-image: -ms-linear-gradient(top, #7691b1 0%, #2a4a6f 100%);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  -moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  text-shadow: #122e4f 0 1px 0;
+  color: #e0e0e0;
+  font-size: 14px;
+  font-family: helvetica, serif;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.dialpad_button:hover {
+  border: 1px solid #041830;
+  text-shadow: #122e4f 0 1px 0;
+  background: #2a4b84;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7692bc), to(#2a4b84));
+  background: -webkit-linear-gradient(top, #7692bc, #2a4b84);
+  background: -moz-linear-gradient(top, #7692bc, #2a4b84);
+  background: -ms-linear-gradient(top, #7692bc, #2a4b84);
+  background: -o-linear-gradient(top, #7692bc, #2a4b84);
+  background-image: -ms-linear-gradient(top, #7692bc 0%, #2a4b84 100%);
+  color: #fff;
+}
+.dialpad_button:active {
+  text-shadow: #122e4f 0 1px 0;
+  border: 1px solid #041830;
+  background: #243f5e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#687f99), to(#2a4b84));
+  background: -webkit-linear-gradient(top, #687f99, #243f5e);
+  background: -moz-linear-gradient(top, #687f99, #243f5e);
+  background: -ms-linear-gradient(top, #687f99, #243f5e);
+  background: -o-linear-gradient(top, #687f99, #243f5e);
+  background-image: -ms-linear-gradient(top, #687f99 0%, #243f5e 100%);
+  color: #fff;
+}
+
+#dial_row1 {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 122px;
+}
+
+#one {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#two {
+  position: absolute;
+  top: 0px;
+  left: 42px;
+}
+
+#three {
+  position: absolute;
+  top: 0px;
+  left: 84px;
+}
+
+#dial_row2 {
+  position: absolute;
+  top: 49px;
+  left: 7px;
+  width: 122px;
+}
+
+#four {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#five {
+  position: absolute;
+  top: 0px;
+  left: 42px;
+}
+
+#six {
+  position: absolute;
+  top: 0px;
+  left: 84px;
+}
+
+#dial_row3 {
+  position: absolute;
+  top: 91px;
+  left: 7px;
+  width: 122px;
+}
+
+#seven {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#eight {
+  position: absolute;
+  top: 0px;
+  left: 42px;
+}
+
+#nine {
+  position: absolute;
+  top: 0px;
+  left: 84px;
+}
+
+#dial_row4 {
+  position: absolute;
+  top: 133px;
+  left: 7px;
+  width: 122px;
+}
+
+#star {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#zero {
+  position: absolute;
+  top: 0px;
+  left: 42px;
+}
+
+#pound {
+  position: absolute;
+  top: 0px;
+  left: 84px;
+}
+
+#dial_dtmf {
+  position: absolute;
+  top: 178px;
+  left: 7px;
+}
+
+#dtmf_digits {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 64px;
+  height: 25px;
+  text-align: center;
+  border: 1px solid #2a4a6f;
+  background: #f0f0f0;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  color: #2a4a6f;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(000, 000, 000, 0.7) 0 0px 0px;
+}
+
+#send_dtmf {
+  position: absolute;
+  top: -4px;
+  right: -123px;
+}
+
+/* VoipIran  */
+#main {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+#logo_img {
+  border: none;
+  width: 183px;
+  height: 29px;
+}
+
+#audio_control {
+  background-color: #323641;
+  border-radius: 0;
+  border: none;
+  left: 15px;
+  top: 98px;
+}
+
+.button {
+  cursor: pointer;
+  border: none;
+  background: #8d2238;
+  background: #434552;
+  background-image: -ms-linear-gradient(top, #7691b1 0%, #8d2238 100%);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  color: #ffffff;
+  outline: none;
+}
+
+.button:hover {
+  border: none;
+  text-shadow: none;
+  background: #4c4f56;
+  color: #fff;
+}
+
+.button:active {
+  text-shadow: none;
+  border: none;
+  background: #4f5567;
+  color: #fff;
+}
+
+button:focus {
+  border: 1px solid white;
+}
+
+#registration_control {
+  background-color: #323641;
+  border: 1px solid #323641;
+  top: -5px;
+}
+
+#dial_control {
+  left: 9px;
+  border: none;
+  top: 67px;
+}
+
+#reg_status {
+  border: 1px solid #727681;
+  background: #727681;
+  outline: none;
+  border-radius: 0 0 5px 5px;
+  width: 228px;
+  font-size: 15px;
+  height: 32px;
+  top: 56px;
+  background-image: none !important;
+}
+
+#digits {
+  border: none;
+  outline: none;
+  border-radius: 5px 5px 0 0;
+  width: 230px;
+  height: 51px;
+  background: #9296a1;
+  font-size: 16px;
+  color: white;
+  position: absolute;
+  top: -57px;
+  height: 39px;
+}
+
+/* Start Buttons  */
+#two,
+#five,
+#eight,
+#zero {
+  left: 90px;
+}
+
+#three,
+#six,
+#nine,
+#pound {
+  left: 160px;
+}
+
+.dialpad_button {
+  cursor: pointer;
+  outline: none;
+  min-width: 55px;
+  background: #424651;
+  text-shadow: none;
+  box-shadow: none;
+  border-radius: 10px;
+  font-family: verdana;
+  height: 48px;
+  border: 1px solid #6b6e77;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.dialpad_button:hover {
+  background: #616570;
+}
+
+#dial_row2 {
+  top: 59px;
+}
+
+#one,
+#four,
+#seven,
+#star {
+  left: 20px;
+}
+
+#dial_dtmf {
+  top: 220px;
+}
+
+#send_dtmf {
+  right: -230px;
+  width: 90px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+#dtmf_digits {
+  width: 134px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  left: 10px;
+  box-shadow: none;
+  background: #9296a1;
+}
+
+#dial_row3 {
+  top: 110px;
+}
+#dial_row4 {
+  top: 162px;
+}
+
+#mic_mute,
+#vol_up,
+#vol_down,
+#dial {
+  width: 53px;
+  height: 40px;
+}
+#vol_up {
+  left: 60px;
+}
+
+#vol_down {
+  left: 115px;
+}
+
+#dial {
+  width: 53px;
+  left: 176px;
+  border: none;
+  z-index: 1;
+  top: 31px;
+}
+
+#register,
+#unregister {
+  border: none;
+  width: 40px;
+  left: -157px;
+  top: 198px;
+  background: #323641;
+  border-radius: 0 0 0 5px;
+  height: 35px;
+  cursor: default;
+  outline: none;
+}
+
+img#unreg_icon,
+img#reg_icon {
+  width: 0px;
+}
+
+.alertCall {
+  /* animation: rigningAnime 1s infinite; */
+}
+
+@keyframes rigningAnime {
+  from {
+    background-color: #727681;
+  }
+  to {
+    background-color: #882c34;
+  }
+}
+
+#register {
+  cursor: pointer;
+}
+
+.alertCallOutGoing {
+  animation: rigningAnimeOutGoing 1s infinite;
+}
+
+@keyframes rigningAnimeOutGoing {
+  from {
+    background-color: #323641;
+  }
+  to {
+    background-color: green;
+  }
+}
+
+
+/* hide arrows from number input  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#reg_name .name{
+  color      : white;
+  font-size  : 19px;
+  font-family: sans-serif;
+  position   : absolute;
+  white-space: nowrap;
+  top        : 23px;
+  font-weight: bold;
+}
+
+#reg_name{
+    position: absolute;
+    top: 19px;
+    left: -80px;
+    z-index: 2;
+}
+
+.swal2-content {
+  font-family: arial;
+  font-size: 16px !important;
+}
+
+section#hangoutButton{
+  z-index: 2;
+  top: 66px;
+  left: 214px;
+  position: absolute;
+  display: none;
+}
+
+section#hangoutButton img{
+  width: 30px;
+  cursor: pointer;
+  position: absolute;
+  animation: disconenctButton 1s infinite;
+}
+
+@keyframes disconenctButton {
+  0%{
+    top: 0;
+  }
+
+  100%{
+    top: 9px;
+  }
+}
+
+section#hangoutButton{
+  left: 91px;
+}
