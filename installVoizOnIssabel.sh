@@ -1,4 +1,8 @@
 #!/bin/bash
+<<<<<<< Updated upstream
+=======
+version=5.0
+>>>>>>> Stashed changes
 echo "Install voipiran VOIZ PBX"
 echo "VOIPIRAN.io"
 echo "VOIPIRAN VOIZ Version 4.3"
