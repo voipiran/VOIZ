@@ -30,11 +30,29 @@ ul.neo-topbar-notification > li.profile-info > a {
     background:#fafafa;
     padding:3px 8px;
     margin-right:2px;
-    border-radius:50%;
+	/*voipiran 50%*/
+    border-radius:25%;
     -webkit-border-radius:50%;
     padding-right:8px !important;
     border: 1px solid #fafafa;
 }
+
+/*voipiran webphone menu*/
+ul.neo-topbar-notification > li.webphone-button > a {
+	    color:#888;
+    font-size:17px;
+    /* background:#33cc33;*/
+    background:#8bc34a !important;
+    padding:3px 8px;
+    margin-right:2px;
+	/*voipiran 50%*/
+    border-radius:25%;
+    -webkit-border-radius:20% !important;
+    padding-right:8px !important;
+    border: 1px solid #fafafa;
+}
+
+
 .neo-topbar-notification-badge {
     position:absolute;
     /*right:-10px;*/
@@ -394,3 +412,5 @@ img.neo-smenubox-arrow-more-right{
 	top:0px;
 	float:right;
 }
+
+/*voipiran*/

@@ -67,6 +67,10 @@ function themeSetup(&$smarty, $selectedMenu, $pdbACL, $pACL, $idUser)
 
     }
 
+/*voipiran*/
+$config = parse_ini_file('/etc/voiz.conf' , true) ;
+$version = $config['version'] ;
+
     $smarty->assign('arrMainMenu', $arrMainMenu);
     $smarty->assign("LANG", $lang);
     $smarty->assign(array(
@@ -74,6 +78,7 @@ function themeSetup(&$smarty, $selectedMenu, $pdbACL, $pACL, $idUser)
         "HELP"                      =>  _tr('HELP'),
         "USER_LOGIN"                =>  $_SESSION['issabel_user'],
         "USER_ID"                   =>  $idUser,
+		"VERSION"                   =>  $version,
         "CHANGE_PASSWORD"           =>  _tr("Change Issabel Password"),
         "MODULES_SEARCH"            =>  _tr("Search modules"),
         "ADD_BOOKMARK"              =>  _tr("Add Bookmark"),

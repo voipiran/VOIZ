@@ -100,10 +100,10 @@ body .page-container .sidebar-menu #main-menu li a:hover {
 }
 .page-container .sidebar-menu #main-menu li ul li a{padding:2px 10px;}
 body .page-container.sidebar-collapsed .sidebar-menu #main-menu > li > ul li {
-/*  border-color: #643590;*/
+/*voipiran  border-color: #643590;*/
 }
 body .page-container .sidebar-menu #main-menu li ul > li ul > li > a {
-/*  background-color: #011A60;*/
+/*voipiran  background-color: #011A60;*/
 }
 body .page-container .sidebar-menu #main-menu li ul > li ul > li ul > li > a {
   background-color: #42225e;
