@@ -3,7 +3,7 @@
 <module> 
   <menulist> 
     <menuitem menuid="voiz-helps" desc="درباره VOIZ"
-parent="" module="no" link="" order="12"> 
+parent="" module="no" link="" order="20"> 
       <permissions> 
         <group id="1" name="administrator" desc="total access"></group> 
       </permissions> 
