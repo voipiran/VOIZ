@@ -1,5 +1,7 @@
 #!/bin/bash
-version=4.5
+
+version=5.0
+
 echo "Install voipiran VOIZ PBX"
 echo "VOIPIRAN.io"
 echo "VOIPIRAN VOIZ Version $version"

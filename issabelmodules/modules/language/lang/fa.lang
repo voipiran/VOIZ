@@ -33,8 +33,8 @@
   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
 global $arrLangModule;
 $arrLangModule=array(
-"Language"=>"زبان",
-"Select language" => "انتخاب زبان",
+"Language"=>"زبان و پوسته",
+"Select language" => "انتخاب زبان و پوسته",
 
 
 

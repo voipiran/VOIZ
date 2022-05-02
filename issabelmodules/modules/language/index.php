@@ -73,18 +73,12 @@ function _moduleContent(&$smarty, $module_name)
         } else {
             // guardar el nuevo valor
             $bExito = set_key_settings($pDB, 'language', $_POST['language']);
-            
-		$conn = new PDO('sqlite:/var/www/db/settings.db', '', '');
-
-			//Change Theme
-			if($_POST['language']="en"){
-				$conn->exec("update settings set value='tenant' where key='theme'");
+			if ($_POST['language']=='fa'){
+				set_them_languages();
+			}else{
+				set_them_languages(0);
 			}
-			if($_POST['language']="fa"){
-				$conn->exec("update settings set value='vitenant' where key='theme'");
-			}
-			
-			if (!$bExito) {
+            if (!$bExito) {
                 $smarty->assign(array(
                     'mb_title'      =>  _tr('Error'),
                     'mb_message'    =>  $pDB->errMsg,
@@ -111,4 +105,17 @@ function load_available_languages()
 
     ksort($languages);
     return $languages;
+}
+
+
+function set_them_languages($isfarsi=1)
+{
+    $dbfile="../../../db/settings.db";
+	$dbfile="/var/www/db/settings.db";
+	$sqlstr = "Update settings set value = 'tenant' where key = 'theme'";
+	$db = new SQLite3($dbfile);
+	if ($isfarsi==1){
+	$sqlstr = "Update settings set value = 'vitenant' where key = 'theme'";
+	}
+	$results = $db->query($sqlstr);
 }
