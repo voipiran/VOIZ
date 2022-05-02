@@ -1,0 +1,36 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 2.4.0-9                                               |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.1 2013-08-12 04:08:50 Jose Briones jbriones@elastix.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Softphones" => "Softphones",
+"Developer Description" => "Descripción del Desarrollador <i>(traducido)</i>",
+"Developer" => "Desarrollador",
+"Download Link" => "Enlace de Descarga",
+
+"xlite_software_description" => "X-Lite es un cliente SIP disponible para Windows y Mac OS X. Están también disponibles desde el sitio web de CounterPath los clientes comerciales eyeBeam y Bria. (Bria cuenta con soporte en Ubuntu).",
+"xlite_manufacturer_description" => "Combinando llamadas de voz, llamadas de video y mensajería instantánea en una interfaz amigable para el usuario, X-Lite de CounterPath lo ayuda sin problemas en la transisión del ambiente de un teléfono tradicional al mundo de Voz sobre IP.",
+
+"zoiper_software_description" => "ZoIPer es un cliente Softphone libre disponible para Windows, Linux y Mac OS X con capacidad SIP e IAX.",
+"zoiper_manufacturer_description" => "Zoiper Classic Softphone IAX y SIP multilenguaje es un cliente de telefonía IP, destinado a trabajar con cualquier sistema e infraestructura de comunicación basado en IP.",
+);
+?>

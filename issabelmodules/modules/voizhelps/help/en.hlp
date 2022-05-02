@@ -1,0 +1,17 @@
+<html>
+    <header>
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+    </header>
+    <body>
+        <h1>{$node_name}</h1>
+        <p>The option "Softphones" of the menu "Downloads" lets us download X-Lite and Zoiper, which are software for the simulation of a conventional phone on a computer.</p>
+
+        <div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_softphones.png" border="0" />
+        <p>Figure 1</p></div>
+        <br />
+
+        <p>To download one of these Softphones, click on the link corresponding to each software.</p>
+
+    </body>
+</html>

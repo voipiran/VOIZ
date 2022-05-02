@@ -236,6 +236,10 @@ make
 make install
 cd ..
 
+echo "     "
+echo "     "
+echo "-------------Add Some Menus----------------"
+issabel-menumerge voiz-guide-menu.xml
 
 echo "     "
 echo "-------------Apache Restart----------------"

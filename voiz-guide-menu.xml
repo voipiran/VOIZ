@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<module> 
+  <menulist> 
+    <menuitem menuid="voiz-helps" desc="درباره VOIZ"
+parent="" module="no" link="" order="12"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+
+<menuitem menuid="voizhelps" desc="راهنمای VOIZ"
+parent="voiz-helps" module="yes" link="" order="71"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+  
+
+	
+  </menulist> 
+</module>
