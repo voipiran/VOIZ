@@ -224,6 +224,14 @@ issabel-menumerge crm-menu.xml
 
 echo "     "
 echo "     "
+echo "-------------Installing WEBPHONE----------------"
+cp -rf webphone /var/www/html
+chown -R asterisk:asterisk /var/www/html/webphone/*
+chown asterisk:asterisk /var/www/html/webphone/
+
+
+echo "     "
+echo "     "
 echo "-------------Installing Network Utils----------------"
 #Installing htop
 yum install htop traceroute -y
