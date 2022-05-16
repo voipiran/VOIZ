@@ -5,10 +5,10 @@
 **این سیستم تلفنی به طور رایگان توسط ویپ ایران VOPIRAN ارائه می گردد و دائما در حال به روز رسانی است.**
 
 
-## Instalation (نصب)
+## Instalation (راهنمای نصب)
 There are two ways to install VOIZ.
 
-### 1. How to Install on Issabel ISO:
+### 1. How to Install on Issabel ISO (نصب بر روی ایزابل):
 -install issabel iso file with Asterisk 16 or 18
 
 -update issabel
@@ -20,7 +20,7 @@ yum update
 yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.git && cd voiz && chmod 777 installVoizOnIssabel.sh && ./installVoizOnIssabel.sh
 ```
 
-### 2. How to  Netinstall (install on centos7 minimal):
+### 2. How to  Netinstall (install on centos7 minimal- نصب بر روی لینوکس سنت او اس 7):
 -install Centos7 Minimal:
 -Run This command on your Linux CLI:
 ```
