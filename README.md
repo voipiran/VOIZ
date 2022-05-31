@@ -79,3 +79,10 @@ https://forum.voipiran.io/t/voiz-documents
 - قرار گرفتن نسخه قابل اجرا از برنامه Putty  بر روی سرور VOIZ، ** این امکان کمک بسیاری به راحتی نصب سیستم تلفنی یا پشتیبانی می کند.
 - نصب برنامه EasyVPN که یک محیط گرافیکی برای راه اندازی Open VPN Server است.
 
+
+
+## Give a Star! ⭐ یک ستاره با ما بدهید
+If you like this project or plan to use it in the future, please give it a star. Thanks 🙏
+
+## Bugs and Feedback
+For bugs, questions, and discussions, please use the Github Issues
