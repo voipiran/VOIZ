@@ -1,0 +1,61 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 0.5                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.7 2007/09/05 00:36:42 alex Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+    "Monitoring" => "Список Записей",
+    "Date" => "Дата",
+    "Time" => "Время",
+    "Source" => "Источник",
+    "Destination" => "Адресат",
+    "Duration" => "Длительность",
+    "Download" => "Скачать",
+    "Listen" => "Слушать",
+    "Type" => "Тип",
+    "Message" => "Сообщение",
+    "Start_Date" => "Начальная Дата",
+    "End_Date" => "Конечная Дата",
+    "Start Date" => "Начальная Дата",
+    "End Date" => "Конечная Дата",
+    "message_alert" => "Вы уверенны, что хотите удалить записи?",
+    "no_extension" => "Нет внутреннего номера ассоциированного с текущим пользователем. Вы можете ассоциировать внутренний номер с вашим пользователем  <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">здесь</a>",
+    "no_file" => "Файл не найден!",
+    "Outgoing" => "Исходящий",
+    "Incoming" => "Входящий",
+    "Queue" => "Очередь",
+    "Group" => "Группа",
+    "unknown" => "Неизвестный",
+    "delete_file_error" => "Как минимум один из выбранных файлов не может быть удалён, потому что не существует",
+    "contact_admin" => "Нет внутреннего номера ассоциированного с текущим пользователем. Пожалуйста, свяжитесь с администратором для назначения внутреннего номера вашему пользователю",
+    "You are not authorized to download this file" => "Вы не авторизованы для скачивания этого файла",
+    "You are not authorized to listen this file" => "Вы не авторизованы для прослушивания этого файла",
+    "You are not authorized to delete any records" => "Вы не авторизованы для удаления каких бы то ни было записей",
+    "Show Filter" => "Показать Фильтр",
+    "Hide Filter" => "Скрыть Фильтр",
+    "Filter applied " => "Текущий фильтр: ",
+    "Page" => "Страница",
+    "records" => "записей",
+    "of" => "из",
+    "No records match the filter criteria" => "Нет записей, соответствующих критериям фильтра",
+    "Deleted" => "Удалённый",
+);
+?>

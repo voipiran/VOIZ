@@ -1,0 +1,22 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+<h1>{$node_name}</h1>
+
+<p>The option “Hardware Detector” from the menu “System” in Issabel allows detecting telephony hardware that is installed on our machine. </p>
+<p>To detect new telephony hardware, select the options of your preference in advanced section and click on the “Detect New Hardware” button. After detecting you will see a list of all the cards that have been installed on the server.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_hardware_detector.png" border="0"/>
+<p>Figure 1</p></div>
+<br />
+<h2>Advanced Options</h2>
+<p>There are 3 options to detect hardware:</p>
+<p><b>Replace file chan_dahdi.conf: </b>This option allows us to replace the original file "chan_dahdi.conf" of the card by the Issabel's "chan_dahdi.conf".</p>
+<p><b>Detect Sangoma hardware: </b>This option allows detecting cards from Sangoma Technologies</p>
+<p><b>Detect ISDN hardware: </b>Select this option if you want to detect the card using the mISDN driver. To enable this option you must have the mISDN driver already installed. To do this, just install the rpm "mISDNUser" from the "extra" repository using yum command.</p>
+
+</body>
+</html>

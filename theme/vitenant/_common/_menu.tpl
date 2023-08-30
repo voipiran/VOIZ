@@ -270,8 +270,8 @@
 <div class="main-content">
     <div style="height:83px;background-color:#303030;padding:15px;">
         <!-- Profile Info and Notifications -->
-        <span style='float:right; text-align:right; padding:0px 5px 0px 0px; width:175px;' class="col-md-6 col-sm-8 clearfix">
-            <ul style='float:right;' class="user-info pull-none-xsm">
+        <span style='float:left; text-align:right; padding:0px 5px 0px 0px; width:175px;' class="col-md-6 col-sm-8 clearfix">
+            <ul style='' class="user-info pull-none-xsm">
                 <!-- Profile Info -->
                 <li class="profile-info dropdown pull-right"><!-- add class "pull-right" if you want to place this from right -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -306,7 +306,7 @@
         </span>
 
         <!-- Raw Links -->
-        <span style='float:right; width:400px;'>
+        <span style=' width:400px;'>
             <ul style="padding-top:12px;" class="list-inline links-list pull-right neo-topbar-notification">
 
 
@@ -359,11 +359,11 @@
                     </a> 
                 </li>
 				
-                <li id="header_notification_bar" class="profile-info dropdown">
-                    <a target="_blank" id="crm_link"  class="" href="">
-                        <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" />
-                    </a> 
-                </li>
+                <!-- <li id="header_notification_bar" class="profile-info dropdown"> -->
+                 <!--    <a target="_blank" id="crm_link"  class="" href=""> -->
+                <!--         <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" /> -->
+               <!--      </a>  -->
+              <!--   </li> -->
 				
                 <li id="header_notification_bar" class="profile-info dropdown">
                     <a data-toggle="dropdown" class="" href="#">

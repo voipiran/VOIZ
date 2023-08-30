@@ -49,7 +49,7 @@ $arrLangModule=array(
 "CallerID Lookup Sources" => "CallerID Lookup",
 "Call Flow Control" => "Call Flow Control",
 "Follow Me" => "Follow Me (دنبال من بگرد)",
-"IVR" => "IVR (منوی پاسخگو)",
+"IVR" => "IVR (منوی منشی)",
 "Queue Priorities" => "Queue Priorities",
 "Misc Destinations" => "Misc Destinations",
 "Queues" => "Queues (صف انتظار)",
@@ -64,7 +64,7 @@ $arrLangModule=array(
 "PIN Sets" => "PIN Sets (تعریف رمز)",
 "Paging and Intercom" => "Paiging and Intercom",
 "Parking Lot" => "Parking (پارک تماس)",
-"System Recordings" => "ضبط فایل صوتی (System Recordings)",
+"System Recordings" => "System Recordings (فایل های صوتی)",
 "VoiceMail Blasting" => " ارسال گروهی پیام صوتی (VoiceMail Blasting)",
 "Remote Access" => "دسترسی راه دور",
 "Callback" => "Callback",
@@ -77,10 +77,12 @@ $arrLangModule=array(
 "BULKDIDS" => "Bulk DIDs (DID تعریف گروهی)",
 "Bulk DIDs" => "Bulk DIDs (DID تعریف گروهی)",
 "CID Superfecta" => "CID Superfecta",
-"Boss Secretary" => "Boss Secretary",
 "Class of Service" => "Class of Service (گروه بندی)",
 "Call Recording" => "Call Recording",
 "Set CallerID" => "Set CallerID (CID تغییر)",
+"Asternic CDR Reports" => "CDR Rports (ریز مکالمات)",
+"Boss Secretary" => "Boss Secretary (مدیر منشی)",
+"Trunk Balance" => "Trunk Balance (مدیریت ترانک ها)",
 
 
 );

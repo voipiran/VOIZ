@@ -1,0 +1,53 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 0.5                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2007/01/09 23:49:36 alex Exp $
+*/
+global $arrLangModule;
+$arrLangModule = array(
+'Fax Queue' => 'صف فکس',
+'Job ID' => 'شناسه',
+'Priority' => 'اولویت',
+'Destination' => 'مقصد',
+'Pages' =>  'صفحه',
+'Retries' => 'تلاش',
+'Status' => 'وضعیت',
+'Sent %d pages of %d' => 'ارسال شده %d صفحه از %d',
+'Try %d of %d' => 'تکرار %d از %d',
+'Busy signal detected' => 'بوق اشغال دریافت شد',
+'No carrier detected' => 'ارسال کننده ای یافت نشد',
+'No answer from remote' => 'پاسخی داده نشد',
+'Could not read request file' => 'ناتوان در خواندن فایل درخواست',
+'Blocked by another job' => 'توسط کار دیگری بسته شده است',
+'Delayed by prior call' => 'به خاطر اولویت کار دیگر دارای تاخیر است',
+'Are you sure to cancel selected jobs?' => 'Are you sure to cancel selected jobs?',
+'Cancel job' => 'انصراف از ارسال',
+'Failed to cancel job' => 'ناتوان در انصراف',
+// Note: truncation on faxstat output
+'Blocked by concurrent cal' => 'به خاطر محدودیت ارسال همزمان مسدود شده است',
+);
+?>

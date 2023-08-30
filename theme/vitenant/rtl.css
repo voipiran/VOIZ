@@ -1,0 +1,15 @@
+.page-container .sidebar-menu {
+left:auto!important;
+right:0px!important;
+}
+.page-container{
+right:auto!important;
+left:0px!important;
+padding-left:auto!important;
+padding-right:280px!important;
+}
+.page-container.sidebar-collapsed{
+padding-left:auto!important;
+padding-right:65px!important;
+}
+.page-container .main-content{}

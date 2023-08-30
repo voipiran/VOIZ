@@ -1,0 +1,103 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  |Elastix version 2.0                                             |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2010-12-21 09:08:11 Alberto Santos asantos@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Rules" => "قوانين",
+"New" => "جديد",
+"Traffic" => "ترافيك",
+"Interface IN" => "ارتباط ورودي",
+"Interface OUT" => "ارتباط خروجي",
+"IP Source" => "آي پي مبدا",
+"IP Destiny" => "آي پي مقصد",
+"ALL" => "كل",
+"Protocol" => "پروتكل",
+"Target" => "هدف",
+"Action" => "عمليات",
+"Port Source" => "پورت مبدا",
+"Port Destine" => "پورت مقصد",
+"Type" => "نوع",
+"ID" => "شناسه",
+"New Rule" => "قانون جديد",
+"Delete" => "حذف",
+"Are you sure you wish to delete the Rule" => "آيا مطمئن به حذف قانون هستيد؟",
+"Orden" => "ترتيب",
+"Filter Example" => "نمونه فيلتر",
+"Rule" => "قانون",
+"Activate" => "فعال",
+"Desactivate" => "غير فعال",
+"Rule List" => "ليست قوانين",
+"Source Port" => "پورت مبدا",
+"Destiny Port" => "پورت مقصد",
+"Protocol ICMP Type" => "نوع پروتكل ICMP",
+"Number Protocol IP" => "آي پي شماره پروتكل",
+"Order" => "ترتيب",
+"Order/Activated" => "ترتيب/فعال",
+"INPUT" => "ورودي",
+"OUTPUT" => "خروجي",
+"FORWARD" => "انتقال",
+"ACCEPT" => "پذيرفته شود",
+"DROP" => "رها شود",
+"REJECT" => "رد شود",
+"ANY" => "هر چيزي",
+"The bit masks must be values less than 33" => "بيت وارد شده بايد كمتر از 33 باشد",
+"Error" => "خطا",
+"Validation Error" => "خطاي اعتبار سنجي",
+"The following fields contain errors" => "فيلد هاي زير داراي خطا هستند",
+"Edit Rule" => "ويرايش قانون",
+"Wrong Mask" => "ماسك اشتباه",
+"Up" => "بالا",
+"Down" => "پايين",
+"Successful Change" => "با موفقيت تغيير كرد",
+"Invalid Action" => "عمل نا معتبر",
+"Execute Rules" => "اجراي قانون",
+"Successful Save" => "با موفقيت ذخيره شد",
+"Successful Update" => "با موفقيت به روز رساني شد",
+"Error during execution of rules" => "بروز خطا در هنگام اجراي قوانين",
+"Interface" => "ارتباط",
+"IN" => "ورود",
+"OUT" => "خروج",
+"The rules have been executed in the system" => "قوانين بر روي سيستم اجرا شد",
+"There have been changes and have not been executed in the system" => "تغييراتي وجود دارد كه بر روي سيستم اجرا نشده است",
+"Cancel" => "انصراف",
+"Wrong value for ip" => "مقدار غير مجاز براي آي پي",
+"Save Changes" => "ذخيره تغييرات",
+"FireWall Rules" => "قوانين فايروال",
+"You have made changes to the definition of firewall rules, for this to take effect in the system press the next button" => "شما در قوانين فايروال تغييراتي اعمال نموديد، براي اجراي آنها دكمه بعدي را بزنيد",
+"The firewall is totally desactivated. It is recommended to activate the firewall rules" => "فايروال غير فعال است، بهتر است آن را فعال نماييد",
+"Activate FireWall" => "فعال سازي فايروال",
+"Desactivate FireWall" => "غير فعال",
+"The firewall has been desactivated" => "فايروال غير فعال شده است",
+"The firewall could not be desactivated" => "فايروال نمي‌تواند غير فعال شود",
+"STATE" => "وضعيت",
+"Established" => "برقرار شد",
+"Related" => "متصل",
+"You have to select at least one state" => "حداقل يك وضعيت را انتخاب نماييد",
+"Details" => "جزئيات"
+);
+?>

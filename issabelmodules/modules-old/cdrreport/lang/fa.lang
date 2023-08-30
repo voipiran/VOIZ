@@ -1,0 +1,65 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 1.0                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+																		  
+	                                      |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                      |
+  | Email: k.haamed@gmail.com                                            |                                                                    |
+  +----------------------------------------------------------------------+
+   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Start Date" => "تاریخ شروع",
+"End Date" => "تاریخ پایان",
+"Field Name" => "نام فیلد",
+"Field" => "فیلد ",
+"CDR Report List" => "گزارش ریز مکالمات",
+"Account Code" => "نظرسنجی/صف",
+"Date" =>"تاریخ",
+"Source" =>"تماس گيرنده",
+"Destination" => "مقصد",
+"Src. Channel" => "كانال ورودي",
+"Dst. Channel" => "کانال مقصد",
+"Duration" => "مدت تماس",
+"Filter" => "نمايش",
+"Are you sure you wish to delete CDR(s) Report(s)?" => "آیا مطمئن به حذف ریز مکالمات هستید؟",
+"Status" => "وضعیت",
+"ALL" => "تمامي تماس ها",
+"ANSWERED" => "پاسخ داده شده",
+"BUSY" => "مشغول",
+"FAILED" => "نا موفق",
+"NO ANSWER" => "پاسخ داده نشده",
+"Delete" => "حذف ريز مكالمات",
+"CDR Report" => "گزارش مكالمات",
+"Please End Date must be greater than Start Date" => "تاريخ اتمام بايد از شروخ بزرگ‌تر باشد",
+"Ring Group"=>"گروه پاسخگو",
+"(Any ringgroup)"=>"(تمامی گروه ها)",
+"Your username does not have any extension assigned." => "کد کاربری شما داخلی وابسته ندارد.",
+"contact_admin" => "کد کاربری شما داخلی وابسته ندارد، لطفا با مدیر سیستم تماس بگیرید.",
+"no_extension" => "کد کاربری شما داخلی وابسته ندارد، می توانید از طریق لینک روبرو یک داخلی انتخاب نمایید. <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">اینجا</a>",
+"uniqueid" => "كد تماس",
+"User Field" => "کارشناس#نظر",
+"Only administrators can delete CDRs" => "فقط مدیر امکان حذف ریز مکالمات را دارد."
+
+);
+?>

@@ -1,0 +1,18 @@
+/* ESTILOS CREADOS POR EDGAR LANDIVAR PARA EL TEMA TENANT */
+
+/* BUTTON */
+.button {
+    color: #fff;
+    border: 1px solid #373e4a;
+    font-size: 13px;
+    font-weight: normal;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-color: #373e4a;
+    height: 16px;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    padding: 6px 12px 6px 12px;
+}

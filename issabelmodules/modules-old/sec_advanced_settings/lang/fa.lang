@@ -1,0 +1,56 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.4-5                                               |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2011-05-13 11:05:31 Estefanía Morán Meza emoran@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Advanced Security Settings"                       => "تنظيمات پيشرفته امنيتي",
+"Enable direct access (Non-embedded) to FreePBX®"   => "Freepbx فعال كردن دسترسي مستقيم به برنامه",
+"Change Password"                                  => "تغيير رمز",
+"Enable access"                                    => "فعال كردن دسترسي",
+"Database and Web Administration FreePBX® Password" => "Freepbx رمز ديتا بيس و محيط مديريت برنامه",
+"Password Confirmation"                            => "تاييد رمز",
+"Password and confirmation do not match!"          => "رمز و تاييديه آن يكسان نيستند",
+"The following fields are required"                => "پر كردن فيلد‌هاي زير الزامي است",
+"The following field contain errors"               => "فيلد‌هاي زير داراي خطا هستند",
+"Information"                                      => "اطلاعات",
+"Password has been updated."                       => "رمز عبور به روز رساني شد",
+"Password has not been updated."                   => "رمز عبور با موفقيت به روز رساني نشد",
+"Access direct to FreePBX® has been enabled."       => "فعال شد Freepbx دسترسي مستقيم به",
+"Access direct to FreePBX® has not been enabled."   => "فعال نشد Freepbx دسترسي مستقيم به",
+"Access direct to FreePBX® has been disabled."      => "غير فعال شد Freepbx دسترسي مستقيم به",
+"Access direct to FreePBX® has not been disabled."  => "غير فعال نشد Freepbx دسترسي مستقيم به",
+" But the following files have been modified: "    => "ولي فال‌هاي زير تغيير داده شد",
+"Password may only contain alphanumeric characters, spaces, or the following: .&-@=_!<>." => 
+"Password may only contain alphanumeric characters, spaces, or the following: .&-@=_!<>.",
+"Advice"                                           => "نكته",
+"Unauthorized"                                     => "نا شناخته",
+"You are not authorized to access this page."      => "شما مجاز به دسترسي به اين صفحه نيستيد",
+"Enable direct access (Non-embedded) to FreePBX in \"Security >> Advanced Security Settings\" menu." 
+						   => "Enable direct access (Non-embedded) to FreePBX in \"Security >> Advanced Security Settings\" menu."
+);
+?>

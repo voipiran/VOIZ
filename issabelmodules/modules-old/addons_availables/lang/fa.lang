@@ -1,0 +1,70 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.0-15                                               |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2010-03-08 12:03:02 Bruno Macias bomv.27@gmail.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Installing/Updating" => "نصب/به روز رسانی",
+"Transaction" => "Transaction",
+"Resolving dependencies" => "Resolving dependencies",
+"Downloading package" => "دریافت بسته",
+"Installing package" => "نصب بسته",
+"Refreshing repos" => "Refreshing repos",
+"Addon" => "Addon",
+"was successfully" => "با موفقیت",
+"Uninstalling" => "در حال حذف",
+"Removing package" => "حذف بسته",
+"has no problem with dependencies" => "has no problem with dependencies",
+"Checking Dependencies" => "Checking Dependencies",
+"Sorry, you can not cancel the transaction on this stage" => "Sorry, you can not cancel the transaction on this stage",
+"Cancelling. This process could take several minutes, please wait" => "Cancelling. This process could take several minutes, please wait",
+"The cancel signal was already sent, this could take several minutes, please wait" => "The cancel signal was already sent, this could take several minutes, please wait",
+"Sorry, another transaction is already in process" => "Sorry, another transaction is already in process",
+"No addons match your search criteria" => "No addons match your search criteria",
+"Filter by" => "فیلتر",
+"Available" => "موجود",
+"Installed" => "نصب شده",
+"Purchased" => "خریداری شده",
+"Update Available" => "به روز رسانی وجود دارد",
+"Name" => "نام",
+"Showing" => "نمایش",
+"of" => "از",
+"by" => "توسط",
+"TRIAL" => "آزمایشی",
+"BUY" => "خرید",
+"INSTALL" => "نصب",
+"UPDATE" => "به روز رسانی",
+"UNINSTALL" => "حذف",
+"More info" => "اطلاعات بیشتر",
+"Addon Market" => "فروشگاه",
+"Are you sure you want to cancel this transaction?" => "Are you sure you want to cancel this transaction?",
+"Location" => "Location",
+"Please wait..." => "لطفا صبر کنید ...",
+"Warning" => "اخطار",
+"Note" => "نوشته"
+);
+?>

@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+
+div#chat .chat-inner > .panel-group > .panel
+{
+    border-radius: 0;
+    background: none;
+}
+
+div#chat .chat-inner > .panel-group > .panel > .panel-heading
+{
+    /*background-color: #2b303a;*/
+    background: none;
+    color: #7f8186;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(69, 74, 84, 0.7);
+}
+div#chat .chat-inner > .panel-group > .panel > .panel-heading a
+{
+    color: #aaabae;
+}
+div#chat .chat-inner > .panel-group > .panel > .panel-heading:hover
+{
+    background-color: rgba(69, 74, 84, 0.3);
+}
+div#chat .chat-inner > .panel-group > .panel > .panel-heading:hover a
+{
+    color: #ffffff;
+}
+
+div#chat .chat-inner > .panel-group > .panel > .panel-heading > .panel-title
+{
+    font-size: 12px;
+}
+
+div#chat .chat-inner > .panel-group > .panel .panel-body
+{
+    background: none;
+    color: #999;
+    border-bottom: 1px solid rgba(69, 74, 84, 0.7);
+}
+
+div#chat .chat-inner > .panel-group .panel-heading + .panel-collapse
+{
+    background: none;
+}
+div#chat .chat-inner > .panel-group .panel-heading + .panel-collapse .panel-body
+{
+    border-top: 0;
+}
+
+div#chat .chat-inner > .panel-group > .panel > .panel-heading i
+{
+  position: relative;
+  font-size: 15px;
+  margin-right: 5px;
+
+  top: 1px;
+  display: inline-block;
+}

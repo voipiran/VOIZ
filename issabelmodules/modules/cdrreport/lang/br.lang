@@ -1,0 +1,61 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 0.5                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.7 2007/09/05 00:36:42 Ibinetwork Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+  "Start Date"=>"Inicio",
+  "End Date"=>"Final",
+  "Field Name"=>"Campo",
+  "Field"=>"Campo",
+  "CDR Report List"=>"Relatório de Ligações",
+  "Account Code" => "Protocolo",
+  "Date"=>"Data",
+  "Source"=>"Origem",
+  "Destination"=>"Destino",
+  "Src. Channel"=>"Canal de Origem",
+  "Dst. Channel"=>"Canal de Destino",
+  "Duration"=>"Duração",
+  "Filter"=>"Filtro",
+  "Are you sure you wish to delete CDR(s) Report(s)?" => "Tem certeza de que deseja excluir o relatório(s) exibido(s)?",
+  "Status"=>"Estado",
+  "ALL" => "TODAS",
+  "ANSWERED" => "ATENDIDA",
+  "BUSY" => "OCUPADA",
+  "FAILED" => "FALHOU",
+  "NO ANSWER" => "NÃO ATENDIDA",
+  "Delete" => "Apagar ligações exibidas",
+  "CDR Report" => "Relatório de Ligações",
+  "Please End Date must be greater than Start Date" => "Por favor, a data final tem que ser posterior a data inicial",
+  "Ring Group"=>"Grupo de Chamada",
+  "(Any ringgroup)"=>"(qualquer)",
+  "Your username does not have any extension assigned." => "Seu usuário não possui nenhum ramal atribuído.",
+  "contact_admin" => "Não há nenhum ramal associado ao usuário atual. Entre em contato com o administrador para atribuir um ramal",
+  "no_extension" => "Não há nenhum ramal associado ao usuário atual. Você pode associar um ramal ao seu usuário clicando <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\"> aqui </a>",
+  "Only administrators can delete CDRs" => "Somente administradores podem apagar relatórios de ligações",
+  "Show Filter" => "Exibir Filtro",
+  "Filter applied" => "Filtro aplicado",
+  "Spreadsheet" => "Planilha",
+  "Page" => "Página",
+  "CDR Report" => "Relatórios",
+  "Show time in Secs" => "Mostrar tempo em segundos",
+);
+?>

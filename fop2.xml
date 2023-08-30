@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<module> 
+  <menulist> 
+    <menuitem menuid="fop2" desc="FOP2"
+parent="" module="no" link="" order="25"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+
+	<menuitem menuid="fop2Panel" desc="FOP2 Panel"
+parent="fop2" module="no" link="fop2/" order="61"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+
+	<menuitem menuid="fop2Admin" desc="ADMIN Panel"
+parent="fop2" module="no" link="fop2/admin/" order="62"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+	
+  </menulist> 
+</module>

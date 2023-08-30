@@ -1,0 +1,329 @@
+html { min-width: 600px; }
+
+body {
+	font-size: 12px;
+    font-family: verdana,sans-serif;
+}
+
+div, caption, td, th, h2, h3, h4 { /* redundant rules for bad browsers  */  
+	font-size: 12px;
+    font-family: verdana,sans-serif;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	color: #333;
+}  
+.clearhack { display: inline; } /*Clears Box Model Hack in IE5*/
+
+a { color: #06C; }
+a:hover { color: #333; }
+a:active { color: #000; }
+
+p { line-height: 140%; }
+
+h1,h2 {
+	font-family: trebuchet ms;
+	font-weight: bold;
+	color: #333;
+}
+
+h1 {
+	font-size: 180%;
+	margin: 0;
+}
+
+h1 a { text-decoration: none; color: #333; }
+h1 a:hover { border-bottom: 1px dotted #666; color: #000; }
+
+h2 {
+	font-size: 140%;
+	padding-bottom: 2px;
+	padding-top: 15px;
+	border-bottom: 1px solid #CCC;
+	margin: 0;
+}
+
+p.note {
+	background: #EEE;
+	padding: 4px;
+	font-family: tahoma;
+	font-size: 85%;
+	line-height: 130%;
+	margin-top: 0;
+}
+
+#icon {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+#rest {
+  width: 100%;
+}
+
+#left {
+  float: left;
+  width:45%;
+}
+#right {
+	width: 45%;
+	float: right;
+}
+
+
+* {
+   margin: 0;
+}
+html, body {
+  height: 100%;
+}
+
+.asternicwrapper {
+     min-height: 100%;
+     height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+.footer, .push {
+       height: 4em;
+}
+
+#asternicmain {
+	border: 1px solid #666;
+	clear: both;
+	background: #FFF3B3;
+	padding-top: 2em;
+}
+
+#asterniccontents {
+	padding: 1.5em;
+	background: #FFFDF3;
+	min-height: 300px;
+}
+
+#asternicheader {
+	position: relative;
+	width: 100%;
+	height: 2.5em;
+	width: 100%; /* a width is required for Opera, older Mozilla browsers, and Konqueror browsers */
+}
+
+#asternicheader ul#primary {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	bottom: -1px;
+	width: 95em; /* a width is required for Opera, older Mozilla browsers, and Konqueror browsers */
+}
+
+#asternicheader ul#primary li  {
+	display: inline;
+	list-style: none;
+}
+
+#asternicheader ul#primary a,#asternicheader ul#primary span,#asternicheader ul#primary a.current {
+	width: 8em;
+	display: block;
+	float: left;
+	padding: 4px 0;
+	margin: 1px 2px 0 0;
+	text-align: center;
+	font-family: tahoma, verdana, sans-serif;
+	font-size: 1em;
+	text-decoration: none;
+	color: #333;
+}
+
+#asternicheader ul#primary span,#asternicheader ul#primary a.current,#asternicheader ul#primary a.current:hover {
+	border: 1px solid #666;
+	border-bottom: none;
+	background: #FFF3B3;
+	padding-bottom: 6px;
+	margin-top: 0;
+}
+
+#asternicheader ul#primary a {
+	background: #FFFAE1;
+	border: 1px solid #AAA;
+	border-bottom: none;
+}
+
+#asternicheader ul#primary a:hover {
+	margin-top: 0;
+	border-color: #666;
+	background: #FFF7CD;
+	padding-bottom: 5px;
+}
+
+#asternicheader ul#secondary {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	bottom: -1.4em;
+	left: 1px;
+	width: 75em; /* a width is required for Opera, older Mozilla browsers, and Konqueror browsers */
+}
+
+#asternicheader ul#secondary li a,#asternicheader ul#secondary li span {
+	width: auto;
+	display: block;
+	float: left;
+	padding: 0 10px;
+	margin: 0;
+	text-align: auto;
+	border: none;
+	border-right: 1px dotted #AAA;
+	background: none;
+
+}
+
+#asternicheader ul#secondary li a {
+	color: #06C;
+	text-decoration: underline;
+}
+
+#asternicheader ul#secondary li a:hover {
+	color: #333;
+	background: transparent;
+	padding: 0 10px;
+	border: none;
+	border-right: 1px dotted #AAA;
+}
+
+#asternicheader ul#secondary li a:active {
+	color: #000;
+	background: transparent;
+}
+
+#asternicheader ul#secondary li:last-child a { border: none; }
+
+div#asterniccontent 
+{ 
+padding:0px; 
+_background: #99cccc;
+_border: 1px solid red;
+} 
+
+/*
+=====================================
+ * Data Tables and Cascading Style Sheets Gallery *
+ *  http://icant.co.uk/csstablegallery/index.php  *
+ * Author: Velizar Garvalov at  http://www.vhg-design.com/ *
+ =====================================
+*/
+
+#asterniccontents table {
+	width: 99%;
+	margin:0; 
+ 	padding:0;
+	font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;	
+	color: #1c5d79;
+	
+}
+#asterniccontents table, #asterniccontents tr, #asterniccontents th, #asterniccontents td {
+	border-collapse: collapse;
+}
+
+#asterniccontents caption {
+	margin:0; 
+ 	padding:0;
+	background: #f3f3f3;
+	height: 40px;
+	line-height: 40px;
+	text-indent: 2px;
+	font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;	
+	font-size: 140%;
+	font-weight: bold;
+	color: #000;
+	text-align: left;
+	letter-spacing: 1px;
+	border-top: dashed 1px #c2c2c2;
+	border-bottom: dashed 1px #c2c2c2;
+}
+
+/* HEAD */
+
+#asterniccontents thead {
+	background-color: #FFFFFF;
+	border: none;
+}
+
+/* BODY */
+
+#asterniccontents table tbody tr {
+	background: #dfedf3;
+	font-size: 110%;
+}
+#asterniccontents table tbody tr.odd {
+	background: #F0FFFF;
+}
+#asterniccontents table tbody tr:hover, tbody tr.odd:hover {
+	background: #ffffff;
+}
+#asterniccontents table tbody tr th, #asterniccontents tbody tr td {
+	padding: 6px;
+	border: solid 1px #326e87;
+}
+#asterniccontents table tbody tr th {
+	background: #1c5d79;
+	font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;	
+	font-size: 100%;
+	padding: 6px;
+	text-align: center;
+	font-weight: bold;
+	color: #FFFFFF;
+	border-bottom: solid 1px white;
+}
+
+/* LINKS */
+
+#asterniccontents table a {
+	color: #FF6600;
+	text-decoration: none;
+	font-size: 110%;
+	//border-bottom: solid 1px white;
+}
+#asterniccontents table a:hover {
+	color: #FF9900;
+	border-bottom: none;
+}
+
+/* FOOTER */
+
+#asterniccontents table tfoot {
+	background: #f3f3f3;
+	height: 24px;
+	line-height: 24px;
+	font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;	
+	font-size: 120%;
+	font-weight: bold;
+	color: #555d6d;
+	text-align: center;
+	letter-spacing: 3px;
+	border-top: solid 2px #326e87;
+	border-bottom: dashed 1px #c2c2c2;
+}
+#asterniccontents tabletfoot tr th {
+	border-top: solid 1px #326e87;
+}
+#asterniccontents tabletfoot tr td {
+	text-align: right;
+}
+
+/* Sortable tables */
+table.sortable a.sortheader {
+    text-decoration: none;
+    display: block;
+	color: #1c5d79;
+	xcolor: #000000;
+}
+table.sortable span.sortarrow {
+    color: black;
+    text-decoration: none;
+}
+
+table.pad10 td {
+    padding: 10px;
+}

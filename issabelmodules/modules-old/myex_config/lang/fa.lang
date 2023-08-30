@@ -1,0 +1,55 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.0-31                                             |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2010-08-09 10:08:51 Mercy Anchundia manchundia@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"My Extension" => "داخلي من",
+"no_extension" => "کد کاربری شما داخلی وابسته ندارد، می توانید از طریق لینک روبرو یک داخلی انتخاب نمایید. <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">اینجا</a>",
+"Call Waiting" => "انتظار تماس",
+"Do Not Disturb" => "مزاحم نشويد",
+"Error processing CallWaiting" => "خطا در روند انتظار تماس",
+"Error processing Do Not Disturb" => "خطا در روند مزاحم نشويد",
+"Save Configuration" => "ذخيره تنظيمات",
+"Your configuration has been saved correctly" => "تنظيمات شما به درستي ذخيره شد",
+"Call Forward" => "انتقال تماس",
+"Call Forward on Unavailable" => "انتقال تماس هنگام در دسترس نبودن",
+"Call Forward on Busy" => "انتقال تماس هنگام اشغال بودن",
+"Configure a phone number here..." => "شماره تلفن را اينجا تنظيم کنيد...",
+"Validation Error" => "خطاي اعتبار",
+"Please check your phone number"      => "لطفا شماره تلفن خود را چک کنيد",
+"Please check your phone number for Call Forward" => "لطفا شماره تلفن خود را براي انتقال تماس چک کنيد",
+"Please check your phone number for Call Forward On Unavailable" => "لطفا شماره تلفن خود را براي انتقال تماس در هنگام در دسترس نبودن چک کنيد",
+"Please check your phone number for Call Forward On Busy" => "لطفا شماره تلفن خودرا براي انتقال تماس در هنگام اشغال بودن چک کنيد",
+"Always" => "هميشه",
+"Never"  => "هرگز",
+"On-Demand" => "بر حسب تقاضا",
+"Record Incoming" => "ضبط تماس هاي ورودي",
+"Record Outgoing" => "ضبط تماس هاي خروجي",
+"SETTINGS FOR YOUR EXTENSION:" => "تنظيمات داخلي شما:",
+);
+?>

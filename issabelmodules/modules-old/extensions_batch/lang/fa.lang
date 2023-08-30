@@ -1,0 +1,81 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                      |
+  | Email: haamed@cytco.net                                              |                                                                    |
+  +----------------------------------------------------------------------+
+   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Extensions Batch" => "فایل دسته ای داخلی ها",
+"Batch of Extensions" => "فایل دسته ای داخلی ها",
+"Are you really sure you want to delete all the extensions in this server?" => "آيا براي حذف تما داخلي ها مطمئن هستيد",
+"Invalid file extension.- It must be csv" => "خطا در قالب فایل، فایل باید با قالب csv باشد",
+"Possible file upload attack. Filename" => "احتمال خطا در ارسال . نام فایل",
+"Error" => "خطا",
+"Error updating Sip" => "خطا در به روزآوری کاربران",
+"Error updating Users" => "خطا در به روز رسانی کاربران",
+"Error updating Devices" => "خطا در به روزآوری تلفن ها",
+"Error updating Voicemail" => "خطا در به روز رسانی صندوق صوتی",
+"Error processing CallWaiting" => "خطا در پردازش سرویس نگهداشتن تماس",
+"Total extension updated" => "Tجمع داخلی های به روز شده",
+"Error, extension" => "خطا، داخلی",
+"repeat in lines" => "تکرار در خط ها",
+"with" => "با",
+"The file is incorrect or empty" => "فایل اشتباه یا خالی است",
+"Incomplete Columns" => "ستون ها ناقص",
+"Verify the header" => "درستی سر ستون را بررسی کنید",
+"At minimum there must be the columns" => "باید حداقل چند ستون وجود داشته باشد",
+"Can't exist a extension empty. Line" => "نمی توان داخلی خالی ایجاد کرد، خط",
+"Can't exist a secret empty. Line" => "رمز نمی تواند خالی باشد، خط",
+"Can't exist a display name empty. Line" => "نام داخلی نمی تواند خالی باشد، خط",
+"Please read the lines in the footer" => "لطفا خطوط پایین صفحه را بررسی کنید",
+"Header File Extensions Batch" =>"خط اول بايد شامل نام براي ستون ها باشد و فايل حداقل سه ستون شامل نام نمايش داده شده، داخلي كاربر و رمز را داشته باشد.براي طلاعات بيشتر درباره ي پارامترهاي پشتيباني شده ، لطفاً قسمت راهنمايي را مطالعه نماييد.اگر فایل حاوی داخلی هایی باشد که قبلا ایجاد شده اند، آنها به روز خواهند شد",
+"There aren't extensions" => "داخلی ها وجود ندارند",
+"Download Extensions" => "CSV دانلود داخلي جاري با فرمت",
+"Error processing Database Family" => "خطا در پردازش پايگاه داده",
+"Delete All Extensions" => "حذف تمام داخلي ها",
+"All extensions deletes" => "تمام داخلي ها حذف شدند",
+"Error to delete extensions" => "خطا در حذف داخلي ها",
+"Unable to reload the changes" => "ناتوان در بارگذاري تغييرات",
+"Could not delete the database" => "پايگاه داده را نمي توان حذف كرد",
+"Could not delete the ASTERISK database" => "خطا در حذف پايگاه داده استريسك",
+"Unable delete AMPUSER in database astDB" => "Unable delete AMPUSER in database astDB",
+"Unable delete DEVICE in database astDB" => "Unable delete DEVICE in database astDB",
+"Unable delete CW in database astDB" => "Unable delete CW in database astDB",
+"Unable delete CF in database astDB" => "Unable delete CF in database astDB",
+"Unable delete CFB in database astDB" => "Unable delete CFB in database astDB",
+"Unable delete CFU in database astDB" => "Unable delete CFU in database astDB",
+"File" => "(*.csv)فايل براي بروز رساني",
+"Message" => "پیام ",
+"There aren't extensions" => "داخلي وجود ندارد",
+
+"Save" => "CVS بروز رساني فايل",
+"Error to insert or update Direct DID" => "خطا در درج و يا به روزرساني DID",
+
+);
+?>

@@ -1,0 +1,52 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 4.0.0-18                                               |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2010-03-22 05:03:48 Eduardo Cueva ecueva@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Monitoring" => "Monitoring List",
+"Date" => "Date",
+"Time" => "Time",
+"Source" => "Source",
+"Destination" => "Destination",
+"Duration" => "Duration",
+"Download" => "Download",
+"Listen" => "Listen",
+"Type" => "Type",
+"Message" => "Message",
+"Start_Date" => "Start Date",
+"End_Date" => "End Date",
+"message_alert" => "Are you sure you wish to delete recordings?",
+"no_extension" => "There is no extension number associated with the current user. You can associate an extension number to your user by clicking <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">here</a>",
+"no_file" => "File not found!",
+"Outgoing" => "Outgoing",
+"Incoming" => "Incoming",
+"Queue" => "Queue",
+"Group" => "Group",
+"unknown" => "Unknown",
+"delete_file_error" => "At least one of the files selected cannot be deleted because it doesn't exist",
+"contact_admin" => "There is no extension number associated with the current user. Please contact the administrator to assign it an extension",
+"You are not authorized to download this file" => "You are not authorized to download this file",
+"You are not authorized to listen this file" => "You are not authorized to listen this file",
+"You are not authorized to delete any records" => "You are not authorized to delete any record",
+'Recording missing' => 'Recording missing',
+);
+?>

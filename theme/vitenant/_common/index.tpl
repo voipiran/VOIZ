@@ -1,17 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html dir="rtl">  <!--  Voiz -->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
         <title>VOIZ | VOIPIRAN</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
-    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/bootstrap.css">
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-core.css">
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-theme.css">
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-forms.css">
+    
+      Voiz -->
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/bootstrap-rtl.min.css">     <!--  Voiz -->
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-core-rtl.css">  <!--  Voiz -->
+     
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-theme-rtl.css"> <!--  Voiz -->
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-forms-rtl.css"> <!--  Voiz -->
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/font-awesome-animation.min.css">
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/custom.css">
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/rtl.css">   <!--  Voiz -->
+    
 
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/styles.css" />
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/widgets.css" />

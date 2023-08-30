@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<module> 
+  <menulist> 
+
+	<menuitem menuid="asternic" desc="Queue Stats"
+parent="reports" module="no" link="queue-stats/" order="2"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+
+	
+  </menulist> 
+</module>

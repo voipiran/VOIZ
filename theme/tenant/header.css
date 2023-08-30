@@ -1,0 +1,396 @@
+/* HEADER */
+#neo-headerbox {
+	background: url("images/headerbox-bg7.png") repeat-x scroll left top #ddd;
+	position:relative;
+	height:103px;
+	width:1280px;
+	/* border-bottom: 1px solid #300; */
+}
+#neo-logobox {
+	position:absolute;
+	top: 0px;
+	left:0px;
+	width:200px;
+	height:65px;
+	margin:7px 0px 14px 0px;
+}
+/* TOPBAR */
+#neo-topbar {
+	position:absolute;
+	top: 0px;
+	right: 0px;
+	height:29px;
+	overflow: hidden;
+}
+ul.neo-topbar-notification > li > a,
+ul.neo-topbar-notification > li.profile-info > a {
+    color:#888;
+    font-size:16px;
+    /* background:#33cc33;*/
+    background:#fafafa;
+    padding:6px 8px;
+    margin-right:2px;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+    padding-right:8px !important;
+    border: 1px solid #fafafa;
+}
+.neo-topbar-notification-badge {
+    position:absolute;
+    /*right:-10px;*/
+    top:-10px;
+    z-index:100;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 11px;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #FCB322;
+    border-radius: 10px;
+}
+#neo-toptools {
+	top:0px;
+	left:0px;
+	height: 24px;
+	position:relative;
+	padding: 2px 10px 2px 15px;
+	float:left;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #666;
+	background:url(images/cmenubg2.png) repeat #ddd;
+}
+#neo-cmenubox {
+	top: 0px;
+	float:right;
+	height: 24px;
+	position:relative;
+	padding: 2px 0px 2px 0px;
+	border-bottom: 1px solid #555;
+	border-left: 1px solid #777;
+    -moz-border-radius: 0px 0px 0px 10px;
+	-webkit-border-radius: 0px 0px 0px 10px;
+	border-radius: 0px 0px 0px 10px;
+	background:url(images/cmenubg.png) repeat #ddd;
+}
+/*agregado para el estilo de los links*/
+#neo-cmenubox span a{
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-shadow: 1px 1px #666;
+}
+/*agregado para el estilo de los links*/
+div.neo-cmenutab {
+	float: left;
+	height:25px; /*Esto arregla bug de logout----*/
+	position: relative;
+	padding:3px 9px 0px 9px;
+	background:url(images/divider2.png)  no-repeat left;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-shadow: 1px 1px #666;
+	text-align:center;
+}
+div.neo-cmenutab-hvr {
+	background: url(images/divider2.png)  no-repeat left, url(images/tab2onbg2.png) repeat;
+}
+div.neo-cmenutableft-hvr {
+	background: url(images/tab2onbg2.png) repeat;
+}
+div.neo-cmenutableft {
+	float: left;
+	height:25px; /*Esto arregla bug de logout----*/
+	position: relative;
+	padding:3px 9px 0px 9px;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-shadow: 1px 1px #666;
+	text-align:center;
+}
+.neo-cmenu-showbox {
+	position:absolute;
+	right: 0px;
+	top:29px;
+	width: 220px;
+	padding: 2px 8px 8px 8px;
+	background-color:rgba(220,220,220,0.8);
+	-moz-border-radius: 6px 0px 6px 6px;
+	-webkit-border-radius: 6px 0px 6px 6px;
+	border-radius:  6px 0px 6px 6px;
+	border-bottom: 1px solid #666;
+	border-left: 1px solid #999;
+	z-index:1000000;
+}
+.neo-cmenu-showbox span a{
+	color: #444444;
+	text-decoration: none;
+}
+.neo-second-showbox-menu {
+	position:absolute;
+	right: -107px;
+	top:39px;
+	width: 113px;
+	padding: 2px 8px 8px 8px;
+	background-color:rgba(220,220,220,0.8);
+	-moz-border-radius: 0px 6px 6px 0px;
+	-webkit-border-radius: 0px 6px 6px 0px;
+	border-radius: 0px 6px 6px 0px;
+	border-top: 1px solid #666;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #999;
+	border-left: 1px solid #999;
+	z-index:1000000;
+}
+.neo-second-showbox-menu p a{
+	color: #444444;
+	text-decoration: none;
+	cursor: pointer;
+}
+.neo-display-none {
+	display: none;
+}
+/*
+.neo-cmenu-showbox-pagination {
+	position: absolute;
+	font: 12px Verdana,Arial,Helvetica,sans-serif;
+	font-family: verdana,arial,helvetica,sans-serif;
+	right: 60px;
+	width: 90px;
+	height: 60px;
+	background-color:rgba(200,200,200,0.9);
+	-moz-border-radius: 6px 0px 6px 6px;
+	-webkit-border-radius: 6px 0px 6px 6px;
+	border-bottom: 1px solid #666;
+	border-left: 1px solid #666;
+	border-top: 1px solid #666;
+	border-right: 1px solid #666;
+	z-index:1000;
+}
+.paginationBackground{
+    height: 15px;
+}
+.neo-cmenu-showbox-pagination span a{
+	text-align: left;
+	color: #444444;
+	text-decoration: none;
+}
+*/
+
+/* HEADER :: MENU HORIZ */
+#neo-mmenubox {
+	position:absolute;
+	bottom: 33px;
+	left: 210px;
+	height: 40px;
+}
+div.neo-tabh {
+	position: relative;
+	min-width: 90px;
+	height:22px;
+	padding:8px 5px 2px 5px;
+	float: left;
+	margin: 8px 0px 0px 0px;
+	border-left: 1px solid #bbb;
+	border-right: 1px solid #999;
+	border-top: 1px solid #666;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+	text-align:center;
+	background: url(images/tabhbg.png) repeat-x;
+}
+div.neo-tabh a{
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+}
+div.neo-tabh-rend {
+	position: relative;
+	min-width: 22px;
+	height:32px;
+	padding:8px 0px 0px 0px;
+	float: left;
+	margin: 8px 0px 0px 0px;
+	border-left: 1px solid #bbb;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+	text-align:center;
+	background: url(images/tabhbg.png) repeat-x;
+	border-right: 1px solid #999;
+	border-top: 1px solid #666;
+	-moz-border-radius: 0px 12px 0px 0px;
+	-webkit-border-radius: 0px 12px 0px 0px;
+	border-radius: 0px 12px 0px 0px;
+	cursor: pointer;
+	/* background: url(../images/tabhonbg_rend.png) no-repeat; */
+}
+div.neo-tabh-lend {
+	position: relative;
+	width: 28px;
+	height:32px;
+	padding:0px;
+	float: left;
+	margin: 8px 0px 0px 0px;
+	border-right: 1px solid #999;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+	text-align:center;
+	background: url(images/tabhonbg_lend.png) no-repeat;
+}
+div.neo-tabh-lend2 {
+	position: relative;
+	width: 90px;
+	height:22px;
+	padding:8px 5px 2px 5px;
+	float: left;
+	margin: 8px 0px 0px 0px;
+	-moz-border-radius: 12px 0px 0px 0px;
+	-webkit-border-radius: 12px 0px 0px 0px;
+	border-radius: 12px 0px 0px 0px;
+	border-left: 1px solid #666;
+	border-right: 1px solid #999;
+	border-top: 1px solid #666;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+	text-align:center;
+	background: url(images/tabhbg.png) repeat-x;
+}
+div.neo-tabh-lend2 a{
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+}
+div.neo-tabh-lend3 {
+	position: relative;
+	width: 90px;
+	height:22px;
+	padding:8px 5px 2px 5px;
+	float: left;
+	margin: 8px 0px 0px 0px;
+	-moz-border-radius: 0px 12px 0px 0px;
+	-webkit-border-radius: 0px 12px 0px 0px;
+	border-radius: 0px 12px 0px 0px;
+	border-left: 1px solid #666;
+	border-right: 1px solid #999;
+	border-top: 1px solid #666;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+	text-align:center;
+	background: url(images/tabhbg.png) repeat-x;
+}
+div.neo-tabh-lend3 a{
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #666;
+	text-shadow: 1px 1px #ddd;
+}
+div.neo-tabhon {
+	position: relative;
+	min-width: 90px;
+	height:28px;
+	padding:14px 5px 2px 5px;
+	float: left;
+	margin: 2px 0px 0px 0px;
+	-moz-border-radius: 6px 6px 0px 0px;
+	-webkit-border-radius: 6px 6px 0px 0px;
+	border-radius: 6px 6px 0px 0px;
+	border-left: 1px solid #bbb;
+	border-right: 1px solid #999;
+	background-color: #454545;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-align:center;
+	text-shadow: 1px 1px #333;
+	background-image:url(images/tabhonbg.png);
+	background-repeat:repeat-x;
+}
+div.neo-tabhon a {
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-shadow: 1px 1px #333;
+}
+/* HEADER :: SEPARATOR */
+#neo-separator {
+	position: absolute;
+	top: 90px;
+	width: 1280px;
+	height: 3px;
+	background-color:#C00;
+}
+/* HEADER :: SUB MENU */
+#neo-smenubox {
+	position:absolute;
+	bottom: 0px;
+	width: 1280px;
+	height: 34px;
+	background-color:#454545;
+	background-image:url(images/men2bg.png);
+	overflow: hidden;
+}
+#neo-smenubox-innerdiv {
+	position:absolute;
+	top:0px;
+	left:0px;
+	padding:0px;
+	margin:0px;
+	border:0px;
+	height:34px;
+}
+div.neo-tabv {
+	position: relative;
+	min-width: 108px;
+	height:22px;
+	float: left;
+	margin: 6px 0px 5px 0px;
+	padding: 2px 8px 0px 8px;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-align:center;
+	text-shadow: 1px 1px #333;
+	background:url(images/divider.png) no-repeat right;
+}
+div.neo-tabv a{
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-shadow: 1px 1px #333;
+	text-decoration: none;
+}
+div.neo-tabvon {
+	position: relative;
+	min-width: 120px;
+	height:22px;
+	float: left;
+	margin: 6px 0px 5px 0px;
+	padding: 2px 2px 0px 2px;
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-align:center;
+	text-shadow: 1px 1px #333;
+	background:url(images/divider.png) no-repeat right, url(images/tab2onbg2.png);
+}
+div.neo-tabvon a{
+	font: 12px Verdana, Arial,Helvetica,sans-serif;
+	color: #eee;
+	text-shadow: 1px 1px #333;
+}
+#neo-smenubox-arrow-more {
+	position:absolute;
+	width:40px;
+	height:21px;
+	background:url(images/bg_buttons_scroll.png) repeat-x;
+	right:0px;
+	top:0px;
+	margin: 5px 0px 2px 0px;
+	padding: 4px 4px 0px 6px;
+}
+img.neo-smenubox-arrow-more-right{
+	position:relative;
+	top:0px;
+	float:right;
+}

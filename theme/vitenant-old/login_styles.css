@@ -1,0 +1,95 @@
+body {
+	background-color:#999;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-image:url(images/bgbodytest.png);
+	font: 13px Verdana, Arial,Helvetica,sans-serif;
+	color: #444;
+}
+#neo-login-box {
+	position:absolute;
+	top:120px;
+	background-color:rgba(40,40,40,0.5);
+	background-image:url(images/bglogin3.png);
+	background-repeat:no-repeat;
+	margin-left:-250px;
+	margin-right:auto;
+	width:500px;
+	height:330px;
+	left:50%;
+	border-top: 1px solid #666;
+    border-left: 1px solid #666;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border-radius: 10px 10px 10px 10px;
+	/* -moz-box-shadow: 8px 8px 10px rgb(0,0,0); */
+
+}
+#neo-login-logo {
+	padding:20px 5px 0px 8px;
+	height:110px;
+	width:100%;
+	text-align:center;
+}
+div.neo-login-line {
+	position: relative;
+	height:52px;
+}
+div.neo-login-label {
+	position:absolute;
+	padding-left:10px;
+	top:6px;
+	height:40px;
+	width:165px;
+	color:#eee;
+	font: 14px Arial,Helvetica,sans-serif;
+	text-align:right;
+}
+div.neo-login-inputbox {
+	position:absolute;
+	left:200px;
+}
+input.neo-login-input {
+	border:1px solid #666;
+	height:26px;
+	background-color:#CCC;
+	width:200px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+input.neo-login-input:focus {
+	-webkit-box-shadow: 0px 0px 10px #ffffff;
+	-moz-box-shadow: 0px 0px 10px #ffffff;
+	box-shadow: 0px 0px 10px #ffffff;
+}  
+input.neo-login-submit {
+	width:120px;
+	height:34px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+    background-image:url(images/bgsubmit.png);
+    background-color:rgba(40,40,40,0.4);
+	border-top: 1px solid #333;
+    border-left: 1px solid #333;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	font: 14px Arial,Helvetica,sans-serif;
+	color: #333;
+}
+.neo-footernote {
+	position:absolute;
+	width:100%;
+	text-align:center;
+	bottom: 5px;
+	color:#666;
+}
+
+.neo-footernote a{
+	color:#666;
+}

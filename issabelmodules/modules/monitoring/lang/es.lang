@@ -1,0 +1,54 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 0.5                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.7 2007/09/05 00:36:42 alex Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+    "Monitoring" => "Reporte de monitoreo",
+    "Date" => "Fecha",
+    "Time" => "Hora",
+    "Source" => "Origen",
+    "Destination" => "Destino",
+    "Duration" => "Duración",
+    "Download" => "Descargar",
+    "Listen" => "Escuchar",
+    "Type" => "Tipo",
+    "Message" => "Mensaje",
+    "Start_Date" => "Fecha inicial",
+    "End_Date" => "Fecha final",
+    "message_alert" => "¿Está usted seguro de querer borrar las grabaciones?",
+    "no_extension" => "El usuario actual no tiene un número de extensión asociado a él. Puede asociar un número de extensión a su usuario haciendo click <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">aquí</a>",
+    "no_file" => "No se encuentra el archivo!",
+    "Outgoing" => "Saliente",
+    "Incoming" => "Entrante",
+    "Queue" => "Cola",
+    "Group" => "Grupo",
+    "unknown" => "Desconocido",
+    "delete_file_error" => "Al menos uno de los archivos seleccionados no puede ser eliminado debido a que no existe.",
+    "contact_admin" => "No hay número de extensión asociado con el usuario actual. Por favor contáctese con el administrador para que le asigne una extensión",
+    "You are not authorized to download this file" => "Usted no está autorizado para descargar este archivo",
+    "You are not authorized to listen this file" => "Usted no está autorizado para escuchar este archivo",
+    "You are not authorized to delete any records" => "Usted no está autorizado para eliminar ningún registro",
+    "Start Date" => "Fecha inicial",
+    "End Date" => "Fecha final",
+    'Recording missing' => 'No se encuentra la grabación',
+);
+?>
