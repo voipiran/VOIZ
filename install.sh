@@ -165,6 +165,9 @@ mysql -u root -p$rootpw -e "CREATE USER 'qstatsliteuser'@'localhost' IDENTIFIED 
 mysql -u root -p$rootpw -e "GRANT select,insert,update,delete ON qstatslite.* TO qstatsliteuser"
 mysql -u root -p$rootpw -e "ALTER DATABASE qstatslite CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
 mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.queue_stats CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qname CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qevent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qagent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
 
 mv html /var/www/html/queue-stats
 mv parselog /usr/local/parseloglite
