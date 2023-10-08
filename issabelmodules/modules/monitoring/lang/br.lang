@@ -1,0 +1,59 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+Codificación: UTF-8
++----------------------------------------------------------------------+
+| Issabel version 1.0                                                  |
+| http://www.issabel.org                                               |
++----------------------------------------------------------------------+
+| Copyright (c) 2006 Palosanto Solutions S. A.                         |
++----------------------------------------------------------------------+
+| The contents of this file are subject to the General Public License  |
+| (GPL) Version 2 (the "License"); you may not use this file except in |
+| compliance with the License. You may obtain a copy of the License at |
+| http://www.opensource.org/licenses/gpl-license.php                   |
+|                                                                      |
+| Software distributed under the License is distributed on an "AS IS"  |
+| basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+| the License for the specific language governing rights and           |
+| limitations under the License.                                       |
++----------------------------------------------------------------------+
+| The Initial Developer of the Original Code is PaloSanto Solutions    |
+|                                                                      |
+| Translate by: Bruno Macias                                           |
+| Email: bmacias@palosanto.com                                         |
++----------------------------------------------------------------------+
+$Id: br.lang,v 1.0 2017/07/19 19:45:00 Ibinetwork Informática - rafael@ibinetwork.com.br $ */
+
+global $arrLangModule;
+$arrLangModule=array(
+"Monitoring" => "Gravações do Sistema",
+"Date" => "Data",
+"Time" => "Hora",
+"Source" => "Origem",
+"Destination" => "Destino",
+"Duration" => "Duração",
+"Download" => "Baixar",
+"Listen" => "Escutar",
+"Type" => "Tipo",
+"Message" => "Mensagem",
+"Start_Date" => "Inicio",
+"Start Date" => "Inicio",
+"End_Date" => "Fim",
+"End Date" => "Fim",
+"message_alert" => "Tem certeza de que deseja excluir as gravações selecionadas?",
+"no_extension" => "Não há nenhum ramal associado ao usuário atual. Você pode associar um ramal a seu usuário clicando <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">aqui</a>",
+"no_file" => "Arquivo não encontrado!",
+"Outgoing" => "Saída",
+"Incoming" => "Entrada",
+"Queue" => "Fila",
+"Group" => "Grupo",
+"unknown" => "Desconhecido",
+"delete_file_error" => "Pelo menos um dos arquivos selecionados não pode ser excluído porque não existe ou esta com algum problema",
+"contact_admin" => "Não há nenhum ramal associado ao usuário atual. Entre em contato com o administrador para atribuir um ramal a sua conta",
+"You are not authorized to download this file" => "Você não está autorizado a baixar essa gravação",
+"You are not authorized to listen this file" => "Você não está autorizado a ouvir essa gravação",
+"You are not authorized to delete any records" => "Você não está autorizado a excluir qualquer gravação",
+'Recording missing' => 'Gravação perdida',
+"Deleted" => "Apagada",
+);
+?>

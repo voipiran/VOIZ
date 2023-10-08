@@ -1,0 +1,108 @@
+.pbxpanel {
+    padding: 0px 0px 0px 0px;
+    margin: 0;
+    width: auto;
+    height: auto;
+    border: black solid 1px;
+}
+.pbxelement {
+	display: inline-block;
+    width: 182px;
+    height: 32px;
+    margin: 1px 1px 1px 1px;
+    padding: 0px 0px 0px 1px;
+    border: black solid 1px;
+    color: black;
+    font-size: 10px;
+    line-height:112%;
+    position:relative;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    border-radius: 9px;
+    background-color: #FFEEB8;
+}
+.pbxelement > div {
+	white-space: nowrap;
+}
+.pbxactive {
+    background-color: #FBAA3F;
+}
+ul.lisortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+a.pbxtooltip {
+    position: relative; /* es la posicion normal */
+    text-decoration: none ; /* forzar sin subrayado */
+}
+a.pbxtooltip > img.constantsize {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+}
+a.pbxtooltip > div {
+    display: none;
+    z-index: 6000;
+
+    position: absolute; /* se fuerza a que se ubique en un lugar de la pantalla */
+    top:1em; 
+    left:2em; /* donde va a estar */
+    min-width:160px; /* el ancho por defecto que va a tener */
+    min-height:50px;
+    padding:10px; /* la separacion entre el contenido y los bordes */
+    background-color: #6CF; /* el color de fondo por defecto */
+    border: 1px solid #36F;
+    
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    font-size:11px;
+    color: #000; /* el color de los textos por defecto */
+    
+    white-space: nowrap;
+}
+a.pbxtooltip:hover > div {
+    display: inline-block; /* se fuerza a mostrar el bloque */
+}
+a.pbxtooltip > div > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+}
+span.monitor {
+    color: blue;
+    font-size: 9px;
+}
+img.icon {
+    padding: 2px 2px 0 0;
+    border: 0;
+}
+dl.faq2 {
+    padding: 0px 0px 0px 0px;
+    float: right;
+    margin: 0px 1px 0 0px;
+    width: 380px;/*396*/
+    height: auto;
+    /*border: black solid 1px;*/
+    z-index:-1;
+}
+dl.faq2 > ul > li > dd {
+	margin: 0;
+}
+span.paneledittitle {
+    float: right;
+    color: #3EBB40;
+    font-size: 11px;
+    margin-left: 60px;
+    cursor: pointer;
+}
+div.statusbar {
+    padding: 0px 3px 0px 0px;
+    background-color:#CCCCCC;
+    height: 24px;
+    border: black solid 0px;
+}

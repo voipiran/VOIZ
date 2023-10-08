@@ -1,0 +1,22 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+<h1>{$node_name}</h1>
+
+<p>La opción "Detector de Hardware" permite detectar hardware telefónico instalado en el servidor.</p>
+<p>Para detectar un nuevo hardware seleccione las opciones de su preferencia en la sección "Avanzado" y luego haga click en el botón "Detectar Nuevo Hardware". Luego de esto usted verá una lista de todo el hardware de telefonía detectado en el servidor.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_hardware_detector.png" border="0"/>
+<p>Figura 1</p></div>
+<br />
+<h2>Opciones Avanzadas</h2>
+<p>Existen tres opciones para detectar hardware:</p>
+<p><b>Reemplazar el archivo chan_dahdi.conf: </b>Esta opción permite reemplazar el archivo chan_dahdi.conf con las nuevas configuraciones cada vez que se procede a detectar hardware.</p>
+<p><b>Detección de hardware Sangoma: </b>Esta opción permite detectar tarjetas del fabricante Sangoma</p>
+<p><b>Detección de hardware ISDN (Driver mISDNuser no Instalado): </b>Seleccione esta opción si desea detectar el hardware usando el controlador mISDN. Para que esto sea posible usted debe tener ya instalado dicho controlador en su servidor. Si aún no lo tiene puede instalarlo por medio del paquete rpm llamado "mISDNUser" disponible en el repositorio "extra" usando el comando yum.</p>
+
+</body>
+</html>

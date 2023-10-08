@@ -1,0 +1,62 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 0.5                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.7 2007/09/05 00:36:42 alex Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+    "Start Date" => "Начальная дата",
+    "End Date" => "Конечная дата",
+    "Field Name" => "Название поля",
+    "Field" => "Поле",
+    "Account Code" => "Код Авторизации",
+    "Download" => "Скачать",
+    "Date" => "Дата",
+    "Source" => "От кого",
+    "Destination" => "Кому",
+    "Src. Channel" => "Канал источник",
+    "Dst. Channel" => "Канал приемник",
+    "Duration" => "Длительность",
+    "Filter" => "Фильтр",
+    "Are you sure you wish to delete CDR(s) Report(s)?" => "Вы уверены, что хотите удалить показанные CDRs?",
+    "Status" => "Статус",
+    "ALL" => "ВСЕ",
+    "ANSWERED" => "ОТВЕЧЕННЫЙ",
+    "BUSY" => "ЗАНЯТО",
+    "FAILED" => "НЕУДАЧНЫЙ",
+    "NO ANSWER" => "НЕТ ОТВЕТА",
+    "Delete" => "Удалить показанные CDR(s)",
+    "CDR Report" => "Отчёт CDR",
+    "Please End Date must be greater than Start Date" => "Конечная Дата должна быть позже Начальной Даты",
+    "Ring Group" => "Группа Вызовов",
+    "(Any ringgroup)" => "(Любые группы вызовов)",
+    "Your username does not have any extension assigned." => "Вашему пользователю не был назначен внутренний номер.",
+    "contact_admin" => "Нет внутреннего номера ассоциированного с текущим пользователем. Пожалуйста, свяжитесь с администратором для назначения внутреннего номера вашему пользователю",
+    "no_extension" => "Нет внутреннего номера ассоциированного с текущим пользователем. Вы можете ассоциировать внутренний номер с вашим пользователем <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">здесь</a>",
+    "Only administrators can delete CDRs" => "Только администраторы могут удалять CDRs",
+    "Show Filter" => "Показать Фильтр",
+    "Hide Filter" => "Скрыть Фильтр",
+    "Filter applied: " => "Текущий фильтр: ",
+    "Page" => "Страница",
+    "records" => "записей",
+    "of" => "из",
+    "No records match the filter criteria" => "Нет записей, соответствующих критериям фильтра",
+);
+?>

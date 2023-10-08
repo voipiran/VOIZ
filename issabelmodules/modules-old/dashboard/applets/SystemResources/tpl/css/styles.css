@@ -1,0 +1,10 @@
+/* SYSTEM RESOURCES */
+div.neo-applet-sys-gauge-percent {
+    position:absolute;
+    font: 11px Verdana, Arial,Helvetica,sans-serif;
+    top:80px; 
+    left:0px; 
+    color:#ccc; 
+    width:155px; 
+    text-align:center;
+}

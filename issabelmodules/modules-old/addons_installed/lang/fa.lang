@@ -1,0 +1,73 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 2.0.0-15                                               |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2010-03-06 11:03:53 Eduardo Cueva ecueva@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Addons Modules" => "ماژول هاي افزونه",
+"texto1" => "texto1",
+"select1" => "select1",
+"textarea1" => "textarea1",
+"checkbox1" => "checkbox1",
+"file1" => "file1",
+"prueba" => "prueba",
+/////
+"Installed" => "نصب شده",
+"Updates" => "به روز رساني",
+"Downloaded" => "دريافت شده",
+"Availables" => "موجود",
+"Admin" => "مديريت افزونه‌ها",
+"Actual Progress" => "پردازش واقعي",
+"Total Progress" => "كل پردازش",
+"Percent_loaded" => "درصد لود شده",
+"name" => "نام",
+"action" => "عمل",
+"of" => "of",
+"status" => "وضعيت",
+"downloading" => "در حالت دانلود",
+"downloaded" => "دانلود شده",
+"installing" => "در حالت نصب",
+"installed" => "نصب شده",
+"removing" => "در حالت حذف",
+"removed" => "حذف شده",
+"waiting" => "در حالت انتظار",
+"no_process" => "هيچ پردازشي در حال انجام نيست",
+"view_details" => "مشاهده جزئيات",
+"process_installed" => "نصب شده",
+"name" => "نام",
+"version" => "ورژن",
+"release" => "نسخه",
+"developed_by" => "تولید شده توسط",
+"Show" => "نمايش",
+"addons_installed" => "افزونه هاي نصب شده",
+"Options" => "گزينه ها",
+"Delete" => "حذف",
+"Update" => "بروز رساني",
+"The system can not connect to the Web Service resource. Please check your Internet connection." => "سيستم نمي‌تواند به وب سرويس‌ها متصل شود، اينترنت خود را چك كنيد",
+
+);
+?>

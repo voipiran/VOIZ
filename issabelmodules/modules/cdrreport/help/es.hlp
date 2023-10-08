@@ -1,0 +1,47 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>La opción "Reportes CDR" en Issabel permite ver una lista detallada de las llamadas en el PBX. Esta lista puede ser descargada en diferentes formatos tales como archivos CSV, XLS y PDF.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_cdr_report_list.png" border="0" />
+<p>Figura 1</p></div>
+<br />
+
+<p>El reporte variará de acuerdo a los valores que se apliquen en el filtro:</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_cdr_report_filters.png" border="0" />
+<p>Figura 2</p></div>
+<br />
+
+<table class="inline">
+  <tr>
+    <th>Campo</th><th>Descripción</th>
+  </tr>
+  <tr>
+    <td>Fecha Inicio</td><td>La fecha de inicio de las llamadas.</td>
+  </tr>
+  <tr>
+    <td>Fecha Fin</td><td>La fecha fin de las llamadas.</td>
+  </tr>
+  <tr>
+    <td>Campo</td><td>Campos adicionales para el filtrado: Destino, Fuente, Canal de origen, Código de Cuenta, Canal destino.</td>
+  </tr>
+  <tr>
+    <td>Estado</td><td>Estado de la llamada: Contestado, Ocupado, Fallido, No Contestado, Todos.</td>
+  </tr>
+  <tr>
+    <td>Grupo de Timbrado</td><td>El grupo de timbrado al que pertenecen las llamadas.</td>
+  </tr>
+</table>
+<br />
+
+<p>Para eliminar reportes determinados selecciónelos y haga click en el botón "Eliminar CDR(s) mostrado(s)".</p>
+<br />
+</body>
+</html>

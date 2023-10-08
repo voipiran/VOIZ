@@ -1,0 +1,17 @@
+<html>
+    <header>
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+    </header>
+    <body>
+        <h1>{$node_name}</h1>
+        <p>La opción "Softphones" permite descargar X-Lite y Zoiper que son clientes SIP que simulan un teléfono convencional en una computadora.</p>
+
+        <div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_softphones.png" border="0" />
+        <p>Figura 1</p></div>
+        <br />
+
+        <p>Para descargar uno de estos Softphones haga click en el enlace correspondiente a cada uno de ellos.</p>
+
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                         |
+  | Email: k.haamed@gmail.com                                       |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.7 2008/02/18 09:49:00 bmacias Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Accounts"=>"ايميل ها",
+"Email Account List"=>"ليست ايميل ها",
+"Create Account"=>"ساختن ايميل",
+"Select a domain"=>"انتخاب دامنه",
+"Email Address"=>"آدرس ايميل",
+"Account Name"=>"نام ايميل",
+"Used Space"=>"فضاي استفاده شده",
+"Options"=>"گزينه ها",
+"New Email Account"=>"ايجاد ايميل جديد",
+"Quota (Kb)"=>"سهم(Kb)",
+"The e-mail address already exists"=>"اين آدرس ايميل موجود است",
+"View Account"=>"مشاهده ايميل",
+"Edit Account"=>"ويرايش ايميل",
+"Retype password" => "تايپ مجدد پسورد",
+"Domain" => "دامنه",
+"Show" => "نمايش",
+"Error" => "خطا",
+"EDITABLE" => "EDITABLE",
+"Error deleting user accounts from system"=>"خطا در حذف ايميل از سيستم ",
+"Error deleting user accounts"=>"خطا در حذف ايميل",
+"Error deleting record from table domain"=>"خطا در حذف ركورد از جدول دامنه",
+"You must select a domain to create an account" => "براي ساختن ايميل بايد دامنه را انتخاب كنيد",
+"Could not query used disc space" => "Could not query used disc space",
+"The passwords are empty or don't match" => "پسوردي وارد نشد يا يكسان نيست",
+"The passwords don't match" => "پسورد يكسان نيست",
+);
+?>

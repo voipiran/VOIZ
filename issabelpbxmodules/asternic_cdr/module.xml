@@ -1,0 +1,32 @@
+<module>
+    <rawname>asternic_cdr</rawname>
+    <name>Asternic CDR Reports</name>
+    <version>1.6.5</version>
+        <publisher>Asternic.net</publisher>
+    <type>tool</type>
+    <category>Reports</category>
+    <embedcategory>Advanced</embedcategory>
+    <menuitems>
+        <asternic_cdr>Asternic CDR Reports</asternic_cdr>
+    </menuitems>
+    <description>Asternic CDR Reports for Asterisk. http://www.asternic.net</description>
+    <changelog>
+        *1.6.5* Use Chart.js for charts instead of deprecated Flash. Make it work in embedded Issabel
+        *1.6.4* Make it PHP7 compatible for Latest FPBx versions
+        *1.6.3* Fix drill down on Fpbx 13
+        *1.6.2* Fix fpdf so it works with PHP > 5.3
+        *1.6.1* Update to work on Fpbx 13
+        *1.6*   Update to work on Fpbx 2.11
+        *1.5*   Update module to work on Fpbx 2.10, includes fpdf in itself, change category to Reports
+        *1.4*   Added download link for recording, access feature via normal freepbx links and not direct
+        *1.3*   Fix average in dashboard, Total, Completed, Missed in reports
+        *1.2*   Fix hh:mm:ss format. Added Dashboard
+        *1.1*   Add recordings links and post processing script
+        *1.0*   Initial Release
+    </changelog>
+        <depends>
+                <module>core ge 2.6.0</module>
+        </depends>
+    <location>release/2.8/asternic_cdr-1.6.4.tgz</location>
+    <md5sum>0</md5sum>
+</module>

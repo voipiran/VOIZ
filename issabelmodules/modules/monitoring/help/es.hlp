@@ -1,0 +1,44 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>La opción "Grabaciones" del menú "PBX" en Issabel permite ver todas las llamadas grabadas asociadas con la extensión del usuario actual. La cuenta de administrador en Issabel puede ver todas las grabaciones existentes.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_monitoring.png" border="0" />
+<p>Figura 1</p></div>
+<br />
+
+<p>El resultado del reporte mostrado depende de los filtros elegidos:</p>
+
+<table class="inline">
+  <tr>
+    <th>Nombre</th><th>Descripción</th>
+  </tr>
+  <tr>
+    <td>Fecha inicial</td><td>Fecha de inicio del rango para la búsqueda.</td>
+  </tr>
+  <tr>
+    <td>Fecha final</td><td>Fecha final del rango para la búsqueda.</td>
+  </tr>
+  <tr>
+    <td>Origen</td><td>Número de teléfono que inició la llamada.</td>
+  </tr>
+  <tr>
+    <td>Destino</td><td>Número de teléfono que recibió la llamada.</td>
+  </tr>
+  <tr>
+    <td>Tipo</td><td>EL tipo de llamada como puede ser Entrante, Saliente, Cola o Grupo.</td>
+  </tr>
+</table>
+
+<p>Con los resultados obtenidos de la búsqueda se puede escuchar o descargar la grabación correspondiente mediante los enlaces "Escuchar" y "Descargar" respectivamente. El archivo descargado estará en formato WAV.</p>
+
+<p>También es posible descargar el reporte mediante el botón "Descargar" ubicado en la cabecera del reporte. Los tipos de formato disponible para la descarga son: csv, xls y pdf.</p>
+
+</body>
+</html>

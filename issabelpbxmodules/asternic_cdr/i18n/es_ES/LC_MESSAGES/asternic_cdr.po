@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FreePBX - asternic_cdr module spanish translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-16 22:30+0100\n"
+"PO-Revision-Date: 2009-11-17 12:26+0100\n"
+"Last-Translator: Nicolas Gudino <asternic@gmail.com>\n"
+"Language-Team: Nicolas Gudino <asternic@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Outgoing"
+msgstr "Salientes"
+
+msgid "Incoming"
+msgstr "Entrantes"
+
+msgid "Distribution"
+msgstr "Distribución"
+
+msgid "Today's Dashboard"
+msgstr "Tablero de Hoy"
+
+msgid "Call Counters"
+msgstr "Contadores de llamados"
+
+msgid "Total Calls"
+msgstr "Llamadas Totales"
+
+msgid "Total Inbound Calls"
+msgstr "Total de llamadas entrantes"
+
+msgid "Total Outbound Calls"
+msgstr "Total de llamadas salientes"
+
+msgid "Unique Callers"
+msgstr "Llamantes Unicos"
+
+msgid "Call Duration"
+msgstr "Duración de llamadas"
+
+msgid "Total Minutes"
+msgstr "Total de Minutos"
+
+msgid "Total Inbound Minutes"
+msgstr "Total de Minutos Entrantes"
+
+msgid "Total Outbound Minutes"
+msgstr "Total de Minutos Salientes"
+
+msgid "Average Inbound Call Duration"
+msgstr "Duración Promedio Entrantes"
+
+msgid "Average Outbound Call Duration"
+msgstr "Duración Promedio Salientes"
+
+msgid "Select Extensions"
+msgstr "Elija Extensiones"
+
+msgid "Available"
+msgstr "Disponibles"
+
+msgid "Selected"
+msgstr "Seleccionados"
+
+msgid "Select Timeframe"
+msgstr "Elija rango horario"
+
+msgid "Shortcuts"
+msgstr "Atajos"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "This Week"
+msgstr "Esta Semana"
+
+msgid "This Month"
+msgstr "Este Mes"
+
+msgid "Last three months"
+msgstr "Ultimos tres meses"
+
+msgid "Start Date"
+msgstr "Fecha Inicio"
+
+msgid "End Date"
+msgstr "Fecha Fin"
+
+msgid "Run Report"
+msgstr "Ver Reporte"
+
+msgid "Report Information"
+msgstr "Información del Reporte"
+
+msgid "Period"
+msgstr "Período"
+
+msgid "Outgoing Calls"
+msgstr "Llamadas Salientes"
+
+msgid "Incoming Calls"
+msgstr "Llamadas Entrantes"
+
+msgid "Number of Calls"
+msgstr "Número de Llamadas"
+
+msgid "Total Time"
+msgstr "Tiempo Total"
+
+msgid "Avg. ring time"
+msgstr "Prom. Tiempo Ring"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Completed"
+msgstr "Completadas"
+
+msgid "Missed"
+msgstr "Perdidas"
+
+msgid "% Missed"
+msgstr "% Perdidas"
+
+msgid "Duration"
+msgstr "Duración"
+
+msgid "% Duration"
+msgstr "% Duración"
+
+msgid "Avg Duration"
+msgstr "Prom. Duración"
+
+msgid "Total Ring Time"
+msgstr "Tiempo Timbre Total"
+
+msgid "Avg Ring Time"
+msgstr "Prom. Tiempo Timbre"
+
+msgid "days"
+msgstr "días"
+
+msgid "Call Distribution per Hour"
+msgstr "Distribución de llamadas por hora"
+
+msgid "Hour"
+msgstr "Hora"
+
+msgid "Call Count"
+msgstr "Cant. Llamadas"
+
+msgid "Total Call Duration by User"
+msgstr "Duración Total por Usuario"
+
+msgid "Incoming/Outgoing Calls by User"
+msgstr "Entrantes/Salientes por Usuario"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Hour of day (8 means 08h00 - 08h59)"
+msgstr "Hora del día (8 significa 08h00 - 08h59)"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Friday"
+msgstr "Viernes"
+
+msgid "Thursday"
+msgstr "Jueves"
+
+msgid "Wednesday"
+msgstr "Miércoles"
+
+msgid "Tuesday"
+msgstr "Martes"
+
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Combined"
+msgstr "Combinado"
+
+msgid "Incoming / Outgoing"
+msgstr "Entrantes / Salientes"
+
+msgid "Ring Time"
+msgstr "Tiempo Timbre"
+
+msgid "Billable Time"
+msgstr "Tiempo Facturable"
+
+msgid "From"
+msgstr "Desde"
+
+msgid "To"
+msgstr "Hacia"
+
+msgid "Disposition"
+msgstr "Disposición"
+
+msgid "Listen"
+msgstr "Escuchar"
+
+msgid "Play"
+msgstr "Reproducir"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Total Internal Calls"
+msgstr "Total de llamadas internas"
+
+msgid "Total Internal Minutes"
+msgstr "Total de Minutos Internas"
+
+msgid "Average Internal Call Duration"
+msgstr "Duración Promedio Internas"

@@ -1,0 +1,17 @@
+<html>
+    <header>
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+    </header>
+    <body>
+        <h1>{$node_name}</h1>
+	<p>La opción "Enviar Fax" del menú "Fax" permite enviar faxes a uno o más números. Sólo debe seleccionar el fax virtual que desea usar, el número de fax destino y el texto que desea enviar. Luego de esto debe hacer click en el botón "Enviar".</p>
+        <div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_send_fax.png" border="0" />
+	<p>Figura 1</p></div>
+	<br />
+	<p>Además usted puede enviar archivos en formato PDF, TIFF y TXT.</p>
+	<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_send_fax_file.png" border="0" />
+	<p>Figura 2</p></div>
+	<br />
+    </body>
+</html>

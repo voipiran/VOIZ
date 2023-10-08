@@ -163,7 +163,7 @@
         <div class="fotter">
             <div class="copyr">
                 <p>
-                    Copyrights © 2017-2020 All Rights Reserved by <a href="http://www.voipiran.io">VOIPIRAN | ویپ ایران</a>
+                    Copyrights © 2017-2023 All Rights Reserved by <a href="http://www.voipiran.io">VOIPIRAN | ویپ ایران</a>
                 </p>  
             </div>
         </div>

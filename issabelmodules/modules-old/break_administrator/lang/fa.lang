@@ -1,0 +1,54 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 0.5                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.2 2007/08/09 00:31:28 jmartinez Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Name Break" => "نام",
+"Description Break" => "توضیحات",
+"New Break" => "ایجاد استراحت",
+"View Break" => "نمایش استراحت",
+"Edit Break" => "ویرایش استراحت",
+"Active" => "فعال",
+"Inactive" => "غيرفعال",
+"Breaks List" => "لیست استراحت ها",
+"Name Break" => "نام",
+"Description Break" => "توضیحات",
+"Create New Break" => "ایجاد استراحت جدید",
+"Error when Activating the Break" => "خطا در هنگام فعال نمودن تنفس",
+"Activate Error" => "خطاي فعال سازي", //Bruno agrego
+"Break ID is not valid" => "شناسه استراحت معتبر نیست",
+"Name Break can't be empty" => "نام استراحت باید درج شود",
+"Name Break already exists" => "این نام استراحت وجود دارد",
+"Id Break is empty" => "شناسه استراحت نوشته نشده",
+"Desactivate Error" => "خطاي غيرفعال سازي", //Bruno agrego
+"Error when desactivating the Break" => "خطا در هنگام غيرفعال نمودن تنفس",
+"Desactivate"=>"غيرفعال نمودن",
+"Activate"=>"فعال نمودن",
+"Status" => "وضعیت",
+);
+?>

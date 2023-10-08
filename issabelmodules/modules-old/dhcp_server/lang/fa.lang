@@ -1,0 +1,67 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.0                                                  |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by: Haamed Kouhfallah                                      |
+  | Email: k.haamed@gmail.com                                          |                                                                    |
+  +----------------------------------------------------------------------+
+   $Id: fa.lang,v 1.2 2008/04/21 10:11:44 bmacias@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"DHCP Server" => "سرور DHCP",
+"Update" => "به روز رسانی",
+"Service Start" => "آغاز سرویس",
+"Service Stop" => "پایان سرویس",
+"Start range of IPs" => "ابتدای محدوده آی پی ها",
+"End range of IPs" => "پایان محدوده آی پی ها",
+"DNS 1" => "DNS1",
+"DNS 2" => "DNS2",
+"WINS" => "WINS",
+"Gateway" => "Gateway",
+"Optional" => "انتخابی",
+"Of 1 to 50000 Seconds" => "از 1 تا 50000 ثانیه",
+"Time of client refreshment" => "زمان تازه سازی مشتری ها",
+"DHCP Configuration" => "DHCP تنظیمات",
+"Could not find IP range" => "محدوده آی پی پیدا نشد",
+"DHCP configuration reading error: Verify that the DHCP service is installed and try again." => "خطا در خواندن فایل پیکربندی سرور DHCP: بررسی کنید که سرویس DHCP نصب گردیده سپس دوباره امتحان کنید.",
+"Information DHCP" => "اطلاعات",
+"The Service dhcpd can't stop" => "خطا در توقف سرویس DHCP",
+"The Service dhcpd can't start" => "خطا در شروع سرویس DHCP",
+"The start IP is outside the LAN network" => "آی پی ابتدایی خارج از محدوده شبکه محلی است",
+"The final IP is outside the LAN network" => "آخرین آی پی خارج از محدوده شبکه محلی است",
+"IP Range is invalid for available devices" => "محدوده آی پی برای رابط های موجود معتبر نیست",
+"Gateway is outside the LAN network" => "دروازه آی پی خارج از محدوده شبکه محلی است",
+"You can only choose between Enabled and Disabled" => "فقط می توانید یکی از دو گزینه فعال یا غیر فعال را انتخاب کنید",
+"Value outside the range (1-50000)" => "این مقدار از محدوده تعریف شده خارج است",
+"Failed to update the file configuration" => "شکست در تغییر فایل تنظیمات",
+"The update was successful, but was unable to reestablish the permissions of the file dhcp.conf" => "به روز آوری با موفقیت انجام شد اما خطا در بازآوری مجوز ها از فایل dhcp.conf",
+"Update Error" => "خطا در به روز رسانی",
+"Status" => "وضعیت",
+"Inactive" => "غیر فعال",
+"Information" => "اطلاعات",
+"Active" => "فعال",
+);
+?>

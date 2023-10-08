@@ -1,0 +1,47 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>The option "CDR Reports" of the Menu “Reports” in Issabel lets us view a list with the details of the calls. You can download this list in different format files such as CSV, XLS and PDF.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_cdr_report_list.png" border="0" />
+<p>Figure 1</p></div>
+<br />
+
+<p>The report will change depending on the values of the filter:</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_cdr_report_filters.png" border="0" />
+<p>Figure 2</p></div>
+<br />
+
+<table class="inline">
+  <tr>
+    <th>Field</th><th>Description</th>
+  </tr>
+  <tr>
+    <td>Start Date</td><td>The start date of the calls to be selected.</td>
+  </tr>
+  <tr>
+    <td>End Date</td><td>The end date of the calls to be selected.</td>
+  </tr>
+  <tr>
+    <td>Field</td><td>Additional fields for filtering: Source, Destination, Dst. Channel, Src. Channel, Account Code.</td>
+  </tr>
+  <tr>
+    <td>Status</td><td>Status of call: Answered, Busy, Failed, No Answer.</td>
+  </tr>
+  <tr>
+    <td>Ring group</td><td>The ring group of the calls to be selected.</td>
+  </tr>
+</table>
+<br />
+
+<p>If you want to delete the reports just find the records you want to get rid by using the filters and click on "Delete displayed CDR(s)" button.</p>
+<br />
+</body>
+</html>

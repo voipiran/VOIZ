@@ -1,0 +1,291 @@
+/* CONTENT */
+#neo-contentbox {
+    /*position: relative;*/
+    /* padding:5px 5px 5px 5px; */
+    padding:0px;
+    /*min-width:1270px;*/
+    /*width:1270px;
+    background-color:#fafafa;
+    background-image:url(images/content-bg.png);
+    background-repeat:no-repeat;*/
+    overflow:auto;  /*FIX BUG WITH CONTAINED FLOATED DIVS */
+}
+#neo-contentbox-leftcolumn {
+    position:relative;
+        float:left;
+        margin-top: 0px;
+        padding: 0px 0px 0px 0px;
+        width: 220px;
+}
+.neo-contentbox-leftcolumn-minimized {
+    /*
+    position:relative;
+        float:left;
+        margin-top: 0px;
+        padding: 0px 0px 0px 0px;
+        width: 0px;
+    overflow:hidden;
+    */
+    display:none;
+}
+#neo-contentbox-maincolumn {
+    padding-right: 10px;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+.neo-contentbox-maincolumn-maximized {
+    width:1245px;
+}
+div.neo-module-title {
+    /*position:absolute;*/
+    top:0px;
+    left:0px;
+    width:100%;
+    /*padding:5px 0px 4px 0px;*/
+	    /*    padding:5px 0px 0px 0px; */
+    overflow:auto;
+    z-index:10;
+}
+span.neo-module-name {
+    padding: 2px 2px 0px 4px;
+    font: 15px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    /* text-shadow: 1px 1px #eee; */
+    text-align:left;
+    height:28px;
+    display: inline-block;
+    /* background:url(images/bgmodulenamerepeat.png) repeat-x top; */
+    float:left;
+}
+div.neo-module-name-left {
+    padding: 5px 0px 0px 0px;
+    float:left;
+    width:6px;
+    height:28px;
+    /* background:url(images/bgmodulenameleft.png) no-repeat left top; */
+}
+div.neo-module-name-right {
+    padding: 5px 0px 0px 0px;
+    float:left;
+    width:48px;
+    height:28px;
+    /* background:url(images/bgmodulenameright.png) no-repeat left top; */
+}
+span.neo-module-title-buttonstab {
+    float:right;
+    padding: 2px 3px 0px 0px;
+    display:inline-block;
+    height:28px;
+    /* background:url(images/moduletitlebuttonstab.png) repeat-x top; */
+}
+span.neo-module-title-buttonstab img {
+    margin: 0px 0px 0px 8px;
+}
+div.neo-module-title-buttonstab-left {
+    float:right;
+    padding: 0px;
+    height:30px;
+    width:36px;
+    /* background:url(images/moduletitlebuttonstableft.png) no-repeat top; */
+}
+div.neo-module-title-buttonstab-right {
+    float:right;
+    padding: 0px;
+    height:30px;
+    width:10px;
+    margin:0px 14px 0px 0px;
+    /* background:url(images/moduletitlebuttonstabright.png) no-repeat top; */
+}
+.neo-picker{
+    cursor: pointer;
+}
+#neo-lengueta-minimized {
+    position:absolute;
+    top: 103px;
+    left:0px;
+    width:13px;
+    height:69px;
+    margin-top:11px;
+    background:url(images/lengueta_minimizada.png) no-repeat top;
+}
+div.neo-module-content {
+    margin-top:3px;
+    overflow:hidden;
+    background-color:#fff;
+    color:#666;
+}
+div.neo-module-content *, div.neo-module-content *::before, div.neo-module-content *::after {
+    box-sizing :initial;
+}
+/*
+div.neo-module-content td {
+    padding:5px;
+}
+*/
+div.neo-addons-header-row {
+	height:40px;
+	margin-top:0px;
+}
+div.neo-addons-header-row-filter {
+	height:40px;
+}
+div.neo-addons-header-row-navigation {
+	height:40px;
+}
+div.neo-addons-row {
+	padding-bottom:20px;
+}
+div.neo-addons-row-button-trial-left {
+	height:22px;
+}
+div.neo-addons-row-button-buy-left {
+	height:22px;
+}
+div.neo-addons-row-button-install-left {
+	height:22px;
+}
+/*.neo-module-content {
+	margin-top:0px;
+}*/
+
+input.submit {
+	height:56px;
+}
+div.neo-modulecontent-row {
+    position:relative;
+    padding:0px 5px 0px 5px;
+    overflow:hidden;
+    /*width:100%;
+    padding:0px;*/
+}
+/* CONTENT :: MENU 3ER NIVEL */
+#neo-3menubox {
+    position: relative;
+    margin-top: 6px;
+    margin-bottom: 18px;
+    padding: 0px 0px 10px 0px;
+    width: 220px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    -moz-box-shadow: 2px 2px 1px rgb(180,180,180);
+    -webkit-box-shadow: 2px 2px 1px rgb(180,180,180);
+    background:url(images/3menubgtop.png) repeat-x top #f0f0f0;
+}
+div.neo-3mtab {
+    height: 26px;
+    padding: 8px 0px 0px 12px;
+    background: url(images/3menubg.png) no-repeat bottom;
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    text-shadow: 1px 1px #ddd;
+    text-align:left;
+}
+div.neo-3mtab a{
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    text-shadow: 1px 1px #ddd;
+}
+div.neo-3mtabon {
+    height: 26px;
+    padding: 8px 0px 0px 12px;
+    background: url(images/3menubg_on.png) no-repeat bottom;
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #555;
+    text-shadow: 1px 1px #eee;
+    text-align:left;
+}
+div.neo-3mtabon a{
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #555;
+    text-shadow: 1px 1px #eee;
+}
+div.neo-shortcuts-box {
+    position: relative;
+    margin-top: 20px;
+    padding: 0px 0px 10px 0px;
+    width: 220px;
+    text-align: center;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    -moz-box-shadow: 2px 2px 1px rgb(180,180,180);
+    -webkit-box-shadow: 2px 2px 1px rgb(180,180,180);
+    box-shadow: 2px 2px 1px rgb(180,180,180);
+    background: url(images/3menubgtop.png) repeat-x top #f0f0f0;
+}
+#neo-historybox {
+    position: relative;
+    margin-top: 8px;
+    padding: 0px 0px 10px 0px;
+    width: 220px;
+}
+div.neo-historybox-tab {
+    height: 26px;
+    padding: 8px 0px 0px 12px;
+    background: url(images/3menubg.png) no-repeat bottom;
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    text-shadow: 1px 1px #ddd;
+    text-align:left;
+    overflow: hidden;
+        position: relative;
+}
+div.neo-historybox-tab a{
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    text-shadow: 1px 1px #ddd;
+    text-decoration: none;
+}
+div.neo-historybox-tabon {
+    height: 26px;
+    padding: 8px 0px 0px 12px;
+    background: url(images/historyboxbg.png) no-repeat bottom;
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #555;
+    text-shadow: 1px 1px #eee;
+    text-align:center;
+}
+div.neo-historybox-tabmid {
+    height: 26px;
+    padding: 8px 0px 0px 12px;
+    /* background: url(../images/3menubg.png) no-repeat bottom; */
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    text-shadow: 1px 1px #ddd;
+    text-align:left;
+    overflow: hidden;
+        position: relative;
+}
+div.neo-historybox-tabmid a{
+    font: 12px Verdana, Arial,Helvetica,sans-serif;
+    color: #666;
+    text-shadow: 1px 1px #ddd;
+    text-decoration: none;
+}
+.neo-bookmarks-equis {
+    position:absolute;
+    width:18px;
+    height:15px;
+    right:10px;
+    top:10px;
+    background:url(../../images/bookmarks_equis.png) no-repeat;
+        cursor: pointer;
+}
+
+.form-label-style {
+    color:#E35332; 
+    font-weigth:bold;
+    font-size:13px;
+    font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
+}

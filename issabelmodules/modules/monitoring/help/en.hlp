@@ -1,0 +1,43 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>The option "Monitoring" of the Menu "PBX" in Issabel lets us view a list with details of all recorded calls for the extension associated to the connected user. The administrator account can see all the recordings.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_monitoring.png" border="0" />
+<p>Figure 1</p></div>
+<br />
+
+<p>The report will change depending on the values of the filter: </p>
+
+<table class="inline">
+  <tr>
+    <th>Name</th><th>Description</th>
+  </tr>
+  <tr>
+    <td>Start Date</td><td>The start date for the calls to be selected.</td>
+  </tr>
+  <tr>
+    <td>End Date</td><td>The end date for the calls to be selected.</td>
+  </tr>
+  <tr>
+    <td>Source</td><td>The extension that started the call.</td>
+  </tr>
+  <tr>
+    <td>Destination</td><td>The extension that received the call.</td>
+  </tr>
+  <tr>
+    <td>Type</td><td>The type of call such as Incoming, Outgoing, Queue or Group.</td>
+  </tr>
+</table>
+
+<p>Also, we can listen to the calls by clicking on the option "Listen" for each call, or we can download an audio file with the .wav extension of the selected call.</p>
+<p>If you want to export the list of the recorded calls, click on "Download" button and choose the type of file you want to download. The available extensions are: csv, xls and pdf.</p>
+
+</body>
+</html>

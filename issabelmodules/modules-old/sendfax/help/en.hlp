@@ -1,0 +1,17 @@
+<html>
+    <header>
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+        <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+    </header>
+    <body>
+        <h1>{$node_name}</h1>
+	<p>The option "Send Fax" of the menu "Fax" in Issabel allows sending faxes to one or more numbers. Here you can enter the text you want to send and click on "Send" button</p>
+        <div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_send_fax.png" border="0" />
+	<p>Figure 1</p></div>
+	<br />
+	<p>Also, you can send files in the format .pdf, .tiff and .txt</p>
+	<div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_send_fax_file.png" border="0" />
+	<p>Figure 2</p></div>
+	<br />
+    </body>
+</html>

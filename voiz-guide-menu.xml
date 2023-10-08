@@ -10,7 +10,7 @@ parent="" module="no" link="" order="20">
     </menuitem> 
 
 <menuitem menuid="voizhelps" desc="راهنمای VOIZ"
-parent="voiz-helps" module="yes" link="" order="71"> 
+parent="voiz-helps" module="yes" link="" order="12"> 
       <permissions> 
         <group id="1" name="administrator" desc="total access"></group> 
       </permissions> 

@@ -1,0 +1,86 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version: 4.0                                           |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  |                                                                      |
+  | Translate by:Chavdar Iliev                                             |
+  | Email: chavdar_75@yahoo.com                                                       |
+  +----------------------------------------------------------------------+
+  $Id: bg.lang, October 25, 2010, 6:07 pm kleber andres loayza Exp $ */
+global $arrLangModule;
+$arrLangModule=array(  
+"New Contact" => "Нов Контакт",
+"Address Book" => "Указател",
+"Are you sure you wish to delete the contact." => "Сигурни ли сте че искате да изтриете контакта.",
+"First Name" => "Име",
+"Last Name" => "Фамилия",
+"Phone Number" => "Телефонен Номер",
+"Extension" => "Вътрешен Номер",
+"The call couldn't be realized" => "Обаждането не може да бъде осъществено",
+"Internal" => "Вътрешни Номера",
+"External" => "Външни Номера",
+"Call" => "Набери",
+"Phone Directory" => "Телефонен Указател",
+"CSV" => "CSV",
+"Download Address Book" => "Изтегли Указател",
+"Can't exist a Name empty. Line" => "Няма въведено Име. Линия",
+"Can't exist a Last Name empty. Line" => "Няма въведена Фамилия. Линия",
+"Can't exist a Phone Number/Job Phone Number empty. Line" => "Няма въведен Телефонен Номер. Линия",
+"Total contacts created" => "Общо създадени контакти",
+"Contact Data already exists" => "контактът вече съществува",
+"Header File Address Book" => "Заглавната линия на файла трябва да е на първия ред и да съдържа най-малко три колони: Име, Фамилия, Телефонен Номер.",
+"About Address Book" => "Ако заредите файл с контакт който вече съществува , информацията за този контакт няма да бъде въведена.",
+"Invalid file extension.- It must be csv" => "Грешно файлово разширение, трябва да бъде (.csv)",
+"There aren't contacts" => "Няма въведени контакти",
+"Address Book from CSV" => "Указател от CSV",
+"Name" => "Име",
+"Filter" => "Филтър",
+"Show" => "Покажи",
+"Email" => "eMail",
+"File" => "Файл",
+"Possible file upload attack. Filename" => "Възможна атака с качване на файлове. Файл с име",
+"Please read the lines in the footer" => "Моля прочетете текста в долната част на страницата",
+"Verify the header" => "Проверка на заглавна част",
+"At minimum there must be the columns" => "Поне трябва да има колони",
+"Incomplete Columns" => "Непълни Колони",
+"The file is incorrect or empty" => "Файлът е грешен или празен",
+"You don't have extension number associated with user" => "There is no extension number associated with the current user. You can associate an extension number to your user by clicking <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">here</a>",
+"ERROR" => "ГРЕШКА",
+"Transfer" => "Transfer",
+"The transfer couldn't be realized, maybe you don't have any conversation now." => "The transfer couldn't be realized, maybe you don't have any conversation now.",
+"Not_allowed_change" => "This changes disallowed for your user. This contact it not associated to your address book",
+"picture" => "Picture",
+"Address" => "Address",
+"Company" => "Company",
+"Notes" => "Notes",
+"Status" => "Status",
+"Private Contact" => "Private Contact",
+"Public Contact" => "Public Contact",
+"Invalid file extension.- It must be png or jpg or jpeg" => "Invalid file extension.- It must be png, jpg or jpeg without content special characters",
+"Validation Error" => "Validation Error",
+"Error to Upload" => "Error to Upload file",
+"Type Contact" => "Type Contact",
+"Internal Error" => "Please be sure if the parameters are corrects",
+"Not_allowed_contact" => "This contact don't exist in your Address Book",
+"Public editable" => "Public editable",
+"Public not editable" => "Public not editable",
+"Private" => "Private",
+"contact_admin" => "There is no extension number associated with the current user. Please contact the administrator to assign it an extension"
+);
+?>

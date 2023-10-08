@@ -1,0 +1,61 @@
+div.neo-applet {
+    position: relative;
+    float:left;
+    margin: 8px 6px 0px 7px;
+    padding: 0px 0px 10px 0px;
+    width: 490px;
+    height: 300px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    -moz-box-shadow: 2px 2px 1px rgb(180,180,180);
+    -webkit-box-shadow: 2px 2px 1px rgb(180,180,180);
+    box-shadow: 2px 2px 1px rgb(180,180,180);
+    border-radius: 10px 10px 10px 10px;
+    background:url(images/appletbg.png) repeat-x top #F6F6F6;
+    
+}
+div.neo-applet-title {
+    position: absolute;
+    top: 0px;
+    left:0px;
+    font: 13px Verdana, Arial,Helvetica,sans-serif;
+    color: #444;
+    text-shadow: 1px 1px #ccc;
+    padding: 5px 4px 4px 8px;
+}
+div.neo-applet-reload {
+    position: absolute;
+    top: 6px;
+    right:4px;
+}
+div.neo-applet-content {
+    position:absolute;
+    top:32px;
+    left:0px;
+    padding:8px 8px 8px 8px;
+    width:464px;
+}
+div.neo-applet-tline {
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    height:22px;
+}
+div.neo-applet-titem {
+    position:absolute;
+    left:0px;
+    top:0px;
+    padding-left:8px;
+    width:110px;
+}
+div.neo-applet-tdesc {
+    position:absolute;
+    left:120px;
+    top:0px;
+    float:left;
+    overflow:hidden;
+}

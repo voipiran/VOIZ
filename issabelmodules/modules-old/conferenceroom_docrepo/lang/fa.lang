@@ -1,0 +1,76 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Elastix version 1.6-5                                               |
+  | http://www.elastix.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | Cdla. Nueva Kennedy Calle E 222 y 9na. Este                          |
+  | Telfs. 2283-268, 2294-440, 2284-356                                  |
+  | Guayaquil - Ecuador                                                  |
+  | http://www.palosanto.com                                             |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Original Code is: Elastix Open Source.                           |
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2009-06-29 08:06:01 Alex Villacís Lasso a_villacis@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Document repository" => "انبار مطلب",
+'Cannot display document' => 'مطالب قابل نمايش نيست',
+'Document Repository for Conference'=>'انبار مطلب براي كنفرانس',
+"Document Viewer" => "ديدن مطلب",
+"Upload file" => "ارسال فايل",
+'Upload new document'   =>  'ارسال مطلب جديد',
+"Select existing document" => "انتخاب مطلب موجود",
+"Proceed" => "ادامه",
+"Document to display" => "نمايش مطلب",
+'(No documents available)'  =>  '(مطلبي موجود نيست)',
+'Cannot remove document'    =>  'مطلب قابل حذف نيست',
+'Cannot display document'   =>  'مطلب قابل نمايش نيست',
+'Problem while uploading file'  =>  'خطا در هنگام ارسال مطلب',
+'Uploaded file is larger than allowed by PHP configuration.'    =>  'حجم فايل ارسالي از مقدار اجازه داده شده توسط تنظيمات پي اچ پي شما بيشتر است',
+'Uploaded file is larger than allowed by MAX_FILE_SIZE.'    =>  'حجم فايل ارسال شده از مقدار مجاز بيشتر است',
+'File was only partially uploaded.' =>  'File was only partially uploaded.',
+'No file was specified for upload.' =>  'فايلي براي ارسال انتخاب نشده',
+'No PHP temporary folder configured. Check PHP configuration.'  =>  'No PHP temporary folder configured. Check PHP configuration.',
+'Unable to write temporary (not enough disk space, or access denied).'  =>  'Unable to write temporary (not enough disk space, or access denied).',
+'Uploaded file blocked by forbidden file extension.'    =>  'فايل ارسال شده پسوند مناسبي ندارد',
+'Failed to convert document'    =>  'خطا در تبديل مطلب',
+'Document uploaded successfully'   =>  'مطلب با موفقيت ارسال شد',
+'Document converted, redirecting to document...'    =>  '... مطلب تبديل شد، بازگشت به مطلب',
+'Document not available'    =>  'مطلب موجود نيست',
+'Hand off to'   =>  'بدون دست زدن به',
+'Remove document'   =>  'حذف مطلب',
+'Document'  =>  'مطلب',
+'Page'  =>  'صفحه',
+'Current owner' =>  'مالك ',
+'Back'  =>  'برگشت',
+'Interactive Document Presentation'=>'نمايش محاوره‌اي مطلب',
+'-No documents uploaded-'=>'-مطلبي ارسال نشده-',
+'Upload new file'=>'ارسال فايل جديد',
+'Upload'=>'ارسال',
+'Regain Control'=>'كنترل مجدد',
+'No document uploaded for presentation'=>'مطلبي براي نمايش ارسال نشده',
+'No document selected for viewing'=>'مطلبي براي نمايش انتخاب نشده',
+'Unable to set presentation'=>'امكان تنظيم نمايش نيست',
+'On startup'=>'در هنگام شروع',
+'Document removed'=>'مطلب حذف شد',
+'Document removed correctly'=>'مطلب به درستي حذف شد',
+'Cannot list documents'=>'امكان ليست كردن مطالب نيست',
+'Upload user'=>'كاربر ارسال‌كننده',
+'Upload time'=>'زمان ارسال',
+);
+?>
