@@ -8,7 +8,8 @@ There are two ways to install VOIZ.
 ### How to Install on Issabel ISO:
 -install issabel iso file with Asterisk 16 or 18 (It is highly recommended o install Nightly ISO and choose Asterisk18).
 
-Download Issabel NIghtly ISO File: [Issabel ISO](https://duckduckgo.com](https://sourceforge.net/projects/issabelpbx/files/Issabel%204/issabel4-NIGHTLY-AST18-USB-DVD-x86_64-20211207.iso/download).
+Download Issabel NIghtly ISO File:
+[Issabel ISO](https://sourceforge.net/projects/issabelpbx/files/Issabel%204/issabel4-NIGHTLY-AST18-USB-DVD-x86_64-20211207.iso/download)
 
 -update issabel: 
 ```
