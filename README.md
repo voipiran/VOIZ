@@ -3,7 +3,6 @@
 
 
 ## Instalation (نصب)
-There are two ways to install VOIZ.
 
 ### How to Install on Issabel ISO:
 1)-install issabel iso file with Asterisk 16 or 18 (It is highly recommended o install Nightly ISO and choose Asterisk18).
