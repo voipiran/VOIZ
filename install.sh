@@ -158,10 +158,10 @@ function asternic-callStats-lite(){
 cd software
 tar zvxf asternic-stats-1.8.tgz
 cd asternic-stats
-mysqladmin -u root -p$rootpw create qstatslite
-mysql -u root -p$rootpw qstatslite < sql/qstats.sql
+mysqladmin -u root -p$rootpw create qstatslite 2>/dev/null
+mysql -u root -p$rootpw qstatslite < sql/qstats.sql  2>/dev/null
 
-mysql -u root -p$rootpw -e "CREATE USER 'qstatsliteuser'@'localhost' IDENTIFIED by '$rootpw'"
+mysql -u root -p$rootpw -e "CREATE USER 'qstatsliteuser'@'localhost' IDENTIFIED by '$rootpw'" 2>/dev/null
 mysql -u root -p$rootpw -e "GRANT select,insert,update,delete ON qstatslite.* TO qstatsliteuser"
 mysql -u root -p$rootpw -e "ALTER DATABASE qstatslite CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
 mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.queue_stats CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
@@ -169,8 +169,8 @@ mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qname CONVERT TO CHARACTER SE
 mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qevent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
 mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qagent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
 
-mv html /var/www/html/queue-stats
-mv parselog /usr/local/parseloglite
+yes | cp -rf html /var/www/html/queue-stats
+yes | cp -rf parselog /usr/local/parseloglite
 
 sed -i "s/= ''/\= \'$rootpw\'/g" /var/www/html/queue-stats/config.php  >/dev/null 2>&1
 sed -i "s/admin/phpconfig/g" /var/www/html/queue-stats/config.php  >/dev/null 2>&1
@@ -298,6 +298,25 @@ function menu-order(){
 issabel-menumerge callcenter-menu.xml
 }
 
+function install-on-issabel(){
+echo "**install-on-issabel" >> voiz-installation.log
+yum --enablerepo=issabel-beta update -y
+}
+
+function install-on-centos(){
+echo "**install-on-centos" >> voiz-installation.log
+}
+
+function install-on-nightly(){
+echo "**install-on-rocky" >> voiz-installation.log
+yum update -y
+}
+
+function update_issabel(){
+echo "**install-on-issabel" >> voiz-installation.log
+yum --enablerepo=issabel-beta update -y 2>/dev/null
+}
+
 
 
 #######################
@@ -309,37 +328,52 @@ rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
 echo "VOIZ Installation Log:" >> voiz-installation.log
 
 welcome
+
+# SELECTED=$(
+# whiptail --title "VOIZ Installation" --menu "Installing VOIZ on ..." 25 78 16 \
+# "ISSABEL Nightly ISO" "Installing VOIZ on Issabel ISO Nightly Version." \
+# "ISSABEL Standard ISO" "Installing VOIZ on Issabel ISO" \
+# "CENTOS Linux" "Installing VOIZ on Centos7 Minimal." 3>&1 1>&2 2>&3
+# )
+# echo ${SELECTED[@]}
+#   for CHOICE in $SELECTED; do
+#   if [[ "$CHOICE" == *"ISSABEL Nightly"* ]]
+# 	then 
+#     INSTALLONNIGHTLY=true
+# 	fi
+#   if [[ "$CHOICE" == *"CENTOS"* ]]
+# 	then 
+#     INSTALLONCENTOS=true
+# 	fi
+#   if [[ "$CHOICE" == *"ISSABEL Standard"* ]]
+# 	then 
+#     INSTALLONISSABEL=true
+# 	fi
+#   done
+
 ###SELECT FEATURES GUI
 SELECTED=$(
 whiptail --title "SELECT Features TO INSTALL" --checklist \
 "List of Features to install" 20 100 10 \
-"CRM" "ویتایگر با تقویم شمسی" ON \
+"Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
 "Webphone" "تلفن تحت وب" ON \
 "NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3
 )
 echo ${SELECTED[@]}
-
-
   for CHOICE in $SELECTED; do
- 
   if [[ "$CHOICE" == *"CRM"* ]]
 	then 
     CRMINSTALL=true
 	fi
-	
   if [[ "$CHOICE" == *"NetworkUtilities"* ]]
 	then 
     NETUTILINSTALL=true
 	fi
-	
   if [[ "$CHOICE" == *"Webphone"* ]]
 	then 
     WEBPHONEINSTALL=true
 	fi
-  
   done
-
-
 
 
 ###SELECT LNGUAGE GUI
@@ -348,17 +382,30 @@ Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25
 "English" "پوسته و محیط انگلیسی به همراه تقویم شمسی" 3>&1 1>&2 2>&3)
 
 
+ COUNTER=0
+ while [[ ${COUNTER} -le 100 ]]; do
+   sleep 1
+   COUNTER=$(($COUNTER+10))
+   echo ${COUNTER} 
 
-COUNTER=0
-while [[ ${COUNTER} -le 100 ]]; do
-  sleep 1
-  COUNTER=$(($COUNTER+10))
-  echo ${COUNTER} 
+# #YUM UPDATE ISSABEL to BETA
+# if [ "$INSTALLONISSABEL" = "true" ]
+# then 
+# install-on-issabel
+# fi
+
+# #YUM UPDATE ISSABEL to BETA
+# if [ "$INSTALLONNIGHTLY" = "true" ]
+# then 
+# install-on-nightly
+# fi
 
 ##Set Version of VOIZ
 setversion
 ##Install Source Gaurdian Module
 install_sourecgaurdian
+
+update_issabel
 
   COUNTER=$(($COUNTER+10))
     echo ${COUNTER} 
@@ -418,8 +465,6 @@ survey
   COUNTER=$(($COUNTER+10))
     echo ${COUNTER} 
 
-echo *****************
-echo $CRMINSTALL
 
 ##Install Vtiger CRM
 if [ "$CRMINSTALL" = "true" ]
@@ -467,13 +512,14 @@ done | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 ${COUNTER}
 
 
 ##FINISHED
+service httpd restart >/dev/null 2>&1
 clear  
 cat voiz-installation/logo.txt
 cat voiz-installation.log
+
 
 #echo "-------------Adminer Installation----------------"
 #sleep 1
 #cp -rf www/adminer /var/www/html/
 #issabel-menumerge adminer-menu.xml
 #echo "Adminer Menu is Created Sucsessfully"
-

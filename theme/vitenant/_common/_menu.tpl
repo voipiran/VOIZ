@@ -320,7 +320,7 @@
 
 			<!------- voipiran Download ---->
 
-        <li id="header_notification_bar" class="profile-info dropdown">
+        <li id="header_notification_bar" class="profile-info dropdown top-bar-downloads"> <!-- voipiran msm -->
             <a data-toggle="dropdown" class="" href="#">
                 <i class="fa fa-download"></i>
             </a>
@@ -353,9 +353,9 @@
                     </a>
                 </li-->
 
-                <li id="header_notification_bar" class="profile-info dropdown">
+                <li id="header_notification_bar" class="profile-info dropdown top-bar-webmin"> <!-- voipiran msm -->
                     <a target="_blank" id="webmin_link"  class="" href="">
-                        <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/webmin.png" />
+                        <img style="width:20px;" src="{$WEBPATH}themes/{$THEMENAME}/images/webmin.png" /> <!-- voipiran msm -->
                     </a> 
                 </li>
 				
@@ -365,7 +365,7 @@
                <!--      </a>  -->
               <!--   </li> -->
 				
-                <li id="header_notification_bar" class="profile-info dropdown">
+                <li id="header_notification_bar" class="profile-info dropdown top-bar-info"> <!-- voipiran msm -->
                     <a data-toggle="dropdown" class="" href="#">
                         <i class="fa fa-info-circle"></i>
                     </a>
