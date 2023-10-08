@@ -26,7 +26,26 @@ https://forum.voipiran.io/t/voiz-documents
 
 
 ## Features (امکانات)
+###Added to Issabel.
+New Queue Stats Report.
+New CDR Reports.
+New ChanSpy Feature Codes (*30,*31).
+New Say Current DateTime in Persian Feature Code (*200,*201,*202).
+Added Persian and RTL Theme.
+New Webphone (Webrtc Phone).
+Added Queue Survey (the reaults shows on CDR Report).
+Added Bult DID Module.
+Added SuperFecta Module.
+Added Development Module.
+Added Asterisk Persian Sounds.
+Added Vtiger CRM with Persian Calendar.
+Added Persian Calendar to Reports.
+Added Webmin Linux Web Manager.
+Added EasyVPN Module (OpenVPN Module).
 
+###Others
+Issabel Registration Popup Removed.
+Added Putty, Winscp, Microsip Runable to Download via Web UI.
 
 ## TODO List (امکانات آینده)
 - [ ] Add Documentations Menu
