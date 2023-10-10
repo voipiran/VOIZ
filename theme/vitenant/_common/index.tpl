@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-forms-rtl.css"> <!--  Voiz -->
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/font-awesome-animation.min.css">
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/custom.css">
-    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/rtl.css">   <!--  Voiz -->
+    <!-- voipiran msm <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/rtl.css"> -->  <!--  Voiz -->
     
 
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/styles.css" />
@@ -32,6 +32,9 @@
     <link rel="stylesheet" media="screen" type="text/css" href="{$WEBPATH}themes/{$THEMENAME}/table.css" />
     <link rel="stylesheet" media="screen" type="text/css" href="{$WEBPATH}themes/{$THEMENAME}/rightbar.css" />
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/purple.css">
+    <!-- voipiran msm -->
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/rtl.css">   <!--  Voiz -->
+    <!-- voipiran msm \-->
 
     {$HEADER_LIBS_JQUERY}
         <!--<script type='text/javascript' src="{$WEBCOMMON}js/base.js"></script>-->

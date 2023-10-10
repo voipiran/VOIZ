@@ -21,21 +21,41 @@ ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-inf
 	padding-left: 3px;
 	translate: 0 1px;
 }
+
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-info > a,
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-downloads > a {
   font-size: 20px;
   padding: 2px;
 }
+
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-info > a {
   padding-left: 10px;
   padding-right: 10px !important;
 }
+
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-downloads > a {
   padding-left: 9px;
   padding-right: 9px !important;
 }
+
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-info > a > i,
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-downloads > a > i {
   translate: 0 2px;
+}
+
+body .page-container .sidebar-menu #main-menu li.active > a {
+    color: #d7d7d7;
+}
+
+body .page-container .sidebar-menu #main-menu li:hover {
+    color: #fff;
+}
+
+.page-container .sidebar-menu #main-menu li.active i {
+    color: #d7d7d7;
+}
+
+.page-container .sidebar-menu #main-menu li a:hover i {
+    color: #fff;
 }
 /* </voipiran msm> */
