@@ -18,7 +18,7 @@ yum update
 ```
 -Run This command on your Linux CLI:
 ```
-yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.git && cd voiz && chmod 777 installVoizOnIssabel.sh && ./installVoizOnIssabel.sh
+yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.git && cd voiz && chmod 777 install.sh && ./install.sh
 ```
 
 ### 2. How to  Netinstall (install on centos7 minimal- نصب بر روی لینوکس سنت او اس 7):
