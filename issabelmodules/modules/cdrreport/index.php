@@ -479,8 +479,8 @@ function _moduleContent(&$smarty, $module_name)
 
     $MsgFilter = "<b>"._tr("Filter applied: ")."</b>".
     '<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>'." ".
-    _tr("Start Date")." = ".$paramFiltro['date_start'].", "._tr("End Date")." = ".
-    $paramFiltro['date_end']." - ".
+    _tr("Start Date")." = ".rectohejri($paramFiltro['date_start']).", "._tr("End Date")." = ".
+    rectohejri($paramFiltro['date_end'])." - ".
     '<span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>'." ".
     $valueFieldName." = ".$paramFiltro['field_pattern']. " - ".
     '<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>'." ".
