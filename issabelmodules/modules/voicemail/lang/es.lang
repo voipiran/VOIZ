@@ -1,0 +1,55 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 0.5                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.7 2007/09/05 00:36:42 alex Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+    "Pager Email Address" => "Localizador de direcciones de Correo Electrónico",
+    "Confirm Password" => "Confirmar Contraseña",
+    "Email Attachment" => "Correos Adjuntos",
+    "Play CID" => "Reproducir CID",
+    "Play Envelope" => "Reproducir Encabezado",
+    "Delete Vmail" => "Eliminar Vmail",
+    "Required Field" => "Campo Requerido",
+    "Filter" => "Filtro",
+    "Configuration" => "Configuración",
+    "Start Date" => "Fecha Inicio",
+    "End Date" => "Fecha Fin",
+    "Voicemail List" => "Lista de Grabaciones",
+    "Are you sure you wish to delete voicemails?" => "Está seguro que desea eliminar la grabación de voz?",
+    "Date" => "Fecha",
+    "Time" => "Tiempo",
+    "Message" => "Mensaje",
+    "Extension" => "Extensión",
+    "Duration" => "Duración",
+    "Email" => "Correo Electrónico",
+    "Status" => "Estado",
+    "Enable" => "Habilitar",
+    "Disable" => "Deshabilitar",
+    "Yes" => "Sí",
+    "no_file" => "Archivo no ha sido encontrado!",
+    "no_extension" => "Este archivo no está permitido para descargar",
+    "Download" => "Descargar",
+    "Listen" => "Escuchar",
+    "no_extension_assigned" => "El usuario actual no tiene un número de extensión asociado a él. Puede asociar un número de extensión a su usuario haciendo click <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">aquí</a>",
+    "contact_admin" => "No hay número de extensión asociado con el usuario actual. Por favor contáctese con el administrador para que le asigne una extensión",
+);
+?>

@@ -27,6 +27,8 @@
 
 // exten => s,n,Set(CDR(userfield)=audio:${CALLFILENAME}.${MIXMON_FORMAT})   extensions_additional
 require_once "libs/paloSantoACL.class.php";
+require_once "libs/date.php"; // <msm/>
+require_once "libs/mylib/tarikh_func.php"; // <msm/>
 
 function _moduleContent(&$smarty, $module_name)
 {
@@ -195,10 +197,17 @@ function reportMonitoring($smarty, $module_name, $local_templates_dir, &$pDB, $p
     $arrResult = $pMonitoring->getMonitoring($param, $limit, $offset);
 
     if (is_array($arrResult)) {
+        $shamsiUtil = new Application_Helper_date; // <msm/>
+
         foreach ($arrResult as $value) {
             $arrTmp = formatCallRecordingTuple($value);
             array_unshift($arrTmp, $value['uniqueid']);
 
+// <msm>
+            list($gDay, $gMonth, $gYear) = explode('/', $arrTmp[1]);
+            list($jYear, $jMonth, $jDay) = $shamsiUtil->gregorian_to_jalali($gYear, $gMonth, $gDay);
+            $arrTmp[1] = sprintf("%d/%02d/%02d", $jYear, $jMonth, $jDay);
+// </msm>
             // checkbox(id_uniqueid) date time src dst hh:mm:ss rectype namefile
             if ($arrTmp[3] == '') $arrTmp[3] = "<font color='gray'>"._tr("unknown")."</font>";
             if ($arrTmp[4] == '') $arrTmp[4] = "<font color='gray'>"._tr("unknown")."</font>";
@@ -267,8 +276,8 @@ function reportMonitoring($smarty, $module_name, $local_templates_dir, &$pDB, $p
 
     $MsgFilter = "<b>"._tr("Filter applied: ")."</b>".
     '<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>'." ".
-    _tr("Start Date")." = ".$paramFilter['date_start'].", "._tr("End Date")." = ".
-    $paramFilter['date_end']." - ".
+    _tr("Start Date") . " = " . dateG2J($paramFilter['date_start']) . ", " .
+    _tr("End Date") . " = " . dateG2J($paramFilter['date_end']) . " - " .
     '<span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>'." ".
     $filter_field." = ".$paramFilter['filter_value'] . _tr(ucfirst($paramFilter['filter_value_recordingfile'])) . " - ".
     $msgLimit;
@@ -463,15 +472,25 @@ function createFieldFilter(){
                     );
 
     $arrFormElements = array(
-            "date_start"  => array(           "LABEL"                  => _tr("Start_Date"),
+            "date_start_shamsi"  => array(    "LABEL"                  => _tr("Start_Date"),
                                               "REQUIRED"               => "yes",
-                                              "INPUT_TYPE"             => "DATE",
+                                              "INPUT_TYPE"             => "DATE_SHAMSI",
                                               "INPUT_EXTRA_PARAM"      => "",
                                               "VALIDATION_TYPE"        => "ereg",
                                               "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"),
-            "date_end"    => array(           "LABEL"                  => _tr("End_Date"),
+            "date_start" => array(            "REQUIRED"               => "yes",
+                                              "INPUT_TYPE"             => "HIDDEN",
+                                              "INPUT_EXTRA_PARAM"      => "",
+                                              "VALIDATION_TYPE"        => "ereg",
+                                              "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"),
+            "date_end_shamsi" => array(       "LABEL"                  => _tr("End_Date"),
                                               "REQUIRED"               => "yes",
-                                              "INPUT_TYPE"             => "DATE",
+                                              "INPUT_TYPE"             => "DATE_SHAMSI",
+                                              "INPUT_EXTRA_PARAM"      => "",
+                                              "VALIDATION_TYPE"        => "ereg",
+                                              "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"),
+            "date_end" => array(              "REQUIRED"               => "yes",
+                                              "INPUT_TYPE"             => "HIDDEN",
                                               "INPUT_EXTRA_PARAM"      => "",
                                               "VALIDATION_TYPE"        => "ereg",
                                               "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"),
@@ -520,4 +539,41 @@ function hasModulePrivilege($user, $module, $privilege)
         'downloadany',  // ¿Está autorizado el usuario a descargar grabaciones de otros usuarios?
         'deleteany',    // ¿Está autorizado el usuario a borrar grabaciones (propias o de otros)?
     )));
+}
+
+function dateG2J($date) {
+    $monthsRev = [
+        "..." => 0,
+        "Jan" => 1,
+        "Feb" => 2,
+        "Mar" => 3,
+        "Apr" => 4,
+        "May" => 5,
+        "Jun" => 6,
+        "Jul" => 7,
+        "Aug" => 8,
+        "Sep" => 9,
+        "Oct" => 10,
+        "Nov" => 11,
+        "Dec" => 12,
+        "Januray"     => 1,
+        "February"    => 2,
+        "March"       => 3,
+        "April"       => 4,
+        "May"         => 5,
+        "June"        => 6,
+        "Julay"       => 7,
+        "August"      => 8,
+        "September"   => 9,
+        "October"     => 10,
+        "November"    => 11,
+        "December"    => 12
+    ];
+
+    $dh = new Application_Helper_date;
+    $gregorian_date = explode(" ", $date);
+    $gregorian_date[1] = $monthsRev[$gregorian_date[1]];
+    $jalali_date = $dh->gregorian_to_jalali($gregorian_date[2], $gregorian_date[1], $gregorian_date[0]);
+
+    return sprintf('%d/%02d/%02d', $jalali_date[0], $jalali_date[1], $jalali_date[2]);
 }

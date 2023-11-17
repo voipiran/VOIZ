@@ -1,0 +1,57 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+Codificación: UTF-8
++----------------------------------------------------------------------+
+| Issabel version 4.0                                                  |
+| http://www.issabel.org                                               |
++----------------------------------------------------------------------+
+| Copyright (c) 2021 Issabel Foundation                                |
++----------------------------------------------------------------------+
+| The contents of this file are subject to the General Public License  |
+| (GPL) Version 2 (the "License"); you may not use this file except in |
+| compliance with the License. You may obtain a copy of the License at |
+| http://www.opensource.org/licenses/gpl-license.php                   |
+|                                                                      |
+| Software distributed under the License is distributed on an "AS IS"  |
+| basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+| the License for the specific language governing rights and           |
+| limitations under the License.                                       |
++----------------------------------------------------------------------+
+| The Initial Developer of the Original Code is PaloSanto Solutions    |
++----------------------------------------------------------------------+
+$Id: br.lang,v 1.1 2021-11-08 11:04:34 Leandro Saltori Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Pager Email Address" => "Endereço de Email",
+"Confirm Password"=>"Confirme a Senha",
+"Email Attachment"=>"Anexo do email",
+"Play CID"=>" Play CID",
+"Play Envelope"=>"Play Envelope",
+"Delete Vmail"=>"Apagar Vmail",
+"Required Field"=>"Campo obrigatório",
+"Filter"=>"Filtro",
+"Configuration" => "Configuração",
+"Start Date"=>"Data Inicial",
+"End Date"=>"Data Final",
+"Voicemail List" => "Lista de correio de voz",
+"Are you sure you wish to delete voicemails?" => "Tem certeza de que deseja excluir correios de voz?",
+"Date"=>"Data",
+"Time"=>"Tempo",
+"Message"=>"Mensagem",
+"CallerID" => "CallerID",
+"Extension" => "Ramal",
+"Duration"=>"Duração",
+"Email"=>"Email",
+"Status"=>"Status",
+"Enable" => "Habilitar",
+"Disable" => "Desabilitar",
+"Yes" => "Sim",
+"No" => "Não",
+"no_file" => "Arquivo não encontrado!",
+"no_extension" => "Este arquivo não pode ser baixado",
+"Download" => "Baixar",
+"Listen" => "Ouvir",
+"no_extension_assigned" => "Não há número de ramal associado ao usuário atual. Você pode associar um número de ramal ao seu usuário clicando em <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">here</a>",
+"contact_admin" => "Não há número de ramal associado ao usuário atual. Entre em contato com o administrador para atribuir uma extensão"
+);
+?>

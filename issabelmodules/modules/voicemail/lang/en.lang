@@ -1,0 +1,57 @@
+<?php
+  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 1.4-1                                               |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: en.lang,v 1.1 2008-11-11 09:11:49 jvega jvega@palosanto.com Exp $ */
+global $arrLangModule;
+$arrLangModule=array(
+"Pager Email Address" => "Pager Email Address",
+"Confirm Password"=>"Confirm Password",
+"Email Attachment"=>"Email Attachment",
+"Play CID"=>"Play CID",
+"Play Envelope"=>"Play Envelope",
+"Delete Vmail"=>"Delete Vmail",
+"Required Field"=>"Required Field",
+"Filter"=>"Filter",
+"Configuration" => "Configuration",
+"Start Date"=>"Start Date",
+"End Date"=>"End Date",
+"Voicemail List" => "Voicemail List",
+"Are you sure you wish to delete voicemails?" => "Are you sure you wish to delete voicemails?",
+"Date"=>"Date",
+"Time"=>"Time",
+"Message"=>"Message",
+"CallerID" => "CallerID",
+"Extension" => "Extension",
+"Duration"=>"Duration",
+"Email"=>"Email",
+"Status"=>"Status",
+"Enable" => "Enable",
+"Disable" => "Disable",
+"Yes" => "Yes",
+"No" => "No",
+"no_file" => "File hasn't been found!",
+"no_extension" => "This file is not allowed to download",
+"Download" => "Download",
+"Listen" => "Listen",
+"no_extension_assigned" => "There is no extension number associated with the current user. You can associate an extension number to your user by clicking <a href=\"javascript: openWindow('index.php?menu=userlist&amp;action=edit_userExtension&amp;rawmode=yes');\">here</a>",
+"contact_admin" => "There is no extension number associated with the current user. Please contact the administrator to assign it an extension"
+);
+?>

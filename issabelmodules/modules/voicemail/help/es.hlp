@@ -1,0 +1,71 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>La opción "Correo de Voz" del menú "PBX" en Issabel permite visualizar una lista de los correos de voz asociados a la extensión del usuario actual.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_voicemail.png" border="0" />
+<p>Figura 1</p></div>
+<br />
+
+<p>El resultado del reporte de los correos de voz depende de varios filtros:</p>
+
+<table class="inline">
+  <tr>
+    <th>Parámetros</th><th>Descripción</th>
+  </tr>
+  <tr>
+    <td>Fecha Inicio</td><td>Fecha inicial del rango de búsqueda de correos de voz.</td>
+  </tr>
+  <tr>
+    <td>Fecha Fin</td><td>Fecha final del rango de búsqueda de correos de voz.</td>
+  </tr>
+</table>
+<br/>
+<p>Aquí el usuario puede escuchar o descargar sus mensajes de voz.</p>
+<p>Para eliminar un correo de voz sólo selecciónelo y haga click en el botón "Eliminar".</p>
+<br />
+<h2>Configuración de correos de voz</h2>
+<p>Los parámetros de correo de voz pueden ser configurados siempre y cuando el usuario actual tenga una extensión asociada a su cuenta en Issabel.</p>
+
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_voicemail_config.png" border="0" />
+<p>Figura 2</p></div>
+<br/>
+<table class="inline">
+  <tr>
+    <th>Parámetro</th><th>Descripción</th>
+  </tr>
+  <tr>
+    <td>Estado</td><td>Habilita o deshabilita la función de correo de voz para la extensión del usuario.</td>
+  </tr>
+  <tr>
+    <td>Correo Electrónico</td><td>La dirección de correo electrónico en donde los correos de voz son enviados.</td>
+  </tr>
+  <tr>
+    <td>Localizador de direcciones<br />de correo electrónico</td><td>Dispositivo móvil o paginador en donde las notificaciones de correo de voz son enviadas.</td>
+  </tr>
+  <tr>
+    <td>Contraseña</td><td>Esta contraseña puede ser utilizada para que el usuario acceda a su correo de voz con más seguridad.</td>
+  </tr>
+
+  <tr>
+    <td>Correos Adjuntos</td><td>Opción para adjuntar correos de voz a los correos electrónicos.</td>
+  </tr>
+  <tr>
+  <td>Reproducir CID<td>Anuncia el número de quien dejó el mensaje de voz antes de reproducir el mensaje en sí y luego de anunciar la fecha y hora del mensaje.</td>
+  </tr>
+  <tr>
+    <td>Reproducir Encabezado</td><td>Permite la reproducción de la hora y fecha del mensaje de voz. Esta configuración no afecta la operación manejada en el menú de correo de voz avanzado.</td>
+  </tr>
+  <tr>
+    <td>Eliminar Vmail</td><td>Si se cambia a "Sí" el mensaje de voz será eliminado del buzón de voz luego de haber sido enviado por correo. De esta manera el usuario sólo revisa el mensaje de voz por correo en lugar de hacerlo desde la interfaz web o desde su extensión.</td>
+  </tr>
+</table>
+<br />
+</body>
+</html>

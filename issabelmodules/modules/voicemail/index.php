@@ -110,6 +110,36 @@ function reportVoicemails($smarty, $module_name, $local_templates_dir, $user, $e
         11 => "Nov",
         12 => "Dec"
     );
+
+    $monthsRev = array
+        (
+        "..." => 0,
+        "Jan" => 1,
+        "Feb" => 2,
+        "Mar" => 3,
+        "Apr" => 4,
+        "May" => 5,
+        "Jun" => 6,
+        "Jul" => 7,
+        "Aug" => 8,
+        "Sep" => 9,
+        "Oct" => 10,
+        "Nov" => 11,
+        "Dec" => 12,
+        "Januray"     => 1,
+        "February"    => 2,
+        "March"       => 3,
+        "April"       => 4,
+        "May"         => 5,
+        "June"        => 6,
+        "Julay"       => 7,
+        "August"      => 8,
+        "September"   => 9,
+        "October"     => 10,
+        "November"    => 11,
+        "December"    => 12
+    );
+/*
     if (isset($_POST["date_start"])) {
         $dh = new Application_Helper_date;
         $date_parts = explode("-", $_POST["date_start"]);
@@ -125,7 +155,7 @@ function reportVoicemails($smarty, $module_name, $local_templates_dir, $user, $e
         $gregorian_date[1] = $months[$gregorian_date[1]];
         $_POST["date_end"] =  $gregorian_date[2] . " " . $gregorian_date[1] . " " . $gregorian_date[0] ;
     }
-
+*/
     if (isset($_POST['submit_eliminar']) && isset($_POST['voicemails']) &&
             is_array($_POST['voicemails']) && count($_POST['voicemails']) > 0) {
         borrarVoicemails($smarty, $module_name, $local_templates_dir, $user, $extension);
@@ -145,12 +175,14 @@ function reportVoicemails($smarty, $module_name, $local_templates_dir, $user, $e
 
     $date_start = date("Y-m-d") . " 00:00:00";
     $date_end = date("Y-m-d") . " 23:59:59";
+// <msm>
+    //require_once "libs/mylib/tarikh_func.php";
+    $dateStartFilterShamsi = dateG2J($_POST["date_start"]);
+    $dateEndFilterShamsi = dateG2J($_POST["date_end"]);
+// </msm>
 
-
-    $dateStartFilter = getParameter('date_start');
     $dateEndFilter = getParameter('date_end');
     $report = false;
-
 
     if (getParameter('filter')) {
         if ($oFilterForm->validateForm($_POST)) {
@@ -158,7 +190,7 @@ function reportVoicemails($smarty, $module_name, $local_templates_dir, $user, $e
             // Exito, puedo procesar los datos ahora.
             $date_start = translateDate($dateStartFilter) . " 00:00:00";
             $date_end = translateDate($dateEndFilter) . " 23:59:59";
-            $arrFilterExtraVars = array("date_start" => $dateStartFilter, "date_end" => $dateEndFilter);
+            $arrFilterExtraVars = array("date_start" => $dateStartFilter, "date_start_shamsi" => $dateStartFilterShamsi, "date_end" => $dateEndFilter);
         } else {
             // Error
             $smarty->assign("mb_title", _tr("Validation Error"));
@@ -243,7 +275,7 @@ function reportVoicemails($smarty, $module_name, $local_templates_dir, $user, $e
    
     $oGrid = new paloSantoGrid($smarty);
     if ($report) {
-        $oGrid->addFilterControl(_tr("Filter applied ") . _tr("Start Date") . " = " . $date_startm . ", " . _tr("End Date") . " = " . $date_endm, $arrDate, array('date_start' => date("d M Y"), 'date_end' => date("d M Y")), true);
+        $oGrid->addFilterControl(_tr("Filter applied ") . _tr("Start Date") . " = " . $dateStartFilterShamsi . ", " . _tr("End Date") . " = " . $dateEndFilterShamsi, $arrDate, array('date_start' => date("d M Y"), 'date_end' => date("d M Y")), true);
     }
 
     $url = array('menu' => $module_name);
@@ -514,20 +546,36 @@ function borrarVoicemails($smarty, $module_name, $local_templates_dir, $user, $e
 }
 
 function createFieldFormVoiceList() {
-    $arrayFields = array(
-        "date_start" => array("LABEL" => _tr("Start Date"),
+    $arrayFields = [
+        "date_start_shamsi" => [
+            "LABEL" => _tr("Start Date"),
             "REQUIRED" => "yes",
-            "INPUT_TYPE" => "DATE",
+            "INPUT_TYPE" => "DATE_SHAMSI",
             "INPUT_EXTRA_PARAM" => "",
             "VALIDATION_TYPE" => "ereg",
-            "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"),
-        "date_end" => array("LABEL" => _tr("End Date"),
+            "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"
+        ],
+        "date_start" => [
             "REQUIRED" => "yes",
-            "INPUT_TYPE" => "DATE",
+            "INPUT_TYPE" => "HIDDEN",
+            "VALIDATION_TYPE" => "ereg",
+            "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"
+        ],
+        "date_end_shamsi" => [
+            "LABEL" => _tr("End Date"),
+            "REQUIRED" => "yes",
+            "INPUT_TYPE" => "DATE_SHAMSI",
             "INPUT_EXTRA_PARAM" => "",
             "VALIDATION_TYPE" => "ereg",
-            "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"),
-    );
+            "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"
+        ],
+        "date_end" => [
+            "REQUIRED" => "yes",
+            "INPUT_TYPE" => "HIDDEN",
+            "VALIDATION_TYPE" => "ereg",
+            "VALIDATION_EXTRA_PARAM" => "^[[:digit:]]{1,2}[[:space:]]+[[:alnum:]]{3}[[:space:]]+[[:digit:]]{4}$"
+        ],
+    ];
     return $arrayFields;
 }
 
@@ -609,4 +657,41 @@ function hasModulePrivilege($user, $module, $privilege) {
                 'downloadany', // ¿Está autorizado el usuario a descargar voicemail de otros usuarios?
                 'deleteany', // ¿Está autorizado el usuario a borrar voicemail de otros usuarios?
     )));
+}
+
+function dateG2J($date) {
+    $monthsRev = [
+        "..." => 0, 
+        "Jan" => 1,
+        "Feb" => 2,
+        "Mar" => 3,
+        "Apr" => 4,
+        "May" => 5,
+        "Jun" => 6,
+        "Jul" => 7,
+        "Aug" => 8,
+        "Sep" => 9,
+        "Oct" => 10,
+        "Nov" => 11, 
+        "Dec" => 12,
+        "Januray"     => 1,
+        "February"    => 2,
+        "March"       => 3,
+        "April"       => 4,
+        "May"         => 5,
+        "June"        => 6,
+        "Julay"       => 7,
+        "August"      => 8,
+        "September"   => 9,
+        "October"     => 10,
+        "November"    => 11,
+        "December"    => 12
+    ];
+    
+    $dh = new Application_Helper_date;
+    $gregorian_date = explode(" ", $date);
+    $gregorian_date[1] = $monthsRev[$gregorian_date[1]];
+    $jalali_date = $dh->gregorian_to_jalali($gregorian_date[2], $gregorian_date[1], $gregorian_date[0]);
+
+    return sprintf('%d/%02d/%02d', $jalali_date[0], $jalali_date[1], $jalali_date[2]);
 }
