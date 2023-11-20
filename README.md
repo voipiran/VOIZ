@@ -25,20 +25,8 @@ yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.
 
 https://forum.voipiran.io/t/voiz-documents
 
-
-## TODO List (امکانات آینده)
-- [ ] Add Documentations Menu
-- [ ] Add Vtiger CRM Popup on Incomming Calls
-- [ ] Transfer Webmin and Download file to Menus
-- [ ] Define Default SIP Trunks
-- [ ] add Installation GUI
-- [ ] Improve English Theme
-- [ ] Configure Linux Firewall and set APIBAN
-- [ ] Show Faxes by Groups
-- [ ] Add Glances System Monitoring Tools
-- [X] Add Webrtc Webphone
-- [X] VOIZ Installation script on Centos7 minimal
-
+## Give a Star! ⭐ یک ستاره با ما بدهید
+If you like this project or plan to use it in the future, please give it a star. Thanks 🙏
 
 ## Features (امکانات سیستم تلفنی ویز، اضافه شده به ایزابل)
 
@@ -73,8 +61,19 @@ https://forum.voipiran.io/t/voiz-documents
 
 
 
-## Give a Star! ⭐ یک ستاره با ما بدهید
-If you like this project or plan to use it in the future, please give it a star. Thanks 🙏
+## TODO List (امکانات آینده)
+- [ ] Add Documentations Menu
+- [ ] Add Vtiger CRM Popup on Incomming Calls
+- [ ] Transfer Webmin and Download file to Menus
+- [ ] Define Default SIP Trunks
+- [ ] add Installation GUI
+- [ ] Improve English Theme
+- [ ] Configure Linux Firewall and set APIBAN
+- [ ] Show Faxes by Groups
+- [ ] Add Glances System Monitoring Tools
+- [X] Add Webrtc Webphone
+- [X] VOIZ Installation script on Centos7 minimal
+
 
 ## Bugs and Feedback
 For bugs, questions, and discussions, please use the Github Issues
