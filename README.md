@@ -7,13 +7,14 @@
 https://voipiran.io
 
 ## Instalation (راهنمای نصب)
--install issabel iso file with Asterisk 16 or 18 (ترجیحا نسخه نایتلی)
+1) install issabel iso file with Asterisk 16 or 18 (ترجیحا نسخه نایتلی)
+[Issabel Nightly]([http://www.example.com](https://sourceforge.net/projects/issabelpbx/files/Issabel%204/issabel4-NIGHTLY-AST18-USB-DVD-x86_64-20211207.iso/download))
 
--update issabel
+2) update issabel
 ```
 yum update
 ```
--Run This command on your Linux CLI:
+3) Run This command on your Linux CLI:
 ```
 yum install git -y && rm -rf voiz && git clone https://github.com/voipiran/voiz.git && cd voiz && chmod 777 install.sh && ./install.sh
 ```
