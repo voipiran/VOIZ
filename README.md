@@ -7,10 +7,7 @@
 https://voipiran.io
 
 ## Instalation (راهنمای نصب)
-There are two ways to install VOIZ.
-
-### 1. How to Install on Issabel ISO (نصب بر روی ایزابل):
--install issabel iso file with Asterisk 16 or 18
+-install issabel iso file with Asterisk 16 or 18 (ترجیحا نسخه نایتلی)
 
 -update issabel
 ```
