@@ -12,7 +12,7 @@ https://voipiran.io
 
 2) update issabel
 ```
-yum update
+yum update -y
 ```
 3) Run This command on your Linux CLI:
 ```
