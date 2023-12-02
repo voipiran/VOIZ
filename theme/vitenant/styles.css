@@ -1419,3 +1419,7 @@ ol.breadcrumb > li#tenant-sticky
     direction:rtl;
     text-align:right;
 }
+
+.chosen-container-single-nosearch .chosen-search input {
+    visibility: hidden;
+}
