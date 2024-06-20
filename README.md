@@ -7,8 +7,9 @@
 https://voipiran.io
 
 ## Instalation (راهنمای نصب)
-1) install issabel iso file with Asterisk 16 or 18 (ترجیحا نسخه نایتلی)
-[Download Issabel Nightly](https://sourceforge.net/projects/issabelpbx/files/Issabel%204/issabel4-NIGHTLY-AST18-USB-DVD-x86_64-20211207.iso/download)
+1) install issabel iso file with Asterisk 16 or 18 (نسخه 4 یا 5)
+[Download Issabel4 Nightly](https://sourceforge.net/projects/issabelpbx/files/Issabel%204/issabel4-NIGHTLY-AST18-USB-DVD-x86_64-20211207.iso/download)
+[Download Issabel5](https://voipiran.io/download/)
 
 2) update issabel
 ```
