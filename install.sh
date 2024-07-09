@@ -1,7 +1,221 @@
 #!/bin/bash
 
+
+#########START#########
+issabel_ver=5
+###Fetch DB root PASSWORD
+echo "185.51.200.2 mirrors.fedoraproject.org" | sudo tee -a /etc/hosts
+rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
+> voiz-installation.log
+echo "VOIZ Installation Log:" >> voiz-installation.log
+
+
+# Get PHP version
+php_version=$(php -r "echo PHP_MAJOR_VERSION;")
+
+# Perform actions based on PHP version
+if [ "$php_version" -eq 5 ]; then
+issabel_ver=5
+else
+issabel_ver=4
+fi
+
+###Welcome
+welcome
+
+###SELECT FEATURES GUI
+SELECTED=$(
+whiptail --title "SELECT Features TO INSTALL" --checklist \
+"List of Features to install" 20 100 10 \
+"Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
+"Webphone" "تلفن تحت وب" ON \
+"NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3
+)
+echo ${SELECTED[@]}
+  for CHOICE in $SELECTED; do
+  if [[ "$CHOICE" == *"CRM"* ]]
+	then 
+    CRMINSTALL=true
+	fi
+  if [[ "$CHOICE" == *"NetworkUtilities"* ]]
+	then 
+    NETUTILINSTALL=true
+	fi
+  if [[ "$CHOICE" == *"Webphone"* ]]
+	then 
+    WEBPHONEINSTALL=true
+	fi
+  done
+
+
+###SELECT LNGUAGE GUI
+Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25 78 5 \
+"Persian" "پوسته و محیط فارسی به همراه تقویم شمسی" \
+"English" "پوسته و محیط انگلیسی به همراه تقویم شمسی" 3>&1 1>&2 2>&3)
+
+
+ COUNTER=0
+ while [[ ${COUNTER} -le 100 ]]; do
+   sleep 1
+   COUNTER=$(($COUNTER+10))
+   echo ${COUNTER} 
+
+# #YUM UPDATE ISSABEL to BETA
+# if [ "$INSTALLONISSABEL" = "true" ]
+# then 
+# install-on-issabel
+# fi
+
+
+##Set Version of VOIZ
+setversion
+
+##Install Source Gaurdian Module
+install_sourecgaurdian
+
+##Edit Extension_custom.conf
+# File to check
+FILE="/etc/asterisk/extensions_custom.conf"
+# Line to search for
+LINE="[from-internal-custom]"
+
+    # Check if the line exists in the file
+    if grep -qF "$LINE" "$FILE"; then
+       echo "The line '$LINE' exists in the file '$FILE'."
+    else
+        echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line."
+       echo "$LINE" | sudo tee -a "$FILE"
+    fi
+
+
+##Update Issabel
+update_issabel
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+##Install Webmin
+install_webmin
+
+##Copy Persian Sounds
+add_persian_sounds
+
+##Install Developer Module
+install_developer
+
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+##Install Asternic CDR
+asterniccdr
+
+##Install Persian Theme
+add_vitenant_theme
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+##Copy Issabel Edited Modules
+edit_issabel_modules
+
+#asternic-callStats-lite
+asternic-callStats-lite
+
+##Coppy Downloadable Files
+downloadable_files
+
+##Install Bulk DIDs Module
+bulkdids
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+##Install BossSecretory Module
+if [ "$issabel_ver" -eq 4 ]; then
+bosssecretary
+fi
+
+##Install Superfecta Module
+superfecta
+##Install VOIZ FeatueCodes
+featurecodes
+
+  COUNTER=$(($COUNTER+10))
+  echo ${COUNTER} 
+
+##Install Openvpn Module
+easyvpn
+##Install Survey
+survey
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+
+##Install Vtiger CRM
+if [ "$CRMINSTALL" = "true" ]
+then 
+vtiger
+fi
+##Install Webphone
+if [ "$WEBPHONEINSTALL" = "true" ]
+then 
+webphone
+fi
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+##Install Htop
+if [ "$NETUTILINSTALL" = "true" ]
+then 
+htop
+fi
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+##Install SNGREP
+if [ "$NETUTILINSTALL" = "true" ]
+then 
+sngrep
+fi
+
+  COUNTER=$(($COUNTER+10))
+    echo ${COUNTER} 
+
+
+##Install VOIZ Guide Menu
+voiz_menu
+
+
+##service httpd restart  >/dev/null 2>&1
+amportal a r  2>&1
+
+COUNTER=$(($COUNTER+10))
+done | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 ${COUNTER}
+
+
+
+##FINISHED
+systemctl restart httpd >/dev/null 2>&1
+clear  
+cat voiz-installation/logo.txt
+cat voiz-installation.log
+
+
+#echo "-------------Adminer Installation----------------"
+#sleep 1
+#cp -rf www/adminer /var/www/html/
+#issabel-menumerge adminer-menu.xml
+#echo "Adminer Menu is Created Sucsessfully"
+
+
+##FUNCTIONS
+
 function setversion(){
-version=5.2
+version=5.4
 #Set VOIZ tag
 file="/etc/voiz.conf"
 if [ -f "$file" ]
@@ -16,20 +230,44 @@ fi
 }
 
 function install_sourecgaurdian(){
+
+
 ###Install SourceGaurdian Files
 cp sourceguardian/ixed.5.4.lin /usr/lib64/php/modules
 cp sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules
 cp /etc/php.ini /etc/php-old.ini
 cp sourceguardian/php.ini /etc
 
-}
+if [ "$issabel_ver" -eq 5 ]; then
+    echo "PHP 5 detected. Performing action A."
 
+echo "Install sourceguardian Files"
+echo "------------Copy SourceGaurd-----------------"
+yes | cp -rf $filesPath/sourceguardian/ixed.5.4.lin /usr/lib64/php/modules
+yes | cp -rf $filesPath/sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules
+yes | cp -rf /etc/php.ini /etc/php-old.ini
+yes | cp -rf $filesPath/sourceguardian/php5.ini /etc/php.ini
+echo "SourceGuardian Files have Moved Sucsessfully"
+sleep 1
+else
+    echo "PHP 7 (or newer) detected. Performing action B."
+
+echo "Install sourceguardian Files"
+echo "------------Copy SourceGaurd-----------------"
+yes | cp -rf $filesPath/sourceguardian/ixed.7.4.lin /usr/lib64/php/modules
+yes | cp -rf /etc/php.ini /etc/php-old.ini
+yes | cp -rf $filesPath/sourceguardian/php7.ini /etc/php.ini
+echo "SourceGuardian Files have Moved Sucsessfully"
+systemctl reload php-fpm  > /dev/null
+
+
+}
 
 
 function install_webmin(){
 ###Install Webmin - 1.953-1
 echo "------------Installing WEBMIN-----------------"
-rpm -U rpms/webmin/webmin-1.984-1.noarch.rpm >/dev/null 2>&1
+rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
 echo "**WEBMIN Util Installed." >> voiz-installation.log
 
 }
@@ -64,6 +302,15 @@ yes | cp -ar persiansounds/pr/ /var/lib/asterisk/sounds
 chmod -R 777 /var/lib/asterisk/sounds/pr
 chown -R asterisk:asterisk /var/lib/asterisk/sounds/pr
 #fi
+
+if [ "$issabel_ver" -eq 5 ]; then
+sed -e "/language=pr/d" /etc/asterisk/pjsip_custom.conf > /etc/asterisk/pjsip_custom.conf.000 >/dev/null 2>&1
+echo    >> /etc/asterisk/pjsip_custom.conf.000
+echo language=pr >> /etc/asterisk/pjsip_custom.conf.000
+cp -f /etc/asterisk/pjsip_custom.conf.000 /etc/asterisk/pjsip_custom.conf
+fi
+
+
 echo "**Persian Sounds Added." >> voiz-installation.log
 }
 
@@ -203,6 +450,8 @@ echo "**Supper Fecta Module Added." >> voiz-installation.log
 }
 
 function featurecodes(){
+
+
 cp -rf customdialplan/extensions_voipiran_featurecodes.conf /etc/asterisk/
 sed -i '/\[from\-internal\-custom\]/a include \=\> voipiran\-features' /etc/asterisk/extensions_custom.conf
 echo "" >> /etc/asterisk/extensions_custom.conf
@@ -314,212 +563,8 @@ yum update -y
 
 function update_issabel(){
 echo "**install-on-issabel" >> voiz-installation.log
-yum --enablerepo=issabel-beta update -y 2>/dev/null
+yum update -y 2>/dev/null
 }
 
 
 
-#######################
-#######################
-#########START#########
-###Fetch DB root PASSWORD
-rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
-> voiz-installation.log
-echo "VOIZ Installation Log:" >> voiz-installation.log
-
-welcome
-
-# SELECTED=$(
-# whiptail --title "VOIZ Installation" --menu "Installing VOIZ on ..." 25 78 16 \
-# "ISSABEL Nightly ISO" "Installing VOIZ on Issabel ISO Nightly Version." \
-# "ISSABEL Standard ISO" "Installing VOIZ on Issabel ISO" \
-# "CENTOS Linux" "Installing VOIZ on Centos7 Minimal." 3>&1 1>&2 2>&3
-# )
-# echo ${SELECTED[@]}
-#   for CHOICE in $SELECTED; do
-#   if [[ "$CHOICE" == *"ISSABEL Nightly"* ]]
-# 	then 
-#     INSTALLONNIGHTLY=true
-# 	fi
-#   if [[ "$CHOICE" == *"CENTOS"* ]]
-# 	then 
-#     INSTALLONCENTOS=true
-# 	fi
-#   if [[ "$CHOICE" == *"ISSABEL Standard"* ]]
-# 	then 
-#     INSTALLONISSABEL=true
-# 	fi
-#   done
-
-###SELECT FEATURES GUI
-SELECTED=$(
-whiptail --title "SELECT Features TO INSTALL" --checklist \
-"List of Features to install" 20 100 10 \
-"Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
-"Webphone" "تلفن تحت وب" ON \
-"NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3
-)
-echo ${SELECTED[@]}
-  for CHOICE in $SELECTED; do
-  if [[ "$CHOICE" == *"CRM"* ]]
-	then 
-    CRMINSTALL=true
-	fi
-  if [[ "$CHOICE" == *"NetworkUtilities"* ]]
-	then 
-    NETUTILINSTALL=true
-	fi
-  if [[ "$CHOICE" == *"Webphone"* ]]
-	then 
-    WEBPHONEINSTALL=true
-	fi
-  done
-
-
-###SELECT LNGUAGE GUI
-Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25 78 5 \
-"Persian" "پوسته و محیط فارسی به همراه تقویم شمسی" \
-"English" "پوسته و محیط انگلیسی به همراه تقویم شمسی" 3>&1 1>&2 2>&3)
-
-
- COUNTER=0
- while [[ ${COUNTER} -le 100 ]]; do
-   sleep 1
-   COUNTER=$(($COUNTER+10))
-   echo ${COUNTER} 
-
-# #YUM UPDATE ISSABEL to BETA
-# if [ "$INSTALLONISSABEL" = "true" ]
-# then 
-# install-on-issabel
-# fi
-
-# #YUM UPDATE ISSABEL to BETA
-# if [ "$INSTALLONNIGHTLY" = "true" ]
-# then 
-# install-on-nightly
-# fi
-
-##Set Version of VOIZ
-setversion
-##Install Source Gaurdian Module
-install_sourecgaurdian
-
-update_issabel
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-##Install Webmin
-install_webmin
-
-##Copy Persian Sounds
-add_persian_sounds
-
-##Install Developer Module
-install_developer
-
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-##Install Asternic CDR
-asterniccdr
-
-##Install Persian Theme
-add_vitenant_theme
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-##Copy Issabel Edited Modules
-edit_issabel_modules
-
-#asternic-callStats-lite
-asternic-callStats-lite
-
-##Coppy Downloadable Files
-downloadable_files
-
-##Install Bulk DIDs Module
-bulkdids
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-##Install BossSecretory Module
-bosssecretary
-##Install Superfecta Module
-superfecta
-##Install VOIZ FeatueCodes
-featurecodes
-
-  COUNTER=$(($COUNTER+10))
-  echo ${COUNTER} 
-
-##Install Openvpn Module
-easyvpn
-##Install Survey
-survey
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-
-##Install Vtiger CRM
-if [ "$CRMINSTALL" = "true" ]
-then 
-vtiger
-fi
-##Install Webphone
-if [ "$WEBPHONEINSTALL" = "true" ]
-then 
-webphone
-fi
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-##Install Htop
-if [ "$NETUTILINSTALL" = "true" ]
-then 
-htop
-fi
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-##Install SNGREP
-if [ "$NETUTILINSTALL" = "true" ]
-then 
-sngrep
-fi
-
-  COUNTER=$(($COUNTER+10))
-    echo ${COUNTER} 
-
-
-##Install VOIZ Guide Menu
-voiz_menu
-
-
-##service httpd restart  >/dev/null 2>&1
-amportal a r  2>&1
-
-COUNTER=$(($COUNTER+10))
-done | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 ${COUNTER}
-
-
-
-##FINISHED
-service httpd restart >/dev/null 2>&1
-clear  
-cat voiz-installation/logo.txt
-cat voiz-installation.log
-
-
-#echo "-------------Adminer Installation----------------"
-#sleep 1
-#cp -rf www/adminer /var/www/html/
-#issabel-menumerge adminer-menu.xml
-#echo "Adminer Menu is Created Sucsessfully"
