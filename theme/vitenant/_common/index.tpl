@@ -40,7 +40,7 @@
         <!--<script type='text/javascript' src="{$WEBCOMMON}js/base.js"></script>-->
         <!--<script type='text/javascript' src="{$WEBCOMMON}js/sticky_note.js"></script>-->
         <!--<script type='text/javascript' src="{$WEBCOMMON}js/iframe.js"></script>-->
-	<script type='text/javascript' src="libs/js/base.js"></script>
+		<script type='text/javascript' src="libs/js/base.js"></script>
         <script type='text/javascript' src="libs/js/sticky_note/sticky_note.js"></script>
         <script type='text/javascript' src="libs/js/iframe.js"></script>
 
