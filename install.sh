@@ -189,6 +189,10 @@ fi
 ##Install VOIZ Guide Menu
 voiz_menu
 
+##Install IssabelCallMonitoring
+issbel-callmonitoring
+cd ..
+
 
 ##service httpd restart  >/dev/null 2>&1
 amportal a r  2>&1
@@ -568,3 +572,10 @@ yum update -y 2>/dev/null
 
 
 
+function issbel-callmonitoring(){
+curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip && \
+unzip -o callmonitoring.zip && \
+cd IssabelCallMonitoring-main && \
+chmod 755 install.sh && \
+yes | ./install.sh
+}
