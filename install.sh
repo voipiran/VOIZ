@@ -127,11 +127,13 @@ touch -r /var/www/html/themes/vitenant/*
 ###Apply changes to PBX Configuration
 # Path to the CSS file
 CSS_FILE="/var/www/html/admin/assets/css/mainstyle.css"
+CSS_FILE_2="/var/www/html/admin/assets/css/bulma.min.css"
 
 # Search and replace color codes using sed
 sed -i 's/#562d7b/#6AB04C/g' "$CSS_FILE"
 sed -i 's/#4B0884/#218c74/g' "$CSS_FILE"
 sed -i 's/#A992DC/#badc58/g' "$CSS_FILE"
+sed -i 's/#485fc7/#2d3436/g' "CSS_FILE_2"
 
 }
 
