@@ -124,6 +124,15 @@ touch -r /var/www/html/themes/vitenant/*
     echo "**English Theme Added." >> voiz-installation.log
   fi
 
+###Apply changes to PBX Configuration
+# Path to the CSS file
+CSS_FILE="/var/www/html/admin/assets/css/mainstyle.css"
+
+# Search and replace color codes using sed
+sed -i 's/#562d7b/#6AB04C/g' "$CSS_FILE"
+sed -i 's/#4B0884/#218c74/g' "$CSS_FILE"
+sed -i 's/#A992DC/#badc58/g' "$CSS_FILE"
+
 }
 
 function edit_issabel_modules(){
