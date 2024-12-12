@@ -17,7 +17,13 @@ yum update -y
 ```
 3) Run This command on your Linux CLI:
 ```
-rm -rf voiz && curl -L https://github.com/voipiran/voiz/archive/refs/heads/master.zip -o voiz.zip && unzip -o voiz.zip && mv VOIZ-main voiz && cd voiz && chmod 777 install.sh && ./install.sh
+rm -rf voiz && \
+curl -L https://github.com/voipiran/voiz/archive/refs/heads/master.zip -o voiz.zip && \
+unzip -o -q voiz.zip && \
+mv VOIZ-main voiz && \
+cd voiz && \
+chmod 777 install.sh && \
+./install.sh
 
 ```
 
