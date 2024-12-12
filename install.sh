@@ -130,10 +130,24 @@ CSS_FILE="/var/www/html/admin/assets/css/mainstyle.css"
 CSS_FILE_2="/var/www/html/admin/assets/css/bulma.min.css"
 
 # Search and replace color codes using sed
-sed -i 's/#562d7b/#6AB04C/g' "$CSS_FILE"
-sed -i 's/#4B0884/#218c74/g' "$CSS_FILE"
-sed -i 's/#A992DC/#badc58/g' "$CSS_FILE"
-sed -i 's/#485fc7/#2d3436/g' "CSS_FILE_2"
+#sed -i 's/#562d7b/#6AB04C/g' "$CSS_FILE"
+#sed -i 's/#4B0884/#218c74/g' "$CSS_FILE"
+#sed -i 's/#A992DC/#badc58/g' "$CSS_FILE"
+#sed -i 's/#485fc7/#2d3436/g' "$CSS_FILE_2"
+
+yes | cp -rf theme/pbxconfig/css /var/www/html/admin/assets >/dev/null 2>&1
+chmod -R 777 /var/www/html/admin/assets/css
+chown -R asterisk:asterisk /var/www/html/admin/assets/css
+
+
+yes | cp -rf theme/pbxconfig/images/issabelpbx_small.png /var/www/html/admin/images/
+chmod -R 777 /var/www/html/admin/images/issabelpbx_small.png
+yes | cp -rf theme/pbxconfig/images/tango.png /var/www/html/admin/images/
+chmod -R 777 /var/www/html/admin/images/tango.png
+
+yes | cp -rf theme/pbxconfig/footer_content.php /var/www/html/admin/views
+chmod -R 777 /var/www/html/admin/views/footer_content.php
+chown -R asterisk:asterisk /var/www/html/admin/views/footer_content.php
 
 }
 
@@ -203,12 +217,12 @@ mysqladmin -u root -p$rootpw create qstatslite 2>/dev/null
 mysql -u root -p$rootpw qstatslite < sql/qstats.sql  2>/dev/null
 
 mysql -u root -p$rootpw -e "CREATE USER 'qstatsliteuser'@'localhost' IDENTIFIED by '$rootpw'" 2>/dev/null
-mysql -u root -p$rootpw -e "GRANT select,insert,update,delete ON qstatslite.* TO qstatsliteuser"
-mysql -u root -p$rootpw -e "ALTER DATABASE qstatslite CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.queue_stats CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qname CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qevent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qagent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -u root -p$rootpw -e "GRANT select,insert,update,delete ON qstatslite.* TO qstatsliteuser" 2>/dev/null
+mysql -u root -p$rootpw -e "ALTER DATABASE qstatslite CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.queue_stats CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qname CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qevent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qagent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
 
 yes | cp -rf html /var/www/html/queue-stats
 yes | cp -rf parselog /usr/local/parseloglite
@@ -368,6 +382,8 @@ unzip -o callmonitoring.zip && \
 cd IssabelCallMonitoring-main && \
 chmod 755 install.sh && \
 yes | ./install.sh
+issabel-menumerge software/control.xml
+
 }
 
 
