@@ -6,7 +6,7 @@
 ##FUNCTIONS
 
 function setversion(){
-version=5.4
+version=5.6
 #Set VOIZ tag
 file="/etc/voiz.conf"
 if [ -f "$file" ]
