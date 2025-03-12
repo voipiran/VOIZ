@@ -268,7 +268,141 @@
 
 <!-- inicio del head principal-->
 <div class="main-content">
-    <div style="height:83px;background-color:#303030;padding:15px;">
+    <div style="height:90px;background-color:#303030;padding:15px;">
+	
+<!------- voipiran Webphone ---->	
+<style>
+  /* جلوگیری از اسکرول افقی */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* استایل پنل */
+  #phonePanel {
+    position: fixed;
+    top: 120px; /* کمی پایین‌تر */
+    left: -260px; /* مخفی‌شده در ابتدا */
+    width: 250px;
+    height: 400px;
+    background: white;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease-in-out;
+    z-index: 9999;
+  }
+
+  /* نوار عنوان برای جابه‌جایی */
+  #dragHandle {
+    width: 100%;
+    height: 30px;
+    background: #8BC34A;
+    cursor: grab;
+    border-radius: 10px 0 0 0;
+  }
+
+  /* دکمه باز و بسته */
+  #toggleButton {
+    position: fixed;
+    top: 140px;
+    left: -80px; /* موقعیت اولیه دکمه (بیرون از صفحه) */
+    background: #8BC34A;
+    color: #303030;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-radius: 0 10px 10px 0;
+    z-index: 10000;
+    font-size: 24px;
+    transition: background 0.3s ease, left 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+  }
+
+  #toggleButton:hover {
+    background: #7CB342;
+  }
+
+  /* اندازه بزرگتر دکمه در حالت بسته */
+  #toggleButton.closed {
+    font-size: 30px;
+    padding: 20px 25px;
+    left: -10px; /* کمی به سمت چپ قرار گرفتن */
+  }
+
+  /* رنگ آیکون تلفن */
+  #toggleButton::before {
+    content: "📞";
+    font-size: 24px;
+    color: #303030; /* رنگ آیکون به رنگ مورد نظر */
+  }
+</style>
+
+<!-- دکمه باز و بسته -->
+<div id="toggleButton" onclick="togglePanel()" class="closed"></div>
+
+<!-- پنل -->
+<div id="phonePanel">
+  <div id="dragHandle"></div>
+  <object style="width: 100%; height: calc(100% - 30px);" data="themes/{$THEMENAME}/phone/phone.php" type="text/html"></object>
+</div>
+
+<script>
+  window.onload = function () {
+    // وقتی صفحه لود می‌شود، دکمه و پنل را تنظیم می‌کنیم
+    var panel = document.getElementById("phonePanel");
+    var button = document.getElementById("toggleButton");
+
+    // در ابتدا پنل مخفی است و دکمه باید در موقعیت بیرون قرار داشته باشد
+    button.style.left = "-10px"; // دکمه در حالت اولیه بیرون از صفحه است
+    panel.style.left = "-260px"; // پنل در حالت اولیه مخفی است
+  };
+
+  function togglePanel() {
+    var panel = document.getElementById("phonePanel");
+    var button = document.getElementById("toggleButton");
+
+    if (panel.style.left === "-260px") {
+      panel.style.left = "0px"; // نمایش پنل
+      button.style.left = "250px"; // جابه‌جایی دکمه
+      button.classList.remove('closed');
+    } else {
+      panel.style.left = "-260px"; // مخفی کردن پنل
+      button.style.left = "-10px"; // بازگشت دکمه به موقعیت اولیه
+      button.classList.add('closed');
+    }
+  }
+
+  // قابلیت درگ کردن با موس
+  var panel = document.getElementById("phonePanel");
+  var handle = document.getElementById("dragHandle");
+  var isDragging = false, offsetX, offsetY;
+
+  handle.addEventListener("mousedown", function (e) {
+    isDragging = true;
+    offsetX = e.clientX - panel.offsetLeft;
+    offsetY = e.clientY - panel.offsetTop;
+    document.body.style.userSelect = "none";
+  });
+
+  document.addEventListener("mousemove", function (e) {
+    if (isDragging) {
+      panel.style.left = (e.clientX - offsetX) + "px";
+      panel.style.top = Math.max(0, e.clientY - offsetY) + "px";
+    }
+  });
+
+  document.addEventListener("mouseup", function () {
+    isDragging = false;
+    document.body.style.userSelect = "";
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
         <!-- Profile Info and Notifications -->
         <span style='float:left; text-align:right; padding:0px 5px 0px 0px; width:175px;' class="col-md-6 col-sm-8 clearfix">
             <ul style='' class="user-info pull-none-xsm">
@@ -310,11 +444,7 @@
             <ul style="padding-top:12px;" class="list-inline links-list pull-right neo-topbar-notification">
 
 
-                <li id="header_notification_bar" class="webphone-button">
-                    <a target="_blank" id="webphone_link"  class="" href="">
-                        <i class="fa fa-phone"></i>
-					</a> 
-                </li>
+
 
 
 

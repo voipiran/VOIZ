@@ -1,0 +1,135 @@
+        span {
+            border-radius: 2px;
+            padding: 2px;
+            display: inline-block;            
+        }
+        #panels {
+            max-width: 500px;
+        }
+
+        .panel,
+        #dtmf_keypad {
+            display: none;
+        }
+
+        #setting .server {
+            background: lightgray;
+        }
+
+        #setting .account {
+            background: #A5ECEC;
+        }
+
+        #call_log_ul {
+            list-style: none;
+            overflow-y: auto;
+            height: 80%;
+            padding-left: 10px;
+        }
+        /* call log */
+
+        #call_log_ul li:before {
+            content: '';
+            display: inline-block;
+            background-size: 1.1em;
+            height: 1.1em;
+            width: 1.1em;
+            margin-right: 10px;
+        }
+
+        #call_log_ul li.in_red:before {
+            background-image: url("images/in_red.png");
+        }
+
+        #call_log_ul li.in_green:before {
+            background-image: url("images/in_green.png");
+        }
+
+        #call_log_ul li.out_red:before {
+            background-image: url("images/out_red.png");
+        }
+
+        #call_log_ul li.out_green:before {
+            background-image: url("images/out_green.png");
+        }
+
+        #call_log_ul li {
+            background: #f6f3f3;
+            margin: 5px 0 5px 0;
+        }
+        /* Messages */
+        #message_ul {
+            list-style: none;
+            height: 50vh;
+            overflow-y: auto;
+            padding-left: 10px;
+        }
+        /*  DTMF keypad */
+
+        #keypad_table {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        #keypad_table tr td {
+            vertical-align: middle;
+            text-align: center;
+            border: 1px solid #000000;
+            font-size: 18px;
+            font-weight: bold;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            background-color: #666666;
+            color: #CCCCCC;
+        }
+
+        #keypad_table tr td:hover {
+            background-color: #999999;
+            color: #FFFF00;
+        }
+
+        #hangup_btn,
+        #cancel_outgoing_call_btn,
+        #reject_btn {
+            background-color: lightpink;
+            border-color: lightpink;
+        }
+
+        #accept_audio_btn,
+        #accept_recvonly_video_btn,
+        #accept_video_btn {
+            background-color: lightgreen;
+            border-color: lightgreen;
+        }
+
+        #redirect_btn {
+            background-color: lightskyblue;
+            border-color: lightskyblue;
+        }
+
+        #message_btn.new_message {
+            color: crimson;
+        }
+
+        .incoming_message {
+          color:darkviolet;
+        }
+
+        .outgoing_message {
+          color: green;
+        }
+
+        #notification_permission_btn {
+            display: none;
+        }
+
+        .mark_invalid:invalid {
+            color: red;
+        }
+
+        #devices_done_btn {
+            margin-right: 20px;
+        }
+        
