@@ -275,6 +275,15 @@ query="insert into featurecodes (modulename,featurename,description,defaultcode,
 mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
 query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Whisper','VOIZ-شنود و نجوا، کد + شماره مقصد','*31',NULL,'1','1')"
 mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Only-Listen','VOIZ-شنود صدای کارشناس، کد + شماره مقصد','*32',NULL,'1','1')"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Private-Whisper','VOIZ-صحبت با کارشناس بدون شنود، کد + شماره مقصد','*33',NULL,'1','1')"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Barge','VOIZ-شنود و مکالمه با هر دو طرف، کد + شماره مقصد','*34',NULL,'1','1')"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
+query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-DTMF','VOIZ-شنود و تغییر حالت شنود حین مکالمه با 4 و 5 و 6، کد + شماره مقصد','*35',NULL,'1','1')"
+mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
+
 
 echo "**VOIZ Feature Codes Added." >> voiz-installation.log
 }

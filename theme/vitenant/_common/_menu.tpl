@@ -270,7 +270,7 @@
 <div class="main-content">
     <div style="height:90px;background-color:#303030;padding:15px;">
 	
-<!------- voipiran Webphone ---->	
+<!------- voipiran Webphone ---->
 <style>
   /* جلوگیری از اسکرول افقی */
   body {
@@ -281,12 +281,12 @@
   #phonePanel {
     position: fixed;
     top: 120px; /* کمی پایین‌تر */
-    left: -260px; /* مخفی‌شده در ابتدا */
-    width: 250px;
+    left: -320px; /* مخفی‌شده در ابتدا (عرض بیشتر) */
+    width: 300px; /* عرض بیشتر (حدود ۱۵٪ افزایش) */
     height: 400px;
     background: white;
-    border-radius: 10px 0 0 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 15px 0 0 15px; /* لبه‌های گردتر */
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3); /* سایه مدرن‌تر و بزرگ‌تر */
     transition: left 0.3s ease-in-out;
     z-index: 9999;
   }
@@ -294,10 +294,17 @@
   /* نوار عنوان برای جابه‌جایی */
   #dragHandle {
     width: 100%;
-    height: 30px;
-    background: #8BC34A;
+    height: 25px; /* ارتفاع کمتر */
+    background: #8bc34a; /* رنگ سبز جدید */
     cursor: grab;
-    border-radius: 10px 0 0 0;
+    border-radius: 15px 15px 0 0; /* لبه‌های گردتر */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* سایه برای نوار عنوان */
   }
 
   /* دکمه باز و بسته */
@@ -305,32 +312,35 @@
     position: fixed;
     top: 140px;
     left: -80px; /* موقعیت اولیه دکمه (بیرون از صفحه) */
-    background: #8BC34A;
-    color: #303030;
-    padding: 12px 15px;
+    background: #8bc34a; /* رنگ سبز جدید */
+    color: white; /* رنگ متن سفید */
+    padding: 12px 18px; /* اندازه مناسب‌تر */
     cursor: pointer;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 15px 15px 0; /* لبه‌های گردتر */
     z-index: 10000;
-    font-size: 24px;
+    font-size: 24px; /* اندازه مناسب‌تر */
     transition: background 0.3s ease, left 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3); /* سایه مدرن و بزرگ‌تر */
   }
 
   #toggleButton:hover {
-    background: #7CB342;
+    background: #7cb342; /* رنگ hover تیره‌تر */
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); /* سایه بزرگ‌تر در حالت hover */
   }
 
   /* اندازه بزرگتر دکمه در حالت بسته */
   #toggleButton.closed {
-    font-size: 30px;
-    padding: 20px 25px;
+    font-size: 28px; /* اندازه مناسب‌تر */
+    padding: 14px 20px; /* اندازه مناسب‌تر */
     left: -10px; /* کمی به سمت چپ قرار گرفتن */
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3); /* سایه در حالت بسته */
   }
 
   /* رنگ آیکون تلفن */
   #toggleButton::before {
     content: "📞";
-    font-size: 24px;
-    color: #303030; /* رنگ آیکون به رنگ مورد نظر */
+    font-size: 24px; /* اندازه مناسب‌تر */
+    color: white; /* رنگ آیکون سفید */
   }
 </style>
 
@@ -339,8 +349,8 @@
 
 <!-- پنل -->
 <div id="phonePanel">
-  <div id="dragHandle"></div>
-  <object style="width: 100%; height: calc(100% - 30px);" data="themes/{$THEMENAME}/phone/phone.php" type="text/html"></object>
+  <div id="dragHandle">تماس‌ها</div> <!-- متن منوی بالای پنل -->
+  <object style="width: 100%; height: calc(100% - 25px);" data="themes/{$THEMENAME}/phone/phone.php" type="text/html"></object>
 </div>
 
 <script>
@@ -351,19 +361,19 @@
 
     // در ابتدا پنل مخفی است و دکمه باید در موقعیت بیرون قرار داشته باشد
     button.style.left = "-10px"; // دکمه در حالت اولیه بیرون از صفحه است
-    panel.style.left = "-260px"; // پنل در حالت اولیه مخفی است
+    panel.style.left = "-320px"; // پنل در حالت اولیه مخفی است
   };
 
   function togglePanel() {
     var panel = document.getElementById("phonePanel");
     var button = document.getElementById("toggleButton");
 
-    if (panel.style.left === "-260px") {
+    if (panel.style.left === "-320px") {
       panel.style.left = "0px"; // نمایش پنل
-      button.style.left = "250px"; // جابه‌جایی دکمه
+      button.style.left = "300px"; // جابه‌جایی دکمه
       button.classList.remove('closed');
     } else {
-      panel.style.left = "-260px"; // مخفی کردن پنل
+      panel.style.left = "-320px"; // مخفی کردن پنل
       button.style.left = "-10px"; // بازگشت دکمه به موقعیت اولیه
       button.classList.add('closed');
     }
@@ -393,10 +403,6 @@
     document.body.style.userSelect = "";
   });
 </script>
-
-
-
-
 
 
 
