@@ -52,7 +52,7 @@ $password = getAsteriskExtensionPassword($extension);
         HTML components of simple GUI
     -->
     <div> 
-        <button class="badge bg-primary" id="devices_btn" title="Select microphone, speaker, camera">Devices</button>
+        <button class="badge bg-primary" id="devices_btn" title="Select microphone, speaker, camera">تجهیزات</button>
 
         <span class="badge bg-primary" id="status_line"> </span>
         <span class="badge bg-warning" id="outgoing_call_user"> </span>
@@ -61,12 +61,12 @@ $password = getAsteriskExtensionPassword($extension);
         <span class="badge bg-danger" id="incoming_call_user"> </span>
         
         <span id="dialer_panel" class="panel">
-            <button style="display: none;" id="settings_btn" title="Settings">Settings</button>
-            <button style="display: none;" id="call_log_btn" title="Call log">Call log</button>
-            <button  style="display: none;"  class="btn btn-sm btn-secondary" id="redial_last_call_btn" title="Redial last call">Redial</button>
-            <button style="display: none;" id="message_btn" title="View/Send Messages">Messages</button>
+            <button style="display: none;" id="settings_btn" title="Settings">تنظیمات</button>
+            <button style="display: none;" id="call_log_btn" title="Call log">لاگ تماس</button>
+            <button  style="display: none;"  class="btn btn-sm btn-secondary" id="redial_last_call_btn" title="Redial last call">تکرار تماس</button>
+            <button style="display: none;" id="message_btn" title="View/Send Messages">پیام ها</button>
             <button style="display: none;" id="subscribe_btn" title="Subscribe/Notify dialog test">Subscribe</button>
-            <button class="btn btn-sm btn-secondary" id="enable_sound_btn" title="Press to enable sound">Enable sound</button>
+            <button class="btn btn-sm btn-secondary" id="enable_sound_btn" title="Press to enable sound">فعال سازی صدا</button>
             <button class="btn btn-sm btn-secondary" id="notification_permission_btn" title="Press to set notification permission">Enable incoming call Notification</button>
                 <form id="call_form" onsubmit="event.preventDefault()">
                     <table>
@@ -75,7 +75,7 @@ $password = getAsteriskExtensionPassword($extension);
                                 <input class="form-control form-control-sm" type="text" name="call_to">
                             </td>
                             <td>
-                                <input class="btn btn-sm btn-primary" id="audio_call_btn" type="button" value="Start Call">
+                                <input class="btn btn-sm btn-primary" id="audio_call_btn" type="button" value="شروع تماس">
                             </td>
                             <td>
                                 <input style="display: none;" id="video_call_btn" type="button" value="Video">
@@ -92,7 +92,7 @@ $password = getAsteriskExtensionPassword($extension);
         <div id="setting_panel" class="panel" style="display: none;">
             <form id="setting" onsubmit="event.preventDefault()">
                 <fieldset>
-                    <legend>Server</legend>
+                    <legend>سرور</legend>
                     <input class="server" type="text" name="sip_domain" size="30" placeholder="SIP domain name"
                         autocomplete="server domain" title="SIP domain name" required>
                     <input class="server" type="text" name="sip_addresses" size="30" placeholder="SIP server addresses"
@@ -103,7 +103,7 @@ $password = getAsteriskExtensionPassword($extension);
                 </fieldset>
 
                 <fieldset>
-                    <legend>Account</legend>
+                    <legend>اکانت</legend>
                     <input class="account" type="text" name="user" size="30" placeholder="user name" title="User name"
                         autocomplete="account name" required>
                     <input class="account" type="text" name="display_name" size="30" placeholder="display name"
@@ -116,20 +116,20 @@ $password = getAsteriskExtensionPassword($extension);
                 </fieldset>
 
             </form>
-            <button id="login_btn" title="Login">Login</button>
+            <button id="login_btn" title="Login">ورود</button>
         </div>
 
         <div id="devices_panel" class="panel">
-                <button class="badge bg-secondary" id="devices_done_btn">Done</button>
+                <button class="badge bg-secondary" id="devices_done_btn">ذخیره</button>
                 <span class="badge bg-secondary" >Exact</span><input type="checkbox" title="Constraint deviceId: {exact: 'xxx'}" id="devices_exact_ckb">
                 <div id="devices">
                     <table class="badge bg-secondary">
                     <thead>
                         <tr>
-                          <th>Microphone</th>
-                          <th>Speaker</th>
-                          <th>Camera</th>
-                          <th>Ringer</th>
+                          <th>میکروفن</th>
+                          <th>اسپیکر</th>
+                          <th>دوربین</th>
+                          <th>زنگ</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -165,7 +165,7 @@ $password = getAsteriskExtensionPassword($extension);
             <button id="call_log_return_btn" title="returns to dialer">Dialer</button>
             <button id="call_log_clear_btn" title="Clear call log">Clear log</button>
             <fieldset>
-                <legend>call log</legend>
+                <legend>لاگ تماس</legend>
                 <ul id="call_log_ul">
                 </ul>
             </fieldset>
@@ -173,17 +173,17 @@ $password = getAsteriskExtensionPassword($extension);
 
         <div id="outgoing_call_panel" class="panel">
             <fieldset>
-                <input class="btn btn-sm btn-danger" id="cancel_outgoing_call_btn" type="button" value="Cancel">
+                <input class="btn btn-sm btn-danger" id="cancel_outgoing_call_btn" type="button" value="انصراف">
             </fieldset>
         </div>
 
         <div id="incoming_call_panel" class="panel">
             <fieldset>
-                <input  class="btn btn-sm btn-secondary" id="accept_audio_btn" type="button" value="Answer">
-                <input style="display: none;" id="accept_recvonly_video_btn" type="button" value="Accept receive video">
-                <input style="display: none;" id="accept_video_btn" type="button" value="Accept video">
-                <input  class="btn btn-sm btn-danger" id="reject_btn" type="button" value="Reject">
-                <input  class="btn btn-sm btn-secondary" id="redirect_btn" type="button" value="Redirect"><br>
+                <input  class="btn btn-sm btn-secondary" id="accept_audio_btn" type="button" value="پاسخ">
+                <input style="display: none;" id="accept_recvonly_video_btn" type="button" value="قبول تماس ویدئویی">
+                <input style="display: none;" id="accept_video_btn" type="button" value="قبول ویدئو">
+                <input  class="btn btn-sm btn-danger" id="reject_btn" type="button" value="رد تماس">
+                <input  class="btn btn-sm btn-secondary" id="redirect_btn" type="button" value="انقال"><br>
             </fieldset>
         </div>
 
@@ -202,7 +202,7 @@ $password = getAsteriskExtensionPassword($extension);
                 <legend>Blind Transfer</legend>
                 <form id="transfer_form" onsubmit="event.preventDefault()">
                     <input type="text" class="input" name="transfer_to">
-                    <input id="do_transfer_btn" type="button" value="Done">
+                    <input id="do_transfer_btn" type="button" value="ذخیره">
                 </form>
             </fieldset>
         </div>
@@ -210,16 +210,16 @@ $password = getAsteriskExtensionPassword($extension);
         <div id="call_established_panel" class="panel">
             <div>
                 <fieldset>
-                    <input  class="btn btn-sm btn-secondary" id="hangup_btn" type="button" value="Hangup" title="Terminate the call">
-                    <input  class="btn btn-sm btn-warning" id="mute_audio_btn" type="button" value="Mute" title="Mute/Unmute microphone">
+                    <input  class="btn btn-sm btn-secondary" id="hangup_btn" type="button" value="پایان مکالمه" title="Terminate the call">
+                    <input  class="btn btn-sm btn-warning" id="mute_audio_btn" type="button" value="قطع صدا" title="Mute/Unmute microphone">
                     <input style="display: none;"  id="info_btn" type="button" value="Info" title="Print to console call information [for debugging]">
                     <input style="display: none;"  id="stats_btn" type="button" value="Stats" title="Print to console call statistics [for debugging]">
                     <input style="display: none;"  id="codecs_btn" type="button" value="Codecs" title="Print to console selected codecs [for debugging]">
                     <input style="display: none;"  id="send_reinvite_btn" type="button" value="Send re-INVITE" title="Send SIP re-INVITE message [for debugging]">
                     <input style="display: none;"  id="send_info_btn" type="button" value="Send INFO" title="Send SIP INFO">
-                    <input  class="btn btn-sm btn-secondary" id="blind_transfer_btn" type="button" value="Transfer" title="Call blind transfer - asks the other side to call someone">
-                    <input style="display: none;"  id="send_video_btn" type="button" value="Start sending video" title="Start/stop sending video">
-                    <input style="display: none;"  id="screen_sharing_btn" type="button" value="Start screen sharing" title="Start/stop screen sharing">
+                    <input  class="btn btn-sm btn-secondary" id="blind_transfer_btn" type="button" value="انتقال" title="Call blind transfer - asks the other side to call someone">
+                    <input style="display: none;"  id="send_video_btn" type="button" value="شروع ارسال ویدئو" title="Start/stop sending video">
+                    <input style="display: none;"  id="screen_sharing_btn" type="button" value="شروع اشتراک دسکتاپ" title="Start/stop screen sharing">
                     <input style="display: none;"  id="enable_receive_video_btn" type="button" value="Enable receive video" title="Enable/Disable receive video">
                     <span style="display: none;"  id="video_controls_span">
                         <input id="mute_video_btn" type="button" value="Mute video" title="Mute/unmute web camera">
@@ -242,8 +242,8 @@ $password = getAsteriskExtensionPassword($extension);
                             <option value="Reset Custom">Reset Custom</option>
                         </select>
                     </span>
-                    <input  class="btn btn-sm btn-secondary" id="hold_btn" type="button" value="Hold" title="Hold/Unhold the call">
-                    <input  class="btn btn-sm btn-secondary" id="keypad_btn" type="button" value="Keypad" title="Open/Close key panel">
+                    <input  class="btn btn-sm btn-secondary" id="hold_btn" type="button" value="انتظار مکالمه" title="Hold/Unhold the call">
+                    <input  class="btn btn-sm btn-secondary" id="keypad_btn" type="button" value="شماره گیر" title="Open/Close key panel">
                 </fieldset>
             </div>
             <div id="dtmf_keypad">
@@ -270,18 +270,18 @@ $password = getAsteriskExtensionPassword($extension);
         <div id="message_panel" class="panel" style="display: none;">
             <button id="message_return_btn" title="returns to dialer">Dialer</button>
             <fieldset>
-                <legend>send message</legend>
+                <legend>ارسال پیام</legend>
                 <form id="send_message_form" onsubmit="event.preventDefault()">
                     to:<input type="text" class="input" name="send_to">
                     <br>
                     <textarea rows="3" cols="30" name="message"></textarea>
                     <br>
-                    <input id="send_message_btn" type="button" value="Send">
+                    <input id="send_message_btn" type="button" value="تماس">
                 </form>
             </fieldset>
 
             <fieldset>
-                <legend>messages</legend>
+                <legend>پیام ها</legend>
                 <button id="message_clear_btn" title="clear all messages">Clear</button>
                 <ul id="message_ul">
                 </ul>
@@ -291,7 +291,7 @@ $password = getAsteriskExtensionPassword($extension);
         <div id="subscribe_panel" class="panel" style="display: none;">
             <button id="subscribe_return_btn" title="returns to dialer">Dialer</button>
             <fieldset>
-                <legend>settings</legend>
+                <legend>تنظیمات</legend>
                 <form id="subscribe_test_setting_form" onsubmit="event.preventDefault()">
                     to user:<input type="text" class="input" name="user" size="6">
                     event:<input type="text" class="input" name="event_name" size="6" value="test"><br>

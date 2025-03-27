@@ -351,7 +351,10 @@ echo "**SNGREP Util Installed." >> voiz-installation.log
 }
 
 function voiz_menu(){
-issabel-menumerge voiz-guide-menu.xml
+#issabel-menumerge voiz-guide-menu.xml
+mv /var/www/db/menu.db /var/www/db/menu.db.000
+cp -rf voiz-installation/menu.db  /var/www/db/
+chown asterisk:asterisk /var/www/db/menu.db
 echo "**VOIZ Guide Menu Added." >> voiz-installation.log
 }
 
@@ -582,13 +585,13 @@ fi
     echo ${COUNTER} 
 
 
-##Install VOIZ Guide Menu
-voiz_menu
 
 ##Install IssabelCallMonitoring
 issbel-callmonitoring
 cd ..
 
+##Install VOIZ Guide Menu
+voiz_menu
 
 ##service httpd restart  >/dev/null 2>&1
 amportal a r  2>&1

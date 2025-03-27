@@ -1,23 +1,25 @@
         span {
             border-radius: 2px;
             padding: 2px;
-            display: inline-block;            
+            display: inline-block;  
+			background: #363535;			
         }
         #panels {
             max-width: 500px;
+			background: #363535;
         }
 
         .panel,
         #dtmf_keypad {
-            display: none;
+            display: true;
         }
 
         #setting .server {
-            background: lightgray;
+            background: #363535;
         }
 
         #setting .account {
-            background: #A5ECEC;
+            background: #363535;
         }
 
         #call_log_ul {
@@ -93,20 +95,20 @@
         #hangup_btn,
         #cancel_outgoing_call_btn,
         #reject_btn {
-            background-color: lightpink;
-            border-color: lightpink;
+            background-color: #FD3B31;
+            border-color: #FD3B31;
         }
 
         #accept_audio_btn,
         #accept_recvonly_video_btn,
         #accept_video_btn {
-            background-color: lightgreen;
-            border-color: lightgreen;
+            background-color: #4ED964;
+            border-color: #4ED964;
         }
 
         #redirect_btn {
-            background-color: lightskyblue;
-            border-color: lightskyblue;
+            background-color: #4ED964;
+            border-color: #4ED964;
         }
 
         #message_btn.new_message {

@@ -280,67 +280,82 @@
   /* استایل پنل */
   #phonePanel {
     position: fixed;
-    top: 120px; /* کمی پایین‌تر */
-    left: -320px; /* مخفی‌شده در ابتدا (عرض بیشتر) */
-    width: 300px; /* عرض بیشتر (حدود ۱۵٪ افزایش) */
+    top: 120px;
+    left: -320px;
+    width: 300px;
     height: 400px;
     background: white;
-    border-radius: 15px 0 0 15px; /* لبه‌های گردتر */
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3); /* سایه مدرن‌تر و بزرگ‌تر */
+    border-radius: 15px 0 0 15px;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
     transition: left 0.3s ease-in-out;
     z-index: 9999;
   }
 
-  /* نوار عنوان برای جابه‌جایی */
+  /* حالت Minimize */
+  #phonePanel.minimized {
+    height: 40px;
+    overflow: hidden;
+  }
+
+  /* نوار عنوان بهبودیافته */
   #dragHandle {
     width: 100%;
-    height: 25px; /* ارتفاع کمتر */
-    background: #8bc34a; /* رنگ سبز جدید */
+    height: 25px;
+    background: #303030;
     cursor: grab;
-    border-radius: 15px 15px 0 0; /* لبه‌های گردتر */
+    border-radius: 15px 15px 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 14px;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* سایه برای نوار عنوان */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative; /* برای قرارگیری دکمه Minimize */
+  }
+
+  /* دکمه Minimize */
+  #minimizeBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
   }
 
   /* دکمه باز و بسته */
   #toggleButton {
     position: fixed;
     top: 140px;
-    left: -80px; /* موقعیت اولیه دکمه (بیرون از صفحه) */
-    background: #8bc34a; /* رنگ سبز جدید */
-    color: white; /* رنگ متن سفید */
-    padding: 12px 18px; /* اندازه مناسب‌تر */
+    left: -80px;
+    background: #8bc34a;
+    color: white;
+    padding: 12px 18px;
     cursor: pointer;
-    border-radius: 0 15px 15px 0; /* لبه‌های گردتر */
+    border-radius: 0 15px 15px 0;
     z-index: 10000;
-    font-size: 24px; /* اندازه مناسب‌تر */
-    transition: background 0.3s ease, left 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3); /* سایه مدرن و بزرگ‌تر */
+    font-size: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
   }
 
   #toggleButton:hover {
-    background: #7cb342; /* رنگ hover تیره‌تر */
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); /* سایه بزرگ‌تر در حالت hover */
+    background: #7cb342;
   }
 
-  /* اندازه بزرگتر دکمه در حالت بسته */
   #toggleButton.closed {
-    font-size: 28px; /* اندازه مناسب‌تر */
-    padding: 14px 20px; /* اندازه مناسب‌تر */
-    left: -10px; /* کمی به سمت چپ قرار گرفتن */
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3); /* سایه در حالت بسته */
+    font-size: 28px;
+    padding: 14px 20px;
+    left: -10px;
   }
 
-  /* رنگ آیکون تلفن */
   #toggleButton::before {
     content: "📞";
-    font-size: 24px; /* اندازه مناسب‌تر */
-    color: white; /* رنگ آیکون سفید */
+    font-size: 24px;
+    color: white;
   }
 </style>
 
@@ -349,59 +364,42 @@
 
 <!-- پنل -->
 <div id="phonePanel">
-  <div id="dragHandle">تماس‌ها</div> <!-- متن منوی بالای پنل -->
+  <div id="dragHandle">
+    WebPhone
+    <button id="minimizeBtn" title="کوچک کردن">─</button>
+  </div>
   <object style="width: 100%; height: calc(100% - 25px);" data="themes/{$THEMENAME}/phone/phone.php" type="text/html"></object>
 </div>
 
 <script>
   window.onload = function () {
-    // وقتی صفحه لود می‌شود، دکمه و پنل را تنظیم می‌کنیم
+    // تنظیمات اولیه
     var panel = document.getElementById("phonePanel");
     var button = document.getElementById("toggleButton");
+    button.style.left = "-10px";
+    panel.style.left = "-320px";
 
-    // در ابتدا پنل مخفی است و دکمه باید در موقعیت بیرون قرار داشته باشد
-    button.style.left = "-10px"; // دکمه در حالت اولیه بیرون از صفحه است
-    panel.style.left = "-320px"; // پنل در حالت اولیه مخفی است
+    // قابلیت Minimize
+    document.getElementById('minimizeBtn').addEventListener('click', function() {
+      panel.classList.toggle('minimized');
+    });
   };
 
+  // تابع باز/بسته کردن پنل
   function togglePanel() {
     var panel = document.getElementById("phonePanel");
     var button = document.getElementById("toggleButton");
 
     if (panel.style.left === "-320px") {
-      panel.style.left = "0px"; // نمایش پنل
-      button.style.left = "300px"; // جابه‌جایی دکمه
+      panel.style.left = "0px";
+      button.style.left = "300px";
       button.classList.remove('closed');
     } else {
-      panel.style.left = "-320px"; // مخفی کردن پنل
-      button.style.left = "-10px"; // بازگشت دکمه به موقعیت اولیه
+      panel.style.left = "-320px";
+      button.style.left = "-10px";
       button.classList.add('closed');
     }
   }
-
-  // قابلیت درگ کردن با موس
-  var panel = document.getElementById("phonePanel");
-  var handle = document.getElementById("dragHandle");
-  var isDragging = false, offsetX, offsetY;
-
-  handle.addEventListener("mousedown", function (e) {
-    isDragging = true;
-    offsetX = e.clientX - panel.offsetLeft;
-    offsetY = e.clientY - panel.offsetTop;
-    document.body.style.userSelect = "none";
-  });
-
-  document.addEventListener("mousemove", function (e) {
-    if (isDragging) {
-      panel.style.left = (e.clientX - offsetX) + "px";
-      panel.style.top = Math.max(0, e.clientY - offsetY) + "px";
-    }
-  });
-
-  document.addEventListener("mouseup", function () {
-    isDragging = false;
-    document.body.style.userSelect = "";
-  });
 </script>
 
 
