@@ -358,6 +358,63 @@ chown asterisk:asterisk /var/www/db/menu.db
 echo "**VOIZ Guide Menu Added." >> voiz-installation.log
 }
 
+function set_cid(){
+
+
+####Install Source Gaurdian Files
+echo "------------START-----------------"
+# Get PHP version
+php_version=$(php -r "echo PHP_MAJOR_VERSION;")
+
+# Perform actions based on PHP version
+if [ "$php_version" -eq 5 ]; then
+    echo "PHP 5 detected. Performing action A."
+
+sleep 1
+else
+    echo "PHP 7 (or newer) detected. Performing action B."
+
+####Add from-internal-custom
+# File to check
+FILE="/etc/asterisk/extensions_custom.conf"
+
+# Line to search for
+LINE="[from-internal-custom]"
+
+    # Check if the line exists in the file
+    if grep -qF "$LINE" "$FILE"; then
+       echo "The line '$LINE' exists in the file '$FILE'."
+    else
+        echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line."
+       echo "$LINE" | sudo tee -a "$FILE"
+    fi
+
+sleep 1
+fi
+sleep 1
+
+#NumberFormater
+echo "" >> /etc/asterisk/extensions_custom.conf
+echo ";;VOIPIRAN.io" >> /etc/asterisk/extensions_custom.conf
+echo "#include extensions_voipiran_numberformatter.conf" >> /etc/asterisk/extensions_custom.conf
+yes | cp -rf software/extensions_voipiran_numberformatter.conf /etc/asterisk
+chown -R asterisk:asterisk /etc/asterisk/extensions_voipiran_numberformatter.conf
+chmod 777 /etc/asterisk/extensions_voipiran_numberformatter.conf
+
+### Add from-pstn Context
+echo "" >> /etc/asterisk/extensions_custom.conf
+echo ";;VOIPIRAN.io" >> /etc/asterisk/extensions_custom.conf
+echo "[to-cidformatter]" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,1,Set(IS_PSTN_CALL=1)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,n,NoOp(start-from-pstn)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,n,Gosub(numberformatter,s,1)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,n,NoOp(end-from-pstn)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,n,Goto(from-pstn,s,1)" >> /etc/asterisk/extensions_custom.conf
+
+
+echo "**Set CID Module Added." >> voiz-installation.log
+}
+
 function welcome(){
 whiptail --title "VOIZ Installtion" --msgbox "Powered by VOIPIRAN.io..." 8 78
 }
@@ -558,6 +615,8 @@ if [ "$WEBPHONEINSTALL" = "true" ]
 then 
 webphone
 fi
+
+set_cid
 
   COUNTER=$(($COUNTER+10))
     echo ${COUNTER} 
