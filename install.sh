@@ -423,11 +423,11 @@ fi
 welcome
 
 ###SELECT FEATURES GUI
+###"Webphone" "تلفن تحت وب" ON
 SELECTED=$(
 whiptail --title "SELECT Features TO INSTALL" --checklist \
 "List of Features to install" 20 100 10 \
 "Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
-"Webphone" "تلفن تحت وب" ON \
 "NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3
 )
 echo ${SELECTED[@]}
@@ -439,10 +439,6 @@ echo ${SELECTED[@]}
   if [[ "$CHOICE" == *"NetworkUtilities"* ]]
 	then 
     NETUTILINSTALL=true
-	fi
-  if [[ "$CHOICE" == *"Webphone"* ]]
-	then 
-    WEBPHONEINSTALL=true
 	fi
   done
 
