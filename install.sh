@@ -306,8 +306,10 @@ function vtiger(){
 #yes | cp -arf vtiger/crm /var/www/html
 #cat vtiger/crma* > vtiger/crm.tar.gz
 #yes | tar -zxvf vtiger/crm.tar.gz -C /var/www/html >/dev/null 2>&1
-cat crm.zip.* > vtiger/crm.zip
+cat vtiger/crm.zip* > vtiger/crm.zip
+yes | unzip -o vtiger/crm.zip -d vtiger >/dev/null 2>&1
 yes | unzip -o vtiger/crm.zip -d /var/www/html >/dev/null 2>&1
+
 
 touch -r /var/www/html/crm/*
 chmod -R 777 /var/www/html/crm
