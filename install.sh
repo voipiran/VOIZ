@@ -480,24 +480,26 @@ fi
 welcome
 
 ###SELECT FEATURES GUI
-###"Webphone" "تلفن تحت وب" ON
-SELECTED=$(
-whiptail --title "SELECT Features TO INSTALL" --checklist \
+SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
 "List of Features to install" 20 100 10 \
 "Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
-"NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3
-)
-echo ${SELECTED[@]}
-  for CHOICE in $SELECTED; do
-  if [[ "$CHOICE" == *"CRM"* ]]
-	then 
+"NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3)
+
+# تبدیل به آرایه واقعی با eval
+eval "ARRAY=($SELECTED)"
+
+# دیباگ
+echo "Selected: ${ARRAY[@]}"
+
+# بررسی انتخاب‌ها
+for CHOICE in "${ARRAY[@]}"; do
+  if [[ "$CHOICE" == *"CRM"* ]]; then 
     CRMINSTALL=true
-	fi
-  if [[ "$CHOICE" == *"NetworkUtilities"* ]]
-	then 
+  fi
+  if [[ "$CHOICE" == *"NetworkUtilities"* ]]; then 
     NETUTILINSTALL=true
-	fi
-  done
+  fi
+done
 
 
 ###SELECT LNGUAGE GUI
@@ -613,7 +615,7 @@ fi
 ##Install Webphone
 if [ "$WEBPHONEINSTALL" = "true" ]
 then 
-webphone
+#webphone
 fi
 
 set_cid
