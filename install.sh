@@ -612,10 +612,6 @@ if [ "$CRMINSTALL" = "true" ]; then
   vtiger
 fi
 
-##Install Webphone
-if [ "$WEBPHONEINSTALL" = "true" ]; then
-  #webphone
-fi
 
 set_cid
 
