@@ -649,7 +649,7 @@ issbel-callmonitoring
 cd ..
 
 ##Install VOIZ Guide Menu
-voiz_menu
+#voiz_menu
 
 ##service httpd restart  >/dev/null 2>&1
 amportal a r  2>&1
