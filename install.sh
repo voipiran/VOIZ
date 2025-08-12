@@ -605,7 +605,7 @@ featurecodes
   echo ${COUNTER} 
 
 ##Install Openvpn Module
-easyvpn
+#easyvpn
 ##Install Survey
 survey
 
