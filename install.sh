@@ -57,8 +57,9 @@ Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25
 # Progress bar function
 COUNTER=0
 update_progress() {
+    local message="$1"
     COUNTER=$((COUNTER + 10))
-    echo "${COUNTER}"
+    echo -e "$message\n$COUNTER"
 }
 
 # Set VOIZ version
@@ -281,35 +282,25 @@ survey() {
 
 # Install Vtiger CRM
 vtiger() {
-    # Download Vtiger CRM ZIP from new repo
     cd /tmp
-    curl -L -o crm.zip https://github.com/newrepo/vtiger-crm/releases/download/latest/crm.zip >/dev/null 2>&1
+    curl -L -o crm.zip https://github.com/voipiran/VOIZ-Vtiger/archive/main.zip >/dev/null 2>&1
+    unzip -o crm.zip >/dev/null 2>&1
+    mv VOIZ-Vtiger-main /tmp/vtiger
+    cd vtiger
+    cat crm.zip* > crm.zip
     unzip -o crm.zip -d "${WWW_DIR}" >/dev/null 2>&1
-    rm -f crm.zip
-
-    # Download Vtiger database file from new repo
-    curl -L -o crm.db https://github.com/newrepo/vtiger-crm/releases/download/latest/crm.db >/dev/null 2>&1
-
-    # Set permissions and touch files
     touch -r "${WWW_DIR}/crm"/*
     chmod -R 777 "${WWW_DIR}/crm"
-
-    # Create and populate MySQL database
     if ! mysql -uroot -p"$rootpw" -e 'use voipirancrm' >/dev/null 2>&1; then
         mysql -uroot -p"$rootpw" -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;"
         mysql -uroot -p"$rootpw" -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';"
         mysql -uroot -p"$rootpw" voipirancrm < crm.db >/dev/null 2>&1
-        rm -f crm.db
     fi
-
-    # Update config file with MySQL password
     sed -i "s/123456/$rootpw/g" "${WWW_DIR}/crm/config.inc.php"
-
-    # Merge Issabel menu
     issabel-menumerge crm-menu.xml
-
     echo "**Vtiger CRM Installed" >> "${LOG_FILE}"
-    cd -
+    cd /tmp
+    rm -rf vtiger crm.zip
 }
 
 # Install Webphone
@@ -448,57 +439,57 @@ install_callerid_formatter() {
 # Main installation process
 {
     [ "$UPDATEISSABEL" = "true" ] && update_issabel
-    update_progress
+    update_progress "در حال آپدیت ایزابل... ممکن است چند دقیقه طول بکشد"
     setversion
-    update_progress
+    update_progress "در حال تنظیم نسخه VOIZ..."
     install_sourcegaurdian
-    update_progress
+    update_progress "در حال نصب SourceGuardian..."
     install_webmin
-    update_progress
+    update_progress "در حال نصب Webmin..."
     add_persian_sounds
-    update_progress
+    update_progress "در حال اضافه کردن صداهای فارسی..."
     install_developer
-    update_progress
+    update_progress "در حال نصب ماژول Developer..."
     asterniccdr
-    update_progress
+    update_progress "در حال نصب Asternic CDR..."
     add_vitenant_theme
-    update_progress
+    update_progress "در حال اضافه کردن تم Vitenant..."
     edit_issabel_modules
-    update_progress
+    update_progress "در حال ویرایش ماژول‌های Issabel..."
     asternic-callStats-lite
-    update_progress
+    update_progress "در حال نصب Asternic Call Stats Lite... ممکن است چند دقیقه طول بکشد"
     downloadable_files
-    update_progress
+    update_progress "در حال نصب فایل‌های downloadable..."
     #bulkdids
-    update_progress
+    update_progress "در حال نصب Bulk DIDs (غیرفعال)..."
     [ "$issabel_ver" -eq 4 ] && bosssecretary
-    update_progress
+    update_progress "در حال نصب Boss Secretary..."
     superfecta
-    update_progress
+    update_progress "در حال نصب Superfecta..."
     #featurecodes
-    update_progress
+    update_progress "در حال نصب Feature Codes (غیرفعال)..."
     survey
-    update_progress
+    update_progress "در حال نصب Survey..."
     [ "$CRMINSTALL" = "true" ] && vtiger
-    update_progress
+    update_progress "در حال نصب Vtiger CRM... ممکن است چند دقیقه طول بکشد"
     set_cid
-    update_progress
+    update_progress "در حال تنظیم CID..."
     [ "$NETUTILINSTALL" = "true" ] && htop
-    update_progress
+    update_progress "در حال نصب HTOP..."
     [ "$NETUTILINSTALL" = "true" ] && sngrep
-    update_progress
+    update_progress "در حال نصب SNGREP..."
     issbel-callmonitoring
-    update_progress
+    update_progress "در حال نصب Issabel Call Monitoring..."
     voiz_menu
-    update_progress
+    update_progress "در حال نصب VOIZ Menu..."
     [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
-    update_progress
+    update_progress "در حال نصب شنود پیشرفته..."
     [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
-    update_progress
+    update_progress "در حال نصب وب فون پنل..."
     [ "$QUEUEDASHBOARDINSTALL" = "true" ] && install_queue_dashboard
-    update_progress
+    update_progress "در حال نصب داشبورد زنده صف..."
     [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
-    update_progress
+    update_progress "در حال نصب اصلاح کالرآی دی..."
 } | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 0
 
 # Finalize
