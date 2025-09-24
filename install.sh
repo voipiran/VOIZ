@@ -35,8 +35,7 @@ SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
 "AdvancedListening" "شنود پیشرفته" ON \
 "WebPhonePanel" "وب فون پنل" ON \
 "QueueDashboard" "داشبرد زنده صف" ON \
-"CallerIDFormatter" "اصلاح کالرآی دی" ON \
-"UpdateIssabel" "آپدیت ایزابل" ON 3>&1 1>&2 2>&3)
+"CallerIDFormatter" "اصلاح کالرآی دی" ON 3>&1 1>&2 2>&3)
 
 eval "ARRAY=($SELECTED)"
 for CHOICE in "${ARRAY[@]}"; do
@@ -46,7 +45,6 @@ for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"WebPhonePanel"* ]] && WEBPHONEPANELINSTALL=true
     [[ "$CHOICE" == *"QueueDashboard"* ]] && QUEUEDASHBOARDINSTALL=true
     [[ "$CHOICE" == *"CallerIDFormatter"* ]] && CALLERIDFORMATTERINSTALL=true
-    [[ "$CHOICE" == *"UpdateIssabel"* ]] && UPDATEISSABEL=true
 done
 
 # Select language
@@ -399,18 +397,6 @@ issbel-callmonitoring() {
     check_status "Installing Issabel Call Monitoring"
 }
 
-# Update Issabel
-update_issabel() {
-    echo "شروع آپدیت ایزابل - ممکن است چند دقیقه طول بکشد..." >> "${LOG_FILE}"
-    yum update -y >> "${LOG_FILE}" 2>&1
-    if [ $? -ne 0 ]; then
-        echo "خطا در آپدیت ایزابل. جزئیات در $LOG_FILE" >> "${LOG_FILE}"
-        whiptail --title "Error" --msgbox "خطا در آپدیت ایزابل. جزئیات در $LOG_FILE" 8 78
-        exit 1
-    fi
-    echo "**Issabel Updated" >> "${LOG_FILE}"
-}
-
 # Install Advanced Listening (AsteriskChanSpyPro)
 install_advanced_listening() {
     cd /tmp
@@ -481,58 +467,56 @@ install_callerid_formatter() {
 
 # Main installation process
 {
-    [ "$UPDATEISSABEL" = "true" ] && update_issabel
-    update_progress "مرحله 1: آپدیت ایزابل - ممکن است چند دقیقه طول بکشد"
     setversion
-    update_progress "مرحله 2: تنظیم نسخه VOIZ"
+    update_progress "مرحله 1: تنظیم نسخه VOIZ"
     install_sourcegaurdian
-    update_progress "مرحله 3: نصب SourceGuardian"
+    update_progress "مرحله 2: نصب SourceGuardian"
     install_webmin
-    update_progress "مرحله 4: نصب Webmin"
+    update_progress "مرحله 3: نصب Webmin"
     add_persian_sounds
-    update_progress "مرحله 5: اضافه کردن صداهای فارسی"
+    update_progress "مرحله 4: اضافه کردن صداهای فارسی"
     install_developer
-    update_progress "مرحله 6: نصب ماژول Developer"
+    update_progress "مرحله 5: نصب ماژول Developer"
     asterniccdr
-    update_progress "مرحله 7: نصب Asternic CDR"
+    update_progress "مرحله 6: نصب Asternic CDR"
     add_vitenant_theme
-    update_progress "مرحله 8: اضافه کردن تم Vitenant"
+    update_progress "مرحله 7: اضافه کردن تم Vitenant"
     edit_issabel_modules
-    update_progress "مرحله 9: ویرایش ماژول‌های Issabel"
+    update_progress "مرحله 8: ویرایش ماژول‌های Issabel"
     asternic-callStats-lite
-    update_progress "مرحله 10: نصب Asternic Call Stats Lite - ممکن است چند دقیقه طول بکشد"
+    update_progress "مرحله 9: نصب Asternic Call Stats Lite - ممکن است چند دقیقه طول بکشد"
     downloadable_files
-    update_progress "مرحله 11: نصب فایل‌های downloadable"
+    update_progress "مرحله 10: نصب فایل‌های downloadable"
     #bulkdids
-    update_progress "مرحله 12: نصب Bulk DIDs (غیرفعال)"
+    update_progress "مرحله 11: نصب Bulk DIDs (غیرفعال)"
     [ "$issabel_ver" -eq 4 ] && bosssecretary
-    update_progress "مرحله 13: نصب Boss Secretary"
+    update_progress "مرحله 12: نصب Boss Secretary"
     superfecta
-    update_progress "مرحله 14: نصب Superfecta"
+    update_progress "مرحله 13: نصب Superfecta"
     #featurecodes
-    update_progress "مرحله 15: نصب Feature Codes (غیرفعال)"
+    update_progress "مرحله 14: نصب Feature Codes (غیرفعال)"
     survey
-    update_progress "مرحله 16: نصب Survey"
+    update_progress "مرحله 15: نصب Survey"
     [ "$CRMINSTALL" = "true" ] && vtiger
-    update_progress "مرحله 17: نصب Vtiger CRM - ممکن است چند دقیقه طول بکشد"
+    update_progress "مرحله 16: نصب Vtiger CRM - ممکن است چند دقیقه طول بکشد"
     set_cid
-    update_progress "مرحله 18: تنظیم CID"
+    update_progress "مرحله 17: تنظیم CID"
     [ "$NETUTILINSTALL" = "true" ] && htop
-    update_progress "مرحله 19: نصب HTOP"
+    update_progress "مرحله 18: نصب HTOP"
     [ "$NETUTILINSTALL" = "true" ] && sngrep
-    update_progress "مرحله 20: نصب SNGREP"
+    update_progress "مرحله 19: نصب SNGREP"
     issbel-callmonitoring
-    update_progress "مرحله 21: نصب Issabel Call Monitoring"
+    update_progress "مرحله 20: نصب Issabel Call Monitoring"
     voiz_menu
-    update_progress "مرحله 22: نصب VOIZ Menu"
+    update_progress "مرحله 21: نصب VOIZ Menu"
     [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
-    update_progress "مرحله 23: نصب شنود پیشرفته"
+    update_progress "مرحله 22: نصب شنود پیشرفته"
     [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
-    update_progress "مرحله 24: نصب وب فون پنل"
+    update_progress "مرحله 23: نصب وب فون پنل"
     [ "$QUEUEDASHBOARDINSTALL" = "true" ] && install_queue_dashboard
-    update_progress "مرحله 25: نصب داشبورد زنده صف"
+    update_progress "مرحله 24: نصب داشبورد زنده صف"
     [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
-    update_progress "مرحله 26: نصب اصلاح کالرآی دی"
+    update_progress "مرحله 25: نصب اصلاح کالرآی دی"
 } | whiptail --gauge "نصب VOIZ در حال انجام است... لطفاً صبر کنید" 8 50 0
 
 # Finalize
