@@ -281,18 +281,35 @@ survey() {
 
 # Install Vtiger CRM
 vtiger() {
-    cat vtiger/crm.zip* > vtiger/crm.zip
-    unzip -o vtiger/crm.zip -d "${WWW_DIR}" >/dev/null 2>&1
+    # Download Vtiger CRM ZIP from new repo
+    cd /tmp
+    curl -L -o crm.zip https://github.com/newrepo/vtiger-crm/releases/download/latest/crm.zip >/dev/null 2>&1
+    unzip -o crm.zip -d "${WWW_DIR}" >/dev/null 2>&1
+    rm -f crm.zip
+
+    # Download Vtiger database file from new repo
+    curl -L -o crm.db https://github.com/newrepo/vtiger-crm/releases/download/latest/crm.db >/dev/null 2>&1
+
+    # Set permissions and touch files
     touch -r "${WWW_DIR}/crm"/*
     chmod -R 777 "${WWW_DIR}/crm"
+
+    # Create and populate MySQL database
     if ! mysql -uroot -p"$rootpw" -e 'use voipirancrm' >/dev/null 2>&1; then
         mysql -uroot -p"$rootpw" -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;"
         mysql -uroot -p"$rootpw" -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';"
-        mysql -uroot -p"$rootpw" voipirancrm < vtiger/crm.db >/dev/null 2>&1
+        mysql -uroot -p"$rootpw" voipirancrm < crm.db >/dev/null 2>&1
+        rm -f crm.db
     fi
+
+    # Update config file with MySQL password
     sed -i "s/123456/$rootpw/g" "${WWW_DIR}/crm/config.inc.php"
+
+    # Merge Issabel menu
     issabel-menumerge crm-menu.xml
+
     echo "**Vtiger CRM Installed" >> "${LOG_FILE}"
+    cd -
 }
 
 # Install Webphone
