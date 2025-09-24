@@ -29,14 +29,24 @@ whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io..." 8 78
 
 # Select features to install
 SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
-"List of Features to install" 20 100 10 \
+"List of Features to install" 20 100 12 \
 "Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
-"NetworkUtilities" "SNGREP, HTOP" ON 3>&1 1>&2 2>&3)
+"NetworkUtilities" "SNGREP, HTOP" ON \
+"AdvancedListening" "شنود پیشرفته" ON \
+"WebPhonePanel" "وب فون پنل" ON \
+"QueueDashboard" "داشبرد زنده صف" ON \
+"CallerIDFormatter" "اصلاح کالرآی دی" ON \
+"UpdateIssabel" "آپدیت ایزابل" ON 3>&1 1>&2 2>&3)
 
 eval "ARRAY=($SELECTED)"
 for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"CRM"* ]] && CRMINSTALL=true
     [[ "$CHOICE" == *"NetworkUtilities"* ]] && NETUTILINSTALL=true
+    [[ "$CHOICE" == *"AdvancedListening"* ]] && ADVANCEDLISTENINGINSTALL=true
+    [[ "$CHOICE" == *"WebPhonePanel"* ]] && WEBPHONEPANELINSTALL=true
+    [[ "$CHOICE" == *"QueueDashboard"* ]] && QUEUEDASHBOARDINSTALL=true
+    [[ "$CHOICE" == *"CallerIDFormatter"* ]] && CALLERIDFORMATTERINSTALL=true
+    [[ "$CHOICE" == *"UpdateIssabel"* ]] && UPDATEISSABEL=true
 done
 
 # Select language
@@ -354,9 +364,73 @@ update_issabel() {
     echo "**Issabel Updated" >> "${LOG_FILE}"
 }
 
+# Install Advanced Listening (AsteriskChanSpyPro)
+install_advanced_listening() {
+    cd /tmp
+    curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip >/dev/null 2>&1
+    unzip -o voipiran_chanspy.zip >/dev/null 2>&1
+    cd AsteriskChanSpyPro-main
+    chmod 755 install.sh
+    ./install.sh -y >/dev/null 2>&1
+    cd /tmp
+    if [ $? -eq 0 ]; then
+        echo "**Advanced Listening Installed Successfully" >> "${LOG_FILE}"
+    else
+        echo "**Advanced Listening Installation Failed" >> "${LOG_FILE}"
+    fi
+}
+
+# Install Web Phone Panel (VOIZ-WebPhone)
+install_web_phone_panel() {
+    cd /tmp
+    git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone >/dev/null 2>&1
+    mv /tmp/VOIZ-WebPhone/Phone /var/www/html/phone
+    cd /var/www/html/phone
+    chmod 755 install.sh
+    bash install.sh >/dev/null 2>&1
+    cd /tmp
+    if [ $? -eq 0 ]; then
+        echo "**Web Phone Panel Installed Successfully" >> "${LOG_FILE}"
+    else
+        echo "**Web Phone Panel Installation Failed" >> "${LOG_FILE}"
+    fi
+}
+
+# Install Queue Dashboard (VOIZ-QueuePanel)
+install_queue_dashboard() {
+    cd /tmp
+    sudo git clone https://github.com/voipiran/VOIZ-QueuePanel /tmp/VOIZ-QueuePanel >/dev/null 2>&1
+    sudo mv /tmp/VOIZ-QueuePanel /var/www/html/qpanel
+    cd /var/www/html/qpanel
+    sudo chmod 755 install.sh
+    sudo bash install.sh >/dev/null 2>&1
+    cd /tmp
+    if [ $? -eq 0 ]; then
+        echo "**Queue Dashboard Installed Successfully" >> "${LOG_FILE}"
+    else
+        echo "**Queue Dashboard Installation Failed" >> "${LOG_FILE}"
+    fi
+}
+
+# Install CallerID Formatter (AsteriskCalleridFormatter)
+install_callerid_formatter() {
+    cd /tmp
+    curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip >/dev/null 2>&1
+    unzip -o AsteriskCalleridFormatter.zip >/dev/null 2>&1
+    cd AsteriskCalleridFormatter-main
+    chmod 755 install.sh
+    ./install.sh -y >/dev/null 2>&1
+    cd /tmp
+    if [ $? -eq 0 ]; then
+        echo "**CallerID Formatter Installed Successfully" >> "${LOG_FILE}"
+    else
+        echo "**CallerID Formatter Installation Failed" >> "${LOG_FILE}"
+    fi
+}
+
 # Main installation process
 {
-    update_issabel
+    [ "$UPDATEISSABEL" = "true" ] && update_issabel
     update_progress
     setversion
     update_progress
@@ -378,13 +452,13 @@ update_issabel() {
     update_progress
     downloadable_files
     update_progress
-    bulkdids
+    #bulkdids
     update_progress
     [ "$issabel_ver" -eq 4 ] && bosssecretary
     update_progress
     superfecta
     update_progress
-    featurecodes
+    #featurecodes
     update_progress
     survey
     update_progress
@@ -400,6 +474,14 @@ update_issabel() {
     update_progress
     voiz_menu
     update_progress
+    [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
+    update_progress
+    [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
+    update_progress
+    [ "$QUEUEDASHBOARDINSTALL" = "true" ] && install_queue_dashboard
+    update_progress
+    [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
+    update_progress
 } | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 0
 
 # Finalize
@@ -408,3 +490,21 @@ amportal a r >/dev/null 2>&1
 clear
 cat voiz-installation/logo.txt
 cat "${LOG_FILE}"
+
+# Final Installation Summary Report
+echo -e "\033[1;34m=====================================\033[0m"
+echo -e "\033[1;34m     VOIZ Installation Summary      \033[0m"
+echo -e "\033[1;34m=====================================\033[0m"
+
+# Extract and display status for each component
+grep -E "Successfully|Failed|Installed|Added|Updated|Set" "${LOG_FILE}" | while read -r line; do
+    if [[ $line == *"Successfully"* ]]; then
+        echo -e "\033[32m$line\033[0m"
+    elif [[ $line == *"Failed"* ]]; then
+        echo -e "\033[31m$line\033[0m"
+    else
+        echo -e "\033[33m$line\033[0m"
+    fi
+done
+
+echo -e "\033[1;34m=====================================\033[0m"
