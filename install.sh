@@ -11,7 +11,7 @@ THEME_DIR="${WWW_DIR}/themes"
 
 # Initialize log file
 > "${LOG_FILE}"
-echo "VOIZ Installation Log:" >> "${LOG_FILE}"
+echo "VOIZ Installation Log - Start: $(date)" >> "${LOG_FILE}"
 
 # Fetch MySQL root password
 rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' "${CONFIG_DIR}/issabel.conf")
@@ -59,7 +59,17 @@ COUNTER=0
 update_progress() {
     local message="$1"
     COUNTER=$((COUNTER + 10))
+    echo -e "$message\n$COUNTER" >> "${LOG_FILE}"
     echo -e "$message\n$COUNTER"
+}
+
+# Check command success
+check_status() {
+    if [ $? -ne 0 ]; then
+        echo "Error: $1 failed at $(date)" >> "${LOG_FILE}"
+        whiptail --title "Error" --msgbox "خطا در $1. جزئیات در $LOG_FILE" 8 78
+        exit 1
+    fi
 }
 
 # Set VOIZ version
@@ -73,6 +83,7 @@ setversion() {
         sed -i "s/.*version.*/version=$version/g" "${CONFIG_DIR}/voiz.conf"
     fi
     echo "**VOIZ Version Set to $version" >> "${LOG_FILE}"
+    check_status "Setting VOIZ version"
 }
 
 # Install SourceGuardian
@@ -91,18 +102,21 @@ install_sourcegaurdian() {
         systemctl reload php-fpm > /dev/null
     fi
     echo "**SourceGuardian Installed" >> "${LOG_FILE}"
+    check_status "Installing SourceGuardian"
 }
 
 # Install Webmin
 install_webmin() {
     rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
     echo "**Webmin Installed" >> "${LOG_FILE}"
+    check_status "Installing Webmin"
 }
 
 # Install Developer Module
 install_developer() {
     rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
     echo "**Developer Module Installed" >> "${LOG_FILE}"
+    check_status "Installing Developer Module"
 }
 
 # Add Persian Sounds
@@ -122,6 +136,7 @@ add_persian_sounds() {
     chmod -R 777 "${SOUND_DIR}/pr"
     chown -R asterisk:asterisk "${SOUND_DIR}/pr"
     echo "**Persian Sounds Added" >> "${LOG_FILE}"
+    check_status "Adding Persian Sounds"
 }
 
 # Add Vitenant Theme
@@ -150,6 +165,7 @@ add_vitenant_theme() {
     cp -f theme/pbxconfig/footer_content.php "${WWW_DIR}/admin/views"
     chmod 777 "${WWW_DIR}/admin/views/footer_content.php"
     chown -R asterisk:asterisk "${WWW_DIR}/admin/views/footer_content.php"
+    check_status "Adding Vitenant Theme"
 }
 
 # Edit Issabel Modules
@@ -173,12 +189,14 @@ edit_issabel_modules() {
     mv "${WWW_DIR}/lang/fa.lang" "${WWW_DIR}/lang/fa.lang.000"
     cp -f issabelmodules/fa.lang "${WWW_DIR}/lang/"
     echo "**Issabel Modules Edited" >> "${LOG_FILE}"
+    check_status "Editing Issabel Modules"
 }
 
 # Install Downloadable Files
 downloadable_files() {
     cp -rf downloadable/download "${WWW_DIR}/"
     echo "**Downloadable Files Added" >> "${LOG_FILE}"
+    check_status "Installing Downloadable Files"
 }
 
 # Install Bulk DIDs Module
@@ -188,6 +206,7 @@ bulkdids() {
         amportal a ma install bulkdids
     fi
     echo "**Bulk DIDs Module Added" >> "${LOG_FILE}"
+    check_status "Installing Bulk DIDs"
 }
 
 # Install Asternic CDR
@@ -197,6 +216,7 @@ asterniccdr() {
         amportal a ma install asternic_cdr
     fi
     echo "**Asternic CDR Module Added" >> "${LOG_FILE}"
+    check_status "Installing Asternic CDR"
 }
 
 # Install Asternic Call Stats Lite
@@ -223,6 +243,7 @@ asternic-callStats-lite() {
     issabel-menumerge asternic.xml
     cd ..
     echo "**Asternic Call Stats Lite Installed" >> "${LOG_FILE}"
+    check_status "Installing Asternic Call Stats Lite"
 }
 
 # Install Boss Secretary Module
@@ -232,6 +253,7 @@ bosssecretary() {
         amportal a ma install bosssecretary
     fi
     echo "**Boss Secretary Module Added" >> "${LOG_FILE}"
+    check_status "Installing Boss Secretary"
 }
 
 # Install Superfecta Module
@@ -241,6 +263,7 @@ superfecta() {
         amportal a ma install superfecta
     fi
     echo "**Superfecta Module Added" >> "${LOG_FILE}"
+    check_status "Installing Superfecta"
 }
 
 # Install Feature Codes
@@ -264,12 +287,14 @@ featurecodes() {
         mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "$query" >/dev/null 2>&1
     done
     echo "**VOIZ Feature Codes Added" >> "${LOG_FILE}"
+    check_status "Installing Feature Codes"
 }
 
 # Install EasyVPN
 easyvpn() {
     yum install issabel-easyvpn --nogpgcheck -y >/dev/null 2>&1
     echo "**OpenVPN Module Added" >> "${LOG_FILE}"
+    check_status "Installing EasyVPN"
 }
 
 # Install Survey
@@ -278,6 +303,7 @@ survey() {
     chmod -R 777 /var/lib/asterisk/agi-bin/voipiranagi
     mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "REPLACE INTO miscdests (id,description,destdial) VALUES('101','نظرسنجی-ویز','4454')"
     echo "**Queue Survey Module Added" >> "${LOG_FILE}"
+    check_status "Installing Survey"
 }
 
 # Install Vtiger CRM
@@ -299,6 +325,7 @@ vtiger() {
     sed -i "s/123456/$rootpw/g" "${WWW_DIR}/crm/config.inc.php"
     issabel-menumerge crm-menu.xml
     echo "**Vtiger CRM Installed" >> "${LOG_FILE}"
+    check_status "Installing Vtiger CRM"
     cd /tmp
     rm -rf vtiger crm.zip
 }
@@ -309,12 +336,14 @@ webphone() {
     chown -R asterisk:asterisk "${WWW_DIR}/webphone"/*
     chown asterisk:asterisk "${WWW_DIR}/webphone"
     echo "**WebPhone Module Added" >> "${LOG_FILE}"
+    check_status "Installing Webphone"
 }
 
 # Install Htop
 htop() {
     yum install htop traceroute -y >/dev/null 2>&1
     echo "**HTOP Util Installed" >> "${LOG_FILE}"
+    check_status "Installing HTOP"
 }
 
 # Install SNGREP
@@ -328,6 +357,7 @@ sngrep() {
     make install
     cd ..
     echo "**SNGREP Util Installed" >> "${LOG_FILE}"
+    check_status "Installing SNGREP"
 }
 
 # Install VOIZ Menu
@@ -336,6 +366,7 @@ voiz_menu() {
     cp -f voiz-installation/menu.db /var/www/db/
     chown asterisk:asterisk /var/www/db/menu.db
     echo "**VOIZ Guide Menu Added" >> "${LOG_FILE}"
+    check_status "Installing VOIZ Menu"
 }
 
 # Set CID
@@ -352,6 +383,7 @@ set_cid() {
 
     echo -e "\n;;VOIPIRAN.io\n[to-cidformatter]\nexten => _.,1,Set(IS_PSTN_CALL=1)\nexten => _.,n,NoOp(start-from-pstn)\nexten => _.,n,Gosub(numberformatter,s,1)\nexten => _.,n,NoOp(end-from-pstn)\nexten => _.,n,Goto(from-pstn,s,1)" >> "$FILE"
     echo "**Set CID Module Added" >> "${LOG_FILE}"
+    check_status "Setting CID"
 }
 
 # Install Issabel Call Monitoring
@@ -364,11 +396,18 @@ issbel-callmonitoring() {
     issabel-menumerge software/control.xml
     cd ..
     echo "**Issabel Call Monitoring Installed" >> "${LOG_FILE}"
+    check_status "Installing Issabel Call Monitoring"
 }
 
 # Update Issabel
 update_issabel() {
-    yum update -y >/dev/null 2>&1
+    echo "شروع آپدیت ایزابل - ممکن است چند دقیقه طول بکشد..." >> "${LOG_FILE}"
+    yum update -y >> "${LOG_FILE}" 2>&1
+    if [ $? -ne 0 ]; then
+        echo "خطا در آپدیت ایزابل. جزئیات در $LOG_FILE" >> "${LOG_FILE}"
+        whiptail --title "Error" --msgbox "خطا در آپدیت ایزابل. جزئیات در $LOG_FILE" 8 78
+        exit 1
+    fi
     echo "**Issabel Updated" >> "${LOG_FILE}"
 }
 
@@ -386,6 +425,7 @@ install_advanced_listening() {
     else
         echo "**Advanced Listening Installation Failed" >> "${LOG_FILE}"
     fi
+    check_status "Installing Advanced Listening"
 }
 
 # Install Web Phone Panel (VOIZ-WebPhone)
@@ -402,6 +442,7 @@ install_web_phone_panel() {
     else
         echo "**Web Phone Panel Installation Failed" >> "${LOG_FILE}"
     fi
+    check_status "Installing Web Phone Panel"
 }
 
 # Install Queue Dashboard (VOIZ-QueuePanel)
@@ -418,6 +459,7 @@ install_queue_dashboard() {
     else
         echo "**Queue Dashboard Installation Failed" >> "${LOG_FILE}"
     fi
+    check_status "Installing Queue Dashboard"
 }
 
 # Install CallerID Formatter (AsteriskCalleridFormatter)
@@ -434,63 +476,64 @@ install_callerid_formatter() {
     else
         echo "**CallerID Formatter Installation Failed" >> "${LOG_FILE}"
     fi
+    check_status "Installing CallerID Formatter"
 }
 
 # Main installation process
 {
     [ "$UPDATEISSABEL" = "true" ] && update_issabel
-    update_progress "در حال آپدیت ایزابل... ممکن است چند دقیقه طول بکشد"
+    update_progress "مرحله 1: آپدیت ایزابل - ممکن است چند دقیقه طول بکشد"
     setversion
-    update_progress "در حال تنظیم نسخه VOIZ..."
+    update_progress "مرحله 2: تنظیم نسخه VOIZ"
     install_sourcegaurdian
-    update_progress "در حال نصب SourceGuardian..."
+    update_progress "مرحله 3: نصب SourceGuardian"
     install_webmin
-    update_progress "در حال نصب Webmin..."
+    update_progress "مرحله 4: نصب Webmin"
     add_persian_sounds
-    update_progress "در حال اضافه کردن صداهای فارسی..."
+    update_progress "مرحله 5: اضافه کردن صداهای فارسی"
     install_developer
-    update_progress "در حال نصب ماژول Developer..."
+    update_progress "مرحله 6: نصب ماژول Developer"
     asterniccdr
-    update_progress "در حال نصب Asternic CDR..."
+    update_progress "مرحله 7: نصب Asternic CDR"
     add_vitenant_theme
-    update_progress "در حال اضافه کردن تم Vitenant..."
+    update_progress "مرحله 8: اضافه کردن تم Vitenant"
     edit_issabel_modules
-    update_progress "در حال ویرایش ماژول‌های Issabel..."
+    update_progress "مرحله 9: ویرایش ماژول‌های Issabel"
     asternic-callStats-lite
-    update_progress "در حال نصب Asternic Call Stats Lite... ممکن است چند دقیقه طول بکشد"
+    update_progress "مرحله 10: نصب Asternic Call Stats Lite - ممکن است چند دقیقه طول بکشد"
     downloadable_files
-    update_progress "در حال نصب فایل‌های downloadable..."
+    update_progress "مرحله 11: نصب فایل‌های downloadable"
     #bulkdids
-    update_progress "در حال نصب Bulk DIDs (غیرفعال)..."
+    update_progress "مرحله 12: نصب Bulk DIDs (غیرفعال)"
     [ "$issabel_ver" -eq 4 ] && bosssecretary
-    update_progress "در حال نصب Boss Secretary..."
+    update_progress "مرحله 13: نصب Boss Secretary"
     superfecta
-    update_progress "در حال نصب Superfecta..."
+    update_progress "مرحله 14: نصب Superfecta"
     #featurecodes
-    update_progress "در حال نصب Feature Codes (غیرفعال)..."
+    update_progress "مرحله 15: نصب Feature Codes (غیرفعال)"
     survey
-    update_progress "در حال نصب Survey..."
+    update_progress "مرحله 16: نصب Survey"
     [ "$CRMINSTALL" = "true" ] && vtiger
-    update_progress "در حال نصب Vtiger CRM... ممکن است چند دقیقه طول بکشد"
+    update_progress "مرحله 17: نصب Vtiger CRM - ممکن است چند دقیقه طول بکشد"
     set_cid
-    update_progress "در حال تنظیم CID..."
+    update_progress "مرحله 18: تنظیم CID"
     [ "$NETUTILINSTALL" = "true" ] && htop
-    update_progress "در حال نصب HTOP..."
+    update_progress "مرحله 19: نصب HTOP"
     [ "$NETUTILINSTALL" = "true" ] && sngrep
-    update_progress "در حال نصب SNGREP..."
+    update_progress "مرحله 20: نصب SNGREP"
     issbel-callmonitoring
-    update_progress "در حال نصب Issabel Call Monitoring..."
+    update_progress "مرحله 21: نصب Issabel Call Monitoring"
     voiz_menu
-    update_progress "در حال نصب VOIZ Menu..."
+    update_progress "مرحله 22: نصب VOIZ Menu"
     [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
-    update_progress "در حال نصب شنود پیشرفته..."
+    update_progress "مرحله 23: نصب شنود پیشرفته"
     [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
-    update_progress "در حال نصب وب فون پنل..."
+    update_progress "مرحله 24: نصب وب فون پنل"
     [ "$QUEUEDASHBOARDINSTALL" = "true" ] && install_queue_dashboard
-    update_progress "در حال نصب داشبورد زنده صف..."
+    update_progress "مرحله 25: نصب داشبورد زنده صف"
     [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
-    update_progress "در حال نصب اصلاح کالرآی دی..."
-} | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 0
+    update_progress "مرحله 26: نصب اصلاح کالرآی دی"
+} | whiptail --gauge "نصب VOIZ در حال انجام است... لطفاً صبر کنید" 8 50 0
 
 # Finalize
 systemctl restart httpd >/dev/null 2>&1
