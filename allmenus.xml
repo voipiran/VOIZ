@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<module> 
+  <menulist> 
+
+<menuitem menuid="webphone" desc="ویتایگر"
+parent="agenda" module="no" link="webphone" order="71"> 
+      <permissions> 
+        <group id="1" name="administrator" desc="total access"></group> 
+      </permissions> 
+    </menuitem> 
+	
+  </menulist> 
+</module>
