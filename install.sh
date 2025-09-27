@@ -188,7 +188,7 @@ asterniccdr() {
     check_status "Installing Asternic CDR"
 }
 # Install Asternic Call Stats Lite
-asternic-callStats-lite() {
+asternic_callStats_lite() {
     cd software >/dev/null 2>&1
     tar zvxf asternic-stats-1.8.tgz >/dev/null 2>&1
     cd asternic-stats >/dev/null 2>&1
@@ -341,7 +341,7 @@ set_cid() {
     check_status "Setting CID"
 }
 # Install Issabel Call Monitoring
-issbel-callmonitoring() {
+issbel_callmonitoring() {
     curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip >/dev/null 2>&1
     unzip -o callmonitoring.zip >/dev/null 2>&1
     cd IssabelCallMonitoring-main >/dev/null 2>&1
@@ -434,18 +434,18 @@ install_callerid_formatter() {
     update_progress "Adding Vitenant Theme"
     edit_issabel_modules
     update_progress "Editing Issabel Modules"
-    asternic-callStats-lite
+    asternic_callStats_lite
     update_progress "Installing Asternic Call Stats Lite - This may take a few minutes"
     downloadable_files
     update_progress "Installing Downloadable Files"
-    #bulkdids
-    update_progress "Installing Bulk DIDs (Disabled)"
+    bulkdids
+    update_progress "Installing Bulk DIDs"
     [ "$issabel_ver" -eq 4 ] && bosssecretary
     update_progress "Installing Boss Secretary"
     superfecta
     update_progress "Installing Superfecta"
-    #featurecodes
-    update_progress "Installing Feature Codes (Disabled)"
+    featurecodes
+    update_progress "Installing Feature Codes"
     survey
     update_progress "Installing Survey"
     [ "$CRMINSTALL" = "true" ] && vtiger
@@ -456,7 +456,7 @@ install_callerid_formatter() {
     update_progress "Installing HTOP"
     [ "$NETUTILINSTALL" = "true" ] && sngrep
     update_progress "Installing SNGREP"
-    issbel-callmonitoring
+    issbel_callmonitoring
     update_progress "Installing Issabel Call Monitoring"
     voiz_menu
     update_progress "Installing VOIZ Menu"
