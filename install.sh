@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Constants for paths
 CONFIG_DIR="/etc"
 WWW_DIR="/var/www/html"
@@ -8,35 +7,29 @@ SOUND_DIR="/var/lib/asterisk/sounds"
 LOG_FILE="voiz-installation.log"
 MODULES_DIR="${WWW_DIR}/modules"
 THEME_DIR="${WWW_DIR}/themes"
-
 # Initialize log file
 > "${LOG_FILE}"
 echo "VOIZ Installation Log - Start: $(date)" >> "${LOG_FILE}"
-
 # Fetch MySQL root password
 rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' "${CONFIG_DIR}/issabel.conf")
 if [ -z "$rootpw" ]; then
     echo "Error: Could not retrieve MySQL root password from /etc/issabel.conf" >> "${LOG_FILE}"
     exit 1
 fi
-
 # Get PHP major version
 php_version=$(php -r 'echo PHP_MAJOR_VERSION;')
 issabel_ver=$([ "$php_version" -eq 5 ] && echo 5 || echo 4)
-
 # Welcome message
-whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io - شروع نصب شگفت‌انگیز!" 8 78
-
+whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io - Starting the amazing installation!" 8 78
 # Select features to install
-SELECTED=$(whiptail --title "انتخاب ویژگی‌ها" --checklist \
-"لیست ویژگی‌ها برای نصب" 20 100 12 \
-"Vtiger CRM" "ویتایگر با تقویم شمسی" ON \
+SELECTED=$(whiptail --title "Select Features" --checklist \
+"List of features to install" 20 100 12 \
+"Vtiger CRM" "Vtiger with Shamsi calendar" ON \
 "NetworkUtilities" "SNGREP, HTOP" ON \
-"AdvancedListening" "شنود پیشرفته" ON \
-"WebPhonePanel" "وب فون پنل" ON \
-"QueueDashboard" "داشبورد زنده صف" ON \
-"CallerIDFormatter" "اصلاح کالرآی دی" ON 3>&1 1>&2 2>&3)
-
+"AdvancedListening" "Advanced Listening" ON \
+"WebPhonePanel" "Web Phone Panel" ON \
+"QueueDashboard" "Live Queue Dashboard" ON \
+"CallerIDFormatter" "CallerID Formatter" ON 3>&1 1>&2 2>&3)
 eval "ARRAY=($SELECTED)"
 for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"CRM"* ]] && CRMINSTALL=true
@@ -46,12 +39,10 @@ for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"QueueDashboard"* ]] && QUEUEDASHBOARDINSTALL=true
     [[ "$CHOICE" == *"CallerIDFormatter"* ]] && CALLERIDFORMATTERINSTALL=true
 done
-
 # Select language
-Lang=$(whiptail --title "انتخاب سبک تم VOIZ" --menu "زبان مورد نظر را انتخاب کنید" 25 78 5 \
-"Persian" "پوسته و محیط فارسی با تقویم شمسی" \
-"English" "پوسته و محیط انگلیسی با تقویم شمسی" 3>&1 1>&2 2>&3)
-
+Lang=$(whiptail --title "Choose VOIZ Theme Style" --menu "Select a language" 25 78 5 \
+"Persian" "Persian theme and interface with Shamsi calendar" \
+"English" "English theme and interface with Shamsi calendar" 3>&1 1>&2 2>&3)
 # Progress bar function
 COUNTER=0
 update_progress() {
@@ -60,14 +51,12 @@ update_progress() {
     echo -e "$message\n$COUNTER" >> "${LOG_FILE}"
     echo -e "$message\n$COUNTER"
 }
-
 # Check command success (silent errors)
 check_status() {
     if [ $? -ne 0 ]; then
         echo "Error: $1 failed at $(date)" >> "${LOG_FILE}"
     fi
 }
-
 # Set VOIZ version
 setversion() {
     local version=5.6
@@ -81,7 +70,6 @@ setversion() {
     echo "**VOIZ Version Set to $version" >> "${LOG_FILE}"
     check_status "Setting VOIZ version"
 }
-
 # Install SourceGuardian
 install_sourcegaurdian() {
     if [ "$php_version" -eq 5 ]; then
@@ -100,21 +88,18 @@ install_sourcegaurdian() {
     echo "**SourceGuardian Installed" >> "${LOG_FILE}"
     check_status "Installing SourceGuardian"
 }
-
 # Install Webmin
 install_webmin() {
     rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
     echo "**Webmin Installed" >> "${LOG_FILE}"
     check_status "Installing Webmin"
 }
-
 # Install Developer Module
 install_developer() {
     rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
     echo "**Developer Module Installed" >> "${LOG_FILE}"
     check_status "Installing Developer Module"
 }
-
 # Add Persian Sounds
 add_persian_sounds() {
     for conf in sip_custom.conf iax_custom.conf pjsip_custom.conf; do
@@ -123,24 +108,20 @@ add_persian_sounds() {
         echo -e "\nlanguage=pr" >> "${ASTERISK_DIR}/${conf}.000" >/dev/null 2>&1
         mv -f "${ASTERISK_DIR}/${conf}.000" "${ASTERISK_DIR}/${conf}" >/dev/null 2>&1
     done
-
     cp -f persiansounds/say.conf "${ASTERISK_DIR}" >/dev/null 2>&1
     chmod 777 "${ASTERISK_DIR}/say.conf" >/dev/null 2>&1
     chown asterisk:asterisk "${ASTERISK_DIR}/say.conf" >/dev/null 2>&1
-
     cp -rf persiansounds/pr "${SOUND_DIR}" >/dev/null 2>&1
     chmod -R 777 "${SOUND_DIR}/pr" >/dev/null 2>&1
     chown -R asterisk:asterisk "${SOUND_DIR}/pr" >/dev/null 2>&1
     echo "**Persian Sounds Added" >> "${LOG_FILE}"
     check_status "Adding Persian Sounds"
 }
-
 # Add Vitenant Theme
 add_vitenant_theme() {
     cp -f theme/favicon.ico "${WWW_DIR}" >/dev/null 2>&1
     cp -rf theme/vitenant "${THEME_DIR}" >/dev/null 2>&1
     touch -r "${WWW_DIR}"/* "${THEME_DIR}"/* "${THEME_DIR}/vitenant"/* >/dev/null 2>&1
-
     if [ "$Lang" = "Persian" ]; then
         sqlite3 /var/www/db/settings.db "update settings set value='fa' where key='language';" >/dev/null 2>&1
         sqlite3 /var/www/db/settings.db "update settings set value='vitenant' where key='theme';" >/dev/null 2>&1
@@ -150,11 +131,9 @@ add_vitenant_theme() {
         sqlite3 /var/www/db/settings.db "update settings set value='tenant' where key='theme';" >/dev/null 2>&1
         echo "**English Theme Added" >> "${LOG_FILE}"
     fi
-
     cp -rf theme/pbxconfig/css "${WWW_DIR}/admin/assets" >/dev/null 2>&1
     chmod -R 777 "${WWW_DIR}/admin/assets/css" >/dev/null 2>&1
     chown -R asterisk:asterisk "${WWW_DIR}/admin/assets/css" >/dev/null 2>&1
-
     cp -f theme/pbxconfig/images/issabelpbx_small.png "${WWW_DIR}/admin/images/" >/dev/null 2>&1
     cp -f theme/pbxconfig/images/tango.png "${WWW_DIR}/admin/images/" >/dev/null 2>&1
     chmod -R 777 "${WWW_DIR}/admin/images/"*.png >/dev/null 2>&1
@@ -163,7 +142,6 @@ add_vitenant_theme() {
     chown -R asterisk:asterisk "${WWW_DIR}/admin/views/footer_content.php" >/dev/null 2>&1
     check_status "Adding Vitenant Theme"
 }
-
 # Edit Issabel Modules
 edit_issabel_modules() {
     cp -rf /var/www/html/modules/* /var/www/html/modules000 >/dev/null 2>&1
@@ -171,7 +149,6 @@ edit_issabel_modules() {
     touch -r "${MODULES_DIR}"/* >/dev/null 2>&1
     chown -R asterisk:asterisk "${MODULES_DIR}"/* >/dev/null 2>&1
     chown asterisk:asterisk "${MODULES_DIR}" >/dev/null 2>&1
-
     cp -f jalalicalendar/date.php "${WWW_DIR}/libs/" >/dev/null 2>&1
     cp -f jalalicalendar/params.php "${WWW_DIR}/libs/" >/dev/null 2>&1
     cp -rf jalalicalendar/JalaliJSCalendar "${WWW_DIR}/libs/" >/dev/null 2>&1
@@ -179,7 +156,6 @@ edit_issabel_modules() {
     chown -R asterisk:asterisk "${WWW_DIR}/libs/mylib" >/dev/null 2>&1
     mv "${WWW_DIR}/libs/paloSantoForm.class.php" "${WWW_DIR}/libs/paloSantoForm.class.php.000" >/dev/null 2>&1
     cp -f issabelmodules/paloSantoForm.class.php "${WWW_DIR}/libs/" >/dev/null 2>&1
-
     sed -i "s/\$('.componentSelect'/\/\/\$('\.componentSelect/g" "${WWW_DIR}/admin/assets/js/pbxlib.js" >/dev/null 2>&1
     cp -rf asteriskjalalical/jalalidate/ "${ASTERISK_DIR}" >/dev/null 2>&1
     mv "${WWW_DIR}/lang/fa.lang" "${WWW_DIR}/lang/fa.lang.000" >/dev/null 2>&1
@@ -187,14 +163,12 @@ edit_issabel_modules() {
     echo "**Issabel Modules Edited" >> "${LOG_FILE}"
     check_status "Editing Issabel Modules"
 }
-
 # Install Downloadable Files
 downloadable_files() {
     cp -rf downloadable/download "${WWW_DIR}/" >/dev/null 2>&1
     echo "**Downloadable Files Added" >> "${LOG_FILE}"
     check_status "Installing Downloadable Files"
 }
-
 # Install Bulk DIDs Module
 bulkdids() {
     if [ ! -d "${WWW_DIR}/admin/modules/bulkdids" ]; then
@@ -204,7 +178,6 @@ bulkdids() {
     echo "**Bulk DIDs Module Added" >> "${LOG_FILE}"
     check_status "Installing Bulk DIDs"
 }
-
 # Install Asternic CDR
 asterniccdr() {
     if [ ! -d "${WWW_DIR}/admin/modules/asternic_cdr" ]; then
@@ -214,7 +187,6 @@ asterniccdr() {
     echo "**Asternic CDR Module Added" >> "${LOG_FILE}"
     check_status "Installing Asternic CDR"
 }
-
 # Install Asternic Call Stats Lite
 asternic-callStats-lite() {
     cd software >/dev/null 2>&1
@@ -241,7 +213,6 @@ asternic-callStats-lite() {
     echo "**Asternic Call Stats Lite Installed" >> "${LOG_FILE}"
     check_status "Installing Asternic Call Stats Lite"
 }
-
 # Install Boss Secretary Module
 bosssecretary() {
     if [ "$issabel_ver" -eq 4 ] && [ ! -d "${WWW_DIR}/admin/modules/bosssecretary" ]; then
@@ -251,7 +222,6 @@ bosssecretary() {
     echo "**Boss Secretary Module Added" >> "${LOG_FILE}"
     check_status "Installing Boss Secretary"
 }
-
 # Install Superfecta Module
 superfecta() {
     if [ ! -d "${WWW_DIR}/admin/modules/superfecta" ]; then
@@ -261,23 +231,21 @@ superfecta() {
     echo "**Superfecta Module Added" >> "${LOG_FILE}"
     check_status "Installing Superfecta"
 }
-
 # Install Feature Codes
 featurecodes() {
     cp -f customdialplan/extensions_voipiran_featurecodes.conf "${ASTERISK_DIR}/" >/dev/null 2>&1
     sed -i '/\[from\-internal\-custom\]/a include => voipiran-features' "${ASTERISK_DIR}/extensions_custom.conf" >/dev/null 2>&1
     echo -e "\n#include extensions_voipiran_featurecodes.conf" >> "${ASTERISK_DIR}/extensions_custom.conf" >/dev/null 2>&1
-
     local queries=(
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIZ-بیان تاریخ و زمان شمسی','*200',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*200'"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATE-Jalali','VOIZ-بیان تاریخ به شمسی','*201',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*201'"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-TIME-Jalali','VOIZ-بیان زمان به فارسی','*202',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*202'"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chanspy-Simple','VOIZ-شنود ساده، کد + شماره مقصد','*30',NULL,'1','1')"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Whisper','VOIZ-شنود و نجوا، کد + شماره مقصد','*31',NULL,'1','1')"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Only-Listen','VOIZ-شنود صدای کارشناس، کد + شماره مقصد','*32',NULL,'1','1')"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Private-Whisper','VOIZ-صحبت با کارشناس بدون شنود، کد + شماره مقصد','*33',NULL,'1','1')"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Barge','VOIZ-شنود و مکالمه با هر دو طرف، کد + شماره مقصد','*34',NULL,'1','1')"
-        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-DTMF','VOIZ-شنود و تغییر حالت شنود حین مکالمه با 4 و 5 و 6، کد + شماره مقصد','*35',NULL,'1','1')"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIZ-Announce Jalali Date and Time','*200',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*200'"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATE-Jalali','VOIZ-Announce Jalali Date','*201',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*201'"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-TIME-Jalali','VOIZ-Announce Time in Persian','*202',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*202'"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chanspy-Simple','VOIZ-Simple Listening, Code + Destination Number','*30',NULL,'1','1')"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Whisper','VOIZ-Listen and Whisper, Code + Destination Number','*31',NULL,'1','1')"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Only-Listen','VOIZ-Listen to Agent Voice, Code + Destination Number','*32',NULL,'1','1')"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Private-Whisper','VOIZ-Talk to Agent Without Listening, Code + Destination Number','*33',NULL,'1','1')"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Barge','VOIZ-Listen and Talk to Both Parties, Code + Destination Number','*34',NULL,'1','1')"
+        "insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-DTMF','VOIZ-Listen and Switch Listening Mode During Call with 4, 5, 6, Code + Destination Number','*35',NULL,'1','1')"
     )
     for query in "${queries[@]}"; do
         mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "$query" >/dev/null 2>&1
@@ -285,23 +253,20 @@ featurecodes() {
     echo "**VOIZ Feature Codes Added" >> "${LOG_FILE}"
     check_status "Installing Feature Codes"
 }
-
 # Install EasyVPN
 easyvpn() {
     yum install issabel-easyvpn --nogpgcheck -y >/dev/null 2>&1
     echo "**OpenVPN Module Added" >> "${LOG_FILE}"
     check_status "Installing EasyVPN"
 }
-
 # Install Survey
 survey() {
     cp -rf voipiranagi /var/lib/asterisk/agi-bin >/dev/null 2>&1
     chmod -R 777 /var/lib/asterisk/agi-bin/voipiranagi >/dev/null 2>&1
-    mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "REPLACE INTO miscdests (id,description,destdial) VALUES('101','نظرسنجی-ویز','4454')" >/dev/null 2>&1
+    mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "REPLACE INTO miscdests (id,description,destdial) VALUES('101','VOIZ-Survey','4454')" >/dev/null 2>&1
     echo "**Queue Survey Module Added" >> "${LOG_FILE}"
     check_status "Installing Survey"
 }
-
 # Install Vtiger CRM
 vtiger() {
     cd /tmp >/dev/null 2>&1
@@ -325,7 +290,6 @@ vtiger() {
     cd /tmp >/dev/null 2>&1
     rm -rf vtiger crm.zip >/dev/null 2>&1
 }
-
 # Install Webphone
 webphone() {
     cp -rf webphone "${WWW_DIR}" >/dev/null 2>&1
@@ -334,14 +298,12 @@ webphone() {
     echo "**WebPhone Module Added" >> "${LOG_FILE}"
     check_status "Installing Webphone"
 }
-
 # Install Htop
 htop() {
     yum install htop traceroute -y >/dev/null 2>&1
     echo "**HTOP Util Installed" >> "${LOG_FILE}"
     check_status "Installing HTOP"
 }
-
 # Install SNGREP
 sngrep() {
     yum install -y git ncurses-devel libpcap-devel >/dev/null 2>&1
@@ -355,7 +317,6 @@ sngrep() {
     echo "**SNGREP Util Installed" >> "${LOG_FILE}"
     check_status "Installing SNGREP"
 }
-
 # Install VOIZ Menu
 voiz_menu() {
     #mv /var/www/db/menu.db /var/www/db/menu.db.000 >/dev/null 2>&1
@@ -364,7 +325,6 @@ voiz_menu() {
     #echo "**VOIZ Guide Menu Added" >> "${LOG_FILE}"
     #check_status "Installing VOIZ Menu"
 }
-
 # Set CID
 set_cid() {
     local FILE="${ASTERISK_DIR}/extensions_custom.conf"
@@ -376,12 +336,10 @@ set_cid() {
     cp -f software/extensions_voipiran_numberformatter.conf "${ASTERISK_DIR}" >/dev/null 2>&1
     chown asterisk:asterisk "${ASTERISK_DIR}/extensions_voipiran_numberformatter.conf" >/dev/null 2>&1
     chmod 777 "${ASTERISK_DIR}/extensions_voipiran_numberformatter.conf" >/dev/null 2>&1
-
     echo -e "\n;;VOIPIRAN.io\n[to-cidformatter]\nexten => _.,1,Set(IS_PSTN_CALL=1)\nexten => _.,n,NoOp(start-from-pstn)\nexten => _.,n,Gosub(numberformatter,s,1)\nexten => _.,n,NoOp(end-from-pstn)\nexten => _.,n,Goto(from-pstn,s,1)" >> "$FILE" >/dev/null 2>&1
     echo "**Set CID Module Added" >> "${LOG_FILE}"
     check_status "Setting CID"
 }
-
 # Install Issabel Call Monitoring
 issbel-callmonitoring() {
     curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip >/dev/null 2>&1
@@ -394,7 +352,6 @@ issbel-callmonitoring() {
     echo "**Issabel Call Monitoring Installed" >> "${LOG_FILE}"
     check_status "Installing Issabel Call Monitoring"
 }
-
 # Install Advanced Listening (AsteriskChanSpyPro)
 install_advanced_listening() {
     cd /tmp >/dev/null 2>&1
@@ -411,7 +368,6 @@ install_advanced_listening() {
     fi
     check_status "Installing Advanced Listening"
 }
-
 # Install Web Phone Panel (VOIZ-WebPhone)
 install_web_phone_panel() {
     cd /tmp >/dev/null 2>&1
@@ -428,7 +384,6 @@ install_web_phone_panel() {
     fi
     check_status "Installing Web Phone Panel"
 }
-
 # Install Queue Dashboard (VOIZ-QueuePanel)
 install_queue_dashboard() {
     cd /tmp >/dev/null 2>&1
@@ -445,7 +400,6 @@ install_queue_dashboard() {
     fi
     check_status "Installing Queue Dashboard"
 }
-
 # Install CallerID Formatter (AsteriskCalleridFormatter)
 install_callerid_formatter() {
     cd /tmp >/dev/null 2>&1
@@ -462,70 +416,66 @@ install_callerid_formatter() {
     fi
     check_status "Installing CallerID Formatter"
 }
-
 # Main installation process
 {
     setversion
-    update_progress "مرحله 1: تنظیم نسخه VOIZ"
+    update_progress "Setting VOIZ Version"
     install_sourcegaurdian
-    update_progress "مرحله 2: نصب SourceGuardian"
+    update_progress "Installing SourceGuardian"
     install_webmin
-    update_progress "مرحله 3: نصب Webmin"
+    update_progress "Installing Webmin"
     add_persian_sounds
-    update_progress "مرحله 4: اضافه کردن صداهای فارسی"
+    update_progress "Adding Persian Sounds"
     install_developer
-    update_progress "مرحله 5: نصب ماژول Developer"
+    update_progress "Installing Developer Module"
     asterniccdr
-    update_progress "مرحله 6: نصب Asternic CDR"
+    update_progress "Installing Asternic CDR"
     add_vitenant_theme
-    update_progress "مرحله 7: اضافه کردن تم Vitenant"
+    update_progress "Adding Vitenant Theme"
     edit_issabel_modules
-    update_progress "مرحله 8: ویرایش ماژول‌های Issabel"
+    update_progress "Editing Issabel Modules"
     asternic-callStats-lite
-    update_progress "مرحله 9: نصب Asternic Call Stats Lite - ممکن است چند دقیقه طول بکشد"
+    update_progress "Installing Asternic Call Stats Lite - This may take a few minutes"
     downloadable_files
-    update_progress "مرحله 10: نصب فایل‌های downloadable"
+    update_progress "Installing Downloadable Files"
     #bulkdids
-    update_progress "مرحله 11: نصب Bulk DIDs (غیرفعال)"
+    update_progress "Installing Bulk DIDs (Disabled)"
     [ "$issabel_ver" -eq 4 ] && bosssecretary
-    update_progress "مرحله 12: نصب Boss Secretary"
+    update_progress "Installing Boss Secretary"
     superfecta
-    update_progress "مرحله 13: نصب Superfecta"
+    update_progress "Installing Superfecta"
     #featurecodes
-    update_progress "مرحله 14: نصب Feature Codes (غیرفعال)"
+    update_progress "Installing Feature Codes (Disabled)"
     survey
-    update_progress "مرحله 15: نصب Survey"
+    update_progress "Installing Survey"
     [ "$CRMINSTALL" = "true" ] && vtiger
-    update_progress "مرحله 16: نصب Vtiger CRM - ممکن است چند دقیقه طول بکشد"
+    update_progress "Installing Vtiger CRM - This may take a few minutes"
     set_cid
-    update_progress "مرحله 17: تنظیم CID"
+    update_progress "Setting CID"
     [ "$NETUTILINSTALL" = "true" ] && htop
-    update_progress "مرحله 18: نصب HTOP"
+    update_progress "Installing HTOP"
     [ "$NETUTILINSTALL" = "true" ] && sngrep
-    update_progress "مرحله 19: نصب SNGREP"
+    update_progress "Installing SNGREP"
     issbel-callmonitoring
-    update_progress "مرحله 20: نصب Issabel Call Monitoring"
+    update_progress "Installing Issabel Call Monitoring"
     voiz_menu
-    update_progress "مرحله 21: نصب VOIZ Menu"
+    update_progress "Installing VOIZ Menu"
     [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
-    update_progress "مرحله 22: نصب شنود پیشرفته"
+    update_progress "Installing Advanced Listening"
     [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
-    update_progress "مرحله 23: نصب وب فون پنل"
+    update_progress "Installing Web Phone Panel"
     [ "$QUEUEDASHBOARDINSTALL" = "true" ] && install_queue_dashboard
-    update_progress "مرحله 24: نصب داشبورد زنده صف"
+    update_progress "Installing Live Queue Dashboard"
     [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
-    update_progress "مرحله 25: نصب اصلاح کالرآی دی"
-} | whiptail --title "نصب VOIZ - تجربه‌ای بی‌نظیر" --gauge "در حال نصب: $message" 10 70 0
-
+    update_progress "Installing CallerID Formatter"
+} | whiptail --title "VOIZ Installation - A Remarkable Experience" --gauge "Installing: $message" 10 70 0
 # Finalize
 systemctl restart httpd >/dev/null 2>&1
 amportal a r >/dev/null 2>&1
-
 # Final Installation Summary Report
 echo -e "\033[1;34m=====================================\033[0m"
-echo -e "\033[1;34m     گزارش نهایی نصب VOIZ           \033[0m"
+echo -e "\033[1;34m VOIZ Installation Final Report \033[0m"
 echo -e "\033[1;34m=====================================\033[0m"
-
 # Extract and display status for each component
 grep -E "Successfully|Failed|Installed|Added|Updated|Set" "${LOG_FILE}" | while read -r line; do
     if [[ $line == *"Successfully"* ]]; then
@@ -536,5 +486,4 @@ grep -E "Successfully|Failed|Installed|Added|Updated|Set" "${LOG_FILE}" | while 
         echo -e "\033[33m$line\033[0m"
     fi
 done
-
 echo -e "\033[1;34m=====================================\033[0m"
