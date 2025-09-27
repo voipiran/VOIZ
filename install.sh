@@ -318,9 +318,9 @@ sngrep() {
     check_status "Installing SNGREP"
 }
 # Install VOIZ Menu
-voiz_menu() {
 
-}
+
+
 # Set CID
 set_cid() {
     local FILE="${ASTERISK_DIR}/extensions_custom.conf"
@@ -454,8 +454,8 @@ install_callerid_formatter() {
     update_progress "Installing SNGREP"
     issbel_callmonitoring
     update_progress "Installing Issabel Call Monitoring"
-    voiz_menu
-    update_progress "Installing VOIZ Menu"
+    #voiz_menu
+    #update_progress "Installing VOIZ Menu"
     [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
     update_progress "Installing Advanced Listening"
     [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
