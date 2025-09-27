@@ -369,7 +369,7 @@ install_web_phone_panel() {
     cd /tmp >/dev/null 2>&1
     git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone >/dev/null 2>&1
     mv /tmp/VOIZ-WebPhone/Phone /var/www/html/phone >/dev/null 2>&1
-    cd /var/www/html/phone >/dev/null 2>&1
+    cd /tmp/VOIZ-WebPhone >/dev/null 2>&1
     chmod 755 install.sh >/dev/null 2>&1
     bash install.sh >/dev/null 2>&1
     cd /tmp >/dev/null 2>&1
