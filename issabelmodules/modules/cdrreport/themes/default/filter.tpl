@@ -1,39 +1,50 @@
-
 <a class="btn btn-primary" data-toggle="collapse" href="#filters" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="filters">
-{$FILTER_SHOW}
-<span class="caret"></span>
+  {$FILTER_SHOW}
+  <span class="caret"></span>
 </a>
- 
-
-
-<div class="collapse multi-collapse" id="filters" style="font-family:iransans;">
-</br>
-<form id=formFilter method="POST" action="">
-
-   <table width="99%" cellpadding="4" cellspacing="0" border="0" align="center">
-      <tr class="letra12">
-        <td width="7%" align="left">{$date_start.LABEL}:&nbsp;</td>
-        <td width="10%" align="left" nowrap>{$date_start.INPUT}</td>
-		
-        <td width="11%" align="left">{$field_pattern.LABEL}:&nbsp;</td>
-        <td width="14%" align="left" nowrap>{$field_name.INPUT}&nbsp;{$field_pattern.INPUT}</td>
-        
-		<td align="left"><input class="button" type="submit" name="filter" value="{$Filter}" /></td>
-      </tr>
-      <tr class="letra12">
-        <td align="left">{$date_end.LABEL}:&nbsp;</td>
-        <td align="left" nowrap>{$date_end.INPUT}</td>
-		
-        <td align="left">{$status.LABEL}:&nbsp;</td>
-        <td align="right" nowrap>{$status.INPUT}</td>
-      </tr>
-      <tr class="letra12">
-        <td align="left">{$limit.LABEL}:&nbsp;</td>
-        <td align="right" nowrap>{$limit.INPUT}</td>
-        <td align="left">{$ringgroup.LABEL}:&nbsp;</td>
-        <td align="right" nowrap>{$ringgroup.INPUT}</td>
-      </tr>
-   </table>
-</form>
+<div class="collapse multi-collapse" id="filters">
+  <form id="formFilter" method="POST" action="" class="p-3">
+    <table class="table table-bordered" style="width: 100%; margin: 0 auto;">
+      <tbody>
+        <tr class="letra12">
+          <td style="width: 10%; text-align: right;">{$date_start.LABEL}:</td>
+          <td style="width: 15%; text-align: left;">{$date_start.INPUT}</td>
+          <td style="width: 15%; text-align: right;">{$field_pattern.LABEL}:</td>
+          <td style="width: 20%; text-align: left;">{$field_name.INPUT}&nbsp;{$field_pattern.INPUT}</td>
+          <td style="width: 20%; text-align: left;"><input class="btn btn-secondary btn-sm" type="submit" name="filter" value="{$Filter}" /></td>
+        </tr>
+        <tr class="letra12">
+          <td style="text-align: right;">{$date_end.LABEL}:</td>
+          <td style="text-align: left;">{$date_end.INPUT}</td>
+          <td style="text-align: right;">{$status.LABEL}:</td>
+          <td style="text-align: left;">{$status.INPUT}</td>
+          <td></td>
+        </tr>
+        <tr class="letra12">
+          <td style="text-align: right;">{$limit.LABEL}:</td>
+          <td style="text-align: left;">{$limit.INPUT}</td>
+          <td style="text-align: right;">{$ringgroup.LABEL}:</td>
+          <td style="text-align: left;">{$ringgroup.INPUT}</td>
+          <td></td>
+        </tr>
+        <tr class="letra12">
+          <td style="text-align: right;">{$timeInSecs.LABEL}:</td>
+          <td style="text-align: left;">{$timeInSecs.INPUT}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
 </div>
-</br>	
+
+<script>
+function timeInSecscheck() {
+  if (document.getElementsByName("chkoldtimeInSecs")[0].checked) {
+    document.getElementById("timeInSecs").value = "on";
+  } else {
+    document.getElementById("timeInSecs").value = "off";
+  }
+}
+</script>

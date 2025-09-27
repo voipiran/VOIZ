@@ -1,28 +1,15 @@
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4 mb-">
-                {$date_start.INPUT}
-                <label class="form-label">{$date_start_shamsi.LABEL}</label>
-                <div style="display: inline-block; margin-bottom: 10px;">{$date_start_shamsi.INPUT}</div>
-            </div>
-            <div class="col-md-4">
-                {$date_end.INPUT}
-                <label class="form-label">{$date_end_shamsi.LABEL}</label>
-                <div style="display: inline-block; margin-bottom: 10px;"> {$date_end_shamsi.INPUT}</div>
-            </div>
-            <div class="col-md-2">
-                <input class="button" type="submit" name="filter" value="{$Filter}" />
-            </div>
-        </div>
-    </div>
-
-<script>
-$("#idformgrid").on("submit", function() {
-    var gDateStart = $("#date_start_shamsipic").attr("data-gdate");
-    var gDateEnd = $("#date_end_shamsipic").attr("data-gdate");
-    console.log("gDateStart: " + gDateStart + " | gDateEnd: " + gDateEnd);
-    $('input[name="date_start"]').val(gDateStart);
-    $('input[name="date_end"]').val(gDateEnd);
-});
-</script>
+<table class="table table-bordered" style="width: 100%; margin: 0 auto; padding: 5px;">
+  <tbody>
+    <tr class="letra12">
+      <td style="width: 10%; text-align: right;">{$date_start.LABEL}:</td>
+      <td style="width: 15%; text-align: left;">{$date_start.INPUT}</td>
+      <td style="width: 10%; text-align: right;">{$date_end.LABEL}:</td>
+      <td style="width: 15%; text-align: left;">{$date_end.INPUT}</td>
+      <td style="width: 20%; text-align: left;"><input class="btn btn-secondary btn-sm" type="submit" name="filter" value="{$Filter}"></td>
+    </tr>
+  </tbody>
+</table>
+<div class="mt-2 text-right pr-3">
+  <a href="javascript:seleccionar_checkbox(1)" class="btn btn-info btn-sm">Marcar todos</a> |
+  <a href="javascript:seleccionar_checkbox(0)" class="btn btn-info btn-sm">Desmarcar Todos</a>
+</div>
