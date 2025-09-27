@@ -33,7 +33,7 @@ chmod 777 install.sh && \
 
 https://forum.voipiran.io/t/voiz-documents
 
-## Give a Star! ⭐ یک ستاره با ما بدهید
+## Give a Star! ⭐ یک ستاره به ما بدهید
 If you like this project or plan to use it in the future, please give it a star. Thanks 🙏
 
 ## Features (امکانات سیستم تلفنی ویز، اضافه شده به ایزابل)
