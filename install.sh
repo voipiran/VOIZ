@@ -319,11 +319,7 @@ sngrep() {
 }
 # Install VOIZ Menu
 voiz_menu() {
-    #mv /var/www/db/menu.db /var/www/db/menu.db.000 >/dev/null 2>&1
-    #cp -f voiz-installation/menu.db /var/www/db/ >/dev/null 2>&1
-    #chown asterisk:asterisk /var/www/db/menu.db >/dev/null 2>&1
-    #echo "**VOIZ Guide Menu Added" >> "${LOG_FILE}"
-    #check_status "Installing VOIZ Menu"
+
 }
 # Set CID
 set_cid() {
