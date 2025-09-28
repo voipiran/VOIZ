@@ -1,4 +1,3 @@
-
 {literal}
     <script type='text/javascript'>
         var themeName = 'elastixneo'; //nombre del tema
@@ -11,9 +10,6 @@
                     $("#togglebookmark").attr('src', "web/themes/" + themeName + "/images/bookmarkon.png");
                 }
             });
-
-
-
             $("#export_button").hover(
                     function () {
                         $(this).addClass("exportBorder");
@@ -46,7 +42,6 @@
                         }
                     }
             );
-
             $("#subMenuExport").hover(
                     function () {
                         $(this).removeClass("neo-display-none");
@@ -61,105 +56,74 @@
                         $("#export_button").attr("aria-expanded", "false");
                     }
             );
-
             $('#header_open_sidebar, a.chat-close').click(function (e) {
                 $('div.page-container').toggleClass('chat-visible');
                 toggle_sidebar_menu(true);
                 e.stopPropagation();
             });
-
         });
-
         function removeNeoDisplayOnMouseOut(ref) {
             $(ref).find('div').addClass('neo-display-none');
         }
-
         function removeNeoDisplayOnMouseOver(ref) {
             $(ref).find('div').removeClass('neo-display-none');
         }
-
         function gotowebmin() {
             var obj = $("#webmin_link");
             var xaddr = "https://" + window.location.hostname + ":10000";
             $(obj).attr("href", xaddr);
         }
-
+        function gotoQueueDashboard() {
+            var obj = $("#queue_dashboard_link");
+            var xaddr = "http://" + window.location.hostname + ":5000";
+            $(obj).attr("href", xaddr);
+            window.open(xaddr, '_blank');
+        }
         $(document).ready(
                 function ()
                 {
                     gotowebmin();
+                    // gotoQueueDashboard() حذف شد تا فقط با کلیک اجرا بشه
                 }
         );
-		
         function gotocrm() {
             var obj = $("#crm_link");
             var xaddr = "https://" + window.location.hostname + "/crm";
             $(obj).attr("href", xaddr);
         }
-		
-        $(document).ready(
-                function ()
-                {
-                    gotocrm();
-                }
-        );
-		
         function gotowinscp() {
             var obj = $("#winscp_link");
             var xaddr = "https://" + window.location.hostname + "/download/WinSCP-Portable.zip";
             $(obj).attr("href", xaddr);
         }
-        $(document).ready(
-                function ()
-                {
-                    gotowinscp();
-                }
-        );
-		
         function gotoputty() {
             var obj = $("#putty_link");
             var xaddr = "https://" + window.location.hostname + "/download/putty.exe";
             $(obj).attr("href", xaddr);
         }
-        $(document).ready(
-                function ()
-                {
-                    gotoputty();
-                }
-        );
-		
         function gotosoftphone() {
             var obj = $("#softphone_link");
             var xaddr = "https://" + window.location.hostname + "/download/MicroSIP.zip";
             $(obj).attr("href", xaddr);
         }
-        $(document).ready(
-                function ()
-                {
-                    gotosoftphone();
-                }
-        );
-		
         function gotowebphone() {
             var obj = $("#webphone_link");
             var xaddr = "https://" + window.location.hostname + "/webphone/phone.php";
             $(obj).attr("href", xaddr);
         }
-		
         $(document).ready(
                 function ()
                 {
+                    gotocrm();
+                    gotowinscp();
+                    gotoputty();
+                    gotosoftphone();
                     gotowebphone();
                 }
         );
-				
-		
-		
-		
     </script>
 {/literal}
-
-<input type="hidden" id="lblRegisterCm"   value="{$lblRegisterCm}" />
+<input type="hidden" id="lblRegisterCm" value="{$lblRegisterCm}" />
 <input type="hidden" id="lblRegisteredCm" value="{$lblRegisteredCm}" />
 <input type="hidden" id="userMenuColor" value="{$MENU_COLOR}" />
 <input type="hidden" id="lblSending_request" value="{$SEND_REQUEST}" />
@@ -177,7 +141,6 @@
 <input type="hidden" id="issabel_theme_name" value="{$THEMENAME}" />
 <input type="hidden" id="lbl_no_description" value="{$LBL_NO_STICKY}" />
 <input type="hidden" id="version" value="{$VERSION}" />
-
 <!-- inicio del menú tipo acordeon-->
 <div class="sidebar-menu">
     <header class="logo-env">
@@ -200,7 +163,6 @@
             </a>
         </div>
     </header>
-
     <ul id="main-menu" class="main-menu">
         <!-- add class "multiple-expanded" to allow multiple submenus to open -->
         <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
@@ -259,42 +221,29 @@
                 </ul>
             </li>
         {/foreach}
-
         {$SHORTCUT}
-
     </ul>
 </div>
 <!-- fin del menú tipo acordeon-->
-
 <!-- inicio del head principal-->
 <div class="main-content">
-    <div style="height:90px;background-color:#303030;padding:15px;">
-	
-
-
-
-
-
-
-
+    <div style="height:68px; background-color:#2F3640; padding:10px;">
         <!-- Profile Info and Notifications -->
         <span style='float:left; text-align:right; padding:0px 5px 0px 0px; width:175px;' class="col-md-6 col-sm-8 clearfix">
             <ul style='' class="user-info pull-none-xsm">
                 <!-- Profile Info -->
                 <li class="profile-info dropdown pull-right"><!-- add class "pull-right" if you want to place this from right -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <!--<img  style="border:0px" src="index.php?menu=_issabelutils&action=getImage&ID={$USER_ID}&rawmode=yes" alt="" class="img-circle" width="44" />-->
-                        <img  style="border:0px" src="/themes/{$THEMENAME}/images/Icon-user.png" alt="" class="img-circle" width="44" />
+                        <!--<img style="border:0px" src="index.php?menu=_issabelutils&action=getImage&ID={$USER_ID}&rawmode=yes" alt="" class="img-circle" width="44" />-->
+                        <img style="border:0px" src="/themes/{$THEMENAME}/images/Icon-user.png" alt="" class="img-circle" width="44" />
                         {$USER_LOGIN}
                     </a>
                     <!-- Reverse Caret -->
                     <i style='font-size:15px;font-weight:bold;' class="fa fa-angle-down"></i>
                     <!-- Profile sub-links -->
                     <ul class="dropdown-menu">
-
                         <!-- Reverse Caret -->
                         <li class="caret"></li>
-
                         <!-- Profile sub-links -->
                         <li class="dropdown">
                             <a href="#" class="setadminpassword">
@@ -312,72 +261,52 @@
                 </li>
             </ul>
         </span>
-
         <!-- Raw Links -->
         <span style=' width:400px;'>
             <ul style="padding-top:12px;" class="list-inline links-list pull-right neo-topbar-notification">
-
-
-
-
-
-
-			<!------- voipiran Download ---->
-
+<!------- voipiran Download ---->
         <li id="header_notification_bar" class="profile-info dropdown top-bar-downloads"> <!-- voipiran msm -->
             <a data-toggle="dropdown" class="" href="#">
                 <i class="fa fa-download"></i>
             </a>
             <ul class="dropdown-menu">
-
                 <!-- Reverse Caret -->
                 <li class="caret"></li>
-				
                 <!-- Profile sub-links -->
-                <li><a target="_blank" id="winscp_link"  class="" href=""><i class="fa fa-external-link"></i>Winscp</a></li>
-                <li><a target="_blank" id="putty_link"  class="" href=""><i class="fa fa-external-link"></i>Putty</a></li>
-                <li><a target="_blank" id="softphone_link"  class="" href=""><i class="fa fa-external-link"></i>Softphone</a></li>           
-		   </ul>
+                <li><a target="_blank" id="winscp_link" class="" href=""><i class="fa fa-external-link"></i>Winscp</a></li>
+                <li><a target="_blank" id="putty_link" class="" href=""><i class="fa fa-external-link"></i>Putty</a></li>
+                <li><a target="_blank" id="softphone_link" class="" href=""><i class="fa fa-external-link"></i>Softphone</a></li>
+   </ul>
         </li>
-
 <!------ end doubledup code ----->
-			
-
-
                 <!--li id="header_notification_bar" class="dropdown">
                     <a {*data-toggle="dropdown"*} class="" href="index.php?menu=addons">
                         <i class="fa fa-cubes"></i>
                     </a>
                 </li-->
-
                 <!-- notification dropdown start-->
                 <!--li id="header_notification_bar" class="dropdown">
                     <a data-toggle="dropdown" class="" href="#">
                         <i class="fa fa-heartbeat"></i>
                     </a>
                 </li-->
-
                 <li id="header_notification_bar" class="profile-info dropdown top-bar-webmin"> <!-- voipiran msm -->
-                    <a target="_blank" id="webmin_link"  class="" href="">
+                    <a target="_blank" id="webmin_link" class="" href="">
                         <img style="width:20px;" src="{$WEBPATH}themes/{$THEMENAME}/images/webmin.png" /> <!-- voipiran msm -->
-                    </a> 
+                    </a>
                 </li>
-				
                 <!-- <li id="header_notification_bar" class="profile-info dropdown"> -->
-                 <!--    <a target="_blank" id="crm_link"  class="" href=""> -->
-                <!--         <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" /> -->
-               <!--      </a>  -->
-              <!--   </li> -->
-				
+                 <!-- <a target="_blank" id="crm_link" class="" href=""> -->
+                <!-- <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" /> -->
+               <!-- </a> -->
+              <!-- </li> -->
                 <li id="header_notification_bar" class="profile-info dropdown top-bar-info"> <!-- voipiran msm -->
                     <a data-toggle="dropdown" class="" href="#">
                         <i class="fa fa-info-circle"></i>
                     </a>
                     <ul class="dropdown-menu">
-
                         <!-- Reverse Caret -->
                         <li class="caret"></li>
-
                         <!-- Profile sub-links -->
                         <li><a href="#" class="register_link">{$Registered}</a></li>
                         <li><a href="#" id="viewDetailsRPMs"><i class="fa fa-cube"></i>{$VersionDetails}</a></li>
@@ -385,17 +314,14 @@
                         <li><a href="#" id="dialogaboutissabel"><i class="fa fa-info-circle"></i>{$ABOUT_ISSABEL2}</a></li>
                     </ul>
                 </li>
-				
                 <!-- notification dropdown end -->
                 <li id="header_notification_bar" class="profile-info dropdown" style="float: none !important;">
                     <a data-toggle="dropdown" class="" href="#">
                         <i id='notibell' class="fa fa-bell-o {$ANIMATE_NOTIFICATION}"></i>
                     </a>
                     <ul class="dropdown-menu">
-
                         <!-- Reverse Caret -->
                         <li class="caret"></li>
-
                         <li><p>{$NOTIFICATIONS.LBL_NOTIFICATION_SYSTEM}</p></li>
                         <li>
                             <ul>
@@ -422,32 +348,31 @@
                         </li>
                     </ul>
                 </li>
-
                 {if $ISSABEL_PANELS}
                     <!-- SIDEBAR LIST -->
                     <li id="header_open_sidebar">
                         <a href="#" data-toggle="chat" data-collapse-sidebar="1"><i class="fa fa-th-list"></i></a>
                     </li>
                 {/if}
+                <!-- Queue Dashboard Button -->
+                <li id="header_notification_bar" class="profile-info dropdown top-bar-queue">
+                    <a id="queue_dashboard_link" href="#" onclick="gotoQueueDashboard(); return false;" class="">
+                        <i class="fa fa-headphones fa-pulse"></i>
+                    </a>
+                </li>
             </ul>
         </span>
         <div class="logo">
             <a href="#">
-                <img style="height:60px;" src="{$WEBPATH}themes/{$THEMENAME}/images/logo-light.png"  alt="voiz" />
-			</a>
-			<!------ VOIPIRAN version ----->
-			<kbd>version {$VERSION}</kbd>
-			 
-
-			  
-		</div>
-		
-
+                <img style="height:60px;" src="{$WEBPATH}themes/{$THEMENAME}/images/logo-light.png" alt="voiz" />
+</a>
+<!------ VOIPIRAN version ----->
+<kbd>version {$VERSION}</kbd>
+ 
+</div>
     </div>
-
     <!-- Breadcrumb 3 -->
     <ol class="breadcrumb bc-2">
-
         {foreach from=$BREADCRUMB item=value name=menu}
             {if $smarty.foreach.menu.first}
                 <li>
@@ -461,7 +386,7 @@
                 {/if}
             {/foreach}
         <li id="tenant-help">
-            <a class="" href="#" onclick="popUp('help/?id_nodo={if !empty($idSubMenu2Selected)}{$idSubMenu2Selected}&name_nodo={$nameSubMenu2Selected}{else}{$idSubMenuSelected}&name_nodo={$nameSubMenuSelected}{/if}', '1000', '460')"> 
+            <a class="" href="#" onclick="popUp('help/?id_nodo={if !empty($idSubMenu2Selected)}{$idSubMenu2Selected}&name_nodo={$nameSubMenu2Selected}{else}{$idSubMenuSelected}&name_nodo={$nameSubMenuSelected}{/if}', '1000', '460')">
                 <!--a href="https://www.voipiran.io" target="_bank"-->
                 <i class="fa fa-support"></i>
             </a>
@@ -472,14 +397,9 @@
             </a>
         </li>
     </ol>
-
     <!-- contenido del modulo-->
     <div id="neo-contentbox">
         <div id="neo-contentbox-maincolumn">
             <input type="hidden" id="issabel_framework_module_id" value="{if empty($idSubMenu2Selected)}{$idSubMenuSelected}{else}{$idSubMenu2Selected}{/if}" />
             <input type="hidden" id="issabel_framework_webCommon" value="{$WEBCOMMON}" />
             <div class="neo-module-content">
-
-
-
-

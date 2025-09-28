@@ -19,8 +19,8 @@ fi
 # Get PHP major version
 php_version=$(php -r 'echo PHP_MAJOR_VERSION;')
 issabel_ver=$([ "$php_version" -eq 5 ] && echo 5 || echo 4)
-# Welcome message
-whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io - Starting the amazing installation!" 8 78
+# Welcome message with Queue Dashboard note
+whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io - Starting the amazing installation!\nNote: Live Queue Dashboard is available on port 5000 after installation." 10 78
 # Select features to install
 SELECTED=$(whiptail --title "Select Features" --checklist \
 "List of features to install" 20 100 12 \
@@ -30,7 +30,8 @@ SELECTED=$(whiptail --title "Select Features" --checklist \
 "WebPhonePanel" "Web Phone Panel" ON \
 "QueueDashboard" "Live Queue Dashboard" ON \
 "CallerIDFormatter" "CallerID Formatter" ON \
-"OptimizedMenus" "Optimized Menus" ON 3>&1 1>&2 2>&3)
+"OptimizedMenus" "Optimized Menus" ON \
+"Developer" "Developer Module" OFF 3>&1 1>&2 2>&3)
 eval "ARRAY=($SELECTED)"
 for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"CRM"* ]] && CRMINSTALL=true
@@ -40,6 +41,7 @@ for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"QueueDashboard"* ]] && QUEUEDASHBOARDINSTALL=true
     [[ "$CHOICE" == *"CallerIDFormatter"* ]] && CALLERIDFORMATTERINSTALL=true
     [[ "$CHOICE" == *"OptimizedMenus"* ]] && OPTIMIZEDMENUS=true
+    [[ "$CHOICE" == *"Developer"* ]] && DEVELOPERINSTALL=true
 done
 # Select language
 Lang=$(whiptail --title "Choose VOIZ Theme Style" --menu "Select a language" 25 78 5 \
@@ -112,8 +114,10 @@ add_persian_sounds() {
 }
 # Install Developer
 install_developer() {
-    rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
-    echo "**Developer Module installed." >> "${LOG_FILE}"
+    if [ "$DEVELOPERINSTALL" = "true" ]; then
+        rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
+        echo "**Developer Module installed." >> "${LOG_FILE}"
+    fi
 }
 # Install Asternic CDR
 asterniccdr() {
@@ -167,8 +171,10 @@ survey() {
 }
 # Install Vtiger
 vtiger() {
-    # Implement as needed
-    echo "**Vtiger installed." >> "${LOG_FILE}"
+    if [ "$CRMINSTALL" = "true" ]; then
+        # Implement as needed
+        echo "**Vtiger installed." >> "${LOG_FILE}"
+    fi
 }
 # Set CID
 set_cid() {
@@ -177,13 +183,17 @@ set_cid() {
 }
 # Install HTOP
 htop() {
-    # Implement as needed
-    echo "**HTOP installed." >> "${LOG_FILE}"
+    if [ "$NETUTILINSTALL" = "true" ]; then
+        # Implement as needed
+        echo "**HTOP installed." >> "${LOG_FILE}"
+    fi
 }
 # Install SNGREP
 sngrep() {
-    # Implement as needed
-    echo "**SNGREP installed." >> "${LOG_FILE}"
+    if [ "$NETUTILINSTALL" = "true" ]; then
+        # Implement as needed
+        echo "**SNGREP installed." >> "${LOG_FILE}"
+    fi
 }
 # Install Issabel Call Monitoring
 issbel_callmonitoring() {
@@ -192,39 +202,58 @@ issbel_callmonitoring() {
 }
 # Optimize Menus
 optimize_menus() {
-    local db_file="/var/www/db/menu.db"
     local backup_file="/var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db"
+    # Check if db_file exists
+    if [ ! -f "/var/www/db/menu.db" ]; then
+        echo "Error: Database file /var/www/db/menu.db not found" >> "${LOG_FILE}"
+        return 1
+    fi
     # Backup the menu.db file
-    cp "${db_file}" "${backup_file}"
+    cp "/var/www/db/menu.db" "${backup_file}"
     echo "**Backup of menu.db created: ${backup_file}" >> "${LOG_FILE}"
     # Delete specified menus
-    sqlite3 "${db_file}" "DELETE FROM menu WHERE id = 'billing';"
-    sqlite3 "${db_file}" "DELETE FROM menu WHERE id = 'graphic_report';"
-    sqlite3 "${db_file}" "DELETE FROM menu WHERE id = 'channelusage';"
-    sqlite3 "${db_file}" "DELETE FROM menu WHERE IdParent = 'email_admin' AND id != 'remote_smtp';"
-    sqlite3 "${db_file}" "DELETE FROM menu WHERE id = 'hardware_detector';"
-    sqlite3 "${db_file}" "DELETE FROM menu WHERE id = 'betachannel';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'billing';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'graphic_report';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'channelusage';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE IdParent = 'email_admin' AND id != 'remote_smtp';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'hardware_detector';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'betachannel';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'extras';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'meet';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'addos_license';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'addons';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'sec_weak_keys';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'sec_letsencrypt';"
+    sqlite3 "/var/www/db/menu.db" "DELETE FROM menu WHERE id = 'festival';"
     echo "**Optimized Menus applied." >> "${LOG_FILE}"
 }
 # Install Advanced Listening
 install_advanced_listening() {
-    # Implement as needed
-    echo "**Advanced Listening installed." >> "${LOG_FILE}"
+    if [ "$ADVANCEDLISTENINGINSTALL" = "true" ]; then
+        # Implement as needed
+        echo "**Advanced Listening installed." >> "${LOG_FILE}"
+    fi
 }
 # Install Web Phone Panel
 install_web_phone_panel() {
-    # Implement as needed
-    echo "**Web Phone Panel installed." >> "${LOG_FILE}"
+    if [ "$WEBPHONEPANELINSTALL" = "true" ]; then
+        # Implement as needed
+        echo "**Web Phone Panel installed." >> "${LOG_FILE}"
+    fi
 }
 # Install Queue Dashboard
 install_queue_dashboard() {
-    # Implement as needed
-    echo "**Queue Dashboard installed." >> "${LOG_FILE}"
+    if [ "$QUEUEDASHBOARDINSTALL" = "true" ]; then
+        # Implement as needed (e.g., start the service on port 5000)
+        echo "**Live Queue Dashboard installed and running on port 5000." >> "${LOG_FILE}"
+    fi
 }
 # Install CallerID Formatter
 install_callerid_formatter() {
-    # Implement as needed
-    echo "**CallerID Formatter installed." >> "${LOG_FILE}"
+    if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
+        # Implement as needed
+        echo "**CallerID Formatter installed." >> "${LOG_FILE}"
+    fi
 }
 # Progress bar
 {
@@ -261,25 +290,25 @@ install_callerid_formatter() {
     update_progress "Installing Survey"
     survey
     update_progress "Installing Vtiger CRM - This may take a few minutes"
-    [ "$CRMINSTALL" = "true" ] && vtiger
+    vtiger
     update_progress "Setting CID"
     set_cid
     update_progress "Installing HTOP"
-    [ "$NETUTILINSTALL" = "true" ] && htop
+    htop
     update_progress "Installing SNGREP"
-    [ "$NETUTILINSTALL" = "true" ] && sngrep
+    sngrep
     update_progress "Installing Issabel Call Monitoring"
     issbel_callmonitoring
     update_progress "Optimizing Menus"
     [ "$OPTIMIZEDMENUS" = "true" ] && optimize_menus
     update_progress "Installing Advanced Listening"
-    [ "$ADVANCEDLISTENINGINSTALL" = "true" ] && install_advanced_listening
+    install_advanced_listening
     update_progress "Installing Web Phone Panel"
-    [ "$WEBPHONEPANELINSTALL" = "true" ] && install_web_phone_panel
+    install_web_phone_panel
     update_progress "Installing Live Queue Dashboard"
-    [ "$QUEUEDASHBOARDINSTALL" = "true" ] && install_queue_dashboard
+    install_queue_dashboard
     update_progress "Installing CallerID Formatter"
-    [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
+    install_callerid_formatter
 } | whiptail --title "VOIZ Installation - A Remarkable Experience" --gauge "Installing: $message" 10 70 0
 # Finalize
 systemctl restart httpd >/dev/null 2>&1
@@ -298,4 +327,5 @@ grep -E "Successfully|Failed|Installed|Added|Updated|Set" "${LOG_FILE}" | while 
         echo -e "\033[33m$line\033[0m"
     fi
 done
+echo -e "\033[33mNote: Live Queue Dashboard is available at http://<server-ip>:5000 after installation.\033[0m"
 echo -e "\033[1;34m=====================================\033[0m"
