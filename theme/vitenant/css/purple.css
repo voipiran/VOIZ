@@ -23,7 +23,7 @@ body .profile-info.dropdown.pull-right .dropdown-menu {
 }
 
 body .page-container .sidebar-menu {
-  background: #535454;
+  background: #212121;
   color: #562d7b;
 }
 body .page-container.sidebar-collapsed .sidebar-menu #main-menu > li#search .search-input {
@@ -70,7 +70,7 @@ body .page-container .sidebar-menu #main-menu li ul li ul li a {
 #main-menu li.opened i{color:#8bc34a;}
 body .page-container .sidebar-menu #main-menu li ul > li > a:hover{
     color:#fff; 
-    background-color:#535454;
+    background-color:#212121;
 }
 
 body .page-container .sidebar-menu .sidebar-user-info {
