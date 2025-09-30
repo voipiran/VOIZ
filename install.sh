@@ -235,27 +235,55 @@ mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
 echo "**Queue Survey Module Added." >> voiz-installation.log
 }
 function vtiger(){
-#yes | cp -arf vtiger/crm /var/www/html
-#cat vtiger/crma* > vtiger/crm.tar.gz
-#yes | tar -zxvf vtiger/crm.tar.gz -C /var/www/html >/dev/null 2>&1
-cat vtiger/crm.zip* > vtiger/crm.zip
-yes | unzip -o vtiger/crm.zip -d vtiger >/dev/null 2>&1
-yes | unzip -o vtiger/crm.zip -d /var/www/html >/dev/null 2>&1
-touch -r /var/www/html/crm/*
-chmod -R 777 /var/www/html/crm
-if ! mysql -uroot -p$rootpw -e 'use voipirancrm' >/dev/null 2>&1; then
-    echo "-------------َADDING VTIGER DATABASE1"
-    mysql -uroot -p$rootpw -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;" >/dev/null 2>&1
-    echo "-------------َADDING VTIGER DATABASE2"
-    mysql -uroot -p$rootpw -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';" >/dev/null 2>&1
-    echo "-------------َADDING VTIGER DATABASE3"
-    mysql -uroot -p$rootpw voipirancrm < vtiger/crm.db >/dev/null 2>&1
-fi
-#Config config.inc.php file
-sed -i "s/123456/$rootpw/g" /var/www/html/crm/config.inc.php >/dev/null 2>&1
-issabel-menumerge crm-menu.xml
-echo "**Vtiger CRM Installed." >> voiz-installation.log
+    echo "------------Installing VOIZ Vtiger CRM-----------------"
+    # دانلود مخزن از GitHub به صورت زیپ و استخراج
+    curl -L -o VOIZ-Vtiger.zip https://github.com/voipiran/VOIZ-Vtiger/archive/master.zip && \
+    unzip -o VOIZ-Vtiger.zip && \
+    cd VOIZ-Vtiger-master && \
+    # کپی فایل‌ها به دایرکتوری هدف
+    yes | cp -rf * /var/www/html/vtiger/ && \
+    cd ..
+
+    # تنظیم دسترسی‌ها
+    chmod -R 777 /var/www/html/vtiger
+    chown -R asterisk:asterisk /var/www/html/vtiger
+
+    # بررسی و ایجاد دیتابیس در صورت نیاز
+    if ! mysql -uroot -p$rootpw -e 'use voipirancrm' >/dev/null 2>&1; then
+        echo "-------------َADDING VTIGER DATABASE1"
+        mysql -uroot -p$rootpw -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;" >/dev/null 2>&1
+        echo "-------------َADDING VTIGER DATABASE2"
+        mysql -uroot -p$rootpw -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';" >/dev/null 2>&1
+        echo "-------------َADDING VTIGER DATABASE3"
+        # فرض بر اینه که اسکریپت دیتابیس در مخزن وجود داره (مثلاً vtiger.sql یا مشابه)
+        if [ -f "VOIZ-Vtiger-master/vtiger.sql" ]; then
+            mysql -uroot -p$rootpw voipirancrm < VOIZ-Vtiger-master/vtiger.sql >/dev/null 2>&1
+        else
+            echo "Warning: No database script (vtiger.sql) found in repository."
+        fi
+    fi
+
+    # پیکربندی فایل config.inc.php (در صورت وجود)
+    if [ -f "/var/www/html/vtiger/config.inc.php" ]; then
+        sed -i "s/123456/$rootpw/g" /var/www/html/vtiger/config.inc.php >/dev/null 2>&1
+    else
+        echo "Warning: config.inc.php not found in /var/www/html/vtiger/"
+    fi
+
+    # ادغام منو در صورت وجود فایل منو
+    if [ -f "VOIZ-Vtiger-master/crm-menu.xml" ]; then
+        issabel-menumerge VOIZ-Vtiger-master/crm-menu.xml
+    else
+        echo "Warning: crm-menu.xml not found in repository."
+    fi
+
+    # پاکسازی فایل‌های موقت
+    rm -rf VOIZ-Vtiger.zip VOIZ-Vtiger-master
+
+    echo "**VOIZ Vtiger CRM Installed." >> voiz-installation.log
 }
+
+
 function install_queue_panel(){
 echo "------------Installing VOIZ Queue Panel-----------------"
 git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanel && bash /var/www/html/qpanel/install.sh
