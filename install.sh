@@ -221,23 +221,7 @@ echo "" >> /etc/asterisk/extensions_custom.conf
 echo "#include extensions_voipiran_featurecodes.conf" >> /etc/asterisk/extensions_custom.conf
 query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIZ-بیان تاریخ و زمان شمسی','*200',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*200'"
 mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATE-Jalali','VOIZ-بیان تاریخ به شمسی','*201',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*201'"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-TIME-Jalali','VOIZ-بیان زمان به فارسی','*202',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*202'"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chanspy-Simple','VOIZ-شنود ساده، کد + شماره مقصد','*30',NULL,'1','1')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Whisper','VOIZ-شنود و نجوا، کد + شماره مقصد','*31',NULL,'1','1')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Only-Listen','VOIZ-شنود صدای کارشناس، کد + شماره مقصد','*32',NULL,'1','1')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Private-Whisper','VOIZ-صحبت با کارشناس بدون شنود، کد + شماره مقصد','*33',NULL,'1','1')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-Barge','VOIZ-شنود و مکالمه با هر دو طرف، کد + شماره مقصد','*34',NULL,'1','1')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Chansyp-DTMF','VOIZ-شنود و تغییر حالت شنود حین مکالمه با 4 و 5 و 6، کد + شماره مقصد','*35',NULL,'1','1')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
-echo "**VOIZ Feature Codes Added." >> voiz-installation.log
+
 }
 function easyvpn(){
 yum install issabel-easyvpn –nogpgcheck -y >/dev/null 2>&1
@@ -272,29 +256,25 @@ sed -i "s/123456/$rootpw/g" /var/www/html/crm/config.inc.php >/dev/null 2>&1
 issabel-menumerge crm-menu.xml
 echo "**Vtiger CRM Installed." >> voiz-installation.log
 }
-function install_web_phone_panel(){
-git clone https://github.com/voipiran/webphone.git /tmp/webphone
-cp -r /tmp/webphone/* /var/www/html/
-rm -rf /tmp/webphone
-chown -R asterisk:asterisk /var/www/html/webphone
-chmod -R 755 /var/www/html/webphone
-echo "**Web Phone Panel installed." >> voiz-installation.log
+function install_queue_panel(){
+echo "------------Installing VOIZ Queue Panel-----------------"
+git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanel && bash /var/www/html/qpanel/install.sh
+echo "**VOIZ Queue Panel Installed." >> voiz-installation.log
+}
+function install_web_phone(){
+echo "------------Installing VOIZ Web Phone-----------------"
+sudo git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone && sudo mv /tmp/VOIZ-WebPhone/Phone /var/www/html/phone && sudo bash /tmp/VOIZ-WebPhone/install.sh
+echo "**VOIZ Web Phone Installed." >> voiz-installation.log
 }
 function install_callerid_formatter(){
-git clone https://github.com/voipiran/callerid-formatter.git /tmp/callerid-formatter
-cp -r /tmp/callerid-formatter/* /var/www/html/
-rm -rf /tmp/callerid-formatter
-chown -R asterisk:asterisk /var/www/html/callerid-formatter
-chmod -R 755 /var/www/html/callerid-formatter
-echo "**CallerID Formatter installed." >> voiz-installation.log
+echo "------------Installing Asterisk Callerid Formatter-----------------"
+curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip && unzip AsteriskCalleridFormatter.zip && cd AsteriskCalleridFormatter-main && chmod 755 install.sh && ./install.sh -y
+echo "**Asterisk Callerid Formatter Installed." >> voiz-installation.log
 }
-function install_queue_dashboard(){
-git clone https://github.com/voipiran/queue-dashboard.git /tmp/queue-dashboard
-cp -r /tmp/queue-dashboard/* /var/www/html/
-rm -rf /tmp/queue-dashboard
-chown -R asterisk:asterisk /var/www/html/queue-dashboard
-chmod -R 755 /var/www/html/queue-dashboard
-echo "**Queue Dashboard installed." >> voiz-installation.log
+function install_chanspy_pro(){
+echo "------------Installing Asterisk ChanSpy Pro-----------------"
+curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip && unzip voipiran_chanspy.zip && cd AsteriskChanSpyPro-main && chmod 755 install_voipiran_chansp.sh && ./install.sh -y
+echo "**Asterisk ChanSpy Pro Installed." >> voiz-installation.log
 }
 function htop(){
 #Installing htop
@@ -346,23 +326,7 @@ LINE="[from-internal-custom]"
 sleep 1
 fi
 sleep 1
-#NumberFormater
-echo "" >> /etc/asterisk/extensions_custom.conf
-echo ";;VOIPIRAN.io" >> /etc/asterisk/extensions_custom.conf
-echo "#include extensions_voipiran_numberformatter.conf" >> /etc/asterisk/extensions_custom.conf
-yes | cp -rf software/extensions_voipiran_numberformatter.conf /etc/asterisk
-chown -R asterisk:asterisk /etc/asterisk/extensions_voipiran_numberformatter.conf
-chmod 777 /etc/asterisk/extensions_voipiran_numberformatter.conf
-### Add from-pstn Context
-echo "" >> /etc/asterisk/extensions_custom.conf
-echo ";;VOIPIRAN.io" >> /etc/asterisk/extensions_custom.conf
-echo "[to-cidformatter]" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,1,Set(IS_PSTN_CALL=1)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,NoOp(start-from-pstn)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,Gosub(numberformatter,s,1)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,NoOp(end-from-pstn)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,Goto(from-pstn,s,1)" >> /etc/asterisk/extensions_custom.conf
-echo "**Set CID Module Added." >> voiz-installation.log
+
 }
 function welcome(){
 whiptail --title "VOIZ Installtion" --msgbox "Powered by VOIPIRAN.io..." 8 78
@@ -415,9 +379,10 @@ welcome
 SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
 "List of Features to install" 20 100 10 \
 "NetworkUtilities" "SNGREP, HTOP" ON \
-"WebPhone" "Web Phone Panel" ON \
-"CallerIDFormatter" "CallerID Formatter" ON \
-"QueueDashboard" "Queue Dashboard" ON \
+"QueuePanel" "VOIZ Queue Panel" ON \
+"WebPhone" "VOIZ Web Phone" ON \
+"CallerIDFormatter" "Asterisk Callerid Formatter" ON \
+"ChanSpyPro" "Asterisk ChanSpy Pro" ON \
 "Vtiger CRM" "ویتایگر با تقویم شمسی" OFF 3>&1 1>&2 2>&3)
 # تبدیل به آرایه واقعی با eval
 eval "ARRAY=($SELECTED)"
@@ -431,14 +396,17 @@ for CHOICE in "${ARRAY[@]}"; do
   if [[ "$CHOICE" == *"NetworkUtilities"* ]]; then
     NETUTILINSTALL=true
   fi
+  if [[ "$CHOICE" == *"QueuePanel"* ]]; then
+    QUEUEPANELINSTALL=true
+  fi
   if [[ "$CHOICE" == *"WebPhone"* ]]; then
     WEBPHONEINSTALL=true
   fi
   if [[ "$CHOICE" == *"CallerIDFormatter"* ]]; then
     CALLERIDFORMATTERINSTALL=true
   fi
-  if [[ "$CHOICE" == *"QueueDashboard"* ]]; then
-    QUEUEDASHBOARDINSTALL=true
+  if [[ "$CHOICE" == *"ChanSpyPro"* ]]; then
+    CHANSPYPROINSTALL=true
   fi
 done
 ###SELECT LNGUAGE GUI
@@ -450,11 +418,6 @@ Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25
    sleep 1
    COUNTER=$(($COUNTER+10))
    echo ${COUNTER}
-# #YUM UPDATE ISSABEL to BETA
-# if [ "$INSTALLONISSABEL" = "true" ]
-# then
-# install-on-issabel
-# fi
 ##Set Version of VOIZ
 setversion
 ##Install Source Gaurdian Module
@@ -517,17 +480,21 @@ survey
 if [ "$CRMINSTALL" = "true" ]; then
   vtiger
 fi
-##Install Web Phone Panel
+##Install Queue Panel
+if [ "$QUEUEPANELINSTALL" = "true" ]; then
+  install_queue_panel
+fi
+##Install Web Phone
 if [ "$WEBPHONEINSTALL" = "true" ]; then
-  install_web_phone_panel
+  install_web_phone
 fi
 ##Install CallerID Formatter
 if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
   install_callerid_formatter
 fi
-##Install Queue Dashboard
-if [ "$QUEUEDASHBOARDINSTALL" = "true" ]; then
-  install_queue_dashboard
+##Install ChanSpy Pro
+if [ "$CHANSPYPROINSTALL" = "true" ]; then
+  install_chanspy_pro
 fi
 set_cid
   COUNTER=$(($COUNTER+10))
