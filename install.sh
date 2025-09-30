@@ -36,7 +36,7 @@ whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io - Starting
 # Select features to install
 SELECTED=$(whiptail --title "Select Features" --checklist \
 "List of features to install" 20 100 12 \
-"Vtiger CRM" "Vtiger with Shamsi calendar" ON \
+"Vtiger CRM" "Vtiger with Shamsi calendar" OFF \
 "NetworkUtilities" "SNGREP, HTOP" ON \
 "AdvancedListening" "Advanced Listening" ON \
 "WebPhonePanel" "Web Phone Panel" ON \
@@ -78,8 +78,8 @@ COUNTER=0
 update_progress() {
     local message="$1"
     COUNTER=$((COUNTER + 10))
+    echo -e "$COUNTER\n$message"  # ارسال درصد و پیام به whiptail
     echo -e "$message\n$COUNTER" >> "${LOG_FILE}"
-    echo -e "$message\n$COUNTER"
 }
 
 # Check command success (silent errors)
