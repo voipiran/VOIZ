@@ -150,6 +150,51 @@ add_persian_sounds() {
     echo "**Persian sounds added." >> "${LOG_FILE}"
 }
 
+# Install Jalali calendar libraries
+install_jalali_calendar() {
+    if [ -d "jalalicalendar" ]; then
+        cp -r "jalalicalendar" "${WWW_DIR}/libs/JalaliJSCalendar" 2>/dev/null || echo "Error: Failed to copy JalaliJSCalendar" >> "${LOG_FILE}"
+        chown -R asterisk:asterisk "${WWW_DIR}/libs/JalaliJSCalendar" 2>/dev/null
+        chmod -R 755 "${WWW_DIR}/libs/JalaliJSCalendar" 2>/dev/null
+        echo "**Jalali calendar libraries installed." >> "${LOG_FILE}"
+    else
+        echo "Warning: jalalicalendar directory not found. Jalali calendar installation skipped." >> "${LOG_FILE}"
+    fi
+}
+
+# Edit Issabel modules
+edit_issabel_modules() {
+    ### Install ISSABEL Modules - 4.2.0
+    # Modules
+    mkdir "${WWW_DIR}/modules000" >/dev/null 2>&1
+    cp -rf "${WWW_DIR}/modules/"* "${WWW_DIR}/modules000"
+    yes | cp -arf issabelmodules/modules "${WWW_DIR}/"
+    touch -r "${WWW_DIR}/modules/"* 2>/dev/null
+    chown -R asterisk:asterisk "${WWW_DIR}/modules/"*
+    chown asterisk:asterisk "${WWW_DIR}/modules/"
+    find "${WWW_DIR}/modules/" -exec touch {} \;
+
+    ### Install Jalali Calendar - 4.2.0
+    # Calendar Shamsi (Added ver 8.0)
+    yes | cp -f jalalicalendar/date.php "${WWW_DIR}/libs/"
+    yes | cp -f jalalicalendar/params.php "${WWW_DIR}/libs/"
+    yes | cp -rf jalalicalendar/JalaliJSCalendar "${WWW_DIR}/libs/"
+    # Shamsi Library Makooei
+    yes | cp -r issabelmodules/mylib "${WWW_DIR}/libs/"
+    chown -R asterisk:asterisk "${WWW_DIR}/libs/mylib"
+    mv "${WWW_DIR}/libs/paloSantoForm.class.php" "${WWW_DIR}/libs/paloSantoForm.class.php.000" 2>/dev/null
+    yes | cp -rf issabelmodules/paloSantoForm.class.php "${WWW_DIR}/libs/"
+    # DropDown Problem
+    sed -i "s/\$('.componentSelect'/\/\/\$('\.componentSelect/g" "${WWW_DIR}/admin/assets/js/pbxlib.js" >/dev/null 2>&1
+
+    ### Install Jalali Date Time Lib - 4.2.0
+    cp -avr asteriskjalalical/jalalidate/ "${ASTERISK_DIR}/"
+    # Add Persian Language TEXT
+    mv "${WWW_DIR}/lang/fa.lang" "${WWW_DIR}/lang/fa.lang.000" 2>/dev/null
+    cp -rf issabelmodules/fa.lang "${WWW_DIR}/lang/"
+    echo "**Issabel modules and Jalali calendar updated." >> "${LOG_FILE}"
+}
+
 # Install Developer
 install_developer() {
     if [ "$DEVELOPERINSTALL" = "true" ]; then
@@ -180,8 +225,35 @@ add_vitenant_theme() {
 
 # Edit Issabel modules
 edit_issabel_modules() {
-    [ -f modules/issabel-modules.tar.gz ] && tar -xzf modules/issabel-modules.tar.gz -C "${MODULES_DIR}" >/dev/null 2>&1 || echo "Warning: issabel-modules.tar.gz not found" >> "${LOG_FILE}"
-    echo "**Issabel modules edited." >> "${LOG_FILE}"
+    ### Install ISSABEL Modules - 4.2.0
+    # Modules
+    mkdir "${WWW_DIR}/modules000" >/dev/null 2>&1
+    cp -rf "${WWW_DIR}/modules/"* "${WWW_DIR}/modules000"
+    yes | cp -arf issabelmodules/modules "${WWW_DIR}/"
+    touch -r "${WWW_DIR}/modules/"* 2>/dev/null
+    chown -R asterisk:asterisk "${WWW_DIR}/modules/"*
+    chown asterisk:asterisk "${WWW_DIR}/modules/"
+    find "${WWW_DIR}/modules/" -exec touch {} \;
+
+    ### Install Jalali Calendar - 4.2.0
+    # Calendar Shamsi (Added ver 8.0)
+    yes | cp -f jalalicalendar/date.php "${WWW_DIR}/libs/"
+    yes | cp -f jalalicalendar/params.php "${WWW_DIR}/libs/"
+    yes | cp -rf jalalicalendar/JalaliJSCalendar "${WWW_DIR}/libs/"
+    # Shamsi Library Makooei
+    yes | cp -r issabelmodules/mylib "${WWW_DIR}/libs/"
+    chown -R asterisk:asterisk "${WWW_DIR}/libs/mylib"
+    mv "${WWW_DIR}/libs/paloSantoForm.class.php" "${WWW_DIR}/libs/paloSantoForm.class.php.000" 2>/dev/null
+    yes | cp -rf issabelmodules/paloSantoForm.class.php "${WWW_DIR}/libs/"
+    # DropDown Problem
+    sed -i "s/\$('.componentSelect'/\/\/\$('\.componentSelect/g" "${WWW_DIR}/admin/assets/js/pbxlib.js" >/dev/null 2>&1
+
+    ### Install Jalali Date Time Lib - 4.2.0
+    cp -avr asteriskjalalical/jalalidate/ "${ASTERISK_DIR}/"
+    # Add Persian Language TEXT
+    mv "${WWW_DIR}/lang/fa.lang" "${WWW_DIR}/lang/fa.lang.000" 2>/dev/null
+    cp -rf issabelmodules/fa.lang "${WWW_DIR}/lang/"
+    echo "**Issabel modules and Jalali calendar updated." >> "${LOG_FILE}"
 }
 
 # Install Asternic Call Stats Lite
@@ -362,14 +434,16 @@ install_callerid_formatter() {
     update_issabel
     update_progress "Adding Persian Sounds"
     add_persian_sounds
+    update_progress "Installing Jalali calendar libraries"
+    install_jalali_calendar
+    update_progress "Editing Issabel Modules and Jalali Calendar"
+    edit_issabel_modules
     update_progress "Installing Developer Module"
     install_developer
     update_progress "Installing Asternic CDR"
     asterniccdr
     update_progress "Adding Vitenant Theme"
     add_vitenant_theme
-    update_progress "Editing Issabel Modules"
-    edit_issabel_modules
     update_progress "Installing Asternic Call Stats Lite - This may take a few minutes"
     asternic_callStats_lite
     update_progress "Installing Downloadable Files"
