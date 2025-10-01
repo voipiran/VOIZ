@@ -304,13 +304,14 @@ function install_web_phone() {
 
 function install_callerid_formatter() {
     echo "------------Installing Asterisk Callerid Formatter-----------------"
-    curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip || { echo "Failed to download Asterisk Callerid Formatter."; exit 1; }
-    unzip -o AsteriskCalleridFormatter.zip
-    cd AsteriskCalleridFormatter-main
-    chmod 755 install.sh
-    ./install.sh -y
-    cd ..
-    rm -rf AsteriskCalleridFormatter.zip AsteriskCalleridFormatter-main
+    curl -L -o /tmp/AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip || { echo "Failed to download Asterisk Callerid Formatter."; exit 1; }
+    unzip -o /tmp/AsteriskCalleridFormatter.zip -d /tmp || { echo "Failed to unzip AsteriskCalleridFormatter.zip."; exit 1; }
+    mv /tmp/AsteriskCalleridFormatter-main /tmp/AsteriskCalleridFormatter || { echo "Failed to rename AsteriskCalleridFormatter-main to AsteriskCalleridFormatter."; exit 1; }
+    cd /tmp/AsteriskCalleridFormatter
+    chmod 755 /tmp/AsteriskCalleridFormatter/install.sh
+    [ -f /tmp/AsteriskCalleridFormatter/install.sh ] && bash /tmp/AsteriskCalleridFormatter/install.sh  
+    cd -
+    rm -rf /tmp/AsteriskCalleridFormatter.zip /tmp/AsteriskCalleridFormatter
     echo "**Asterisk Callerid Formatter Installed." >> "$LOG_FILE"
 }
 
