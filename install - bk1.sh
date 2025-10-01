@@ -461,131 +461,64 @@ Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25
 COUNTER=0
 while [[ ${COUNTER} -le 100 ]]; do
     sleep 1
-    MESSAGE="Setting VOIZ version..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    setversion
-    MESSAGE="Installing SourceGuardian..."
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
+    echo ${COUNTER}
+
+    setversion
     install_sourcegaurdian
     FILE="/etc/asterisk/extensions_custom.conf"
     LINE="[from-internal-custom]"
-    MESSAGE="Checking and updating Asterisk custom extensions..."
     if grep -qF "$LINE" "$FILE"; then
         echo "The line '$LINE' exists in the file '$FILE'."
     else
         echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line."
         echo "$LINE" | tee -a "$FILE"
     fi
-    MESSAGE="Updating Issabel system..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     update_issabel
-    MESSAGE="Installing Webmin..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     install_webmin
-    MESSAGE="Adding Persian sounds..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     add_persian_sounds
-    MESSAGE="Installing Issabel Developer module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     install_developer
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Installing Asternic CDR module..."
+    echo ${COUNTER}
     asterniccdr
-    MESSAGE="Adding Vitenant theme..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     add_vitenant_theme
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Editing Issabel modules..."
+    echo ${COUNTER}
     edit_issabel_modules
-    MESSAGE="Installing Asternic Call Stats Lite..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     asternic-callStats-lite
-    MESSAGE="Adding downloadable files..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     downloadable_files
-    MESSAGE="Installing Bulk DIDs module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     bulkdids
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$issabel_ver" -eq 4 ]; then
-        MESSAGE="Installing Boss Secretary module..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        bosssecretary
-    fi
-    MESSAGE="Installing Superfecta module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
+    echo ${COUNTER}
+    [ "$issabel_ver" -eq 4 ] && bosssecretary
     superfecta
-    MESSAGE="Adding VOIZ feature codes..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     featurecodes
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Installing Queue Survey module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
+    echo ${COUNTER}
+    #easyvpn
     survey
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$CRMINSTALL" = "true" ]; then
-        MESSAGE="Installing VOIZ Vtiger CRM..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        vtiger
-    fi
-    if [ "$QUEUEPANELINSTALL" = "true" ]; then
-        MESSAGE="Installing VOIZ Queue Panel..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_queue_panel
-    fi
-    if [ "$WEBPHONEINSTALL" = "true" ]; then
-        MESSAGE="Installing VOIZ Web Phone..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_web_phone
-    fi
-    if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
-        MESSAGE="Installing Asterisk CallerID Formatter..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_callerid_formatter
-    fi
-    if [ "$CHANSPYPROINSTALL" = "true" ]; then
-        MESSAGE="Installing Asterisk ChanSpy Pro..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_chanspy_pro
-    fi
-    if [ "$OPTIMIZEDMENUS" = "true" ]; then
-        MESSAGE="Optimizing Issabel menus..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        optimize_menus
-    fi
+    echo ${COUNTER}
+    [ "$CRMINSTALL" = "true" ] && vtiger
+    [ "$QUEUEPANELINSTALL" = "true" ] && install_queue_panel
+    [ "$WEBPHONEINSTALL" = "true" ] && install_web_phone
+    [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
+    [ "$CHANSPYPROINSTALL" = "true" ] && install_chanspy_pro
+    [ "$OPTIMIZEDMENUS" = "true" ] && optimize_menus
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$NETUTILINSTALL" = "true" ]; then
-        MESSAGE="Installing HTOP and Traceroute..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        htop
-    fi
+    echo ${COUNTER}
+    [ "$NETUTILINSTALL" = "true" ] && htop
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$NETUTILINSTALL" = "true" ]; then
-        MESSAGE="Installing SNGREP..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        sngrep
-    fi
+    echo ${COUNTER}
+    [ "$NETUTILINSTALL" = "true" ] && sngrep
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Installing Issabel Call Monitoring..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
+    echo ${COUNTER}
     issbel-callmonitoring
-    MESSAGE="Finalizing installation..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     cd ..
     #voiz_menu
     amportal a r >/dev/null 2>&1
     COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-done | whiptail --gauge "Installing VOIZ components..." 6 50 0
+done | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 ${COUNTER}
 
 systemctl restart httpd >/dev/null 2>&1
 clear
