@@ -6,7 +6,6 @@ issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;')
 # اطمینان از وجود دستورات مورد نیاز
 command -v whiptail >/dev/null 2>&1 || { echo "whiptail is required but not installed. Please install it."; exit 1; }
 command -v mysql >/dev/null 2>&1 || { echo "mysql is required but not installed. Please install it."; exit 1; }
-command -v git >/dev/null 2>&1 || { echo "git is required but not installed. Please install it."; exit 1; }
 
 # تعریف متغیرهای ثابت
 WWW_DIR="/var/www"
@@ -228,6 +227,15 @@ function featurecodes() {
     sed -i '/\[from\-internal\-custom\]/a include => voipiran-features' /etc/asterisk/extensions_custom.conf
     echo "" >> /etc/asterisk/extensions_custom.conf
     echo "#include extensions_voipiran_featurecodes.conf" >> /etc/asterisk/extensions_custom.conf
+    queries=(
+        "INSERT INTO featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIZ-بیان تاریخ و زمان شمسی','*200',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*200'"
+        "INSERT INTO featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATE-Jalali','VOIZ-بیان تاریخ به شمسی','*201',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*201'"
+        "INSERT INTO featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-TIME-Jalali','VOIZ-بیان زمان به فارسی','*202',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*202'"
+
+    )
+    for query in "${queries[@]}"; do
+        mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "$query" >/dev/null 2>&1
+    done
     echo "**VOIZ Feature Codes Added." >> "$LOG_FILE"
 }
 
@@ -268,26 +276,35 @@ function vtiger() {
 
 function install_queue_panel() {
     echo "------------Installing VOIZ Queue Panel-----------------"
-    git clone https://github.com/voipiran/VOIZ-QueuePanel "$WWW_DIR/html/qpanel" && bash "$WWW_DIR/html/qpanel/install.sh"
+    curl -L -o VOIZ-QueuePanel.zip https://github.com/voipiran/VOIZ-QueuePanel/archive/master.zip || { echo "Failed to download VOIZ Queue Panel."; exit 1; }
+    unzip -o VOIZ-QueuePanel.zip
+    mv VOIZ-QueuePanel-master "$WWW_DIR/html/qpanel"
+    cd "$WWW_DIR/html/qpanel"
+    [ -f install.sh ] && bash install.sh
     chmod -R 755 "$WWW_DIR/html/qpanel"
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel"
+    cd -
+    rm -rf VOIZ-QueuePanel.zip
     echo "**VOIZ Queue Panel Installed." >> "$LOG_FILE"
 }
 
 function install_web_phone() {
     echo "------------Installing VOIZ Web Phone-----------------"
-    git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone
-    mv /tmp/VOIZ-WebPhone/Phone "$WWW_DIR/html/phone"
-    bash /tmp/VOIZ-WebPhone/install.sh
+    curl -L -o VOIZ-WebPhone.zip https://github.com/voipiran/VOIZ-WebPhone/archive/master.zip || { echo "Failed to download VOIZ Web Phone."; exit 1; }
+    unzip -o VOIZ-WebPhone.zip
+    mv VOIZ-WebPhone-master/Phone "$WWW_DIR/html/phone"
+    cd VOIZ-WebPhone-master
+    [ -f install.sh ] && bash install.sh
     chmod -R 755 "$WWW_DIR/html/phone"
     chown -R asterisk:asterisk "$WWW_DIR/html/phone"
-    rm -rf /tmp/VOIZ-WebPhone
+    cd -
+    rm -rf VOIZ-WebPhone.zip VOIZ-WebPhone-master
     echo "**VOIZ Web Phone Installed." >> "$LOG_FILE"
 }
 
 function install_callerid_formatter() {
     echo "------------Installing Asterisk Callerid Formatter-----------------"
-    curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip
+    curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip || { echo "Failed to download Asterisk Callerid Formatter."; exit 1; }
     unzip -o AsteriskCalleridFormatter.zip
     cd AsteriskCalleridFormatter-main
     chmod 755 install.sh
@@ -299,7 +316,7 @@ function install_callerid_formatter() {
 
 function install_chanspy_pro() {
     echo "------------Installing Asterisk ChanSpy Pro-----------------"
-    curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip
+    curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip || { echo "Failed to download Asterisk ChanSpy Pro."; exit 1; }
     unzip -o voipiran_chanspy.zip
     cd AsteriskChanSpyPro-main
     chmod 755 install_voipiran_chansp.sh
@@ -315,15 +332,17 @@ function htop() {
 }
 
 function sngrep() {
-    yum install -y git ncurses-devel libpcap-devel >/dev/null 2>&1
-    git clone https://github.com/irontec/sngrep.git
-    cd sngrep
+    echo "------------Installing SNGREP-----------------"
+    yum install -y ncurses-devel libpcap-devel >/dev/null 2>&1
+    curl -L -o sngrep.zip https://github.com/irontec/sngrep/archive/master.zip || { echo "Failed to download sngrep."; exit 1; }
+    unzip -o sngrep.zip
+    cd sngrep-master
     ./bootstrap.sh
     ./configure
     make
     make install
     cd ..
-    rm -rf sngrep
+    rm -rf sngrep.zip sngrep-master
     echo "**SNGREP Util Installed." >> "$LOG_FILE"
 }
 
@@ -376,7 +395,8 @@ function update_issabel() {
 }
 
 function issbel-callmonitoring() {
-    curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip
+    echo "------------Installing Issabel Call Monitoring-----------------"
+    curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip || { echo "Failed to download Issabel Call Monitoring."; exit 1; }
     unzip -o callmonitoring.zip
     cd IssabelCallMonitoring-main
     chmod 755 install.sh
