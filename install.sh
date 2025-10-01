@@ -1,28 +1,44 @@
 #!/bin/bash
+
+# بررسی نسخه PHP
 issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;')
-##FUNCTIONS
-function setversion(){
-version=5.6
-#Set VOIZ tag
-file="/etc/voiz.conf"
-if [ -f "$file" ]
-then
-    #find version and replace
-sed -i -e "s/.*version.*/version=$version/g" /etc/voiz.conf
-else
-cp voiz-installation/voiz.conf /etc
-    sed -i -e "s/.*version.*/version=$version/g" /etc/voiz.conf
-fi
+
+# اطمینان از وجود دستورات مورد نیاز
+command -v whiptail >/dev/null 2>&1 || { echo "whiptail is required but not installed. Please install it."; exit 1; }
+command -v mysql >/dev/null 2>&1 || { echo "mysql is required but not installed. Please install it."; exit 1; }
+command -v git >/dev/null 2>&1 || { echo "git is required but not installed. Please install it."; exit 1; }
+
+# تعریف متغیرهای ثابت
+WWW_DIR="/var/www"
+LOG_FILE="voiz-installation.log"
+
+## FUNCTIONS
+
+function setversion() {
+    version=5.6
+    file="/etc/voiz.conf"
+    if [ -f "$file" ]; then
+        sed -i "s/.*version.*/version=$version/g" "$file"
+    else
+        mkdir -p /etc
+        cp -f voiz-installation/voiz.conf /etc/voiz.conf
+        sed -i "s/.*version.*/version=$version/g" /etc/voiz.conf
+        chmod 644 /etc/voiz.conf
+        chown asterisk:asterisk /etc/voiz.conf
+    fi
+    echo "**VOIZ version set to $version." >> "$LOG_FILE"
 }
+
 function install_sourcegaurdian() {
-    issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;') # Assuming issabel_ver holds PHP major version (e.g., 5 or 7)
+    issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;')
     if [ "$issabel_ver" -eq 5 ]; then
         echo "PHP 5 detected. Performing action A."
         echo "Install SourceGuardian Files"
         echo "------------Copy SourceGuard-----------------"
+        [ -d sourceguardian ] || { echo "SourceGuardian directory not found."; exit 1; }
         yes | cp -rf sourceguardian/ixed.5.4.lin /usr/lib64/php/modules
         yes | cp -rf sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules
-        yes | cp -rf /etc/php.ini /etc/php-old.ini
+        [ -f /etc/php.ini ] && yes | cp -rf /etc/php.ini /etc/php-old.ini
         yes | cp -rf sourceguardian/php5.ini /etc/php.ini
         echo "SourceGuardian Files have moved successfully"
         sleep 1
@@ -30,380 +46,367 @@ function install_sourcegaurdian() {
         echo "PHP 7 (or newer) detected. Performing action B."
         echo "Install SourceGuardian Files"
         echo "------------Copy SourceGuard-----------------"
+        [ -d sourceguardian ] || { echo "SourceGuardian directory not found."; exit 1; }
         yes | cp -rf sourceguardian/ixed.7.4.lin /usr/lib64/php/modules
-        yes | cp -rf /etc/php.ini /etc/php-old.ini
+        [ -f /etc/php.ini ] && yes | cp -rf /etc/php.ini /etc/php-old.ini
         yes | cp -rf sourceguardian/php7.ini /etc/php.ini
         echo "SourceGuardian Files have moved successfully"
-        systemctl reload php-fpm > /dev/null
+        systemctl reload php-fpm >/dev/null 2>&1 || echo "Failed to reload php-fpm."
     fi
+    echo "**SourceGuardian installed." >> "$LOG_FILE"
 }
-function install_webmin(){
-###Install Webmin - 1.953-1
-echo "------------Installing WEBMIN-----------------"
-rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
-echo "**WEBMIN Util Installed." >> voiz-installation.log
-}
-function install_developer(){
-echo "------------Installing Issabel DEVELOPER-----------------"
-rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
-echo "**Developer Module Installed." >> voiz-installation.log
-}
-function add_persian_sounds(){
-###Install Persian Language Sounds - 4.2.0
-echo "Add Persian Language"
-sed -e "/language=pr/d" /etc/asterisk/sip_custom.conf > /etc/asterisk/sip_custom.conf.000 >/dev/null 2>&1
-echo >> /etc/asterisk/sip_custom.conf.000
-echo language=pr >> /etc/asterisk/sip_custom.conf.000
-cp -f /etc/asterisk/sip_custom.conf.000 /etc/asterisk/sip_custom.conf
-sed -e "/language=pr/d" /etc/asterisk/iax_custom.conf > /etc/asterisk/iax_custom.conf.000 >/dev/null 2>&1
-echo >> /etc/asterisk/iax_custom.conf.000
-echo language=pr >> /etc/asterisk/iax_custom.conf.000
-cp -f /etc/asterisk/iax_custom.conf.000 /etc/asterisk/iax_custom.conf
-#Add Say.conf
-cp -rf persiansounds/say.conf /etc/asterisk
-chmod 777 /etc/asterisk/say.conf
-chown asterisk:asterisk /etc/asterisk/say.conf
-#Add Perisan Sounds Folder
-FILE=/var/lib/asterisk/sounds/pr
-#if [ ! -d "$FILE" ]; then
-yes | cp -ar persiansounds/pr/ /var/lib/asterisk/sounds
-chmod -R 777 /var/lib/asterisk/sounds/pr
-chown -R asterisk:asterisk /var/lib/asterisk/sounds/pr
-#fi
-if [ "$issabel_ver" -eq 5 ]; then
-sed -e "/language=pr/d" /etc/asterisk/pjsip_custom.conf > /etc/asterisk/pjsip_custom.conf.000 >/dev/null 2>&1
-echo >> /etc/asterisk/pjsip_custom.conf.000
-echo language=pr >> /etc/asterisk/pjsip_custom.conf.000
-cp -f /etc/asterisk/pjsip_custom.conf.000 /etc/asterisk/pjsip_custom.conf
-fi
-echo "**Persian Sounds Added." >> voiz-installation.log
-}
-function add_vitenant_theme(){
-echo "------------Installing VOIPIRAN Theme-----------------"
-sleep 1
-###Install RTL Theme Sounds - 4.2.0
-#Add voiz Favicon
-cp -f theme/favicon.ico /var/www/html
-touch -r /var/www/html/*
-#Installing Theme
-cp -rf theme/vitenant /var/www/html/themes/
-touch -r /var/www/html/themes/*
-touch -r /var/www/html/themes/vitenant/*
-#Setting DB (Set default language to Farsi)
-#Set Persian Langugae and Theme as Default
-  if [ "$Lang" = "Persian" ]
-  then
-    sqlite3 /var/www/db/settings.db "update settings set value='fa' where key='language';"
-    sqlite3 /var/www/db/settings.db "update settings set value='vitenant' where key='theme';"
-    echo "**Persian Theme Added." >> voiz-installation.log
-  fi
-  if [ "$Lang" = "English" ]
-  then
-    sqlite3 /var/www/db/settings.db "update settings set value='en' where key='language';"
-    sqlite3 /var/www/db/settings.db "update settings set value='tenant' where key='theme';"
-    echo "**English Theme Added." >> voiz-installation.log
-  fi
-###Apply changes to PBX Configuration
-# Path to the CSS file
-CSS_FILE="/var/www/html/admin/assets/css/mainstyle.css"
-CSS_FILE_2="/var/www/html/admin/assets/css/bulma.min.css"
-# Search and replace color codes using sed
-#sed -i 's/#562d7b/#6AB04C/g' "$CSS_FILE"
-#sed -i 's/#4B0884/#218c74/g' "$CSS_FILE"
-#sed -i 's/#A992DC/#badc58/g' "$CSS_FILE"
-#sed -i 's/#485fc7/#2d3436/g' "$CSS_FILE_2"
-yes | cp -rf theme/pbxconfig/css /var/www/html/admin/assets >/dev/null 2>&1
-chmod -R 777 /var/www/html/admin/assets/css
-chown -R asterisk:asterisk /var/www/html/admin/assets/css
-yes | cp -rf theme/pbxconfig/images/issabelpbx_small.png /var/www/html/admin/images/
-chmod -R 777 /var/www/html/admin/images/issabelpbx_small.png
-yes | cp -rf theme/pbxconfig/images/tango.png /var/www/html/admin/images/
-chmod -R 777 /var/www/html/admin/images/tango.png
-yes | cp -rf theme/pbxconfig/footer_content.php /var/www/html/admin/views
-chmod -R 777 /var/www/html/admin/views/footer_content.php
-chown -R asterisk:asterisk /var/www/html/admin/views/footer_content.php
-}
-function edit_issabel_modules(){
-###Install ISSABEL Modules - 4.2.0
-#Madules
-mkdir /var/www/html/modules000 >/dev/null 2>&1
-cp -rf /var/www/html/modules/* /var/www/html/modules000
-#cp -avr issabelmodules/modules /var/www/html
-yes | cp -arf issabelmodules/modules /var/www/html
-touch -r /var/www/html/modules/*
-chown -R asterisk:asterisk /var/www/html/modules/*
-chown asterisk:asterisk /var/www/html/modules/
-find /var/www/html/modules/ -exec touch {} \;
-###Install Jalali Calendar - 4.2.0
-#Calendar Shamsi(Added ver 8.0)
-yes | cp -f jalalicalendar/date.php /var/www/html/libs/
-yes | cp -f jalalicalendar/params.php /var/www/html/libs/
-yes | cp -rf jalalicalendar/JalaliJSCalendar /var/www/html/libs/
-#Shamsi Library Makooei
-yes | cp -r issabelmodules/mylib /var/www/html/libs/
-chown -R asterisk:asterisk /var/www/html/libs/mylib
-mv /var/www/html/libs/paloSantoForm.class.php /var/www/html/libs/paloSantoForm.class.php.000
-yes | cp -rf issabelmodules/paloSantoForm.class.php /var/www/html/libs/
-#DropDown Problem
-sed -i "s/\$('.componentSelect'/\/\/\$('\.componentSelect/g" /var/www/html/admin/assets/js/pbxlib.js >/dev/null 2>&1
-###Install Jalali Date Time Lib - 4.2.0
-cp -avr asteriskjalalical/jalalidate/ /etc/asterisk
-#Add Persian Language TEXT
-mv /var/www/html/lang/fa.lang /var/www/html/lang/fa.lang.000
-cp -rf issabelmodules/fa.lang /var/www/html/lang/
-}
-function downloadable_files(){
-###Install Downloadable Files - 4.2.0
-#copy Download Folder
-cp -rf downloadable/download /var/www/html/
-    echo "**Downloadable Files Added." >> voiz-installation.log
-}
-function bulkdids(){
-if [ ! -d "/var/www/html/admin/modules/bulkdids" ]; then
-#BULK DIDs Module
-yes | cp -rf issabelpbxmodules/bulkdids /var/www/html/admin/modules/
-amportal a ma install bulkdids
-fi
-    echo "**Bulk DIDs Module Added." >> voiz-installation.log
-}
-function asterniccdr(){
-  if [ ! -d "/var/www/html/admin/modules/asternic_cdr" ]; then
-#BULK DIDs Module
-yes | cp -rf issabelpbxmodules/asternic_cdr /var/www/html/admin/modules/
-amportal a ma install asternic_cdr
-fi
-    echo "**asternic_cdr Module Added." >> voiz-installation.log
-}
-function asternic-callStats-lite(){
-cd software
-tar zvxf asternic-stats-1.8.tgz
-cd asternic-stats
-mysqladmin -u root -p$rootpw create qstatslite 2>/dev/null
-mysql -u root -p$rootpw qstatslite < sql/qstats.sql 2>/dev/null
-mysql -u root -p$rootpw -e "CREATE USER 'qstatsliteuser'@'localhost' IDENTIFIED by '$rootpw'" 2>/dev/null
-mysql -u root -p$rootpw -e "GRANT select,insert,update,delete ON qstatslite.* TO qstatsliteuser" 2>/dev/null
-mysql -u root -p$rootpw -e "ALTER DATABASE qstatslite CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.queue_stats CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qname CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qevent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
-mysql -u root -p$rootpw -e "ALTER TABLE qstatslite.qagent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
-yes | cp -rf html /var/www/html/queue-stats
-yes | cp -rf parselog /usr/local/parseloglite
-sed -i "s/= ''/\= \'$rootpw\'/g" /var/www/html/queue-stats/config.php >/dev/null 2>&1
-sed -i "s/admin/phpconfig/g" /var/www/html/queue-stats/config.php >/dev/null 2>&1
-sed -i "s/amp111/php[onfig/g" /var/www/html/queue-stats/config.php >/dev/null 2>&1
-sed -i "s/= ''/\= \'$rootpw\'/g" /usr/local/parseloglite/config.php >/dev/null 2>&1
-(crontab -l ; echo "*/15 * * * * php -q /usr/local/parseloglite/parselog.php convertlocal") | crontab -
-cd ..
-issabel-menumerge asternic.xml
-cd ..
-}
-function bosssecretary(){
-if [ ! -d "/var/www/html/admin/modules/bosssecretary" ]; then
-#bosssecretary Module
-yes | cp -rf issabelpbxmodules/bosssecretary /var/www/html/admin/modules/
-amportal a ma install bosssecretary
-fi
-    echo "**Boss Secretary Module Added." >> voiz-installation.log
-}
-function superfecta(){
-if [ ! -d "/var/www/html/admin/modules/superfecta" ]; then
-#superfecta Module
-yes | cp -rf issabelpbxmodules/superfecta /var/www/html/admin/modules/
-amportal a ma install superfecta
-fi
-echo "**Supper Fecta Module Added." >> voiz-installation.log
-}
-function featurecodes(){
-cp -rf customdialplan/extensions_voipiran_featurecodes.conf /etc/asterisk/
-sed -i '/\[from\-internal\-custom\]/a include \=\> voipiran\-features' /etc/asterisk/extensions_custom.conf
-echo "" >> /etc/asterisk/extensions_custom.conf
-echo "#include extensions_voipiran_featurecodes.conf" >> /etc/asterisk/extensions_custom.conf
-query="insert into featurecodes (modulename,featurename,description,defaultcode,customcode,enabled,providedest) VALUES('core','Say-DATETIME-Jalali','VOIZ-بیان تاریخ و زمان شمسی','*200',NULL,'1','1') ON DUPLICATE KEY UPDATE defaultcode = '*200'"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query" >/dev/null 2>&1
 
+function install_webmin() {
+    echo "------------Installing WEBMIN-----------------"
+    [ -f rpms/webmin/webmin-2.111-1.noarch.rpm ] || { echo "Webmin RPM not found."; exit 1; }
+    rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
+    echo "**WEBMIN Util Installed." >> "$LOG_FILE"
 }
-function easyvpn(){
-yum install issabel-easyvpn –nogpgcheck -y >/dev/null 2>&1
-echo "**OpenVPN Module Added." >> voiz-installation.log
+
+function install_developer() {
+    echo "------------Installing Issabel DEVELOPER-----------------"
+    [ -f rpms/develop/issabel-developer-4.0.0-3.noarch.rpm ] || { echo "Developer RPM not found."; exit 1; }
+    rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
+    echo "**Developer Module Installed." >> "$LOG_FILE"
 }
-function survey(){
-cp -rf voipiranagi /var/lib/asterisk/agi-bin
-chmod -R 777 /var/lib/asterisk/agi-bin/voipiranagi
-query="REPLACE INTO miscdests (id,description,destdial) VALUES('101','نظرسنجی-ویز','4454')"
-mysql -hlocalhost -uroot -p$rootpw asterisk -e "$query"
-echo "**Queue Survey Module Added." >> voiz-installation.log
+
+function add_persian_sounds() {
+    echo "Add Persian Language"
+    [ -d persiansounds ] || { echo "Persian sounds directory not found."; exit 1; }
+    sed -e "/language=pr/d" /etc/asterisk/sip_custom.conf > /etc/asterisk/sip_custom.conf.000
+    echo >> /etc/asterisk/sip_custom.conf.000
+    echo "language=pr" >> /etc/asterisk/sip_custom.conf.000
+    cp -f /etc/asterisk/sip_custom.conf.000 /etc/asterisk/sip_custom.conf
+    chmod 644 /etc/asterisk/sip_custom.conf
+    chown asterisk:asterisk /etc/asterisk/sip_custom.conf
+
+    sed -e "/language=pr/d" /etc/asterisk/iax_custom.conf > /etc/asterisk/iax_custom.conf.000
+    echo >> /etc/asterisk/iax_custom.conf.000
+    echo "language=pr" >> /etc/asterisk/iax_custom.conf.000
+    cp -f /etc/asterisk/iax_custom.conf.000 /etc/asterisk/iax_custom.conf
+    chmod 644 /etc/asterisk/iax_custom.conf
+    chown asterisk:asterisk /etc/asterisk/iax_custom.conf
+
+    cp -rf persiansounds/say.conf /etc/asterisk
+    chmod 644 /etc/asterisk/say.conf
+    chown asterisk:asterisk /etc/asterisk/say.conf
+
+    yes | cp -ar persiansounds/pr/ /var/lib/asterisk/sounds/
+    chmod -R 755 /var/lib/asterisk/sounds/pr
+    chown -R asterisk:asterisk /var/lib/asterisk/sounds/pr
+
+    if [ "$issabel_ver" -eq 5 ]; then
+        sed -e "/language=pr/d" /etc/asterisk/pjsip_custom.conf > /etc/asterisk/pjsip_custom.conf.000
+        echo >> /etc/asterisk/pjsip_custom.conf.000
+        echo "language=pr" >> /etc/asterisk/pjsip_custom.conf.000
+        cp -f /etc/asterisk/pjsip_custom.conf.000 /etc/asterisk/pjsip_custom.conf
+        chmod 644 /etc/asterisk/pjsip_custom.conf
+        chown asterisk:asterisk /etc/asterisk/pjsip_custom.conf
+    fi
+    echo "**Persian Sounds Added." >> "$LOG_FILE"
 }
-function vtiger(){
-    echo "------------Installing VOIZ Vtiger CRM-----------------"
-    # دانلود مخزن از GitHub به صورت زیپ و استخراج
-    curl -L -o VOIZ-Vtiger.zip https://github.com/voipiran/VOIZ-Vtiger/archive/master.zip && \
-    unzip -o VOIZ-Vtiger.zip && \
-    cd VOIZ-Vtiger-master && \
-    # کپی فایل‌ها به دایرکتوری هدف
-    yes | cp -rf * /var/www/html/vtiger/ && \
+
+function add_vitenant_theme() {
+    echo "------------Installing VOIPIRAN Theme-----------------"
+    sleep 1
+    [ -f theme/favicon.ico ] || { echo "Favicon not found."; exit 1; }
+    cp -f theme/favicon.ico "$WWW_DIR/html"
+    touch -r "$WWW_DIR/html/*"
+    cp -rf theme/vitenant "$WWW_DIR/html/themes/"
+    touch -r "$WWW_DIR/html/themes/*"
+    touch -r "$WWW_DIR/html/themes/vitenant/*"
+    if [ "$Lang" = "Persian" ]; then
+        sqlite3 "$WWW_DIR/db/settings.db" "update settings set value='fa' where key='language';"
+        sqlite3 "$WWW_DIR/db/settings.db" "update settings set value='vitenant' where key='theme';"
+        echo "**Persian Theme Added." >> "$LOG_FILE"
+    elif [ "$Lang" = "English" ]; then
+        sqlite3 "$WWW_DIR/db/settings.db" "update settings set value='en' where key='language';"
+        sqlite3 "$WWW_DIR/db/settings.db" "update settings set value='tenant' where key='theme';"
+        echo "**English Theme Added." >> "$LOG_FILE"
+    fi
+    yes | cp -rf theme/pbxconfig/css "$WWW_DIR/html/admin/assets"
+    chmod -R 755 "$WWW_DIR/html/admin/assets/css"
+    chown -R asterisk:asterisk "$WWW_DIR/html/admin/assets/css"
+    yes | cp -rf theme/pbxconfig/images/issabelpbx_small.png "$WWW_DIR/html/admin/images/"
+    chmod 644 "$WWW_DIR/html/admin/images/issabelpbx_small.png"
+    yes | cp -rf theme/pbxconfig/images/tango.png "$WWW_DIR/html/admin/images/"
+    chmod 644 "$WWW_DIR/html/admin/images/tango.png"
+    yes | cp -rf theme/pbxconfig/footer_content.php "$WWW_DIR/html/admin/views"
+    chmod 644 "$WWW_DIR/html/admin/views/footer_content.php"
+    chown -R asterisk:asterisk "$WWW_DIR/html/admin/views/footer_content.php"
+}
+
+function edit_issabel_modules() {
+    mkdir -p "$WWW_DIR/html/modules000"
+    cp -rf "$WWW_DIR/html/modules/*" "$WWW_DIR/html/modules000"
+    yes | cp -arf issabelmodules/modules "$WWW_DIR/html"
+    touch -r "$WWW_DIR/html/modules/*"
+    chown -R asterisk:asterisk "$WWW_DIR/html/modules/*"
+    find "$WWW_DIR/html/modules/" -exec touch {} \;
+    yes | cp -f jalalicalendar/date.php "$WWW_DIR/html/libs/"
+    yes | cp -f jalalicalendar/params.php "$WWW_DIR/html/libs/"
+    yes | cp -rf jalalicalendar/JalaliJSCalendar "$WWW_DIR/html/libs/"
+    yes | cp -r issabelmodules/mylib "$WWW_DIR/html/libs/"
+    chown -R asterisk:asterisk "$WWW_DIR/html/libs/mylib"
+    [ -f "$WWW_DIR/html/libs/paloSantoForm.class.php" ] && mv "$WWW_DIR/html/libs/paloSantoForm.class.php" "$WWW_DIR/html/libs/paloSantoForm.class.php.000"
+    yes | cp -rf issabelmodules/paloSantoForm.class.php "$WWW_DIR/html/libs/"
+    sed -i "s/\$('.componentSelect'/\/\/\$('\.componentSelect/g" "$WWW_DIR/html/admin/assets/js/pbxlib.js" >/dev/null 2>&1
+    cp -avr asteriskjalalical/jalalidate/ /etc/asterisk
+    [ -f "$WWW_DIR/html/lang/fa.lang" ] && mv "$WWW_DIR/html/lang/fa.lang" "$WWW_DIR/html/lang/fa.lang.000"
+    cp -rf issabelmodules/fa.lang "$WWW_DIR/html/lang/"
+    echo "**Issabel Modules Edited." >> "$LOG_FILE"
+}
+
+function downloadable_files() {
+    cp -rf downloadable/download "$WWW_DIR/html/"
+    chmod -R 755 "$WWW_DIR/html/download"
+    chown -R asterisk:asterisk "$WWW_DIR/html/download"
+    echo "**Downloadable Files Added." >> "$LOG_FILE"
+}
+
+function bulkdids() {
+    if [ ! -d "$WWW_DIR/html/admin/modules/bulkdids" ]; then
+        yes | cp -rf issabelpbxmodules/bulkdids "$WWW_DIR/html/admin/modules/"
+        amportal a ma install bulkdids
+    fi
+    echo "**Bulk DIDs Module Added." >> "$LOG_FILE"
+}
+
+function asterniccdr() {
+    if [ ! -d "$WWW_DIR/html/admin/modules/asternic_cdr" ]; then
+        yes | cp -rf issabelpbxmodules/asternic_cdr "$WWW_DIR/html/admin/modules/"
+        amportal a ma install asternic_cdr
+    fi
+    echo "**Asternic CDR Module Added." >> "$LOG_FILE"
+}
+
+function asternic-callStats-lite() {
+    [ -d software ] || { echo "Software directory not found."; exit 1; }
+    cd software
+    tar zvxf asternic-stats-1.8.tgz
+    cd asternic-stats
+    mysqladmin -u root -p"$rootpw" create qstatslite 2>/dev/null
+    mysql -u root -p"$rootpw" qstatslite < sql/qstats.sql 2>/dev/null
+    mysql -u root -p"$rootpw" -e "CREATE USER 'qstatsliteuser'@'localhost' IDENTIFIED BY '$rootpw'" 2>/dev/null
+    mysql -u root -p"$rootpw" -e "GRANT SELECT,INSERT,UPDATE,DELETE ON qstatslite.* TO 'qstatsliteuser'@'localhost'" 2>/dev/null
+    mysql -u root -p"$rootpw" -e "ALTER DATABASE qstatslite CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+    mysql -u root -p"$rootpw" -e "ALTER TABLE qstatslite.queue_stats CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+    mysql -u root -p"$rootpw" -e "ALTER TABLE qstatslite.qname CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+    mysql -u root -p"$rootpw" -e "ALTER TABLE qstatslite.qevent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+    mysql -u root -p"$rootpw" -e "ALTER TABLE qstatslite.qagent CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null
+    yes | cp -rf html "$WWW_DIR/html/queue-stats"
+    yes | cp -rf parselog /usr/local/parseloglite
+    sed -i "s/= ''/= '$rootpw'/g" "$WWW_DIR/html/queue-stats/config.php" >/dev/null 2>&1
+    sed -i "s/admin/phpconfig/g" "$WWW_DIR/html/queue-stats/config.php" >/dev/null 2>&1
+    sed -i "s/amp111/php[onfig/g" "$WWW_DIR/html/queue-stats/config.php" >/dev/null 2>&1
+    sed -i "s/= ''/= '$rootpw'/g" /usr/local/parseloglite/config.php >/dev/null 2>&1
+    (crontab -l ; echo "*/15 * * * * php -q /usr/local/parseloglite/parselog.php convertlocal") | crontab -
     cd ..
+    issabel-menumerge asternic.xml
+    cd ..
+    echo "**Asternic Call Stats Lite Installed." >> "$LOG_FILE"
+}
 
-    # تنظیم دسترسی‌ها
-    chmod -R 777 /var/www/html/vtiger
-    chown -R asterisk:asterisk /var/www/html/vtiger
-
-    # بررسی و ایجاد دیتابیس در صورت نیاز
-    if ! mysql -uroot -p$rootpw -e 'use voipirancrm' >/dev/null 2>&1; then
-        echo "-------------َADDING VTIGER DATABASE1"
-        mysql -uroot -p$rootpw -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;" >/dev/null 2>&1
-        echo "-------------َADDING VTIGER DATABASE2"
-        mysql -uroot -p$rootpw -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';" >/dev/null 2>&1
-        echo "-------------َADDING VTIGER DATABASE3"
-        # فرض بر اینه که اسکریپت دیتابیس در مخزن وجود داره (مثلاً vtiger.sql یا مشابه)
-        if [ -f "VOIZ-Vtiger-master/vtiger.sql" ]; then
-            mysql -uroot -p$rootpw voipirancrm < VOIZ-Vtiger-master/vtiger.sql >/dev/null 2>&1
-        else
-            echo "Warning: No database script (vtiger.sql) found in repository."
-        fi
+function bosssecretary() {
+    if [ "$issabel_ver" -eq 4 ] && [ ! -d "$WWW_DIR/html/admin/modules/bosssecretary" ]; then
+        yes | cp -rf issabelpbxmodules/bosssecretary "$WWW_DIR/html/admin/modules/"
+        amportal a ma install bosssecretary
     fi
+    echo "**Boss Secretary Module Added." >> "$LOG_FILE"
+}
 
-    # پیکربندی فایل config.inc.php (در صورت وجود)
-    if [ -f "/var/www/html/vtiger/config.inc.php" ]; then
-        sed -i "s/123456/$rootpw/g" /var/www/html/vtiger/config.inc.php >/dev/null 2>&1
-    else
-        echo "Warning: config.inc.php not found in /var/www/html/vtiger/"
+function superfecta() {
+    if [ ! -d "$WWW_DIR/html/admin/modules/superfecta" ]; then
+        yes | cp -rf issabelpbxmodules/superfecta "$WWW_DIR/html/admin/modules/"
+        amportal a ma install superfecta
     fi
+    echo "**Superfecta Module Added." >> "$LOG_FILE"
+}
 
-    # ادغام منو در صورت وجود فایل منو
-    if [ -f "VOIZ-Vtiger-master/crm-menu.xml" ]; then
-        issabel-menumerge VOIZ-Vtiger-master/crm-menu.xml
-    else
-        echo "Warning: crm-menu.xml not found in repository."
+function featurecodes() {
+    cp -rf customdialplan/extensions_voipiran_featurecodes.conf /etc/asterisk/
+    sed -i '/\[from\-internal\-custom\]/a include => voipiran-features' /etc/asterisk/extensions_custom.conf
+    echo "" >> /etc/asterisk/extensions_custom.conf
+    echo "#include extensions_voipiran_featurecodes.conf" >> /etc/asterisk/extensions_custom.conf
+    echo "**VOIZ Feature Codes Added." >> "$LOG_FILE"
+}
+
+function easyvpn() {
+    yum install issabel-easyvpn --nogpgcheck -y >/dev/null 2>&1
+    echo "**OpenVPN Module Added." >> "$LOG_FILE"
+}
+
+function survey() {
+    cp -rf voipiranagi /var/lib/asterisk/agi-bin
+    chmod -R 755 /var/lib/asterisk/agi-bin/voipiranagi
+    chown -R asterisk:asterisk /var/lib/asterisk/agi-bin/voipiranagi
+    query="REPLACE INTO miscdests (id,description,destdial) VALUES('101','نظرسنجی-ویز','4454')"
+    mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "$query" >/dev/null 2>&1
+    echo "**Queue Survey Module Added." >> "$LOG_FILE"
+}
+
+function vtiger() {
+    echo "------------Installing VOIZ Vtiger CRM-----------------"
+    curl -L -o VOIZ-Vtiger.zip https://github.com/voipiran/VOIZ-Vtiger/archive/master.zip || { echo "Failed to download Vtiger."; exit 1; }
+    unzip -o VOIZ-Vtiger.zip
+    cd VOIZ-Vtiger-master
+    yes | cp -rf * "$WWW_DIR/html/vtiger/"
+    cd ..
+    chmod -R 755 "$WWW_DIR/html/vtiger"
+    chown -R asterisk:asterisk "$WWW_DIR/html/vtiger"
+    if ! mysql -uroot -p"$rootpw" -e 'use voipirancrm' >/dev/null 2>&1; then
+        echo "-------------Adding VTIGER DATABASE"
+        mysql -uroot -p"$rootpw" -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;" >/dev/null 2>&1
+        mysql -uroot -p"$rootpw" -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';" >/dev/null 2>&1
+        [ -f "VOIZ-Vtiger-master/vtiger.sql" ] && mysql -uroot -p"$rootpw" voipirancrm < VOIZ-Vtiger-master/vtiger.sql >/dev/null 2>&1
     fi
-
-    # پاکسازی فایل‌های موقت
+    [ -f "$WWW_DIR/html/vtiger/config.inc.php" ] && sed -i "s/123456/$rootpw/g" "$WWW_DIR/html/vtiger/config.inc.php" >/dev/null 2>&1
+    [ -f VOIZ-Vtiger-master/crm-menu.xml ] && issabel-menumerge VOIZ-Vtiger-master/crm-menu.xml
     rm -rf VOIZ-Vtiger.zip VOIZ-Vtiger-master
-
-    echo "**VOIZ Vtiger CRM Installed." >> voiz-installation.log
+    echo "**VOIZ Vtiger CRM Installed." >> "$LOG_FILE"
 }
 
+function install_queue_panel() {
+    echo "------------Installing VOIZ Queue Panel-----------------"
+    git clone https://github.com/voipiran/VOIZ-QueuePanel "$WWW_DIR/html/qpanel" && bash "$WWW_DIR/html/qpanel/install.sh"
+    chmod -R 755 "$WWW_DIR/html/qpanel"
+    chown -R asterisk:asterisk "$WWW_DIR/html/qpanel"
+    echo "**VOIZ Queue Panel Installed." >> "$LOG_FILE"
+}
 
-function install_queue_panel(){
-echo "------------Installing VOIZ Queue Panel-----------------"
-git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanel && bash /var/www/html/qpanel/install.sh
-echo "**VOIZ Queue Panel Installed." >> voiz-installation.log
+function install_web_phone() {
+    echo "------------Installing VOIZ Web Phone-----------------"
+    git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone
+    mv /tmp/VOIZ-WebPhone/Phone "$WWW_DIR/html/phone"
+    bash /tmp/VOIZ-WebPhone/install.sh
+    chmod -R 755 "$WWW_DIR/html/phone"
+    chown -R asterisk:asterisk "$WWW_DIR/html/phone"
+    rm -rf /tmp/VOIZ-WebPhone
+    echo "**VOIZ Web Phone Installed." >> "$LOG_FILE"
 }
-function install_web_phone(){
-echo "------------Installing VOIZ Web Phone-----------------"
-sudo git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone && sudo mv /tmp/VOIZ-WebPhone/Phone /var/www/html/phone && sudo bash /tmp/VOIZ-WebPhone/install.sh
-echo "**VOIZ Web Phone Installed." >> voiz-installation.log
+
+function install_callerid_formatter() {
+    echo "------------Installing Asterisk Callerid Formatter-----------------"
+    curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip
+    unzip -o AsteriskCalleridFormatter.zip
+    cd AsteriskCalleridFormatter-main
+    chmod 755 install.sh
+    ./install.sh -y
+    cd ..
+    rm -rf AsteriskCalleridFormatter.zip AsteriskCalleridFormatter-main
+    echo "**Asterisk Callerid Formatter Installed." >> "$LOG_FILE"
 }
-function install_callerid_formatter(){
-echo "------------Installing Asterisk Callerid Formatter-----------------"
-curl -L -o AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip && unzip AsteriskCalleridFormatter.zip && cd AsteriskCalleridFormatter-main && chmod 755 install.sh && ./install.sh -y
-echo "**Asterisk Callerid Formatter Installed." >> voiz-installation.log
+
+function install_chanspy_pro() {
+    echo "------------Installing Asterisk ChanSpy Pro-----------------"
+    curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip
+    unzip -o voipiran_chanspy.zip
+    cd AsteriskChanSpyPro-main
+    chmod 755 install_voipiran_chansp.sh
+    ./install_voipiran_chansp.sh -y
+    cd ..
+    rm -rf voipiran_chanspy.zip AsteriskChanSpyPro-main
+    echo "**Asterisk ChanSpy Pro Installed." >> "$LOG_FILE"
 }
-function install_chanspy_pro(){
-echo "------------Installing Asterisk ChanSpy Pro-----------------"
-curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip && unzip voipiran_chanspy.zip && cd AsteriskChanSpyPro-main && chmod 755 install_voipiran_chansp.sh && ./install.sh -y
-echo "**Asterisk ChanSpy Pro Installed." >> voiz-installation.log
+
+function htop() {
+    yum install htop traceroute -y >/dev/null 2>&1
+    echo "**HTOP Util Installed." >> "$LOG_FILE"
 }
-function htop(){
-#Installing htop
-yum install htop traceroute -y >/dev/null 2>&1
-echo "**HTOP Util Installed." >> voiz-installation.log
+
+function sngrep() {
+    yum install -y git ncurses-devel libpcap-devel >/dev/null 2>&1
+    git clone https://github.com/irontec/sngrep.git
+    cd sngrep
+    ./bootstrap.sh
+    ./configure
+    make
+    make install
+    cd ..
+    rm -rf sngrep
+    echo "**SNGREP Util Installed." >> "$LOG_FILE"
 }
-function sngrep(){
-#Installing SNGREP
-yum install -y git ncurses-devel libpcap-devel >/dev/null 2>&1
-git clone https://github.com/irontec/sngrep.git >/dev/null 2>&1
-cd sngrep
-./bootstrap.sh
-./configure
-make
-make install
-cd ..
-echo "**SNGREP Util Installed." >> voiz-installation.log
+
+function voiz_menu() {
+    mv "$WWW_DIR/db/menu.db" "$WWW_DIR/db/menu.db.000"
+    cp -rf voiz-installation/menu.db "$WWW_DIR/db/"
+    chmod 644 "$WWW_DIR/db/menu.db"
+    chown asterisk:asterisk "$WWW_DIR/db/menu.db"
+    echo "**VOIZ Guide Menu Added." >> "$LOG_FILE"
 }
-function voiz_menu(){
-#issabel-menumerge voiz-guide-menu.xml
-mv /var/www/db/menu.db /var/www/db/menu.db.000
-cp -rf voiz-installation/menu.db /var/www/db/
-chown asterisk:asterisk /var/www/db/menu.db
-echo "**VOIZ Guide Menu Added." >> voiz-installation.log
-}
-function set_cid(){
-####Install Source Gaurdian Files
-echo "------------START-----------------"
-# Get PHP version
-php_version=$(php -r "echo PHP_MAJOR_VERSION;")
-# Perform actions based on PHP version
-if [ "$php_version" -eq 5 ]; then
-    echo "PHP 5 detected. Performing action A."
-sleep 1
-else
-    echo "PHP 7 (or newer) detected. Performing action B."
-####Add from-internal-custom
-# File to check
-FILE="/etc/asterisk/extensions_custom.conf"
-# Line to search for
-LINE="[from-internal-custom]"
-    # Check if the line exists in the file
-    if grep -qF "$LINE" "$FILE"; then
-       echo "The line '$LINE' exists in the file '$FILE'."
-    else
-        echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line."
-       echo "$LINE" | sudo tee -a "$FILE"
+
+function optimize_menus() {
+    if [ "$OPTIMIZEDMENUS" = "true" ]; then
+        local backup_file="$WWW_DIR/db/menu_backup_$(date +%Y%m%d_%H%M%S).db"
+        [ -f "$WWW_DIR/db/menu.db" ] && cp "$WWW_DIR/db/menu.db" "$backup_file" 2>/dev/null || echo "Warning: Failed to backup menu.db" >> "$LOG_FILE"
+        sqlite3 "$WWW_DIR/db/menu.db" "DELETE FROM menu WHERE id = 'billing';" 2>/dev/null || echo "Warning: Failed to delete billing menu" >> "$LOG_FILE"
+        sqlite3 "$WWW_DIR/db/menu.db" "DELETE FROM menu WHERE id = 'graphic_report';" 2>/dev/null || echo "Warning: Failed to delete graphic_report menu" >> "$LOG_FILE"
+        sqlite3 "$WWW_DIR/db/menu.db" "DELETE FROM menu WHERE id = 'channelusage';" 2>/dev/null || echo "Warning: Failed to delete channelusage menu" >> "$LOG_FILE"
+        sqlite3 "$WWW_DIR/db/menu.db" "DELETE FROM menu WHERE IdParent = 'email_admin' AND id != 'remote_smtp';" 2>/dev/null || echo "Warning: Failed to delete email_admin submenus" >> "$LOG_FILE"
+        echo "**Optimized Menus applied." >> "$LOG_FILE"
     fi
-sleep 1
-fi
-sleep 1
+}
 
+function welcome() {
+    whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io..." 8 78
 }
-function welcome(){
-whiptail --title "VOIZ Installtion" --msgbox "Powered by VOIPIRAN.io..." 8 78
+
+function menu-order() {
+    issabel-menumerge callcenter-menu.xml
+    echo "**Callcenter Menu Added." >> "$LOG_FILE"
 }
-function menu-order(){
-###َAdd Callcenter Menu
-issabel-menumerge callcenter-menu.xml
+
+function install-on-issabel() {
+    yum --enablerepo=issabel-beta update -y >/dev/null 2>&1
+    echo "**install-on-issabel" >> "$LOG_FILE"
 }
-function install-on-issabel(){
-echo "**install-on-issabel" >> voiz-installation.log
-yum --enablerepo=issabel-beta update -y
+
+function install-on-centos() {
+    echo "**install-on-centos" >> "$LOG_FILE"
 }
-function install-on-centos(){
-echo "**install-on-centos" >> voiz-installation.log
+
+function install-on-nightly() {
+    yum update -y >/dev/null 2>&1
+    echo "**install-on-rocky" >> "$LOG_FILE"
 }
-function install-on-nightly(){
-echo "**install-on-rocky" >> voiz-installation.log
-yum update -y
+
+function update_issabel() {
+    yum update -y >/dev/null 2>&1
+    echo "**install-on-issabel" >> "$LOG_FILE"
 }
-function update_issabel(){
-echo "**install-on-issabel" >> voiz-installation.log
-yum update -y 2>/dev/null
+
+function issbel-callmonitoring() {
+    curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip
+    unzip -o callmonitoring.zip
+    cd IssabelCallMonitoring-main
+    chmod 755 install.sh
+    ./install.sh -y
+    cd ..
+    issabel-menumerge software/control.xml
+    rm -rf callmonitoring.zip IssabelCallMonitoring-main
+    echo "**Issabel Call Monitoring Installed." >> "$LOG_FILE"
 }
-function issbel-callmonitoring(){
-curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip && \
-unzip -o callmonitoring.zip && \
-cd IssabelCallMonitoring-main && \
-chmod 755 install.sh && \
-yes | ./install.sh
-issabel-menumerge software/control.xml
-}
+
 #########START#########
-issabel_ver=5
-###Fetch DB root PASSWORD
-echo "185.51.200.2 mirrors.fedoraproject.org" | sudo tee -a /etc/hosts
+
+# Fetch DB root password
+echo "185.51.200.2 mirrors.fedoraproject.org" | tee -a /etc/hosts
 rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
-> voiz-installation.log
-echo "VOIZ Installation Log:" >> voiz-installation.log
+[ -z "$rootpw" ] && { echo "MySQL root password not found in /etc/issabel.conf."; exit 1; }
+> "$LOG_FILE"
+echo "VOIZ Installation Log:" >> "$LOG_FILE"
+
 # Get PHP version
 php_version=$(php -r "echo PHP_MAJOR_VERSION;")
-# Perform actions based on PHP version
 if [ "$php_version" -eq 5 ]; then
-issabel_ver=5
+    issabel_ver=5
 else
-issabel_ver=4
+    issabel_ver=4
 fi
-###Welcome
+
 welcome
-###SELECT FEATURES GUI
+
+# SELECT FEATURES GUI
 SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
 "List of Features to install" 20 100 10 \
 "NetworkUtilities" "SNGREP, HTOP" ON \
@@ -411,152 +414,92 @@ SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
 "WebPhone" "VOIZ Web Phone" ON \
 "CallerIDFormatter" "Asterisk Callerid Formatter" ON \
 "ChanSpyPro" "Asterisk ChanSpy Pro" ON \
-"Vtiger CRM" "ویتایگر با تقویم شمسی" OFF 3>&1 1>&2 2>&3)
-# تبدیل به آرایه واقعی با eval
+"Vtiger CRM" "ویتایگر با تقویم شمسی" OFF \
+"OptimizedMenus" "Optimized Menus" ON 3>&1 1>&2 2>&3)
+
 eval "ARRAY=($SELECTED)"
-# دیباگ
-echo "Selected: ${ARRAY[@]}"
-# بررسی انتخاب‌ها
+echo "Selected: ${ARRAY[@]}" >> "$LOG_FILE"
+
 for CHOICE in "${ARRAY[@]}"; do
-  if [[ "$CHOICE" == *"CRM"* ]]; then
-    CRMINSTALL=true
-  fi
-  if [[ "$CHOICE" == *"NetworkUtilities"* ]]; then
-    NETUTILINSTALL=true
-  fi
-  if [[ "$CHOICE" == *"QueuePanel"* ]]; then
-    QUEUEPANELINSTALL=true
-  fi
-  if [[ "$CHOICE" == *"WebPhone"* ]]; then
-    WEBPHONEINSTALL=true
-  fi
-  if [[ "$CHOICE" == *"CallerIDFormatter"* ]]; then
-    CALLERIDFORMATTERINSTALL=true
-  fi
-  if [[ "$CHOICE" == *"ChanSpyPro"* ]]; then
-    CHANSPYPROINSTALL=true
-  fi
+    case "$CHOICE" in
+        *"CRM"*) CRMINSTALL=true ;;
+        *"NetworkUtilities"*) NETUTILINSTALL=true ;;
+        *"QueuePanel"*) QUEUEPANELINSTALL=true ;;
+        *"WebPhone"*) WEBPHONEINSTALL=true ;;
+        *"CallerIDFormatter"*) CALLERIDFORMATTERINSTALL=true ;;
+        *"ChanSpyPro"*) CHANSPYPROINSTALL=true ;;
+        *"OptimizedMenus"*) OPTIMIZEDMENUS=true ;;
+    esac
 done
-###SELECT LNGUAGE GUI
+
+# SELECT LANGUAGE GUI
 Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25 78 5 \
 "Persian" "پوسته و محیط فارسی به همراه تقویم شمسی" \
 "English" "پوسته و محیط انگلیسی به همراه تقویم شمسی" 3>&1 1>&2 2>&3)
- COUNTER=0
- while [[ ${COUNTER} -le 100 ]]; do
-   sleep 1
-   COUNTER=$(($COUNTER+10))
-   echo ${COUNTER}
-##Set Version of VOIZ
-setversion
-##Install Source Gaurdian Module
-install_sourcegaurdian
-##Edit Extension_custom.conf
-# File to check
-FILE="/etc/asterisk/extensions_custom.conf"
-# Line to search for
-LINE="[from-internal-custom]"
-    # Check if the line exists in the file
+
+COUNTER=0
+while [[ ${COUNTER} -le 100 ]]; do
+    sleep 1
+    COUNTER=$((COUNTER+10))
+    echo ${COUNTER}
+
+    setversion
+    install_sourcegaurdian
+    FILE="/etc/asterisk/extensions_custom.conf"
+    LINE="[from-internal-custom]"
     if grep -qF "$LINE" "$FILE"; then
-       echo "The line '$LINE' exists in the file '$FILE'."
+        echo "The line '$LINE' exists in the file '$FILE'."
     else
         echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line."
-       echo "$LINE" | sudo tee -a "$FILE"
+        echo "$LINE" | tee -a "$FILE"
     fi
-  COUNTER=$(($COUNTER+10))
+    update_issabel
+    install_webmin
+    add_persian_sounds
+    install_developer
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install Webmin
-install_webmin
-##Copy Persian Sounds
-add_persian_sounds
-##Install Developer Module
-install_developer
-  COUNTER=$(($COUNTER+10))
+    asterniccdr
+    add_vitenant_theme
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install Asternic CDR
-asterniccdr
-##Install Persian Theme
-add_vitenant_theme
-  COUNTER=$(($COUNTER+10))
+    edit_issabel_modules
+    asternic-callStats-lite
+    downloadable_files
+    bulkdids
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Copy Issabel Edited Modules
-edit_issabel_modules
-#asternic-callStats-lite
-asternic-callStats-lite
-##Coppy Downloadable Files
-downloadable_files
-##Install Bulk DIDs Module
-bulkdids
-  COUNTER=$(($COUNTER+10))
+    [ "$issabel_ver" -eq 4 ] && bosssecretary
+    superfecta
+    featurecodes
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install BossSecretory Module
-if [ "$issabel_ver" -eq 4 ]; then
-bosssecretary
-fi
-##Install Superfecta Module
-superfecta
-##Install VOIZ FeatueCodes
-featurecodes
-  COUNTER=$(($COUNTER+10))
-  echo ${COUNTER}
-##Install Openvpn Module
-#easyvpn
-##Install Survey
-survey
-  COUNTER=$(($COUNTER+10))
+    #easyvpn
+    survey
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install Vtiger CRM
-if [ "$CRMINSTALL" = "true" ]; then
-  vtiger
-fi
-##Install Queue Panel
-if [ "$QUEUEPANELINSTALL" = "true" ]; then
-  install_queue_panel
-fi
-##Install Web Phone
-if [ "$WEBPHONEINSTALL" = "true" ]; then
-  install_web_phone
-fi
-##Install CallerID Formatter
-if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
-  install_callerid_formatter
-fi
-##Install ChanSpy Pro
-if [ "$CHANSPYPROINSTALL" = "true" ]; then
-  install_chanspy_pro
-fi
-set_cid
-  COUNTER=$(($COUNTER+10))
+    [ "$CRMINSTALL" = "true" ] && vtiger
+    [ "$QUEUEPANELINSTALL" = "true" ] && install_queue_panel
+    [ "$WEBPHONEINSTALL" = "true" ] && install_web_phone
+    [ "$CALLERIDFORMATTERINSTALL" = "true" ] && install_callerid_formatter
+    [ "$CHANSPYPROINSTALL" = "true" ] && install_chanspy_pro
+    [ "$OPTIMIZEDMENUS" = "true" ] && optimize_menus
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install Htop
-if [ "$NETUTILINSTALL" = "true" ]
-then
-htop
-fi
-  COUNTER=$(($COUNTER+10))
+    [ "$NETUTILINSTALL" = "true" ] && htop
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install SNGREP
-if [ "$NETUTILINSTALL" = "true" ]
-then
-sngrep
-fi
-  COUNTER=$(($COUNTER+10))
+    [ "$NETUTILINSTALL" = "true" ] && sngrep
+    COUNTER=$((COUNTER+10))
     echo ${COUNTER}
-##Install IssabelCallMonitoring
-issbel-callmonitoring
-cd ..
-##Install VOIZ Guide Menu
-#voiz_menu
-##service httpd restart >/dev/null 2>&1
-amportal a r 2>&1
-COUNTER=$(($COUNTER+10))
+    issbel-callmonitoring
+    cd ..
+    #voiz_menu
+    amportal a r >/dev/null 2>&1
+    COUNTER=$((COUNTER+10))
 done | whiptail --gauge "Sit back, enjoy coffee, VOIPIRAN." 6 50 ${COUNTER}
-##FINISHED
+
 systemctl restart httpd >/dev/null 2>&1
 clear
 cat voiz-installation/logo.txt
-cat voiz-installation.log
-#echo "-------------Adminer Installation----------------"
-#sleep 1
-#cp -rf www/adminer /var/www/html/
-#issabel-menumerge adminer-menu.xml
-#echo "Adminer Menu is Created Sucsessfully"
+cat "$LOG_FILE"
