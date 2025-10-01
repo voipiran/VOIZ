@@ -276,29 +276,29 @@ function vtiger() {
 
 function install_queue_panel() {
     echo "------------Installing VOIZ Queue Panel-----------------"
-    curl -L -o VOIZ-QueuePanel.zip https://github.com/voipiran/VOIZ-QueuePanel/archive/master.zip || { echo "Failed to download VOIZ Queue Panel."; exit 1; }
-    unzip -o VOIZ-QueuePanel.zip
-    mv VOIZ-QueuePanel-master "$WWW_DIR/html/qpanel"
-    cd "$WWW_DIR/html/qpanel"
-    [ -f install.sh ] && bash install.sh
+    curl -L -o /tmp/VOIZ-QueuePanel.zip https://github.com/voipiran/VOIZ-QueuePanel/archive/master.zip || { echo "Failed to download VOIZ Queue Panel."; exit 1; }
+    unzip -o /tmp/VOIZ-QueuePanel.zip -d /tmp || { echo "Failed to unzip VOIZ-QueuePanel.zip."; exit 1; }
+    mv /tmp/VOIZ-QueuePanel-master /tmp/VOIZ-QueuePanel || { echo "Failed to rename VOIZ-QueuePanel-master to VOIZ-QueuePanel."; exit 1; }
+    mv /tmp/VOIZ-QueuePanel "$WWW_DIR/html/qpanel"
+    [ -f /var/www/html/qpanel/install.sh ] && bash /var/www/html/qpanel/install.sh
     chmod -R 755 "$WWW_DIR/html/qpanel"
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel"
     cd -
-    rm -rf VOIZ-QueuePanel.zip
+    rm -rf /tmp/VOIZ-QueuePanel.zip /tmp/VOIZ-QueuePanel
     echo "**VOIZ Queue Panel Installed." >> "$LOG_FILE"
 }
 
 function install_web_phone() {
     echo "------------Installing VOIZ Web Phone-----------------"
-    curl -L -o VOIZ-WebPhone.zip https://github.com/voipiran/VOIZ-WebPhone/archive/master.zip || { echo "Failed to download VOIZ Web Phone."; exit 1; }
-    unzip -o VOIZ-WebPhone.zip
-    mv VOIZ-WebPhone-master/Phone "$WWW_DIR/html/phone"
-    cd VOIZ-WebPhone-master
-    [ -f install.sh ] && bash install.sh
+    curl -L -o /tmp/VOIZ-WebPhone.zip https://github.com/voipiran/VOIZ-WebPhone/archive/master.zip || { echo "Failed to download VOIZ Web Phone."; exit 1; }
+    unzip -o /tmp/VOIZ-WebPhone.zip -d /tmp || { echo "Failed to unzip VOIZ-WebPhone.zip."; exit 1; }
+    mv /tmp/VOIZ-WebPhone-master /tmp/VOIZ-WebPhone || { echo "Failed to rename VOIZ-WebPhone-master to VOIZ-WebPhone."; exit 1; }
+    mv /tmp/VOIZ-WebPhone/Phone "$WWW_DIR/html/phone"
+    [ -f /tmp/VOIZ-WebPhone/install.sh ] && bash /tmp/VOIZ-WebPhone/install.sh
     chmod -R 755 "$WWW_DIR/html/phone"
     chown -R asterisk:asterisk "$WWW_DIR/html/phone"
     cd -
-    rm -rf VOIZ-WebPhone.zip VOIZ-WebPhone-master
+    rm -rf /tmp/VOIZ-WebPhone.zip /tmp/VOIZ-WebPhone
     echo "**VOIZ Web Phone Installed." >> "$LOG_FILE"
 }
 
