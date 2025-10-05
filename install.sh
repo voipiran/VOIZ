@@ -13,7 +13,7 @@ LOG_FILE="voiz-installation.log"
 
 ## FUNCTIONS
 function setversion() {
-    version=5.6
+    version=5.8
     file="/etc/voiz.conf"
     if [ -f "$file" ]; then
         sed -i "s/.*version.*/version=$version/g" "$file"
