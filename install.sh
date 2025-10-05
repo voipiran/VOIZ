@@ -1,7 +1,4 @@
 #!/bin/bash
-# نصب git اگر نصب نباشد
-if ! command -v git >/dev/null 2>&1; then yum install -y git; fi
-
 # بررسی نسخه PHP
 issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;')
 # اطمینان از وجود دستورات مورد نیاز
@@ -253,8 +250,9 @@ function vtiger() {
 function install_queue_panel() {
     echo "------------Installing VOIZ Queue Panel-----------------"
     if ! [ -d "$WWW_DIR/html/qpanel" ]; then
-        git clone https://github.com/voipiran/VOIZ-QueuePanel "$WWW_DIR/html/qpanel"
-        [ -f "$WWW_DIR/html/qpanel/install.sh" ] && bash "$WWW_DIR/html/qpanel/install.sh" >/dev/null 2>&1
+        rm -rf /tmp/qpanel && \
+        git clone https://github.com/voipiran/VOIZ-QueuePanel /tmp/qpanel && \
+        [ -f "/tmp/qpanel/install.sh" ] && bash "/tmp/qpanel/install.sh" >/dev/null 2>&1
     fi
     chmod -R 755 "$WWW_DIR/html/qpanel" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel" 2>/dev/null
@@ -370,6 +368,27 @@ function issbel-callmonitoring() {
 }
 #########START#########
 # Fetch DB root password
+clear
+# Colorize output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+MAGENTA='\033[1;35m'
+BOLD='\033[1m'
+NC='\033[0m' # No color
+clear
+echo -e "${MAGENTA}###############################################################${NC}"
+echo -e "${CYAN}██╗   ██╗ ██████╗ ██╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗${NC}"
+echo -e "${CYAN}██║   ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║${NC}"
+echo -e "${CYAN}██║   ██║██║   ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
+echo -e "${CYAN}╚██╗ ██╔╝██║   ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
+echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║     ██║██║  ██║██║  ██║██║ ╚████║${NC}"
+echo -e "${CYAN}  ╚═══╝   ╚═════╝ ╚═╝╚═╝     ╚═╝╚══╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝${NC}"
+echo -e "${MAGENTA}###############################################################${NC}"
+echo -e "${MAGENTA}                    https://voipiran.io                    ${NC}"
+echo -e "${MAGENTA}###############################################################${NC}"
+
 #echo "185.51.200.2 mirrors.fedoraproject.org" | tee -a /etc/hosts 2>/dev/null
 rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
 [ -z "$rootpw" ] && { echo "MySQL root password not found in /etc/issabel.conf."; exit 1; }
