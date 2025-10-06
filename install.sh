@@ -9,19 +9,6 @@ WWW_DIR="/var/www"
 LOG_FILE="voiz-installation.log"
 
 ## FUNCTIONS
-function show_progress() {
-    local animations=( "|" "/" "-" "\\" )
-    while true; do
-        for anim in "${animations[@]}"; do
-            echo "XXX"
-            echo "${COUNTER}"
-            echo "Installing VOIZ components $anim"
-            echo "XXX"
-            sleep 0.2
-        done
-    done
-}
-
 function initial() {
     if ! command -v git >/dev/null 2>&1; then
         yum install git -y >/dev/null 2>&1 || { echo "Failed to install git."; exit 1; }
@@ -438,15 +425,16 @@ BOLD='\033[1m'
 NC='\033[0m' # No color
 clear
 echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${CYAN}██╗   ██╗ ██████╗ ██╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗${NC}"
-echo -e "${CYAN}██║   ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║${NC}"
-echo -e "${CYAN}██║   ██║██║   ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
-echo -e "${CYAN}╚██╗ ██╔╝██║   ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
-echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║     ██║██║  ██║██║  ██║██║ ╚████║${NC}"
-echo -e "${CYAN}  ╚═══╝   ╚═════╝ ╚═╝╚═╝     ╚═╝╚══╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝${NC}"
+echo -e "${CYAN}██╗ ██╗ ██████╗ ██╗██████╗ ██╗██████╗ █████╗ ███╗ ██╗${NC}"
+echo -e "${CYAN}██║ ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗ ██║${NC}"
+echo -e "${CYAN}██║ ██║██║ ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
+echo -e "${CYAN}╚██╗ ██╔╝██║ ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
+echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║ ██║██║ ██║██║ ██║██║ ╚████║${NC}"
+echo -e "${CYAN} ╚═══╝ ╚═════╝ ╚═╝╚═╝ ╚═╝╚══╝ ╚═╝╚═╝ ╚═╝╚═╝ ╚═══╝${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${MAGENTA}                    https://voipiran.io                    ${NC}"
+echo -e "${MAGENTA} https://voipiran.io ${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
+
 # اجرای تابع اولیه
 initial
 welcome
@@ -478,26 +466,15 @@ Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25
 "Persian" "پوسته و محیط فارسی به همراه تقویم شمسی" \
 "English" "پوسته و محیط انگلیسی به همراه تقویم شمسی" 3>&1 1>&2 2>&3)
 
-# شروع انیمیشن در پس‌زمینه
-show_progress &
-PROGRESS_PID=$!
+# شروع نصب با پیام ساده
 COUNTER=0
-TOTAL_STEPS=15  # تعداد کل مراحل (10 اصلی + 5 شرطی)
-STEP_INCREMENT=$((100 / TOTAL_STEPS))  # افزایش درصد برای هر مرحله
-
 {
-    echo "XXX"
     echo "$COUNTER"
-    echo "Starting installation..."
-    echo "XXX"
     sleep 1
 
     install_sourcegaurdian
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     FILE="/etc/asterisk/extensions_custom.conf"
     LINE="[from-internal-custom]"
@@ -507,200 +484,124 @@ STEP_INCREMENT=$((100 / TOTAL_STEPS))  # افزایش درصد برای هر م�
         echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line." >> "$LOG_FILE"
         echo "$LINE" | tee -a "$FILE" 2>/dev/null
     fi
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     update_issabel
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     install_webmin
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     add_persian_sounds
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     install_developer
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     asterniccdr
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     add_vitenant_theme
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     edit_issabel_modules
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     asternic-callStats-lite
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     downloadable_files
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     bulkdids
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     if [ "$issabel_ver" -eq 4 ]; then
         bosssecretary
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     superfecta
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     featurecodes
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     survey
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     if [ "$CRMINSTALL" = "true" ]; then
         vtiger
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$QUEUEPANELINSTALL" = "true" ]; then
         install_queue_panel
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$WEBPHONEINSTALL" = "true" ]; then
         install_web_phone
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
         install_callerid_formatter
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$CHANSPYPROINSTALL" = "true" ]; then
         install_chanspy_pro
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$OPTIMIZEDMENUS" = "true" ]; then
         optimize_menus
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$NETUTILINSTALL" = "true" ]; then
         htop
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     if [ "$NETUTILINSTALL" = "true" ]; then
         sngrep
-        COUNTER=$((COUNTER + STEP_INCREMENT))
-        echo "XXX"
+        COUNTER=$((COUNTER + 6))
         echo "$COUNTER"
-        echo "Installing VOIZ components..."
-        echo "XXX"
     fi
 
     issbel-callmonitoring
-    COUNTER=$((COUNTER + STEP_INCREMENT))
-    echo "XXX"
+    COUNTER=$((COUNTER + 6))
     echo "$COUNTER"
-    echo "Installing VOIZ components..."
-    echo "XXX"
 
     cd .. 2>/dev/null
     amportal a r >/dev/null 2>&1
     COUNTER=100
-    echo "XXX"
     echo "$COUNTER"
-    echo "Finalizing installation..."
-    echo "XXX"
-} | whiptail --gauge "Installing VOIZ components..." 6 50 0
+} | whiptail --gauge "یک قهوه بنوشید و منتظر بمانید. \"حامد کوه فلاح\"" 6 50 0
 
-kill $PROGRESS_PID 2>/dev/null
 systemctl restart httpd >/dev/null 2>&1
 finalize
