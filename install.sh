@@ -299,14 +299,16 @@ function vtiger() {
 function install_queue_panel() {
     echo "------------Installing VOIZ Queue Panel-----------------"
     if ! [ -d "$WWW_DIR/html/qpanel" ]; then
-        rm -rf /tmp/qpanel >/dev/null 2>&1
-        git clone https://github.com/voipiran/VOIZ-QueuePanel /tmp/qpanel >/dev/null 2>&1 || { echo "Failed to clone VOIZ-QueuePanel repository."; exit 1; }
-        [ -f "/tmp/qpanel/install.sh" ] && bash "/tmp/qpanel/install.sh" >/dev/null 2>&1 || { echo "Failed to execute qpanel install.sh."; exit 1; }
-        rm -rf /tmp/qpanel >/dev/null 2>&1
+        rm -rf /var/www/html/qpanel >/dev/null 2>&1
+        git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanell >/dev/null 2>&1 || { echo "Failed to clone VOIZ-QueuePanel repository."; exit 1; }
+        [ -f "/var/www/html/qpanel/install.sh" ] && bash "/var/www/html/qpanel/install.sh" >/dev/null 2>&1 || { echo "Failed to execute qpanel install.sh."; exit 1; }
+
     fi
     chmod -R 755 "$WWW_DIR/html/qpanel" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel" 2>/dev/null
     echo "**VOIZ Queue Panel Installed." >> "$LOG_FILE"
+	
+	
 }
 
 function install_web_phone() {
