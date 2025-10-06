@@ -9,19 +9,27 @@ WWW_DIR="/var/www"
 LOG_FILE="voiz-installation.log"
 
 ## FUNCTIONS
+function show_progress() {
+    local animations=( "|" "/" "-" "\\" )
+    while true; do
+        for anim in "${animations[@]}"; do
+            echo "XXX"
+            echo "${COUNTER}"
+            echo "Installing VOIZ components $anim"
+            echo "XXX"
+            sleep 0.2
+        done
+    done
+}
+
 function initial() {
-    # بررسی و نصب git
     if ! command -v git >/dev/null 2>&1; then
         yum install git -y >/dev/null 2>&1 || { echo "Failed to install git."; exit 1; }
     fi
     echo "**Git installed successfully." >> "$LOG_FILE"
-
-    # دریافت رمز عبور MySQL root
     rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
     [ -z "$rootpw" ] && { echo "MySQL root password not found in /etc/issabel.conf."; exit 1; }
     echo "**MySQL root password retrieved successfully." >> "$LOG_FILE"
-
-    # تنظیم نسخه VOIZ
     version=5.8
     file="/etc/voiz.conf"
     if [ -f "$file" ]; then
@@ -34,18 +42,12 @@ function initial() {
         chown asterisk:asterisk /etc/voiz.conf || { echo "Failed to set ownership for voiz.conf."; exit 1; }
     fi
     echo "**VOIZ version set to $version." >> "$LOG_FILE"
-
-    # تغییر DNS سرورها و تهیه نسخه پشتیبان
     [ -f /etc/resolv.conf ] && cp /etc/resolv.conf /etc/resolv.conf.bak || { echo "Failed to backup resolv.conf."; exit 1; }
     echo "nameserver 8.8.8.8" > /etc/resolv.conf || { echo "Failed to set DNS 8.8.8.8."; exit 1; }
     echo "nameserver 4.2.2.4" >> /etc/resolv.conf || { echo "Failed to set DNS 4.2.2.4."; exit 1; }
     echo "**DNS servers set to 8.8.8.8 and 4.2.2.4." >> "$LOG_FILE"
-
-    # ایجاد فایل لاگ
     > "$LOG_FILE" || { echo "Failed to create log file."; exit 1; }
     echo "VOIZ Installation Log:" >> "$LOG_FILE"
-
-    # بررسی نسخه PHP
     php_version=$(php -r "echo PHP_MAJOR_VERSION;") || { echo "Failed to retrieve PHP version."; exit 1; }
     if [ "$php_version" -eq 5 ]; then
         issabel_ver=5
@@ -58,46 +60,36 @@ function initial() {
 function install_sourcegaurdian() {
     issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;')
     if [ "$issabel_ver" -eq 5 ]; then
-        echo "PHP 5 detected. Performing action A."
-        echo "Install SourceGuardian Files"
-        echo "------------Copy SourceGuard-----------------"
         [ -d sourceguardian ] || { echo "SourceGuardian directory not found."; exit 1; }
         yes | cp -rf sourceguardian/ixed.5.4.lin /usr/lib64/php/modules 2>/dev/null
         yes | cp -rf sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules 2>/dev/null
         [ -f /etc/php.ini ] && yes | cp -rf /etc/php.ini /etc/php-old.ini 2>/dev/null
         yes | cp -rf sourceguardian/php5.ini /etc/php.ini 2>/dev/null
-        echo "SourceGuardian Files have moved successfully"
-        sleep 1
+        echo "**SourceGuardian Files have moved successfully" >> "$LOG_FILE"
     else
-        echo "PHP 7 (or newer) detected. Performing action B."
-        echo "Install SourceGuardian Files"
-        echo "------------Copy SourceGuard-----------------"
         [ -d sourceguardian ] || { echo "SourceGuardian directory not found."; exit 1; }
         yes | cp -rf sourceguardian/ixed.7.4.lin /usr/lib64/php/modules 2>/dev/null
         [ -f /etc/php.ini ] && yes | cp -rf /etc/php.ini /etc/php-old.ini 2>/dev/null
         yes | cp -rf sourceguardian/php7.ini /etc/php.ini 2>/dev/null
-        echo "SourceGuardian Files have moved successfully"
-        systemctl reload php-fpm >/dev/null 2>&1 || echo "Failed to reload php-fpm."
+        systemctl reload php-fpm >/dev/null 2>&1 || echo "Failed to reload php-fpm." >> "$LOG_FILE"
+        echo "**SourceGuardian Files have moved successfully" >> "$LOG_FILE"
     fi
     echo "**SourceGuardian installed." >> "$LOG_FILE"
 }
 
 function install_webmin() {
-    echo "------------Installing WEBMIN-----------------"
     [ -f rpms/webmin/webmin-2.111-1.noarch.rpm ] || { echo "Webmin RPM not found."; exit 1; }
     rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
     echo "**WEBMIN Util Installed." >> "$LOG_FILE"
 }
 
 function install_developer() {
-    echo "------------Installing Issabel DEVELOPER-----------------"
     [ -f rpms/develop/issabel-developer-4.0.0-3.noarch.rpm ] || { echo "Developer RPM not found."; exit 1; }
     rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
     echo "**Developer Module Installed." >> "$LOG_FILE"
 }
 
 function add_persian_sounds() {
-    echo "Add Persian Language"
     [ -d persiansounds ] || { echo "Persian sounds directory not found."; exit 1; }
     sed -e "/language=pr/d" /etc/asterisk/sip_custom.conf > /etc/asterisk/sip_custom.conf.000 2>/dev/null
     echo >> /etc/asterisk/sip_custom.conf.000
@@ -129,7 +121,6 @@ function add_persian_sounds() {
 }
 
 function add_vitenant_theme() {
-    echo "------------Installing VOIPIRAN Theme-----------------"
     sleep 1
     [ -f theme/favicon.ico ] || { echo "Favicon not found."; exit 1; }
     cp -f theme/favicon.ico "$WWW_DIR/html" 2>/dev/null
@@ -156,6 +147,7 @@ function add_vitenant_theme() {
     yes | cp -rf theme/pbxconfig/footer_content.php "$WWW_DIR/html/admin/views" 2>/dev/null
     chmod 644 "$WWW_DIR/html/admin/views/footer_content.php" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/admin/views/footer_content.php" 2>/dev/null
+    echo "**VOIPIRAN Theme Installed." >> "$LOG_FILE"
 }
 
 function edit_issabel_modules() {
@@ -276,7 +268,6 @@ function survey() {
 }
 
 function vtiger() {
-    echo "------------Installing VOIZ Vtiger CRM-----------------"
     curl -L -o VOIZ-Vtiger.zip https://github.com/voipiran/VOIZ-Vtiger/archive/master.zip 2>/dev/null || { echo "Failed to download Vtiger."; exit 1; }
     unzip -o VOIZ-Vtiger.zip 2>/dev/null
     cd VOIZ-Vtiger-master 2>/dev/null
@@ -285,7 +276,6 @@ function vtiger() {
     chmod -R 755 "$WWW_DIR/html/vtiger" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/vtiger" 2>/dev/null
     if ! mysql -uroot -p"$rootpw" -e 'use voipirancrm' >/dev/null 2>&1; then
-        echo "-------------Adding VTIGER DATABASE"
         mysql -uroot -p"$rootpw" -e "CREATE DATABASE IF NOT EXISTS voipirancrm DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci;" >/dev/null 2>&1
         mysql -uroot -p"$rootpw" -e "GRANT ALL PRIVILEGES ON voipirancrm.* TO 'root'@'localhost';" >/dev/null 2>&1
         [ -f "VOIZ-Vtiger-master/vtiger.sql" ] && mysql -uroot -p"$rootpw" voipirancrm < VOIZ-Vtiger-master/vtiger.sql >/dev/null 2>&1
@@ -297,22 +287,17 @@ function vtiger() {
 }
 
 function install_queue_panel() {
-    echo "------------Installing VOIZ Queue Panel-----------------"
     if ! [ -d "$WWW_DIR/html/qpanel" ]; then
         rm -rf /var/www/html/qpanel >/dev/null 2>&1
-        git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanell >/dev/null 2>&1 || { echo "Failed to clone VOIZ-QueuePanel repository."; exit 1; }
+        git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanel >/dev/null 2>&1 || { echo "Failed to clone VOIZ-QueuePanel repository."; exit 1; }
         [ -f "/var/www/html/qpanel/install.sh" ] && bash "/var/www/html/qpanel/install.sh" >/dev/null 2>&1 || { echo "Failed to execute qpanel install.sh."; exit 1; }
-
     fi
     chmod -R 755 "$WWW_DIR/html/qpanel" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel" 2>/dev/null
     echo "**VOIZ Queue Panel Installed." >> "$LOG_FILE"
-	
-	
 }
 
 function install_web_phone() {
-    echo "------------Installing VOIZ Web Phone-----------------"
     rm -rf "$WWW_DIR/html/phone" >/dev/null 2>&1
     if ! [ -d "$WWW_DIR/html/phone" ]; then
         git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone >/dev/null 2>&1 || { echo "Failed to clone VOIZ-WebPhone repository."; exit 1; }
@@ -326,7 +311,6 @@ function install_web_phone() {
 }
 
 function install_callerid_formatter() {
-    echo "------------Installing Asterisk Callerid Formatter-----------------"
     curl -L -o /tmp/AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip 2>/dev/null || { echo "Failed to download Asterisk Callerid Formatter."; exit 1; }
     unzip -o /tmp/AsteriskCalleridFormatter.zip -d /tmp 2>/dev/null || { echo "Failed to unzip AsteriskCalleridFormatter.zip."; exit 1; }
     mv /tmp/AsteriskCalleridFormatter-main /tmp/AsteriskCalleridFormatter 2>/dev/null || { echo "Failed to rename AsteriskCalleridFormatter-main to AsteriskCalleridFormatter."; exit 1; }
@@ -339,12 +323,11 @@ function install_callerid_formatter() {
 }
 
 function install_chanspy_pro() {
-    echo "------------Installing Asterisk ChanSpy Pro-----------------"
     curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip 2>/dev/null || { echo "Failed to download Asterisk ChanSpy Pro."; exit 1; }
     unzip -o voipiran_chanspy.zip 2>/dev/null
     cd AsteriskChanSpyPro-main 2>/dev/null
     [ -f install.sh ] && chmod 755 install.sh 2>/dev/null
-    [ -f install.sh ] && ./install.sh -y >/dev/null 2>&1 || echo "No install.sh found, checking for install_voipiran_chansp.sh"
+    [ -f install.sh ] && ./install.sh -y >/dev/null 2>&1 || echo "No install.sh found, checking for install_voipiran_chansp.sh" >> "$LOG_FILE"
     [ -f install_voipiran_chansp.sh ] && chmod 755 install_voipiran_chansp.sh 2>/dev/null
     [ -f install_voipiran_chansp.sh ] && ./install_voipiran_chansp.sh -y >/dev/null 2>&1
     cd .. 2>/dev/null
@@ -358,7 +341,6 @@ function htop() {
 }
 
 function sngrep() {
-    echo "------------Installing SNGREP-----------------"
     yum install -y ncurses-devel libpcap-devel >/dev/null 2>&1
     curl -L -o sngrep.zip https://github.com/irontec/sngrep/archive/master.zip 2>/dev/null || { echo "Failed to download sngrep."; exit 1; }
     unzip -o sngrep.zip 2>/dev/null
@@ -421,7 +403,6 @@ function update_issabel() {
 }
 
 function issbel-callmonitoring() {
-    echo "------------Installing Issabel Call Monitoring-----------------"
     curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip 2>/dev/null || { echo "Failed to download Issabel Call Monitoring."; exit 1; }
     unzip -o callmonitoring.zip 2>/dev/null
     cd IssabelCallMonitoring-main 2>/dev/null
@@ -434,15 +415,12 @@ function issbel-callmonitoring() {
 }
 
 function finalize() {
-    # بازگرداندن DNS سرورها
     if [ -f /etc/resolv.conf.bak ]; then
         mv /etc/resolv.conf.bak /etc/resolv.conf || echo "Warning: Failed to restore resolv.conf." >> "$LOG_FILE"
     else
         echo "Warning: No resolv.conf backup found to restore." >> "$LOG_FILE"
     fi
     echo "**DNS servers restored." >> "$LOG_FILE"
-
-    # نمایش لاگ نصب
     clear
     cat voiz-installation/logo.txt
     cat "$LOG_FILE"
@@ -469,10 +447,8 @@ echo -e "${CYAN}  ╚═══╝   ╚═════╝ ╚═╝╚═╝    
 echo -e "${MAGENTA}###############################################################${NC}"
 echo -e "${MAGENTA}                    https://voipiran.io                    ${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
-
 # اجرای تابع اولیه
 initial
-
 welcome
 # SELECT FEATURES GUI
 SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
@@ -501,131 +477,230 @@ done
 Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25 78 5 \
 "Persian" "پوسته و محیط فارسی به همراه تقویم شمسی" \
 "English" "پوسته و محیط انگلیسی به همراه تقویم شمسی" 3>&1 1>&2 2>&3)
+
+# شروع انیمیشن در پس‌زمینه
+show_progress &
+PROGRESS_PID=$!
 COUNTER=0
-while [[ ${COUNTER} -le 100 ]]; do
+TOTAL_STEPS=15  # تعداد کل مراحل (10 اصلی + 5 شرطی)
+STEP_INCREMENT=$((100 / TOTAL_STEPS))  # افزایش درصد برای هر مرحله
+
+{
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Starting installation..."
+    echo "XXX"
     sleep 1
-    MESSAGE="Installing SourceGuardian..."
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
+
     install_sourcegaurdian
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
     FILE="/etc/asterisk/extensions_custom.conf"
     LINE="[from-internal-custom]"
-    MESSAGE="Checking and updating Asterisk custom extensions..."
     if grep -qF "$LINE" "$FILE"; then
-        echo "The line '$LINE' exists in the file '$FILE'."
+        echo "The line '$LINE' exists in the file '$FILE'." >> "$LOG_FILE"
     else
-        echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line."
+        echo "The line '$LINE' does not exist in the file '$FILE'. Adding the line." >> "$LOG_FILE"
         echo "$LINE" | tee -a "$FILE" 2>/dev/null
     fi
-    MESSAGE="Updating Issabel system..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    update_issabel
-    MESSAGE="Installing Webmin..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    install_webmin
-    MESSAGE="Adding Persian sounds..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    add_persian_sounds
-    MESSAGE="Installing Issabel Developer module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    install_developer
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Installing Asternic CDR module..."
-    asterniccdr
-    MESSAGE="Adding Vitenant theme..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    add_vitenant_theme
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Editing Issabel modules..."
-    edit_issabel_modules
-    MESSAGE="Installing Asternic Call Stats Lite..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    asternic-callStats-lite
-    MESSAGE="Adding downloadable files..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    downloadable_files
-    MESSAGE="Installing Bulk DIDs module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    bulkdids
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$issabel_ver" -eq 4 ]; then
-        MESSAGE="Installing Boss Secretary module..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        bosssecretary
-    fi
-    MESSAGE="Installing Superfecta module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    superfecta
-    MESSAGE="Adding VOIZ feature codes..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    featurecodes
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Installing Queue Survey module..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    survey
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$CRMINSTALL" = "true" ]; then
-        MESSAGE="Installing VOIZ Vtiger CRM..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        vtiger
-    fi
-    if [ "$QUEUEPANELINSTALL" = "true" ]; then
-        MESSAGE="Installing VOIZ Queue Panel..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_queue_panel
-    fi
-    if [ "$WEBPHONEINSTALL" = "true" ]; then
-        MESSAGE="Installing VOIZ Web Phone..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_web_phone
-    fi
-    if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
-        MESSAGE="Installing Asterisk CallerID Formatter..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_callerid_formatter
-    fi
-    if [ "$CHANSPYPROINSTALL" = "true" ]; then
-        MESSAGE="Installing Asterisk ChanSpy Pro..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        install_chanspy_pro
-    fi
-    if [ "$OPTIMIZEDMENUS" = "true" ]; then
-        MESSAGE="Optimizing Issabel menus..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        optimize_menus
-    fi
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$NETUTILINSTALL" = "true" ]; then
-        MESSAGE="Installing HTOP and Traceroute..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        htop
-    fi
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    if [ "$NETUTILINSTALL" = "true" ]; then
-        MESSAGE="Installing SNGREP..."
-        echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-        sngrep
-    fi
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    MESSAGE="Installing Issabel Call Monitoring..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    issbel-callmonitoring
-    MESSAGE="Finalizing installation..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    cd .. 2>/dev/null
-    #voiz_menu
-    amportal a r >/dev/null 2>&1
-    COUNTER=$((COUNTER+10))
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-done | whiptail --gauge "Installing VOIZ components..." 6 50 0
-systemctl restart httpd >/dev/null 2>&1
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
 
+    update_issabel
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    install_webmin
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    add_persian_sounds
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    install_developer
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    asterniccdr
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    add_vitenant_theme
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    edit_issabel_modules
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    asternic-callStats-lite
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    downloadable_files
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    bulkdids
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    if [ "$issabel_ver" -eq 4 ]; then
+        bosssecretary
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    superfecta
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    featurecodes
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    survey
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    if [ "$CRMINSTALL" = "true" ]; then
+        vtiger
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$QUEUEPANELINSTALL" = "true" ]; then
+        install_queue_panel
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$WEBPHONEINSTALL" = "true" ]; then
+        install_web_phone
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$CALLERIDFORMATTERINSTALL" = "true" ]; then
+        install_callerid_formatter
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$CHANSPYPROINSTALL" = "true" ]; then
+        install_chanspy_pro
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$OPTIMIZEDMENUS" = "true" ]; then
+        optimize_menus
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$NETUTILINSTALL" = "true" ]; then
+        htop
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    if [ "$NETUTILINSTALL" = "true" ]; then
+        sngrep
+        COUNTER=$((COUNTER + STEP_INCREMENT))
+        echo "XXX"
+        echo "$COUNTER"
+        echo "Installing VOIZ components..."
+        echo "XXX"
+    fi
+
+    issbel-callmonitoring
+    COUNTER=$((COUNTER + STEP_INCREMENT))
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Installing VOIZ components..."
+    echo "XXX"
+
+    cd .. 2>/dev/null
+    amportal a r >/dev/null 2>&1
+    COUNTER=100
+    echo "XXX"
+    echo "$COUNTER"
+    echo "Finalizing installation..."
+    echo "XXX"
+} | whiptail --gauge "Installing VOIZ components..." 6 50 0
+
+kill $PROGRESS_PID 2>/dev/null
+systemctl restart httpd >/dev/null 2>&1
 finalize
