@@ -299,9 +299,10 @@ function vtiger() {
 function install_queue_panel() {
     echo "------------Installing VOIZ Queue Panel-----------------"
     if ! [ -d "$WWW_DIR/html/qpanel" ]; then
-        rm -rf /tmp/qpanel && \
-        git clone https://github.com/voipiran/VOIZ-QueuePanel /tmp/qpanel && \
-        [ -f "/tmp/qpanel/install.sh" ] && bash "/tmp/qpanel/install.sh" >/dev/null 2>&1
+        rm -rf /tmp/qpanel >/dev/null 2>&1
+        git clone https://github.com/voipiran/VOIZ-QueuePanel /tmp/qpanel >/dev/null 2>&1 || { echo "Failed to clone VOIZ-QueuePanel repository."; exit 1; }
+        [ -f "/tmp/qpanel/install.sh" ] && bash "/tmp/qpanel/install.sh" >/dev/null 2>&1 || { echo "Failed to execute qpanel install.sh."; exit 1; }
+        rm -rf /tmp/qpanel >/dev/null 2>&1
     fi
     chmod -R 755 "$WWW_DIR/html/qpanel" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel" 2>/dev/null
@@ -310,12 +311,12 @@ function install_queue_panel() {
 
 function install_web_phone() {
     echo "------------Installing VOIZ Web Phone-----------------"
-    rm -rf "$WWW_DIR/html/phone" 2>/dev/null
+    rm -rf "$WWW_DIR/html/phone" >/dev/null 2>&1
     if ! [ -d "$WWW_DIR/html/phone" ]; then
-        git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone
-        mv /tmp/VOIZ-WebPhone/Phone "$WWW_DIR/html/phone" 2>/dev/null
-        [ -f "/tmp/VOIZ-WebPhone/install.sh" ] && bash "/tmp/VOIZ-WebPhone/install.sh" >/dev/null 2>&1
-        rm -rf /tmp/VOIZ-WebPhone 2>/dev/null
+        git clone https://github.com/voipiran/VOIZ-WebPhone /tmp/VOIZ-WebPhone >/dev/null 2>&1 || { echo "Failed to clone VOIZ-WebPhone repository."; exit 1; }
+        mv /tmp/VOIZ-WebPhone/Phone "$WWW_DIR/html/phone" >/dev/null 2>&1 || { echo "Failed to move WebPhone files."; exit 1; }
+        [ -f "/tmp/VOIZ-WebPhone/install.sh" ] && bash "/tmp/VOIZ-WebPhone/install.sh" >/dev/null 2>&1 || { echo "Failed to execute WebPhone install.sh."; exit 1; }
+        rm -rf /tmp/VOIZ-WebPhone >/dev/null 2>&1
     fi
     chmod -R 755 "$WWW_DIR/html/phone" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/phone" 2>/dev/null
@@ -457,14 +458,14 @@ BOLD='\033[1m'
 NC='\033[0m' # No color
 clear
 echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${CYAN}██╗ ██╗ ██████╗ ██╗██████╗ ██╗██████╗ █████╗ ███╗ ██╗${NC}"
-echo -e "${CYAN}██║ ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗ ██║${NC}"
-echo -e "${CYAN}██║ ██║██║ ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
-echo -e "${CYAN}╚██╗ ██╔╝██║ ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
-echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║ ██║██║ ██║██║ ██║██║ ╚████║${NC}"
-echo -e "${CYAN} ╚═══╝ ╚═════╝ ╚═╝╚═╝ ╚═╝╚══╝ ╚═╝╚═╝ ╚═╝╚═╝ ╚═══╝${NC}"
+echo -e "${CYAN}██╗   ██╗ ██████╗ ██╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗${NC}"
+echo -e "${CYAN}██║   ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║${NC}"
+echo -e "${CYAN}██║   ██║██║   ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
+echo -e "${CYAN}╚██╗ ██╔╝██║   ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
+echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║     ██║██║  ██║██║  ██║██║ ╚████║${NC}"
+echo -e "${CYAN}  ╚═══╝   ╚═════╝ ╚═╝╚═╝     ╚═╝╚══╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${MAGENTA} https://voipiran.io ${NC}"
+echo -e "${MAGENTA}                    https://voipiran.io                    ${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
 
 # اجرای تابع اولیه
