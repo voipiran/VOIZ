@@ -7,21 +7,54 @@ command -v mysql >/dev/null 2>&1 || { echo "mysql is required but not installed.
 # تعریف متغیرهای ثابت
 WWW_DIR="/var/www"
 LOG_FILE="voiz-installation.log"
+
 ## FUNCTIONS
-function setversion() {
+function initial() {
+    # بررسی و نصب git
+    if ! command -v git >/dev/null 2>&1; then
+        yum install git -y >/dev/null 2>&1 || { echo "Failed to install git."; exit 1; }
+    fi
+    echo "**Git installed successfully." >> "$LOG_FILE"
+
+    # دریافت رمز عبور MySQL root
+    rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
+    [ -z "$rootpw" ] && { echo "MySQL root password not found in /etc/issabel.conf."; exit 1; }
+    echo "**MySQL root password retrieved successfully." >> "$LOG_FILE"
+
+    # تنظیم نسخه VOIZ
     version=5.8
     file="/etc/voiz.conf"
     if [ -f "$file" ]; then
-        sed -i "s/.*version.*/version=$version/g" "$file"
+        sed -i "s/.*version.*/version=$version/g" "$file" || { echo "Failed to update voiz.conf."; exit 1; }
     else
-        mkdir -p /etc
-        cp -f voiz-installation/voiz.conf /etc/voiz.conf
-        sed -i "s/.*version.*/version=$version/g" /etc/voiz.conf
-        chmod 644 /etc/voiz.conf
-        chown asterisk:asterisk /etc/voiz.conf
+        mkdir -p /etc || { echo "Failed to create /etc directory."; exit 1; }
+        cp -f voiz-installation/voiz.conf /etc/voiz.conf || { echo "Failed to copy voiz.conf."; exit 1; }
+        sed -i "s/.*version.*/version=$version/g" /etc/voiz.conf || { echo "Failed to update voiz.conf."; exit 1; }
+        chmod 644 /etc/voiz.conf || { echo "Failed to set permissions for voiz.conf."; exit 1; }
+        chown asterisk:asterisk /etc/voiz.conf || { echo "Failed to set ownership for voiz.conf."; exit 1; }
     fi
     echo "**VOIZ version set to $version." >> "$LOG_FILE"
+
+    # تغییر DNS سرورها و تهیه نسخه پشتیبان
+    [ -f /etc/resolv.conf ] && cp /etc/resolv.conf /etc/resolv.conf.bak || { echo "Failed to backup resolv.conf."; exit 1; }
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf || { echo "Failed to set DNS 8.8.8.8."; exit 1; }
+    echo "nameserver 4.2.2.4" >> /etc/resolv.conf || { echo "Failed to set DNS 4.2.2.4."; exit 1; }
+    echo "**DNS servers set to 8.8.8.8 and 4.2.2.4." >> "$LOG_FILE"
+
+    # ایجاد فایل لاگ
+    > "$LOG_FILE" || { echo "Failed to create log file."; exit 1; }
+    echo "VOIZ Installation Log:" >> "$LOG_FILE"
+
+    # بررسی نسخه PHP
+    php_version=$(php -r "echo PHP_MAJOR_VERSION;") || { echo "Failed to retrieve PHP version."; exit 1; }
+    if [ "$php_version" -eq 5 ]; then
+        issabel_ver=5
+    else
+        issabel_ver=4
+    fi
+    echo "**PHP version set to $issabel_ver." >> "$LOG_FILE"
 }
+
 function install_sourcegaurdian() {
     issabel_ver=$(php -r 'echo PHP_MAJOR_VERSION;')
     if [ "$issabel_ver" -eq 5 ]; then
@@ -48,18 +81,21 @@ function install_sourcegaurdian() {
     fi
     echo "**SourceGuardian installed." >> "$LOG_FILE"
 }
+
 function install_webmin() {
     echo "------------Installing WEBMIN-----------------"
     [ -f rpms/webmin/webmin-2.111-1.noarch.rpm ] || { echo "Webmin RPM not found."; exit 1; }
     rpm -U rpms/webmin/webmin-2.111-1.noarch.rpm >/dev/null 2>&1
     echo "**WEBMIN Util Installed." >> "$LOG_FILE"
 }
+
 function install_developer() {
     echo "------------Installing Issabel DEVELOPER-----------------"
     [ -f rpms/develop/issabel-developer-4.0.0-3.noarch.rpm ] || { echo "Developer RPM not found."; exit 1; }
     rpm -U rpms/develop/issabel-developer-4.0.0-3.noarch.rpm >/dev/null 2>&1
     echo "**Developer Module Installed." >> "$LOG_FILE"
 }
+
 function add_persian_sounds() {
     echo "Add Persian Language"
     [ -d persiansounds ] || { echo "Persian sounds directory not found."; exit 1; }
@@ -91,6 +127,7 @@ function add_persian_sounds() {
     fi
     echo "**Persian Sounds Added." >> "$LOG_FILE"
 }
+
 function add_vitenant_theme() {
     echo "------------Installing VOIPIRAN Theme-----------------"
     sleep 1
@@ -120,6 +157,7 @@ function add_vitenant_theme() {
     chmod 644 "$WWW_DIR/html/admin/views/footer_content.php" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/admin/views/footer_content.php" 2>/dev/null
 }
+
 function edit_issabel_modules() {
     mkdir -p "$WWW_DIR/html/modules000" 2>/dev/null
     if ls "$WWW_DIR/html/modules/"* >/dev/null 2>&1; then cp -rf "$WWW_DIR/html/modules/"* "$WWW_DIR/html/modules000" 2>/dev/null; fi
@@ -140,12 +178,14 @@ function edit_issabel_modules() {
     cp -rf issabelmodules/fa.lang "$WWW_DIR/html/lang/" 2>/dev/null
     echo "**Issabel Modules Edited." >> "$LOG_FILE"
 }
+
 function downloadable_files() {
     cp -rf downloadable/download "$WWW_DIR/html/" 2>/dev/null
     chmod -R 755 "$WWW_DIR/html/download" 2>/dev/null
     chown -R asterisk:asterisk "$WWW_DIR/html/download" 2>/dev/null
     echo "**Downloadable Files Added." >> "$LOG_FILE"
 }
+
 function bulkdids() {
     if [ ! -d "$WWW_DIR/html/admin/modules/bulkdids" ]; then
         yes | cp -rf issabelpbxmodules/bulkdids "$WWW_DIR/html/admin/modules/" 2>/dev/null
@@ -153,6 +193,7 @@ function bulkdids() {
     fi
     echo "**Bulk DIDs Module Added." >> "$LOG_FILE"
 }
+
 function asterniccdr() {
     if [ ! -d "$WWW_DIR/html/admin/modules/asternic_cdr" ]; then
         yes | cp -rf issabelpbxmodules/asternic_cdr "$WWW_DIR/html/admin/modules/" 2>/dev/null
@@ -160,6 +201,7 @@ function asterniccdr() {
     fi
     echo "**Asternic CDR Module Added." >> "$LOG_FILE"
 }
+
 function asternic-callStats-lite() {
     [ -d software ] || { echo "Software directory not found."; exit 1; }
     cd software
@@ -186,6 +228,7 @@ function asternic-callStats-lite() {
     cd ..
     echo "**Asternic Call Stats Lite Installed." >> "$LOG_FILE"
 }
+
 function bosssecretary() {
     if [ "$issabel_ver" -eq 4 ] && [ ! -d "$WWW_DIR/html/admin/modules/bosssecretary" ]; then
         yes | cp -rf issabelpbxmodules/bosssecretary "$WWW_DIR/html/admin/modules/" 2>/dev/null
@@ -193,6 +236,7 @@ function bosssecretary() {
     fi
     echo "**Boss Secretary Module Added." >> "$LOG_FILE"
 }
+
 function superfecta() {
     if [ ! -d "$WWW_DIR/html/admin/modules/superfecta" ]; then
         yes | cp -rf issabelpbxmodules/superfecta "$WWW_DIR/html/admin/modules/" 2>/dev/null
@@ -200,6 +244,7 @@ function superfecta() {
     fi
     echo "**Superfecta Module Added." >> "$LOG_FILE"
 }
+
 function featurecodes() {
     cp -rf customdialplan/extensions_voipiran_featurecodes.conf /etc/asterisk/ 2>/dev/null
     sed -i '/\[from\-internal\-custom\]/a include => voipiran-features' /etc/asterisk/extensions_custom.conf 2>/dev/null
@@ -215,10 +260,12 @@ function featurecodes() {
     done
     echo "**VOIZ Feature Codes Added." >> "$LOG_FILE"
 }
+
 function easyvpn() {
     yum install issabel-easyvpn --nogpgcheck -y >/dev/null 2>&1
     echo "**OpenVPN Module Added." >> "$LOG_FILE"
 }
+
 function survey() {
     cp -rf voipiranagi /var/lib/asterisk/agi-bin 2>/dev/null
     chmod -R 755 /var/lib/asterisk/agi-bin/voipiranagi 2>/dev/null
@@ -227,6 +274,7 @@ function survey() {
     mysql -hlocalhost -uroot -p"$rootpw" asterisk -e "$query" >/dev/null 2>&1
     echo "**Queue Survey Module Added." >> "$LOG_FILE"
 }
+
 function vtiger() {
     echo "------------Installing VOIZ Vtiger CRM-----------------"
     curl -L -o VOIZ-Vtiger.zip https://github.com/voipiran/VOIZ-Vtiger/archive/master.zip 2>/dev/null || { echo "Failed to download Vtiger."; exit 1; }
@@ -247,6 +295,7 @@ function vtiger() {
     rm -rf VOIZ-Vtiger.zip VOIZ-Vtiger-master 2>/dev/null
     echo "**VOIZ Vtiger CRM Installed." >> "$LOG_FILE"
 }
+
 function install_queue_panel() {
     echo "------------Installing VOIZ Queue Panel-----------------"
     if ! [ -d "$WWW_DIR/html/qpanel" ]; then
@@ -258,6 +307,7 @@ function install_queue_panel() {
     chown -R asterisk:asterisk "$WWW_DIR/html/qpanel" 2>/dev/null
     echo "**VOIZ Queue Panel Installed." >> "$LOG_FILE"
 }
+
 function install_web_phone() {
     echo "------------Installing VOIZ Web Phone-----------------"
     rm -rf "$WWW_DIR/html/phone" 2>/dev/null
@@ -271,6 +321,7 @@ function install_web_phone() {
     chown -R asterisk:asterisk "$WWW_DIR/html/phone" 2>/dev/null
     echo "**VOIZ Web Phone Installed." >> "$LOG_FILE"
 }
+
 function install_callerid_formatter() {
     echo "------------Installing Asterisk Callerid Formatter-----------------"
     curl -L -o /tmp/AsteriskCalleridFormatter.zip https://github.com/voipiran/AsteriskCalleridFormatter/archive/master.zip 2>/dev/null || { echo "Failed to download Asterisk Callerid Formatter."; exit 1; }
@@ -283,6 +334,7 @@ function install_callerid_formatter() {
     rm -rf /tmp/AsteriskCalleridFormatter.zip /tmp/AsteriskCalleridFormatter 2>/dev/null
     echo "**Asterisk Callerid Formatter Installed." >> "$LOG_FILE"
 }
+
 function install_chanspy_pro() {
     echo "------------Installing Asterisk ChanSpy Pro-----------------"
     curl -L -o voipiran_chanspy.zip https://github.com/voipiran/AsteriskChanSpyPro/archive/main.zip 2>/dev/null || { echo "Failed to download Asterisk ChanSpy Pro."; exit 1; }
@@ -296,10 +348,12 @@ function install_chanspy_pro() {
     rm -rf voipiran_chanspy.zip AsteriskChanSpyPro-main 2>/dev/null
     echo "**Asterisk ChanSpy Pro Installed." >> "$LOG_FILE"
 }
+
 function htop() {
     yum install htop traceroute -y >/dev/null 2>&1
     echo "**HTOP Util Installed." >> "$LOG_FILE"
 }
+
 function sngrep() {
     echo "------------Installing SNGREP-----------------"
     yum install -y ncurses-devel libpcap-devel >/dev/null 2>&1
@@ -314,6 +368,7 @@ function sngrep() {
     rm -rf sngrep.zip sngrep-master 2>/dev/null
     echo "**SNGREP Util Installed." >> "$LOG_FILE"
 }
+
 function voiz_menu() {
     mv "$WWW_DIR/db/menu.db" "$WWW_DIR/db/menu.db.000" 2>/dev/null
     cp -rf voiz-installation/menu.db "$WWW_DIR/db/" 2>/dev/null
@@ -321,6 +376,7 @@ function voiz_menu() {
     chown asterisk:asterisk "$WWW_DIR/db/menu.db" 2>/dev/null
     echo "**VOIZ Guide Menu Added." >> "$LOG_FILE"
 }
+
 function optimize_menus() {
     if [ "$OPTIMIZEDMENUS" = "true" ]; then
         local backup_file="$WWW_DIR/db/menu_backup_$(date +%Y%m%d_%H%M%S).db"
@@ -332,28 +388,35 @@ function optimize_menus() {
         echo "**Optimized Menus applied." >> "$LOG_FILE"
     fi
 }
+
 function welcome() {
     whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io\nWebsites:\n - https://voipiran.io\n - https://voiz.ir\nProject Manager: Hamed Kouhfallah" 12 78
 }
+
 function menu-order() {
     issabel-menumerge callcenter-menu.xml 2>/dev/null
     echo "**Callcenter Menu Added." >> "$LOG_FILE"
 }
+
 function install-on-issabel() {
     yum --enablerepo=issabel-beta update -y >/dev/null 2>&1
     echo "**install-on-issabel" >> "$LOG_FILE"
 }
+
 function install-on-centos() {
     echo "**install-on-centos" >> "$LOG_FILE"
 }
+
 function install-on-nightly() {
     yum update -y >/dev/null 2>&1
     echo "**install-on-rocky" >> "$LOG_FILE"
 }
+
 function update_issabel() {
     yum update -y >/dev/null 2>&1
     echo "**install-on-issabel" >> "$LOG_FILE"
 }
+
 function issbel-callmonitoring() {
     echo "------------Installing Issabel Call Monitoring-----------------"
     curl -L -o callmonitoring.zip https://github.com/voipiran/IssabelCallMonitoring/archive/master.zip 2>/dev/null || { echo "Failed to download Issabel Call Monitoring."; exit 1; }
@@ -366,9 +429,24 @@ function issbel-callmonitoring() {
     rm -rf callmonitoring.zip IssabelCallMonitoring-main 2>/dev/null
     echo "**Issabel Call Monitoring Installed." >> "$LOG_FILE"
 }
+
+function finalize() {
+    # بازگرداندن DNS سرورها
+    if [ -f /etc/resolv.conf.bak ]; then
+        mv /etc/resolv.conf.bak /etc/resolv.conf || echo "Warning: Failed to restore resolv.conf." >> "$LOG_FILE"
+    else
+        echo "Warning: No resolv.conf backup found to restore." >> "$LOG_FILE"
+    fi
+    echo "**DNS servers restored." >> "$LOG_FILE"
+
+    # نمایش لاگ نصب
+    clear
+    cat voiz-installation/logo.txt
+    cat "$LOG_FILE"
+    echo "**Installation completed and log displayed." >> "$LOG_FILE"
+}
+
 #########START#########
-# Fetch DB root password
-clear
 # Colorize output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -379,28 +457,19 @@ BOLD='\033[1m'
 NC='\033[0m' # No color
 clear
 echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${CYAN}██╗   ██╗ ██████╗ ██╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗${NC}"
-echo -e "${CYAN}██║   ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║${NC}"
-echo -e "${CYAN}██║   ██║██║   ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
-echo -e "${CYAN}╚██╗ ██╔╝██║   ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
-echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║     ██║██║  ██║██║  ██║██║ ╚████║${NC}"
-echo -e "${CYAN}  ╚═══╝   ╚═════╝ ╚═╝╚═╝     ╚═╝╚══╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝${NC}"
+echo -e "${CYAN}██╗ ██╗ ██████╗ ██╗██████╗ ██╗██████╗ █████╗ ███╗ ██╗${NC}"
+echo -e "${CYAN}██║ ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗ ██║${NC}"
+echo -e "${CYAN}██║ ██║██║ ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
+echo -e "${CYAN}╚██╗ ██╔╝██║ ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
+echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║ ██║██║ ██║██║ ██║██║ ╚████║${NC}"
+echo -e "${CYAN} ╚═══╝ ╚═════╝ ╚═╝╚═╝ ╚═╝╚══╝ ╚═╝╚═╝ ╚═╝╚═╝ ╚═══╝${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${MAGENTA}                    https://voipiran.io                    ${NC}"
+echo -e "${MAGENTA} https://voipiran.io ${NC}"
 echo -e "${MAGENTA}###############################################################${NC}"
 
-#echo "185.51.200.2 mirrors.fedoraproject.org" | tee -a /etc/hosts 2>/dev/null
-rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
-[ -z "$rootpw" ] && { echo "MySQL root password not found in /etc/issabel.conf."; exit 1; }
-> "$LOG_FILE"
-echo "VOIZ Installation Log:" >> "$LOG_FILE"
-# Get PHP version
-php_version=$(php -r "echo PHP_MAJOR_VERSION;")
-if [ "$php_version" -eq 5 ]; then
-    issabel_ver=5
-else
-    issabel_ver=4
-fi
+# اجرای تابع اولیه
+initial
+
 welcome
 # SELECT FEATURES GUI
 SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
@@ -432,9 +501,6 @@ Lang=$(whiptail --title "Choose VOIZ Theme Style:" --menu "Choose a Language" 25
 COUNTER=0
 while [[ ${COUNTER} -le 100 ]]; do
     sleep 1
-    MESSAGE="Setting VOIZ version..."
-    echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    setversion
     MESSAGE="Installing SourceGuardian..."
     COUNTER=$((COUNTER+10))
     echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
@@ -558,6 +624,5 @@ while [[ ${COUNTER} -le 100 ]]; do
     echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
 done | whiptail --gauge "Installing VOIZ components..." 6 50 0
 systemctl restart httpd >/dev/null 2>&1
-clear
-cat voiz-installation/logo.txt
-cat "$LOG_FILE"
+
+finalize
