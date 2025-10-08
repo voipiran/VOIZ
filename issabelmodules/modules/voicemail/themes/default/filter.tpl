@@ -1,15 +1,10 @@
-<table class="table table-bordered" style="width: 100%; margin: 0 auto; padding: 5px;">
-  <tbody>
+<table width="99%" cellpadding="4" cellspacing="0" border="0" align="center">
     <tr class="letra12">
-      <td style="width: 10%; text-align: right;">{$date_start.LABEL}:</td>
-      <td style="width: 15%; text-align: left;">{$date_start.INPUT}</td>
-      <td style="width: 10%; text-align: right;">{$date_end.LABEL}:</td>
-      <td style="width: 15%; text-align: left;">{$date_end.INPUT}</td>
-      <td style="width: 20%; text-align: left;"><input class="btn btn-secondary btn-sm" type="submit" name="filter" value="{$Filter}"></td>
+        <td width="7%" align="right">{$date_start_shamsi.LABEL}:</td>
+        <td width="10%" align="left" nowrap>{$date_start_shamsi.INPUT}</td>
+        <td width="7%" align="right">{$date_end_shamsi.LABEL}:</td>
+        <td width="10%" align="left" nowrap>{$date_end_shamsi.INPUT}</td>
+        <td align="left"><input class="button" type="submit" name="filter" value="{$Filter}"></td>
     </tr>
-  </tbody>
 </table>
-<div class="mt-2 text-right pr-3">
-  <a href="javascript:seleccionar_checkbox(1)" class="btn btn-info btn-sm">Marcar todos</a> |
-  <a href="javascript:seleccionar_checkbox(0)" class="btn btn-info btn-sm">Desmarcar Todos</a>
-</div>
+<a href="javascript:seleccionar_checkbox(1)">Marcar todos</a> | <a href="javascript:seleccionar_checkbox(0)">Desmarcar Todos</a>

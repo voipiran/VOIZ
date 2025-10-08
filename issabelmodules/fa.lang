@@ -366,6 +366,10 @@ $arrLang=array(
 "VI AddressBook" => "دفترچه تلفن",
 "VI Mysql" => "دیتابیس Mysql",
 "VI Vtiger" => "ویتایگر",
+"VI Vtiger" => "ویتایگر",
+"Webphone" => "وب فون",
+"Queue Panel" => "پنل زنده صف",
+
 
 );
 ?>
