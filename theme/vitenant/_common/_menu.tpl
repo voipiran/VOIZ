@@ -363,13 +363,12 @@
                     </a>
                 </li>
 				
-				<!-- <<<=== این خط جدید رو اینجا اضافه کن ===>>> -->
-                <li class="profile-info dropdown top-bar-webphone">
-                    <a id="webphone_link" href="#" onclick="gotowebphone(); return false;" target="_blank">
-                        <i class="fa fa-phone"></i>
-                    </a>
-                </li>
-                <!-- <<<=== تا اینجا ===>>> -->
+<!-- Webphone Button – باز شدن در تب جدید -->
+<li class="profile-info dropdown top-bar-webphone">
+    <a id="webphone_link" href="https://{$SERVER_NAME}/phone" target="_blank" rel="noopener">
+        <i class="fa fa-phone"></i>
+    </a>
+</li>
 				
             </ul>
         </span>
