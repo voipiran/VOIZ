@@ -38,3 +38,52 @@ body.page-body.login-page.login-form-fall {
     text-align-last: right !important;	
 }
 */
+
+/* VOIZ – نوار بالا نهایی – تیره، مینیمال، دقیق وسط و کمی بالاتر */
+.neo-topbar-notification > li {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.neo-topbar-notification > li > a {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 50%;
+    background: #212121 !important;           /* بک‌گراند دقیقاً #212121 */
+    border: 1px solid rgba(255,255,255,0.25) !important;  /* خط دور نازک‌تر */
+    transition: all 0.22s ease;
+    top: -2px;                                 /* کمی بالاتر */
+}
+
+.neo-topbar-notification > li > a:hover {
+    background: #2d2d2d !important;
+    border-color: rgba(255,255,255,0.5) !important;
+    transform: scale(1.1);
+}
+
+/* آیکون‌ها کاملاً سفید و دقیقاً وسط */
+.neo-topbar-notification > li > a i,
+.neo-topbar-notification > li > a img {
+    font-size: 16px;
+    color: #ffffff !important;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+/* حذف کامل چرخش */
+.top-bar-queue a i.fa-pulse,
+#queue_dashboard_link i.fa-pulse {
+    animation: none !important;
+    -webkit-animation: none !important;
+}
+
+/* فاصله عمودی دقیق */
+.neo-topbar-notification {
+    padding: 10px 0 14px 0 !important;
+}

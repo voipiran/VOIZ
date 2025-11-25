@@ -42,6 +42,7 @@
                         }
                     }
             );
+			
             $("#subMenuExport").hover(
                     function () {
                         $(this).removeClass("neo-display-none");
@@ -108,7 +109,7 @@
         }
         function gotowebphone() {
             var obj = $("#webphone_link");
-            var xaddr = "https://" + window.location.hostname + "/webphone/phone.php";
+            var xaddr = "https://" + window.location.hostname + "/phone.php";
             $(obj).attr("href", xaddr);
         }
         $(document).ready(
@@ -290,11 +291,12 @@
                         <i class="fa fa-heartbeat"></i>
                     </a>
                 </li-->
-                <li id="header_notification_bar" class="profile-info dropdown top-bar-webmin"> <!-- voipiran msm -->
-                    <a target="_blank" id="webmin_link" class="" href="">
-                        <img style="width:20px;" src="{$WEBPATH}themes/{$THEMENAME}/images/webmin.png" /> <!-- voipiran msm -->
-                    </a>
-                </li>
+<!-- Webmin Button – آیکون ساده و مطمئن از سری fa -->
+<li class="profile-info dropdown top-bar-webmin">
+    <a id="webmin_link" href="#" onclick="gotowebmin(); return false;" target="_blank">
+        <i class="fa fa-cog"></i>
+    </a>
+</li>
                 <!-- <li id="header_notification_bar" class="profile-info dropdown"> -->
                  <!-- <a target="_blank" id="crm_link" class="" href=""> -->
                 <!-- <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" /> -->
@@ -357,9 +359,18 @@
                 <!-- Queue Dashboard Button -->
                 <li id="header_notification_bar" class="profile-info dropdown top-bar-queue">
                     <a id="queue_dashboard_link" href="#" onclick="gotoQueueDashboard(); return false;" class="">
-                        <i class="fa fa-headphones fa-pulse"></i>
+		<i class="fa fa-bar-chart"></i>
                     </a>
                 </li>
+				
+				<!-- <<<=== این خط جدید رو اینجا اضافه کن ===>>> -->
+                <li class="profile-info dropdown top-bar-webphone">
+                    <a id="webphone_link" href="#" onclick="gotowebphone(); return false;" target="_blank">
+                        <i class="fa fa-phone"></i>
+                    </a>
+                </li>
+                <!-- <<<=== تا اینجا ===>>> -->
+				
             </ul>
         </span>
         <div class="logo">
