@@ -17,7 +17,7 @@ function initial() {
     rootpw=$(sed -ne 's/.*mysqlrootpwd=//gp' /etc/issabel.conf)
     [ -z "$rootpw" ] && { echo "MySQL root password not found in /etc/issabel.conf."; exit 1; }
     echo "**MySQL root password retrieved successfully." >> "$LOG_FILE"
-    version=5.8
+    version=5.10.0
     file="/etc/voiz.conf"
     if [ -f "$file" ]; then
         sed -i "s/.*version.*/version=$version/g" "$file" || { echo "Failed to update voiz.conf."; exit 1; }

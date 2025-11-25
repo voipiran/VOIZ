@@ -369,6 +369,7 @@ $arrLang=array(
 "VI Vtiger" => "ویتایگر",
 "Webphone" => "وب فون",
 "Queue Panel" => "پنل زنده صف",
+"Call Monitoring" => "پنل مانیتورینگ",
 
 
 );
