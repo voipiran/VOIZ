@@ -31,7 +31,7 @@ chmod 777 install.sh && \
 
 ## Documents (مطالب راهنما و آموزش)
 
-https://forum.voipiran.io/t/voiz-documents
+https://voiz.ir
 
 ## Give a Star! ⭐ یک ستاره به ما بدهید
 If you like this project or plan to use it in the future, please give it a star. Thanks 🙏
