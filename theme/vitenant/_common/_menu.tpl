@@ -109,7 +109,7 @@
         }
         function gotowebphone() {
             var obj = $("#webphone_link");
-            var xaddr = "https://" + window.location.hostname + "/phone.php";
+            var xaddr = "https://" + window.location.hostname + "/phone";
             $(obj).attr("href", xaddr);
         }
         $(document).ready(
