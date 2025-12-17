@@ -276,7 +276,7 @@ function vtiger() {
 function install_queue_panel() {
     if ! [ -d "$WWW_DIR/html/qpanel" ]; then
         rm -rf /var/www/html/qpanel >/dev/null 2>&1
-        git clone https://github.com/voipiran/VOIZ-QueuePanel /var/www/html/qpanel >/dev/null 2>&1 || { echo "Failed to clone VOIZ-QueuePanel repository."; exit 1; }
+        git clone https://github.com/voipiran/AsteriskQueuePanel /var/www/html/qpanel >/dev/null 2>&1 || { echo "Failed to clone AsteriskQueuePanel repository."; exit 1; }
         [ -f "/var/www/html/qpanel/install.sh" ] && bash "/var/www/html/qpanel/install.sh" >/dev/null 2>&1 || { echo "Failed to execute qpanel install.sh."; exit 1; }
     fi
     chmod -R 755 "$WWW_DIR/html/qpanel" 2>/dev/null
