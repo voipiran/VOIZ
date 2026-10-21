@@ -22,7 +22,11 @@ main() {
     mkdir -p "$(dirname "${ASTERNIC_STATS_SOURCE}")"
 
     if [[ -d "${ASTERNIC_STATS_SOURCE}/.git" ]]; then
-        log "Using existing Asternic repository at ${ASTERNIC_STATS_SOURCE}"
+        log "Updating existing Asternic repository at ${ASTERNIC_STATS_SOURCE}"
+        if ! git -C "${ASTERNIC_STATS_SOURCE}" pull --ff-only; then
+            log "ERROR: Existing Asternic repository could not be fast-forwarded; refusing to install a stale or mixed version"
+            return 1
+        fi
     elif [[ -e "${ASTERNIC_STATS_SOURCE}" ]]; then
         log "ERROR: ${ASTERNIC_STATS_SOURCE} exists but is not a Git repository"
         return 1
@@ -33,6 +37,14 @@ main() {
 
     [[ -f "${ASTERNIC_STATS_SOURCE}/install.sh" ]] || {
         log "ERROR: Asternic install.sh not found in ${ASTERNIC_STATS_SOURCE}"
+        return 1
+    }
+    [[ -f "${ASTERNIC_STATS_SOURCE}/html/css/voiz-asternic.css" ]] || {
+        log "ERROR: Asternic repository is missing the VOIZ theme; update the repository before installing"
+        return 1
+    }
+    [[ -f "${ASTERNIC_STATS_SOURCE}/html/js/jalali.js" ]] || {
+        log "ERROR: Asternic repository is missing the Jalali date integration; update the repository before installing"
         return 1
     }
 
