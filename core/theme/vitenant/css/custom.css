@@ -306,6 +306,12 @@ body .page-container .sidebar-menu #main-menu li ul li ul li > a:hover > i {
     color: var(--voiz-sidebar-hover-icon);
 }
 
+body .page-container .sidebar-menu #main-menu li > a:focus:not(:focus-visible) {
+    outline: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
 body .page-container .sidebar-menu #main-menu > li.active.opened > a,
 body .page-container .sidebar-menu #main-menu > li.opened:not(.active) > a {
     color: var(--voiz-surface);
@@ -343,6 +349,12 @@ body .page-container .sidebar-menu #main-menu li ul > li > a,
 body .page-container .sidebar-menu #main-menu li ul li ul li > a {
     background-color: #202124;
     color: var(--voiz-header-muted);
+}
+
+body .page-container .sidebar-menu #main-menu li ul > li > a,
+body .page-container .sidebar-menu #main-menu li ul li ul li > a {
+    font-size: 13px;
+    font-weight: 500;
 }
 
 .voiz-top-header .profile-info.dropdown .dropdown-menu {
@@ -816,6 +828,7 @@ body .page-container .sidebar-menu #main-menu li.active > a > span:not(.badge) {
     justify-content: center;
     width: auto !important;
     height: 42px;
+    padding: 0 !important;
     transform: translate(-50%, -50%);
     z-index: 5;
 }
@@ -909,9 +922,9 @@ body .page-container .sidebar-menu #main-menu li#search {
 
 body .page-container .sidebar-menu #main-menu li#search .search-input {
     color: #202124 !important;
-    background-color: rgba(255, 255, 255, 0.12) !important;
+    background-color: #689F38 !important;
     border-color: rgba(32, 33, 36, 0.24) !important;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 body .page-container .sidebar-menu #main-menu li#search .search-input::placeholder,
@@ -923,4 +936,10 @@ body .page-container .sidebar-menu #main-menu li#search button {
 body .page-container .sidebar-menu #main-menu li#search button {
     background-color: #689F38 !important;
     border-color: transparent !important;
+    color: #202124 !important;
+}
+
+body .page-container .sidebar-menu #main-menu li#search button:hover {
+    background-color: #558B2F !important;
+    color: #ffffff !important;
 }

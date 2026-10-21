@@ -232,8 +232,8 @@
             </ul>
         </span>
         <!-- Raw Links -->
-        <span class="voiz-topbar-actions-container" style=' width:400px;'>
-            <ul style="padding-top:12px;" class="list-inline links-list pull-right neo-topbar-notification">
+        <span class="voiz-topbar-actions-container">
+            <ul class="list-inline links-list pull-right neo-topbar-notification">
                 <!--li id="header_notification_bar" class="dropdown">
                     <a {*data-toggle="dropdown"*} class="" href="index.php?menu=addons">
                         <i class="fa fa-cubes"></i>
@@ -272,14 +272,14 @@
                 {/if}
                 <!-- Call center dashboard -->
                 <li id="header_notification_bar" class="profile-info dropdown top-bar-queue">
-                    <a id="queue_dashboard_link" href="#" target="_blank" rel="noopener" title="مرکز تماس" aria-label="مرکز تماس">
+                    <a id="queue_dashboard_link" href="#" target="_blank" rel="noopener" title="Contact Center" aria-label="Contact Center">
                         <i class="fa fa-headphones" aria-hidden="true"></i>
                     </a>
                 </li>
 				
 <!-- Webphone Button – باز شدن در تب جدید -->
 <li class="profile-info dropdown top-bar-webphone">
-    <a id="webphone_link" href="https://{$SERVER_NAME}/phone" target="_blank" rel="noopener">
+    <a id="webphone_link" href="https://{$SERVER_NAME}/phone" target="_blank" rel="noopener" title="Webphone" aria-label="Webphone">
         <i class="fa fa-phone"></i>
     </a>
 </li>

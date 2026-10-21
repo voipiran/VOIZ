@@ -89,6 +89,28 @@ bash <(curl -fsSL "https://raw.githubusercontent.com/voipiran/callcenter-issabel
 
 > `Voiz Contact Center` و `Issabel Call Center 5` دو پروژه جدا هستند. اولی پنل مدرن Voiz/OpDesk است و دومی ماژول کلاسیک Call Center برای Issabel 5.
 
+### نصب Asternic Call Stats Lite
+
+گزینه `Asternic Call Stats Lite` در نصب‌کننده VOIZ، مخزن
+[voipiran/asternic-stats-lite](https://github.com/voipiran/asternic-stats-lite) را
+در مسیر `/usr/src/asternic-stats-lite` دریافت کرده و `install.sh` همان مخزن را
+اجرا می‌کند. نصب‌کننده رمز ریشه MySQL را از `/etc/issabel.conf` می‌خواند و
+موارد زیر را تنظیم می‌کند:
+
+- دیتابیس و کاربر `qstatslite`
+- فایل‌های گزارش در `/var/www/html/queue-stats`
+- parser در `/usr/local/parseloglite`
+- کاربر AMI با نام `phpconfig`
+- منوی `Queue Stats` در بخش Reports
+- cron پنج‌دقیقه‌ای برای پردازش `queue_log`
+
+گزارش نصب در مسیر `/var/log/asternic-stats-lite-install.log` ذخیره می‌شود و
+آدرس گزارش پس از نصب این است:
+
+```text
+https://<issabel-host>/queue-stats/
+```
+
 ### بررسی عیب‌یابی VOIZ ContactCenter
 
 وقتی گزینه `VOIZ ContactCenter` انتخاب شود، VOIZ دقیقاً همان دستور رسمی نصب پروژه را اجرا می‌کند:
