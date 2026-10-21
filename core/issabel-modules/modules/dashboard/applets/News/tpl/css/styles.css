@@ -1,0 +1,45 @@
+/* APPLET NEWS */
+div.neo-applet-news-row {
+    height: 26px;
+    border-bottom: 1px dashed #ccc;
+    padding: 8px 0px 0px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.neo-applet-news-row img {
+    margin: 0px 5px 0px 4px;
+    border: 0px;
+}
+
+.neo-applet-news-row a {
+    color: #444;
+    text-decoration: none;
+}
+
+.neo-applet-news-row a:active a:hover {
+    color: #000099;
+    text-decoration: underline;
+}
+
+span.neo-applet-news-row-date {
+    padding: 2px 4px 2px 4px;
+    border: 1px solid #bbb;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+span.neo-applet-news-row-tweet {
+    padding: 2px 4px 2px 4px;
+    margin: 0px 3px 0px 3px;
+    height: 16px;
+    border: 1px solid #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    font: 11px Verdana, Arial,Helvetica,sans-serif;
+    background-color: #E35332;
+}

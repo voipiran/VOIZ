@@ -15,15 +15,14 @@ padding-right:65px!important;
 .page-container .main-content{}
 
 /* <voipiran msm> */
-ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-webmin > a {
+ul.neo-topbar-notification > li > a {
 	padding: 4px;
 	padding-right: 7px !important;
 	padding-left: 3px;
 	translate: 0 1px;
 }
 
-ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-info > a,
-ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-downloads > a {
+ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-info > a {
   font-size: 20px;
   padding: 2px;
 }
@@ -33,13 +32,8 @@ ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-inf
   padding-right: 10px !important;
 }
 
-ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-downloads > a {
-  padding-left: 9px;
-  padding-right: 9px !important;
-}
-
 ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-info > a > i,
-ul.neo-topbar-notification > li > a, ul.neo-topbar-notification > li.profile-info.top-bar-downloads > a > i {
+ul.neo-topbar-notification > li.profile-info.top-bar-info > a > i {
   translate: 0 2px;
 }
 
@@ -52,10 +46,10 @@ body .page-container .sidebar-menu #main-menu li:hover {
 }
 
 .page-container .sidebar-menu #main-menu li.active i {
-    color: #d7d7d7;
+    color: #8BC34A;
 }
 
 .page-container .sidebar-menu #main-menu li a:hover i {
-    color: #fff;
+    color: #8BC34A;
 }
 /* </voipiran msm> */

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -97,9 +97,23 @@
                 font-size: 0.9rem;
                 display: none;
                 backdrop-filter: blur(4px);
+                direction: rtl;
+                text-align: right;
             }
             .form-login-error.show {
                 display: block;
+            }
+            .form-login-error h3,
+            .form-login-error p {
+                direction: rtl;
+                text-align: right;
+                margin-right: 0;
+            }
+            .form-login-error h3 {
+                margin-top: 0;
+            }
+            .form-login-error p {
+                margin-bottom: 0;
             }
 
             /* فوتر: وسط + فاصله از باکس */

@@ -69,42 +69,13 @@
         function removeNeoDisplayOnMouseOver(ref) {
             $(ref).find('div').removeClass('neo-display-none');
         }
-        function gotowebmin() {
-            var obj = $("#webmin_link");
-            var xaddr = "https://" + window.location.hostname + ":10000";
-            $(obj).attr("href", xaddr);
+        function setQueueDashboardUrl() {
+            var xaddr = "https://" + window.location.hostname + ":9001/dashboard";
+            $("#queue_dashboard_link").attr("href", xaddr);
         }
-        function gotoQueueDashboard() {
-            var obj = $("#queue_dashboard_link");
-            var xaddr = "http://" + window.location.hostname + ":5000";
-            $(obj).attr("href", xaddr);
-            window.open(xaddr, '_blank');
-        }
-        $(document).ready(
-                function ()
-                {
-                    gotowebmin();
-                    // gotoQueueDashboard() حذف شد تا فقط با کلیک اجرا بشه
-                }
-        );
         function gotocrm() {
             var obj = $("#crm_link");
             var xaddr = "https://" + window.location.hostname + "/crm";
-            $(obj).attr("href", xaddr);
-        }
-        function gotowinscp() {
-            var obj = $("#winscp_link");
-            var xaddr = "https://" + window.location.hostname + "/download/WinSCP-Portable.zip";
-            $(obj).attr("href", xaddr);
-        }
-        function gotoputty() {
-            var obj = $("#putty_link");
-            var xaddr = "https://" + window.location.hostname + "/download/putty.exe";
-            $(obj).attr("href", xaddr);
-        }
-        function gotosoftphone() {
-            var obj = $("#softphone_link");
-            var xaddr = "https://" + window.location.hostname + "/download/MicroSIP.zip";
             $(obj).attr("href", xaddr);
         }
         function gotowebphone() {
@@ -115,10 +86,8 @@
         $(document).ready(
                 function ()
                 {
+                    setQueueDashboardUrl();
                     gotocrm();
-                    gotowinscp();
-                    gotoputty();
-                    gotosoftphone();
                     gotowebphone();
                 }
         );
@@ -228,7 +197,7 @@
 <!-- fin del menú tipo acordeon-->
 <!-- inicio del head principal-->
 <div class="main-content">
-    <div style="height:68px; background-color:#2F3640; padding:10px;">
+    <div class="voiz-top-header" style="height:68px; padding:10px;">
         <!-- Profile Info and Notifications -->
         <span style='float:left; text-align:right; padding:0px 5px 0px 0px; width:175px;' class="col-md-6 col-sm-8 clearfix">
             <ul style='' class="user-info pull-none-xsm">
@@ -263,23 +232,8 @@
             </ul>
         </span>
         <!-- Raw Links -->
-        <span style=' width:400px;'>
+        <span class="voiz-topbar-actions-container" style=' width:400px;'>
             <ul style="padding-top:12px;" class="list-inline links-list pull-right neo-topbar-notification">
-<!------- voipiran Download ---->
-        <li id="header_notification_bar" class="profile-info dropdown top-bar-downloads"> <!-- voipiran msm -->
-            <a data-toggle="dropdown" class="" href="#">
-                <i class="fa fa-download"></i>
-            </a>
-            <ul class="dropdown-menu">
-                <!-- Reverse Caret -->
-                <li class="caret"></li>
-                <!-- Profile sub-links -->
-                <li><a target="_blank" id="winscp_link" class="" href=""><i class="fa fa-external-link"></i>Winscp</a></li>
-                <li><a target="_blank" id="putty_link" class="" href=""><i class="fa fa-external-link"></i>Putty</a></li>
-                <li><a target="_blank" id="softphone_link" class="" href=""><i class="fa fa-external-link"></i>Softphone</a></li>
-   </ul>
-        </li>
-<!------ end doubledup code ----->
                 <!--li id="header_notification_bar" class="dropdown">
                     <a {*data-toggle="dropdown"*} class="" href="index.php?menu=addons">
                         <i class="fa fa-cubes"></i>
@@ -291,63 +245,21 @@
                         <i class="fa fa-heartbeat"></i>
                     </a>
                 </li-->
-<!-- Webmin Button – آیکون ساده و مطمئن از سری fa -->
-<li class="profile-info dropdown top-bar-webmin">
-    <a id="webmin_link" href="#" onclick="gotowebmin(); return false;" target="_blank">
-        <i class="fa fa-cog"></i>
-    </a>
-</li>
                 <!-- <li id="header_notification_bar" class="profile-info dropdown"> -->
                  <!-- <a target="_blank" id="crm_link" class="" href=""> -->
                 <!-- <img style="width:16px;" src="{$WEBPATH}themes/{$THEMENAME}/images/crm.png" /> -->
                <!-- </a> -->
               <!-- </li> -->
-                <li id="header_notification_bar" class="profile-info dropdown top-bar-info"> <!-- voipiran msm -->
-                    <a data-toggle="dropdown" class="" href="#">
+                <li id="header_notification_bar" class="profile-info dropdown top-bar-info">
+                    <a data-toggle="dropdown" class="" href="#" title="About and Version" aria-label="About and Version">
                         <i class="fa fa-info-circle"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- Reverse Caret -->
                         <li class="caret"></li>
-                        <!-- Profile sub-links -->
                         <li><a href="#" class="register_link">{$Registered}</a></li>
                         <li><a href="#" id="viewDetailsRPMs"><i class="fa fa-cube"></i>{$VersionDetails}</a></li>
                         <li><a href="http://www.voipiran.io" target="_blank"><i class="fa fa-external-link"></i>VOIPIRAN Website</a></li>
                         <li><a href="#" id="dialogaboutissabel"><i class="fa fa-info-circle"></i>{$ABOUT_ISSABEL2}</a></li>
-                    </ul>
-                </li>
-                <!-- notification dropdown end -->
-                <li id="header_notification_bar" class="profile-info dropdown" style="float: none !important;">
-                    <a data-toggle="dropdown" class="" href="#">
-                        <i id='notibell' class="fa fa-bell-o {$ANIMATE_NOTIFICATION}"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- Reverse Caret -->
-                        <li class="caret"></li>
-                        <li><p>{$NOTIFICATIONS.LBL_NOTIFICATION_SYSTEM}</p></li>
-                        <li>
-                            <ul>
-                                {foreach from=$NOTIFICATIONS.NOTIFICATIONS_PUBLIC item=NOTI}
-                                    <li id='notiitem{$NOTI.id}' class="{if $NOTI.level == "info"}notification-info{elseif $NOTI.level == "warning"}notification-warning{elseif $NOTI.level == "error"}notification-danger{/if}">
-                                        <a href="#" onclick='readNoti("{$NOTI.id}")'><i class="{if $NOTI.level == "info"}fa fa-info{elseif $NOTI.level == "warning"}fa fa-warning{elseif $NOTI.level == "error"}fa fa-ban{/if}"></i>{$NOTI.content}</a>
-                                    </li>
-                                {foreachelse}
-                                    <li><p>{$NOTIFICATIONS.TXT_NO_NOTIFICATIONS}</p></li>
-                                        {/foreach}
-                            </ul>
-                        </li>
-                        <li><p>{$NOTIFICATIONS.LBL_NOTIFICATION_USER}</p></li>
-                        <li>
-                            <ul>
-                                {foreach from=$NOTIFICATIONS.NOTIFICATIONS_PRIVATE item=NOTI}
-                                    <li class="{if $NOTI.level == "info"}notification-info{elseif $NOTI.level == "warning"}notification-warning{elseif $NOTI.level == "error"}notification-danger{/if}">
-                                        <a href="#"><i class="{if $NOTI.level == "info"}fa fa-info{elseif $NOTI.level == "warning"}fa fa-warning{elseif $NOTI.level == "error"}fa fa-ban{/if}"></i>{$NOTI.content}</a>
-                                    </li>
-                                {foreachelse}
-                                    <li><p>{$NOTIFICATIONS.TXT_NO_NOTIFICATIONS}</p></li>
-                                        {/foreach}
-                            </ul>
-                        </li>
                     </ul>
                 </li>
                 {if $ISSABEL_PANELS}
@@ -356,10 +268,10 @@
                         <a href="#" data-toggle="chat" data-collapse-sidebar="1"><i class="fa fa-th-list"></i></a>
                     </li>
                 {/if}
-                <!-- Queue Dashboard Button -->
+                <!-- Call center dashboard -->
                 <li id="header_notification_bar" class="profile-info dropdown top-bar-queue">
-                    <a id="queue_dashboard_link" href="#" onclick="gotoQueueDashboard(); return false;" class="">
-		<i class="fa fa-bar-chart"></i>
+                    <a id="queue_dashboard_link" href="#" target="_blank" rel="noopener" title="Agent Dashboard" aria-label="Agent Dashboard">
+                        <i class="fa fa-headphones" aria-hidden="true"></i>
                     </a>
                 </li>
 				

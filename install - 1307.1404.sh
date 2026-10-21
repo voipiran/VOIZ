@@ -429,14 +429,15 @@ welcome
 
 # SELECT FEATURES GUI
 SELECTED=$(whiptail --title "SELECT Features TO INSTALL" --checklist \
-"List of Features to install" 20 100 10 \
+"List of Features to install" 21 100 11 \
 "NetworkUtilities" "SNGREP, HTOP" ON \
 "QueuePanel" "VOIZ Queue Panel" ON \
-"WebPhone" "VOIZ Web Phone" ON \
+"WebPhone" "Webphone-BrowserPhone" ON \
 "CallerIDFormatter" "Asterisk Callerid Formatter" ON \
 "ChanSpyPro" "Asterisk ChanSpy Pro" ON \
 "Vtiger CRM" "ویتایگر با تقویم شمسی" OFF \
-"OptimizedMenus" "Optimized Menus" ON 3>&1 1>&2 2>&3)
+"OptimizedMenus" "Optimized Menus" ON \
+"UpdateIssabel" "Update Issabel packages" OFF 3>&1 1>&2 2>&3)
 
 eval "ARRAY=($SELECTED)"
 echo "Selected: ${ARRAY[@]}" >> "$LOG_FILE"
@@ -450,6 +451,7 @@ for CHOICE in "${ARRAY[@]}"; do
         *"CallerIDFormatter"*) CALLERIDFORMATTERINSTALL=true ;;
         *"ChanSpyPro"*) CHANSPYPROINSTALL=true ;;
         *"OptimizedMenus"*) OPTIMIZEDMENUS=true ;;
+        *"UpdateIssabel"*) UPDATEISSABELINSTALL=true ;;
     esac
 done
 
@@ -479,7 +481,9 @@ while [[ ${COUNTER} -le 100 ]]; do
     fi
     MESSAGE="Updating Issabel system..."
     echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
-    update_issabel
+    if [ "$UPDATEISSABELINSTALL" = "true" ]; then
+        update_issabel
+    fi
     MESSAGE="Installing Webmin..."
     echo "XXX\n${COUNTER}\n${MESSAGE}\nXXX"
     install_webmin

@@ -1,0 +1,36 @@
+<?php
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+  Codificación: UTF-8
+  +----------------------------------------------------------------------+
+  | Issabel version 4.0                                                  |
+  | http://www.issabel.org                                               |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 2020 Issabel Foundation                                |
+  | Copyright (c) 2006 Palosanto Solutions S. A.                         |
+  +----------------------------------------------------------------------+
+  | The contents of this file are subject to the General Public License  |
+  | (GPL) Version 2 (the "License"); you may not use this file except in |
+  | compliance with the License. You may obtain a copy of the License at |
+  | http://www.opensource.org/licenses/gpl-license.php                   |
+  |                                                                      |
+  | Software distributed under the License is distributed on an "AS IS"  |
+  | basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See  |
+  | the License for the specific language governing rights and           |
+  | limitations under the License.                                       |
+  +----------------------------------------------------------------------+
+  | The Initial Developer of the Original Code is PaloSanto Solutions    |
+  +----------------------------------------------------------------------+
+  $Id: es.lang,v 1.7 2020/04/17 00:36:42 nicolas@issabel.com Exp $ */
+global $arrLangModule;
+$arrLangModule = array(
+    "CPU Info" => "CPU",
+    "CPU Speed" => "Velocidad CPU",
+    "Memory usage" => "Memoria Utilizada",
+    "minute(s)" => "minutos(s)",
+    "hour(s)" => "horas(s)",
+    "day(s)" => "días(s)",
+    "Uptime" => "Tiempo de Actividad",
+    "Last login: %s from %s" => "Ultimo acceso: %s desde %s",
+    "No last login info" => "Sin información de último acceso"
+);
+?>

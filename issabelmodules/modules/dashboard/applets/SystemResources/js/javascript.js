@@ -1,5 +1,11 @@
 $(document).ready(function() {
     var gauges = ['cpugauge', 'memgauge', 'swapgauge'];
+    var themeColors = getComputedStyle(document.documentElement);
+    var resourceColors = [
+        themeColors.getPropertyValue('--voiz-success').trim(),
+        themeColors.getPropertyValue('--voiz-warning').trim(),
+        themeColors.getPropertyValue('--voiz-danger').trim()
+    ];
     for (var i = 0; i < gauges.length; i++) {
         $('div#dashboard-applet-'+gauges[i]).data('justgage', new JustGage({
             id: "dashboard-applet-"+gauges[i],
@@ -10,7 +16,11 @@ $(document).ready(function() {
             startAnimationType : 'bounce',
             shadowSize: 0,
             shadowVerticalOffset: 0,
-            valueFontColor: '#666666',
+            gaugeColor: themeColors.getPropertyValue('--voiz-border').trim(),
+            levelColors: resourceColors,
+            titleFontColor: themeColors.getPropertyValue('--voiz-text-secondary').trim(),
+            valueFontColor: themeColors.getPropertyValue('--voiz-text-secondary').trim(),
+            labelFontColor: themeColors.getPropertyValue('--voiz-text-secondary').trim(),
             title: $('input#'+gauges[i]+'_label').val(),
             label: "%"
         }));

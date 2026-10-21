@@ -1,0 +1,84 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>Опція "Панель управління" меню "Система" в Issabel - це інструмент візуалізації, який показує загальний вигляд системи і надає швидкий доступ до адміністративних дій, щоб дозволити користувачеві легко адмініструвати сервер, таких як "Системні Ресурси", "Стан Процесів", "Жорсткі Диски", "Графіки Продуктивності", "Комунікаційна Активність", "Мережа Issabel" і так далі. Нижче наведено короткий опис кожної з них.
+</p>
+<p><b>Системні Ресурси: </b>Тут показано загальну інформацію про систему, в якій працює Issabel.</p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_system_resources.png" border="0" />
+<p>Зображення 1</p>
+</div>
+<br />
+<p><b>Статус Процесів: </b>Тут показано увімкнені та вимкнені процеси. Тут ви можете запускати, зупиняти і перезапускати ці процеси.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_processes_status.png" border="0" />
+<p>Зображення 2</p>
+</div>
+<br />
+<p><b>Жорсткі Диски: </b>Жорсткі диски показує вільний та зайнятий простір на жорстких дисках, встановлених на вашому сервері Issabel.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_hard_drives.png" border="0" />
+<p>Зображення 3</p>
+</div>
+<br />
+<p><b>Графік Продуктивності: </b>Дозволяє переглянути історію використання процесора та пам'яті, а також одночасних дзвінків у часі.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_performance_graphic.png" border="0" />
+<p>Зображення 4</p>
+</div>
+<br />
+<p><b>Новини: </b>Слідкуйте за останніми новинами про Іссабель на сайті www.issabel.org</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_news.png" border="0">
+<p>Зображення 5</p>
+</div>
+<br />
+<p><b>Комунікаційна Активність: </b>Цей аплет показує кількість внутрішніх номерів, транків та дзвінків на сервері Issabel.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_communication_activity.png" border="0" />
+<p>Зображення 6</p>
+</div>
+<br />
+<p><b>Календар: </b>Показує розклад активностей для користувача, що увійшов в систему</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_calendar.png" border="0" />
+<p>Зображення 7</p>
+</div>
+<br />
+<p><b>Дзвінки: </b>Це історія дзвінків із зазначенням часу і тривалості, пов'язаних з внутрішнім номером зареєстрованого користувача.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_calls.png" border="0" />
+<p>Зображення 8</p>
+</div>
+<br />
+<p><b>Електронна Пошта: </b>Користувач, який увійшов до системи, може бачити, коли він отримує листи.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_emails.png" border="0" />
+<p>Зображення 9</p>
+</div>
+<br />
+<p><b>Факси: </b>Показує отримані факсимільні повідомлення на внутрішній номер користувача, що увійшов до системи.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_faxes.png" border="0" />
+<p>Зображення 10</p>
+</div>
+<br />
+<p><b>Голосова Пошта: </b>Цей аплет інформує про наявність голосових повідомлень на внутрішній номер користувача, що увійшов до системи.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_voicemails.png" border="0" />
+<p>Зображення 11</p>
+</div>
+<br />
+<p><b>Система: </b>Показує місце на жорсткому диску, призначене користувачеві, який увійшов до системи.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_system.png" border="0" />
+<p>Зображення 12</p>
+</div>
+<br />
+<p><b>Телефонне Обладнання: </b>Показує загальний вигляд встановлених пристроїв телефонії на сервері Issabel.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_telephony_hardware.png" border="0" />
+<p>Зображення 13</p>
+</div>
+<br />
+<p><b>Мережа Issabel: </b>Показує статус "Ліцензії", "Моніторингу", "DynDNS", "RBL", а також дає змогу "Увімкнути" або "Вимкнути" "Віддалене Управління".</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/uk_network_issabel.png" border="0" />
+<p>Зображення 14</p>
+</div>
+<br />
+<br />
+</body>
+</html>

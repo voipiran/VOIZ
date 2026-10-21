@@ -1,0 +1,50 @@
+/* APPLET HD */
+div.neo-applet-hd-innerbox {
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:300px;
+    height:100px;
+    border:1px solid #999;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    background-color:#f3f3f3;
+}
+div.neo-applet-hd-innerbox-top {
+    position:relative;
+    padding:2px 0px 0px 8px;
+    width:292px;
+    height:25px;
+}
+div.neo-applet-hd-innerbox-bottom {
+    position:relative;
+    padding:5px 0px 0px 8px;
+    width:292px;
+    height:67px;
+    border-top:1px solid #999;
+}
+div.neo-applet-hd-report-row {
+    position:relative;
+    height:32px;
+    border-bottom: 1px dashed #ccc;
+}
+div.neo-applet-hd-report-row-left {
+    position:relative;
+    float:left;
+    padding:3px 0px 0px 10px;
+    width: 220px;
+    height:29px;
+    overflow:hidden;
+    white-space:nowrap;
+}
+div.neo-applet-hd-report-row-right {
+    position:relative;
+    float:right;
+    width: 220px;
+    height:29px;
+    padding:3px 0px 0px 0px;
+    margin:0px 5px 0px 0px;
+    overflow:hidden;
+    white-space:nowrap;
+}

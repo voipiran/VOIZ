@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-theme-rtl.css"> <!--  Voiz -->
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/neon-forms-rtl.css"> <!--  Voiz -->
     <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/font-awesome-animation.min.css">
-    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/custom.css">
     <!-- voipiran msm <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/rtl.css"> -->  <!--  Voiz -->
     
 
@@ -46,6 +45,7 @@
 
         {$HEADER}
     {$HEADER_MODULES}
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/custom.css?v=20261021">
     </head>
     <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="mainBody page-body" {$BODYPARAMS}>
     <div class="page-container">

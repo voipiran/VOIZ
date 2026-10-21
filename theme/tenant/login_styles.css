@@ -8,6 +8,15 @@ body {
 	font: 13px Verdana, Arial,Helvetica,sans-serif;
 	color: #444;
 }
+.form-login-error {
+	direction: rtl;
+	text-align: right;
+}
+.form-login-error h3,
+.form-login-error p {
+	direction: rtl;
+	text-align: right;
+}
 #neo-login-box {
 	position:absolute;
 	top:120px;

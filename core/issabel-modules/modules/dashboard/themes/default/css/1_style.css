@@ -1,0 +1,345 @@
+#applet_grid > tbody > tr > td {
+    padding: 5px 5px;
+    vertical-align: top;
+    width: 50%;
+}
+
+.appletwindow
+{
+    position: relative;
+    float:left;
+    margin: 10px 5px 0px 0px;
+    padding: 0px 0px 10px 0px;
+    width: 474px;
+    height: 300px;
+    _border-top: 1px solid #aaa;
+    _border-left: 1px solid #aaa;
+    _border-right: 1px solid #999;
+    _border-bottom: 1px solid #999;
+    font-size: 12px;
+    background-color:#fcfcfc;
+    _box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,.03), 0 0.9375rem 1.40625rem rgba(4,9,20,.03), 0 0.25rem 0.53125rem rgba(4,9,20,.05), 0 0.125rem 0.1875rem rgba(4,9,20,.03);
+    border-width: 0;
+    transition: all .2s;
+}
+
+.appletwindow > .appletwindow_topbar
+{
+    padding: 5px 10px;
+    font-family:verdana,arial,helvetica,sans-serif;
+    font-size:13pt;
+    font-weight:bold;
+    color:#E35332;
+    height:21px;
+    cursor: move;
+    background-color: #eee;
+  }
+
+.appletwindow > .appletwindow_topbar > .appletwindow_title {
+    position: absolute;
+    top: 0px;
+    left:0px;
+    font: 13px Verdana, Arial,Helvetica,sans-serif;
+    color: #999;
+    padding: 5px 4px 4px 8px;
+    float:left;
+}
+
+
+.appletwindow > .appletwindow_topbar > .appletwindow_widgets {
+    padding-right:2px;
+    padding-left:2px;
+}
+
+
+.appletwindow > .appletwindow_topbar > .appletwindow_widgets > a
+{
+    color: #443;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ima{
+    padding-top:0px;
+}
+
+.appletwindow > .appletwindow_content
+{
+    position:absolute;
+    top:32px;
+    left:0px;
+    padding:8px 8px 8px 8px;
+    width:462px;
+}
+
+/*nuevo*/
+div.neo-applet {
+    position: relative;
+    float:left;
+    margin: 10px 10px 0px 0px;
+    padding: 0px 0px 10px 0px;
+    width: 490px;
+    height: 300px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    -moz-box-shadow: 2px 2px 1px rgb(180,180,180);
+    -webkit-box-shadow: 2px 2px 1px #B4B4B4;
+    box-shadow: 2px 2px 1px #B4B4B4;
+    background:url(../../../images/appletbg.png) repeat-x top #ddd;
+}
+div.neo-applet-title {
+    position: absolute;
+    top: 0px;
+    left:0px;
+    font: 13px Verdana, Arial,Helvetica,sans-serif;
+    color: #444;
+    text-shadow: 1px 1px #ccc;
+    padding: 5px 4px 4px 8px;
+}
+div.neo-applet-reload {
+    position: absolute;
+    top: 6px;
+    right:4px;
+}
+div.neo-applet-content {
+    position:absolute;
+    top:32px;
+    left:0px;
+    padding:8px 8px 8px 8px;
+    width:464px;
+}
+div.neo-applet-tline {
+    position:relative;
+    width:100%;
+    /* background-color:red; */
+    overflow:hidden;
+    height:22px;
+}
+div.neo-applet-titem {
+    position:absolute;
+    left:0px;
+    top:0px;
+    padding-left:4px;
+    width:180px;
+    white-space:nowrap;
+}
+div.neo-applet-tdesc {
+    position:absolute;
+    top:0px;
+    float:left;
+    margin-left: 15%;
+    white-space:nowrap;
+    left:120px;
+    overflow:hidden;
+}
+div.neo-clearing {
+    clear:both;
+}
+div.neo-divisor {
+    position:relative;
+    height:2px;
+    widows:100%;
+    margin:0px 0px 8px 0px;
+    background: url(../../../images/applet_divisor.png) no-repeat bottom;
+}
+img.fullwidth {
+    width:100%;
+}
+
+.appletwindow_wait {
+   text-align: center;
+   height: 250px;
+   width:470px;
+   display: table-cell;
+   vertical-align: middle;
+}
+
+@keyframes spin {
+ from{
+ transform: rotateY(0deg);
+ moz-transform: rotateY(0deg); //Firefox
+ ms-transform: rotateY(0deg); //Microsoft Browsers
+ }
+ to{
+ transform: rotateY(360deg);
+ moz-transform: rotateY(360deg); //Firefox
+ ms-transform: rotateY(360deg); //Microsoft Browsers
+ }
+}
+@-webkit-keyframes spin{
+ from{-webkit-transform: rotateY(0deg);}
+ to{-webkit-transform: rotateY(360deg);}
+}
+.imageSpin{
+ animation-name: spin;
+ animation-timing-function: linear;
+ animation-iteration-count: infinite;
+ animation-duration: 5s;
+ -webkit-animation-name: spin;
+ -webkit-animation-timing-function: linear;
+ -webkit-animation-iteration-count: infinite;
+ -webkit-animation-duration: 5s;
+}
+
+@font-face {
+    font-family: 'VOIZ IRANSans';
+    src: url('/themes/vitenant/fonts/IRANSansWeb(FaNum).woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VOIZ IRANSans';
+    src: url('/themes/vitenant/fonts/IRANSansWeb(FaNum)_Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+#applet_grid {
+    width: calc(100% - 32px) !important;
+    max-width: 1200px;
+    margin: 12px auto;
+    table-layout: fixed;
+    direction: rtl;
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif;
+}
+
+#applet_grid > tbody > tr > td {
+    width: 50%;
+    padding: 8px 10px;
+    text-align: right;
+    vertical-align: top;
+}
+
+#applet_grid .appletwindow {
+    float: none;
+    width: 100%;
+    max-width: 540px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    direction: rtl;
+    text-align: right;
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif;
+}
+
+#applet_grid .appletwindow_topbar {
+    position: relative;
+    min-height: 32px;
+    height: auto;
+    box-sizing: border-box;
+    direction: rtl;
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif;
+}
+
+#applet_grid .appletwindow_title {
+    left: auto;
+    right: 0;
+    width: calc(100% - 36px);
+    box-sizing: border-box;
+    float: none;
+    padding: 5px 10px;
+    text-align: right;
+    font: 13px 'VOIZ IRANSans', Tahoma, sans-serif;
+}
+
+#applet_grid .appletwindow_content {
+    left: auto;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    direction: rtl;
+    text-align: right;
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif;
+}
+
+#applet_grid .appletwindow_fullcontent,
+#applet_grid .appletwindow_fullcontent * {
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif;
+}
+
+#applet_grid #lastlogin {
+    direction: rtl;
+    text-align: right !important;
+    unicode-bidi: plaintext;
+}
+
+#applet_grid .neo-applet-tline {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    height: auto;
+    min-height: 24px;
+    direction: rtl;
+    text-align: right;
+}
+
+#applet_grid .neo-applet-titem,
+#applet_grid .neo-applet-tdesc {
+    position: static;
+    top: auto;
+    left: auto;
+    float: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    white-space: normal;
+    text-align: right;
+}
+
+#applet_grid .neo-applet-titem {
+    flex: 0 0 38%;
+}
+
+#applet_grid .neo-applet-tdesc {
+    flex: 1 1 auto;
+}
+
+#applet_grid .system-resources-gauges {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    align-items: start;
+    direction: rtl;
+}
+
+#applet_grid .system-resources-gauge {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+}
+
+#applet_grid .flot-text {
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif !important;
+}
+
+#applet_grid svg text {
+    font-family: 'VOIZ IRANSans', Tahoma, sans-serif !important;
+}
+
+@media (max-width: 900px) {
+    #applet_grid,
+    #applet_grid > tbody,
+    #applet_grid > tbody > tr {
+        display: block;
+        width: calc(100% - 16px) !important;
+        max-width: none;
+    }
+
+    #applet_grid > tbody > tr > td {
+        display: block;
+        width: 100%;
+        padding: 4px 0;
+    }
+
+    #applet_grid .appletwindow {
+        max-width: 540px;
+    }
+}

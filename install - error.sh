@@ -35,15 +35,16 @@ whiptail --title "VOIZ Installation" --msgbox "Powered by VOIPIRAN.io - Starting
 
 # Select features to install
 SELECTED=$(whiptail --title "Select Features" --checklist \
-"List of features to install" 20 100 12 \
+"List of features to install" 21 100 13 \
 "Vtiger CRM" "Vtiger with Shamsi calendar" OFF \
 "NetworkUtilities" "SNGREP, HTOP" ON \
 "AdvancedListening" "Advanced Listening" ON \
-"WebPhonePanel" "Web Phone Panel" ON \
+"WebPhonePanel" "Webphone-BrowserPhone" ON \
 "QueueDashboard" "Live Queue Dashboard" ON \
 "CallerIDFormatter" "CallerID Formatter" ON \
 "OptimizedMenus" "Optimized Menus" ON \
-"Developer" "Developer Module" OFF 3>&1 1>&2 2>&3) || SELECTED=""
+"Developer" "Developer Module" OFF \
+"UpdateIssabel" "Update Issabel packages" OFF 3>&1 1>&2 2>&3) || SELECTED=""
 eval "ARRAY=($SELECTED)"
 
 # Set default feature flags
@@ -55,6 +56,7 @@ QUEUEDASHBOARDINSTALL=false
 CALLERIDFORMATTERINSTALL=false
 OPTIMIZEDMENUS=false
 DEVELOPERINSTALL=false
+UPDATEISSABELINSTALL=false
 
 # Check selected features
 for CHOICE in "${ARRAY[@]}"; do
@@ -66,6 +68,7 @@ for CHOICE in "${ARRAY[@]}"; do
     [[ "$CHOICE" == *"CallerIDFormatter"* ]] && CALLERIDFORMATTERINSTALL=true
     [[ "$CHOICE" == *"OptimizedMenus"* ]] && OPTIMIZEDMENUS=true
     [[ "$CHOICE" == *"Developer"* ]] && DEVELOPERINSTALL=true
+    [[ "$CHOICE" == *"UpdateIssabel"* ]] && UPDATEISSABELINSTALL=true
 done
 
 # Select language
@@ -430,8 +433,10 @@ install_callerid_formatter() {
     install_sourcegaurdian
     update_progress "Installing Webmin"
     install_webmin
-    update_progress "Updating Issabel"
-    update_issabel
+    if [ "$UPDATEISSABELINSTALL" = "true" ]; then
+        update_progress "Updating Issabel"
+        update_issabel
+    fi
     update_progress "Adding Persian Sounds"
     add_persian_sounds
     update_progress "Installing Jalali calendar libraries"

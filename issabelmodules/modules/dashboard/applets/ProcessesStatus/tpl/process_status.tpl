@@ -14,32 +14,30 @@
 
     /* باکس اصلی اپلت */
     .neo-applet-processes-menu {
-        background: #ffffff;
-        border-radius: 16px;
+        background: var(--voiz-surface);
+        border-radius: 6px;
         padding: 20px;
         margin-bottom: 24px;
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--voiz-border);
         overflow: hidden;
     }
 
     /* دکمه‌های کنترل */
     .neo_applet_process {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border: none;
+        background: var(--voiz-surface);
+        color: var(--voiz-data-text);
+        border: 1px solid var(--voiz-border-strong);
         padding: 8px 16px;
         margin-left: 8px;
-        border-radius: 8px;
+        border-radius: 6px;
         font-weight: 500;
         font-size: 13px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .neo_applet_process:hover {
-        background: linear-gradient(135deg, #5a6fd8, #6a4190);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        background: var(--voiz-surface-secondary);
+        border-color: var(--voiz-sidebar-muted);
     }
 
     /* ردیف‌های سرویس */
@@ -47,13 +45,15 @@
         display: flex;
         align-items: center;
         padding: 12px 16px;
-        border-bottom: 1px dashed #e2e8f0;
+        border-bottom: 1px solid var(--voiz-border);
+        border-color: var(--voiz-border);
+        background: var(--voiz-surface);
         transition: background 0.2s ease;
-        border-radius: 10px;
+        border-radius: 6px;
         margin: 4px 0;
     }
     .neo-applet-processes-row:hover {
-        background: #f8f9fc;
+        background: var(--voiz-surface-secondary);
     }
     .neo-applet-processes-row:last-child {
         border-bottom: none;
@@ -73,7 +73,7 @@
     .neo-applet-processes-row-name {
         flex: 1;
         font-weight: 500;
-        color: #1a202c;
+        color: var(--voiz-text);
         min-width: 140px;
     }
 

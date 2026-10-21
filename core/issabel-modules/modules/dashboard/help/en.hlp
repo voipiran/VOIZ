@@ -1,0 +1,79 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+
+<h1>{$node_name}</h1>
+
+<p>The option "Dashboard" of menu "System" in Issabel is a visualization tool that shows a general view of the system and gives a faster access to administrative actions in order to allow the user an easy administration of the server such as "System Resources", "Processes Status", "Hard Drives", "Performance Graphics", "Communication Activity", and so on. Below a short description of each one.
+</p>
+<p><b>System Resources: </b>Here shows general information about the system where Issabel is running.</p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/help/system_resources.png" border="0" />
+<p>Figure 1</p>
+</div>
+<br />
+<p><b>Processes Status: </b>It shows the enabled and disabled processes. Here you can start, stop and restart these processes.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/processes_status.png" border="0" />
+<p>Figure 2</p>
+</div>
+<br />
+<p><b>Hard Drives: </b>Hard Drives shows the free and used space of the hard drives installed on your server.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/hard_drives.png" border="0" />
+<p>Figure 3</p>
+</div>
+<br />
+<p><b>Performance Graphic: </b>It allows to check out the history of CPU and Memory usage as well as simultaneous calls over the time.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/performance_graphic.png" border="0" />
+<p>Figure 4</p>
+</div>
+<br />
+<p><b>News: </b>Keep track of the latest news about Issabel from www.issabel.org</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/news.png" border="0">
+<p>Figure 5</p>
+</div>
+<br />
+<p><b>Communication Activity: </b>This applet shows the number of extensions, trunks and calls currently on Issabel server.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/communication_activity.png" border="0" />
+<p>Figure 6</p>
+</div>
+<br />
+<p><b>Calendar: </b>It shows the schedule of activities for the logged user</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/calendar.png" border="0" />
+<p>Figure 7</p>
+</div>
+<br />
+<p><b>Calls: </b>It is a history of calls with time and duration related to the extension of the logged user.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/calls.png" border="0" />
+<p>Figure 8</p>
+</div>
+<br />
+<p><b>Emails: </b>The logged user can see when he receives emails.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/emails.png" border="0" />
+<p>Figure 9</p>
+</div>
+<br />
+<p><b>Faxes: </b>It shows the received faxes on the extension of the logged user.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/faxes.png" border="0" />
+<p>Figure 10</p>
+</div>
+<br />
+<p><b>Voicemails: </b>This applet inform when the extension of the logged user has voicemails.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/voicemails.png" border="0" />
+<p>Figure 11</p>
+</div>
+<br />
+<p><b>System: </b>It shows the assigned space on hard drive to the logged user.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/system.png" border="0" />
+<p>Figure 12</p>
+</div>
+<br />
+<p><b>Telephony Hardware: </b>It shows a general view of the installed telephony devices on Issabel server.</p>
+<div align="center" class="hlp_figures"><img src="../modules/{$node_id}/images/help/telephony_hardware.png" border="0" />
+<p>Figure 13</p>
+</div>
+<br />
+<br />
+</body>
+</html>
