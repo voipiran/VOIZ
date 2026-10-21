@@ -45,7 +45,7 @@
 
         {$HEADER}
     {$HEADER_MODULES}
-    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/custom.css?v=20261021-7">
+    <link rel="stylesheet" href="{$WEBPATH}themes/{$THEMENAME}/css/custom.css?v=20261021-8">
     </head>
     <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="mainBody page-body" {$BODYPARAMS}>
     <div class="page-container">

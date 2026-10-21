@@ -354,7 +354,7 @@ body .page-container .sidebar-menu #main-menu li ul li ul li > a {
 body .page-container .sidebar-menu #main-menu li ul > li > a,
 body .page-container .sidebar-menu #main-menu li ul li ul li > a {
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .voiz-top-header .profile-info.dropdown .dropdown-menu {
@@ -807,6 +807,11 @@ body .page-container .sidebar-menu #main-menu li.opened > a > i {
 
 body .page-container .sidebar-menu #main-menu li > a > span:not(.badge) {
     font-weight: 600;
+}
+
+body .page-container .sidebar-menu #main-menu li ul > li > a > span:not(.badge),
+body .page-container .sidebar-menu #main-menu li ul li ul li > a > span:not(.badge) {
+    font-weight: 400;
 }
 
 body .page-container .sidebar-menu #main-menu li.active > a,
