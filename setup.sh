@@ -303,7 +303,7 @@ install_contact_center() (
     local installer_status
     local last_log_line
     started_at=$(date +%s)
-    sudo bash install.sh >> "${install_log}" 2>&1 &
+    bash install.sh >> "${install_log}" 2>&1 &
     installer_pid=$!
     echo "[INFO] ContactCenter installer started. PID=${installer_pid}" >> "${install_log}"
 
@@ -318,8 +318,9 @@ install_contact_center() (
 
     wait "${installer_pid}"
     installer_status=$?
-    echo "[EXIT] sudo bash install.sh returned ${installer_status}" >> "${install_log}"
+    echo "[EXIT] bash install.sh returned ${installer_status}" >> "${install_log}"
     if [[ "${installer_status}" -ne 0 ]]; then
+        log "ERROR: ContactCenter installer failed with exit code ${installer_status}; see ${install_log}"
         return "${installer_status}"
     fi
 
@@ -391,17 +392,17 @@ select_features() {
     local selected
     selected=$(whiptail --title "SELECT OPTIONAL MODULES TO INSTALL" --checklist \
         "Core components (Persian Sounds, Jalali Calendar, Theme, Issabel Modules, voipiranAGI, VOIZ Menu) are installed automatically.\n\nSelect additional modules:" 24 100 16 \
-        "UpdateIssabel" "Update Issabel (non-blocking)" OFF \
+        "UpdateIssabel" "Update Issabel (non-blocking)" ON \
+        "JalaliModulePatch" "Apply Jalali Calendar to Monitoring/CDR/Voicemail" OFF \
         "IssabelCallcenterCE" "Issabel Callcenter CE" OFF \
-        "VoizMonitoring" "VOIZ Issabel Monitoring" ON \
-        "CalleridFormatter" "VOIZ Asterisk Caller ID Formatter" ON \
-        "Chanspy" "VOIZ Asterisk Chanspy" ON \
-        "VOIZContactCenter" "VOIZ ContactCenter" OFF \
-        "WebPhone" "WebPhone Client" ON \
-        "AsternicStats" "Asternic Call Stats Lite" ON \
-        "AsternicCDR" "Asternic CDR Processing" ON \
+        "VoizMonitoring" "VOIZ Issabel Monitoring" OFF \
+        "CalleridFormatter" "VOIZ Asterisk Caller ID Formatter" OFF \
+        "Chanspy" "VOIZ Asterisk Chanspy" OFF \
+        "VOIZContactCenter" "VOIZContactCenter" OFF \
+        "WebPhone" "WebPhone Client" OFF \
+        "AsternicStats" "Asternic Call Stats Lite" OFF \
+        "AsternicCDR" "Asternic CDR Processing" OFF \
         "VtigerCRM" "Vtiger CRM Integration" OFF \
-        "JalaliModulePatch" "Apply Jalali Calendar to Monitoring/CDR/Voicemail" ON \
         3>&1 1>&2 2>&3) || return 1
     
     eval "FEATURES=($selected)"

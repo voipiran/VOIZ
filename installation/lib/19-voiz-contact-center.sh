@@ -34,7 +34,7 @@ main() {
     log "Running the Contact Center installer..."
     (
         cd "${checkout_dir}"
-        ./install.sh 2>&1 | tee -a "${CC_LOG}"
+        bash ./install.sh 2>&1 | tee -a "${CC_LOG}"
     )
 
     log "=== VOIZ Contact Center Installation Complete ==="

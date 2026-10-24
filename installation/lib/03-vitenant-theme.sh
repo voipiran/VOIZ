@@ -31,6 +31,18 @@ main() {
     # Copy vitenant theme
     mkdir -p "${www_html}/themes"
     cp -rf "${theme_src}/vitenant" "${www_html}/themes/"
+    [[ -f "${www_html}/themes/vitenant/_common/_menu.tpl" ]] || {
+        log "ERROR: Vitenant menu template was not deployed"
+        return 1
+    }
+    [[ -f "${www_html}/themes/vitenant/css/custom.css" ]] || {
+        log "ERROR: Vitenant custom stylesheet was not deployed"
+        return 1
+    }
+    touch "${www_html}/themes/vitenant/_common/_menu.tpl" \
+        "${www_html}/themes/vitenant/_common/index.tpl" \
+        "${www_html}/themes/vitenant/css/custom.css" \
+        "${www_html}/themes/vitenant/rtl.css"
     
     # Set language/theme in Issabel's settings database. The database path
     # differs between Issabel installations and versions.
@@ -116,6 +128,13 @@ main() {
     # Set permissions on theme
     chown -R asterisk:asterisk "${www_html}/themes/vitenant" 2>/dev/null || true
     chmod -R 755 "${www_html}/themes/vitenant" 2>/dev/null || true
+
+    # Make PHP reload the deployed templates and stylesheet immediately.
+    if command -v systemctl >/dev/null 2>&1; then
+        systemctl reload httpd 2>/dev/null || true
+    elif command -v service >/dev/null 2>&1; then
+        service httpd reload 2>/dev/null || true
+    fi
     
     log "=== Vitenant Theme Installed ==="
     return 0
