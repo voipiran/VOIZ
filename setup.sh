@@ -297,6 +297,18 @@ install_contact_center() (
     tar -xzf "${archive}" >> "${install_log}" 2>&1 || return 1
     mv voiz-contact-center-main voiz-contact-center >> "${install_log}" 2>&1 || return 1
     cd "${project}" || return 1
+
+    # The bundled ContactCenter installer is also invoked by the web license
+    # flow, where no terminal or TERM variable is available. Keep older
+    # published bundles from aborting on their unconditional `clear`.
+    if grep -qx 'clear' install.sh 2>/dev/null; then
+        sed -i '/^clear$/c\
+if [[ -t 1 \&\& -n "${TERM:-}" ]] \&\& command -v clear >/dev/null 2>\&1; then\
+    clear || true\
+fi' install.sh
+        echo "[INFO] Patched non-interactive terminal handling in ContactCenter installer." >> "${install_log}"
+    fi
+
     local started_at
     local elapsed
     local installer_pid
