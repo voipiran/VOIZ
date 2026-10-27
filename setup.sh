@@ -90,6 +90,7 @@ normalize_module_line_endings() {
 # ==========================================
 # Helper Functions
 # ==========================================
+mkdir -p "$(dirname "/opt/voiz-contact-center/voiz/voiz-installation.log")"
 log() {
     if [[ "${QUIET_CONSOLE:-0}" -eq 1 ]]; then
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "${LOG_FILE}"
