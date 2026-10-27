@@ -66,7 +66,7 @@ check_php_version() {
 
 check_required_commands() {
     local missing=()
-    for cmd in whiptail mysql sed awk sqlite3 bc; do
+    for cmd in whiptail mysql sed awk sqlite3; do
         if ! command -v "${cmd}" >/dev/null 2>&1; then
             missing+=("${cmd}")
         fi
