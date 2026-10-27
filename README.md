@@ -7,7 +7,7 @@
 [![Version](https://img.shields.io/badge/version-6.0.0-0f766e?style=for-the-badge)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-Issabel%20%7C%20Asterisk-2563eb?style=for-the-badge)](https://www.issabel.org/)
 [![License](https://img.shields.io/github/license/voipiran/VOIZ?style=for-the-badge)](LICENSE)
-[![Latest Commit](https://img.shields.io/github/last-commit/voipiran/VOIZ?style=for-the-badge)](https://github.com/voipiran/VOIZ/commits/master)
+[![Latest Commit](https://img.shields.io/github/last-commit/voipiran/VOIZ?style=for-the-badge)](https://github.com/voipiran/VOIZ/commits/main)
 
 </div>
 
@@ -44,9 +44,9 @@ yum update -y
 
 ```bash
 rm -rf voiz && \
-curl -fL https://github.com/voipiran/VOIZ/archive/refs/heads/master.tar.gz -o voiz.tar.gz && \
+curl -fL https://github.com/voipiran/VOIZ/archive/refs/heads/main.tar.gz -o voiz.tar.gz && \
 tar -xzf voiz.tar.gz && \
-mv VOIZ-master voiz && \
+mv VOIZ-main voiz && \
 cd voiz && \
 chmod +x install.sh && \
 ./install.sh
