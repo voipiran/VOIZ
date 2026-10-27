@@ -40,17 +40,19 @@ VOIZ امکانات ارزشمند و کاربردی متعددی را به ای
 yum update -y
 ```
 
-سپس آخرین نسخه VOIZ را دریافت و نصب کنید:
+سپس آخرین نسخه VOIZ را دریافت و نصب کنید (روش پیشنهادی - نام فولدر مهم نیست):
 
 ```bash
 rm -rf voiz && \
 curl -fL https://github.com/voipiran/VOIZ/archive/refs/heads/main.tar.gz -o voiz.tar.gz && \
 tar -xzf voiz.tar.gz && \
-mv VOIZ-main voiz && \
+mv VOIZ-* voiz && \
 cd voiz && \
 chmod +x install.sh && \
 ./install.sh
 ```
+
+> نکته: استفاده از `VOIZ-*` باعث می‌شود با هر نام فولدر (VOIZ-main، VOIZ-master، و...) کار کند.
 
 > نصب‌کننده باید با کاربر `root` اجرا شود. پیش از اجرا از فایل‌های تنظیمات و دیتابیس Issabel نسخه پشتیبان تهیه کنید.
 
