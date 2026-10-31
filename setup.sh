@@ -415,6 +415,7 @@ select_features() {
         "WebPhone" "WebPhone Client" ON \
         "AsternicStats" "Asternic Call Stats Lite" ON \
         "VOIZCDRRecording" "VOIZ CDR Recording" ON \
+        "VOIZCustomMenus" "Customize Issabel Menus" ON \
         "VtigerCRM" "Vtiger CRM Integration" OFF \
         3>&1 1>&2 2>&3) || return 1
     
@@ -432,16 +433,14 @@ show_banner() {
     clear
     echo -e "${MAGENTA}=================================================================${NC}"
     echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
-echo -e "${MAGENTA}###############################################################${NC}"
-echo -e "${CYAN}██╗   ██╗ ██████╗ ██╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗${NC}"
-echo -e "${CYAN}██║   ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║${NC}"
-echo -e "${CYAN}██║   ██║██║   ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║${NC}"
-echo -e "${CYAN}╚██╗ ██╔╝██║   ██║██║██╔═══╝ ██║██╔══██╗██╔══██║██║╚██╗██║${NC}"
-echo -e "${CYAN} ╚████╔╝ ╚██████╔╝██║██║     ██║██║  ██║██║  ██║██║ ╚████║${NC}"
-echo -e "${CYAN}  ╚═══╝   ╚═════╝ ╚═╝╚═╝     ╚═╝╚══╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝${NC}"
-echo -e "${MAGENTA}###############################################################${NC}"
+    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD}   ___   ___   ___   ___   ___   ___   ___   ___   ___   ___   ${NC}              ${MAGENTA}|${NC}"
+    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD}  /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\  ${NC}              ${MAGENTA}|${NC}"
+    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD} |   | |   | |   | |   | |   | |   | |   | |   | |   | |   | ${NC}              ${MAGENTA}|${NC}"
+    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD}  \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/  ${NC}              ${MAGENTA}|${NC}"
+    echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
     echo -e "${MAGENTA}|${NC}                        ${BOLD}${MAGENTA}VOIZ 6${NC}                                                   ${MAGENTA}|${NC}"
     echo -e "${MAGENTA}|${NC}                        ${CYAN}https://voipiran.io${NC}                                        ${MAGENTA}|${NC}"
+    echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
     echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
     echo -e "${MAGENTA}=================================================================${NC}"
     echo
@@ -460,12 +459,12 @@ show_project_details() {
 
     whiptail --title "V O I Z  v6 | VOIPIRAN" --msgbox \
         "\n\
-██╗   ██╗ ██████╗ ██╗███████╗ ██████╗ 
-██║   ██║██╔═══██╗██║╚══███╔╝██╔════╝ 
-██║   ██║██║   ██║██║  ███╔╝ ███████╗ 
-╚██╗ ██╔╝██║   ██║██║ ███╔╝  ██╔═══██╗
- ╚████╔╝ ╚██████╔╝██║███████╗╚██████╔╝
-  ╚═══╝   ╚═════╝ ╚═╝╚══════╝ ╚═════╝ 
+    *****   ***** ******* ***** ******* *****  *****  *****   *****\n\
+    *****   ***** ******* ***** ******* *****  *****  *****   *****\n\
+    *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
+     *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
+      *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
+      *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
                           v6\n\n\
   Issabel enhancement installer\n\
   Simple, reliable and Persian-ready.\n\n\
@@ -540,6 +539,7 @@ main() {
     export INSTALL_WEB_PHONE=false
     export INSTALL_ASTERNIC_STATS=false
     export INSTALL_VOIZ_CDR_RECORDING=false
+    export INSTALL_VOIZ_CUSTOM_MENUS=false
     export INSTALL_VTIGER=false
     export INSTALL_JALALI_MODULE_PATCH=false
     export INSTALL_BULKDIDS=false
@@ -557,6 +557,7 @@ main() {
             "WebPhone") export INSTALL_WEB_PHONE=true ;;
             "AsternicStats") export INSTALL_ASTERNIC_STATS=true ;;
             "VOIZCDRRecording") export INSTALL_VOIZ_CDR_RECORDING=true ;;
+            "VOIZCustomMenus") export INSTALL_VOIZ_CUSTOM_MENUS=true ;;
             "VtigerCRM") export INSTALL_VTIGER=true ;;
             "JalaliModulePatch") export INSTALL_JALALI_MODULE_PATCH=true ;;
         esac
@@ -580,6 +581,7 @@ main() {
     [[ "${INSTALL_WEB_PHONE}" == "true" ]] && TOTAL_STEPS=$((TOTAL_STEPS + 1))
     [[ "${INSTALL_ASTERNIC_STATS}" == "true" ]] && TOTAL_STEPS=$((TOTAL_STEPS + 1))
     [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]] && TOTAL_STEPS=$((TOTAL_STEPS + 1))
+    [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]] && TOTAL_STEPS=$((TOTAL_STEPS + 1))
     [[ "${INSTALL_VTIGER}" == "true" ]] && TOTAL_STEPS=$((TOTAL_STEPS + 1))
     [[ "${INSTALL_JALALI_MODULE_PATCH}" == "true" ]] && TOTAL_STEPS=$((TOTAL_STEPS + 1))
     TOTAL_STEPS=$((TOTAL_STEPS + 1)) # voiz-config
@@ -602,6 +604,7 @@ main() {
     [[ "${INSTALL_WEB_PHONE}" == "true" ]] && STEP_LABELS+=("WebPhone")
     [[ "${INSTALL_ASTERNIC_STATS}" == "true" ]] && STEP_LABELS+=("Asternic Call Stats Lite")
     [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]] && STEP_LABELS+=("VOIZ CDR Recording")
+    [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]] && STEP_LABELS+=("Customize Issabel Menus")
     [[ "${INSTALL_VTIGER}" == "true" ]] && STEP_LABELS+=("Vtiger CRM")
     [[ "${INSTALL_JALALI_MODULE_PATCH}" == "true" ]] && STEP_LABELS+=("Jalali Module Patch")
     STEP_LABELS+=("VOIZ Configuration" "Finalize")
@@ -730,6 +733,14 @@ main() {
                 sleep 1
             fi
 
+            if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
+                gauge_msg "Customizing Issabel Menus..."
+                cp /var/www/db/menu.db /var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db 2>/dev/null || log "WARNING: menu.db backup failed"
+                sqlite3 /var/www/db/menu.db "DELETE FROM menu WHERE id IN ('betachannel','currency','extras','meet');" >> "${LOG_FILE}" 2>&1 || log "WARNING: menu cleanup failed"
+                COUNTER=$((COUNTER + step_increment))
+                sleep 1
+            fi
+
             if [[ "${INSTALL_VTIGER}" == "true" ]]; then
                 gauge_msg "Installing Vtiger CRM..."
                  run_module_non_blocking "11-vtiger-crm.sh" "Vtiger CRM"
@@ -842,6 +853,12 @@ main() {
         if [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]]; then
             log "Installing VOIZ CDR Recording..."
             bash -c 'curl -sSL https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh | bash' >> "${LOG_FILE}" 2>&1 || log "WARNING: VOIZ CDR Recording installation failed"
+        fi
+        
+        if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
+            log "Customizing Issabel Menus..."
+            cp /var/www/db/menu.db /var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db 2>/dev/null || log "WARNING: menu.db backup failed"
+            sqlite3 /var/www/db/menu.db "DELETE FROM menu WHERE id IN ('betachannel','currency','extras','meet');" >> "${LOG_FILE}" 2>&1 || log "WARNING: menu cleanup failed"
         fi
         
         if [[ "${INSTALL_VTIGER}" == "true" ]]; then
