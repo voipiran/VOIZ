@@ -429,29 +429,40 @@ gauge_msg() {
     fi
 }
 
+
 show_banner() {
     clear
+
     echo -e "${MAGENTA}=================================================================${NC}"
     echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD}   ___   ___   ___   ___   ___   ___   ___   ___   ___   ___   ${NC}              ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD}  /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\ /   \\  ${NC}              ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD} |   | |   | |   | |   | |   | |   | |   | |   | |   | |   | ${NC}              ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}    ${CYAN}${BOLD}  \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/ \\___/  ${NC}              ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}                        ${BOLD}${MAGENTA}VOIZ 6${NC}                                                   ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}                        ${CYAN}https://voipiran.io${NC}                                        ${MAGENTA}|${NC}"
-    echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
+
+    cat <<'EOF'
+██╗   ██╗ ██████╗ ██╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗
+██║   ██║██╔═══██╗██║██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║
+██║   ██║██║   ██║██║██████╔╝██║██████╔╝███████║██╔██╗ ██║
+╚██╗ ██╔╝██║   ██║██║██╔═══╝ ██║██╔══██╗██╔══██╗██║╚██╗██║
+ ╚████╔╝ ╚██████╔╝██║██║     ██║██║  ██║██║  ██║██║ ╚████║
+  ╚═══╝   ╚═════╝ ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+EOF
+
+    echo -e "${MAGENTA}|${NC}                         ${BOLD}${MAGENTA}VOIZ 6${NC}                         ${MAGENTA}|${NC}"
+    echo -e "${MAGENTA}|${NC}                    ${CYAN}https://voipiran.io${NC}                    ${MAGENTA}|${NC}"
     echo -e "${MAGENTA}|${NC}                                                               ${MAGENTA}|${NC}"
     echo -e "${MAGENTA}=================================================================${NC}"
     echo
 }
 
+
+
+
 show_project_details() {
     local terminal_lines terminal_columns dialog_height dialog_width
     terminal_lines=$(tput lines 2>/dev/null || printf '24')
     terminal_columns=$(tput cols 2>/dev/null || printf '100')
+
     dialog_height=$((terminal_lines - 2))
     dialog_width=$((terminal_columns - 4))
+
     if [[ "${dialog_height}" -lt 12 ]]; then dialog_height=12; fi
     if [[ "${dialog_height}" -gt 30 ]]; then dialog_height=30; fi
     if [[ "${dialog_width}" -lt 72 ]]; then dialog_width=72; fi
@@ -459,26 +470,34 @@ show_project_details() {
 
     whiptail --title "V O I Z  v6 | VOIPIRAN" --msgbox \
         "\n\
-    *****   ***** ******* ***** ******* *****  *****  *****   *****\n\
-    *****   ***** ******* ***** ******* *****  *****  *****   *****\n\
-    *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
-     *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
-      *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
-      *****   ***** *****   ***** ******* *****  *****  *****   *****\n\
-                          v6\n\n\
+██╗   ██╗ ██████╗ ██╗███████╗ ██████╗\n\
+██║   ██║██╔═══██╗██║╚══███╔╝██╔════╝\n\
+██║   ██║██║   ██║██║  ███╔╝ ███████╗\n\
+╚██╗ ██╔╝██║   ██║██║ ███╔╝  ██╔═══██╗\n\
+ ╚████╔╝ ╚██████╔╝██║███████╗╚██████╔╝\n\
+\n\
+                    VOIZ v6\n\
+\n\
   Issabel enhancement installer\n\
-  Simple, reliable and Persian-ready.\n\n\
+  Simple, reliable and Persian-ready.\n\
+\n\
   Powered by VOIPIRAN\n\
-  https://voipiran.io\n\n\
+  https://voipiran.io\n\
+\n\
   Project Manager\n\
   Hamed Kouhfallah\n\
-  k.haamed@gmail.com\n\n\
+  k.haamed@gmail.com\n\
+\n\
   Includes Persian language, Jalali calendar,\n\
-  Vitenant theme, AGI and optional PBX tools.\n\n\
+  Vitenant theme, AGI and optional PBX tools.\n\
+\n\
   Target: Issabel ${ISSABEL_VERSION} | PHP ${PHP_MAJOR_VERSION} | Asterisk ${ASTERISK_MAJOR_VERSION}\n\
   ${OS_NAME} ${OS_VERSION} (${OS_ID})\n\n\
-  Log: ${LOG_FILE}" "${dialog_height}" "${dialog_width}"
+  Log: ${LOG_FILE}" \
+        "${dialog_height}" "${dialog_width}"
 }
+
+
 
 # ==========================================
 # Main Installation Flow
