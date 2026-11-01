@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # VOIZ installer entrypoint (compatibility wrapper)
 
 set -euo pipefail

@@ -34,7 +34,7 @@ main() {
     log "Running the ChanSpy installer..."
     (
         cd "${checkout_dir}"
-        ./install.sh 2>&1 | tee -a "${CHANSPY_LOG}"
+        ./install.sh 2>&1 | tee -a "${CHANSPY_LOG}" || true
     )
 
     log "=== VOIZ Asterisk ChanSpy Installation Complete ==="

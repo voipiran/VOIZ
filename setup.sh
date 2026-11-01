@@ -90,7 +90,10 @@ normalize_module_line_endings() {
 # ==========================================
 # Helper Functions
 # ==========================================
-mkdir -p "$(dirname "/opt/voiz-contact-center/voiz/voiz-installation.log")"
+# Keep the log beside this installer. Do not rely on a hard-coded deployment
+# path: VOIZ can be launched from /opt/voiz, a checkout, or another directory.
+mkdir -p "${VOIZ_ROOT}"
+touch "${LOG_FILE}"
 log() {
     if [[ "${QUIET_CONSOLE:-0}" -eq 1 ]]; then
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "${LOG_FILE}"
@@ -930,4 +933,3 @@ main() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
 fi
-
