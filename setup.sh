@@ -1,5 +1,5 @@
 #!/bin/bash
-# VOIZ 6.0.0 Setup Script
+# VOIZ 6.0.2 Setup Script
 # Modular installer for VOIZ - Persian Unified Communication
 
 set -euo pipefail
@@ -404,6 +404,45 @@ EOF
     return 1
 )
 
+install_voiz_cdr_recording() (
+    local install_log="/var/log/voiz-cdr-recording-install.log"
+    curl -fsSL "https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh" |
+        bash >> "${install_log}" 2>&1
+)
+
+install_custom_menu_database() {
+    local menu_src="${VOIZ_ROOT}/installation/config/menu.db"
+    local menu_dst="/var/www/db/menu.db"
+    local backup_file
+
+    if [[ ! -f "${menu_src}" ]]; then
+        log "ERROR: Custom menu database not found at ${menu_src}"
+        return 1
+    fi
+
+    mkdir -p "$(dirname "${menu_dst}")"
+    if [[ -f "${menu_dst}" ]]; then
+        backup_file="${menu_dst}.backup_$(date +%Y%m%d_%H%M%S).db"
+        cp -f "${menu_dst}" "${backup_file}" || {
+            log "ERROR: Could not back up the existing menu database to ${backup_file}"
+            return 1
+        }
+    fi
+
+    cp -f "${menu_src}" "${menu_dst}" || {
+        log "ERROR: Could not install custom menu database to ${menu_dst}"
+        return 1
+    }
+    chmod 644 "${menu_dst}" 2>/dev/null || true
+    chown asterisk:asterisk "${menu_dst}" 2>/dev/null || true
+    log "Installed custom menu database at ${menu_dst}"
+
+    if command -v amportal >/dev/null 2>&1; then
+        timeout 30 amportal a r >> "${LOG_FILE}" 2>&1 ||
+            log "WARNING: Issabel menu reload failed or timed out"
+    fi
+}
+
 select_features() {
     local selected
     selected=$(whiptail --title "SELECT OPTIONAL MODULES TO INSTALL" --checklist \
@@ -771,15 +810,25 @@ main() {
 
             if [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]]; then
                 gauge_msg "Installing VOIZ CDR Recording..."
-                bash -c 'curl -sSL https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh | bash' >> "${LOG_FILE}" 2>&1 || log "WARNING: VOIZ CDR Recording installation failed"
+                installation_step_start "VOIZ CDR Recording"
+                if install_voiz_cdr_recording; then
+                    installation_step_done
+                else
+                    installation_step_warning
+                    log "WARNING: VOIZ CDR Recording installation failed; see /var/log/voiz-cdr-recording-install.log"
+                fi
                 COUNTER=$((COUNTER + step_increment))
                 sleep 1
             fi
 
             if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
                 gauge_msg "Customizing Issabel Menus..."
-                cp /var/www/db/menu.db /var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db 2>/dev/null || log "WARNING: menu.db backup failed"
-                sqlite3 /var/www/db/menu.db "DELETE FROM menu WHERE id IN ('betachannel','currency','extras','meet');" >> "${LOG_FILE}" 2>&1 || log "WARNING: menu cleanup failed"
+                installation_step_start "Customize Issabel Menus"
+                if install_custom_menu_database; then
+                    installation_step_done
+                else
+                    installation_step_warning
+                fi
                 COUNTER=$((COUNTER + step_increment))
                 sleep 1
             fi
@@ -897,13 +946,21 @@ main() {
         
         if [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]]; then
             log "Installing VOIZ CDR Recording..."
-            bash -c 'curl -sSL https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh | bash' >> "${LOG_FILE}" 2>&1 || log "WARNING: VOIZ CDR Recording installation failed"
+            if install_voiz_cdr_recording; then
+                log "RESULT: [OK] VOIZ CDR Recording"
+            else
+                log "RESULT: [WARN] VOIZ CDR Recording"
+                log "WARNING: VOIZ CDR Recording installation failed; see /var/log/voiz-cdr-recording-install.log"
+            fi
         fi
         
         if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
             log "Customizing Issabel Menus..."
-            cp /var/www/db/menu.db /var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db 2>/dev/null || log "WARNING: menu.db backup failed"
-            sqlite3 /var/www/db/menu.db "DELETE FROM menu WHERE id IN ('betachannel','currency','extras','meet');" >> "${LOG_FILE}" 2>&1 || log "WARNING: menu cleanup failed"
+            if install_custom_menu_database; then
+                log "RESULT: [OK] Customize Issabel Menus"
+            else
+                log "RESULT: [WARN] Customize Issabel Menus"
+            fi
         fi
         
         if [[ "${INSTALL_VTIGER}" == "true" ]]; then

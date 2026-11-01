@@ -4,7 +4,7 @@
 
 ### Persian Unified Communication for Issabel
 
-[![Version](https://img.shields.io/badge/version-6.0.1-0f766e?style=for-the-badge)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-6.0.2-0f766e?style=for-the-badge)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-Issabel%20%7C%20Asterisk-2563eb?style=for-the-badge)](https://www.issabel.org/)
 [![License](https://img.shields.io/github/license/voipiran/VOIZ?style=for-the-badge)](LICENSE)
 [![Latest Commit](https://img.shields.io/github/last-commit/voipiran/VOIZ?style=for-the-badge)](https://github.com/voipiran/VOIZ/commits/main)
@@ -104,9 +104,9 @@ chmod +x install.sh && \
 
 ## نسخه فعلی
 
-### VOIZ 6.0.1
+### VOIZ 6.0.2
 
-نسخه 6.0.1 یک به‌روزرسانی اصلاحی برای پایداری نصب VOIZ است. در این نسخه مسیر ثبت لاگ مستقل از محل اجرای پروژه شده، اجرای ماژول VOIZ ContactCenter پایدارتر شده و وضعیت مراحل پایانی نصب دقیق‌تر نمایش داده می‌شود.
+نسخه 6.0.2 یک به‌روزرسانی اصلاحی برای پایداری نصب VOIZ است. در این نسخه نصب CDR مستقل شده، منوهای سفارشی Issabel به‌درستی اعمال می‌شوند، وضعیت مراحل نصب دقیق‌تر نمایش داده می‌شود و نسخه‌ی نصب‌شده در کانفیگ اصلی به‌روزرسانی شده است.
 
 برای جزئیات تغییرات به [CHANGELOG.md](CHANGELOG.md) مراجعه کنید.
 
