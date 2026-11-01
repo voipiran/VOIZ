@@ -182,7 +182,7 @@ installation_step_failed() {
 }
 
 installation_step_warning() {
-    log "RESULT: [OK] ${CURRENT_STEP_DESCRIPTION}"
+    log "RESULT: [WARN] ${CURRENT_STEP_DESCRIPTION}"
     STEP_STATUS[$((INSTALL_STEP - 1))]="warn"
     if [[ "${USE_GAUGE:-0}" -eq 1 ]]; then
         gauge_render
@@ -800,6 +800,8 @@ main() {
              gauge_msg "Finalizing installation..."
              run_module "99-finalize.sh" "Finalize"
              COUNTER=100
+             INSTALL_STEP=${TOTAL_STEPS}
+             gauge_render "Installation completed."
              sleep 1
         }
     else
@@ -916,6 +918,11 @@ main() {
          sleep 1
     fi
 
+    if [[ "${USE_GAUGE:-0}" -eq 1 ]]; then
+        INSTALL_STEP=${TOTAL_STEPS}
+        gauge_render "Installation completed."
+        sleep 1
+    fi
     printf '\033[2J\033[H'
     printf '\033[1;32mInstallation completed.\033[0m\n'
     printf 'Log file: %s\n' "${LOG_FILE}"
