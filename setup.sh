@@ -432,6 +432,27 @@ gauge_msg() {
     fi
 }
 
+sync_final_step_statuses() {
+    local config_index=$((TOTAL_STEPS - 2))
+    local finalize_index=$((TOTAL_STEPS - 1))
+
+    if grep -q 'RESULT: \[OK\] VOIZ Configuration' "${LOG_FILE}" 2>/dev/null; then
+        STEP_STATUS[config_index]="ok"
+    elif grep -q 'RESULT: \[WARN\] VOIZ Configuration' "${LOG_FILE}" 2>/dev/null; then
+        STEP_STATUS[config_index]="warn"
+    elif grep -q 'RESULT: \[FAIL\] VOIZ Configuration' "${LOG_FILE}" 2>/dev/null; then
+        STEP_STATUS[config_index]="fail"
+    fi
+
+    if grep -q 'RESULT: \[OK\] Finalize' "${LOG_FILE}" 2>/dev/null; then
+        STEP_STATUS[finalize_index]="ok"
+    elif grep -q 'RESULT: \[WARN\] Finalize' "${LOG_FILE}" 2>/dev/null; then
+        STEP_STATUS[finalize_index]="warn"
+    elif grep -q 'RESULT: \[FAIL\] Finalize' "${LOG_FILE}" 2>/dev/null; then
+        STEP_STATUS[finalize_index]="fail"
+    fi
+}
+
 
 show_banner() {
     clear
@@ -920,6 +941,7 @@ main() {
 
     if [[ "${USE_GAUGE:-0}" -eq 1 ]]; then
         INSTALL_STEP=${TOTAL_STEPS}
+        sync_final_step_statuses
         gauge_render "Installation completed."
         sleep 1
     fi
