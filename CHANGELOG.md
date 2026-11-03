@@ -2,6 +2,13 @@
 
 تمام تغییرات مهم VOIZ در این فایل ثبت می‌شوند. قالب این فایل بر اساس [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) و نسخه‌گذاری پروژه بر اساس [Semantic Versioning](https://semver.org/) تنظیم شده است.
 
+## [6.0.3] - 2026-11-03
+
+### Changed
+
+- به‌روزرسانی نسخه VOIZ به 6.0.3 در بسته نصب و فایل‌های پیکربندی.
+- مخفی‌سازی گزینه Custom Menu از گزینه‌های نصب و جلوگیری از اجرای آن، با حفظ کدهای مربوطه برای اصلاحات بعدی.
+
 ## [6.0.0] - 2026-10-21
 
 ### Added
@@ -30,4 +37,5 @@
 
 تغییرات آماده انتشار نسخه بعدی در این بخش ثبت می‌شوند.
 
+[6.0.3]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.3
 [6.0.0]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.0

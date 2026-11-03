@@ -1,5 +1,5 @@
 #!/bin/bash
-# VOIZ 6.0.0 Setup Script
+# VOIZ 6.0.3 Setup Script
 # Modular installer for VOIZ - Persian Unified Communication
 
 set -euo pipefail
@@ -415,7 +415,6 @@ select_features() {
         "WebPhone" "WebPhone Client" ON \
         "AsternicStats" "Asternic Call Stats Lite" ON \
         "VOIZCDRRecording" "VOIZ CDR Recording" ON \
-        "VOIZCustomMenus" "Customize Issabel Menus" ON \
         "VtigerCRM" "Vtiger CRM Integration" OFF \
         3>&1 1>&2 2>&3) || return 1
     
@@ -576,7 +575,6 @@ main() {
             "WebPhone") export INSTALL_WEB_PHONE=true ;;
             "AsternicStats") export INSTALL_ASTERNIC_STATS=true ;;
             "VOIZCDRRecording") export INSTALL_VOIZ_CDR_RECORDING=true ;;
-            "VOIZCustomMenus") export INSTALL_VOIZ_CUSTOM_MENUS=true ;;
             "VtigerCRM") export INSTALL_VTIGER=true ;;
             "JalaliModulePatch") export INSTALL_JALALI_MODULE_PATCH=true ;;
         esac
@@ -930,4 +928,3 @@ main() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
 fi
-
