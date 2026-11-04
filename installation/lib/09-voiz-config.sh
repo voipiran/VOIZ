@@ -14,7 +14,7 @@ main() {
     
     local config_src="${VOIZ_ROOT}/core/config/voiz.conf"
     local config_dst="/etc/voiz.conf"
-    local version="6.0.3"
+    local version="6.0.4"
     
     if [[ ! -f "${config_src}" ]]; then
         log "ERROR: VOIZ config not found at ${config_src}"

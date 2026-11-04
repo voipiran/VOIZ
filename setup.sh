@@ -1,5 +1,5 @@
 #!/bin/bash
-# VOIZ 6.0.3 Setup Script
+# VOIZ 6.0.4 Setup Script
 # Modular installer for VOIZ - Persian Unified Communication
 
 set -euo pipefail
@@ -288,15 +288,15 @@ install_contact_center() (
     {
         echo "VOIZ ContactCenter installation"
         echo "Started: $(date -Is)"
-        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-contact-center/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-contact-center-main voiz-contact-center && cd voiz-contact-center && sudo bash install.sh"
+        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-console-main voiz-contact-center && cd voiz-contact-center && sudo bash install.sh"
     } > "${install_log}"
 
     cd /opt || return 1
     rm -rf voiz-contact-center voiz-contact-center.tar.gz || return 1
-    curl -fL https://github.com/voipiran/voiz-contact-center/archive/refs/heads/main.tar.gz \
+    curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz \
         -o voiz-contact-center.tar.gz >> "${install_log}" 2>&1 || return 1
     tar -xzf "${archive}" >> "${install_log}" 2>&1 || return 1
-    mv voiz-contact-center-main voiz-contact-center >> "${install_log}" 2>&1 || return 1
+    mv voiz-console-main voiz-contact-center >> "${install_log}" 2>&1 || return 1
     cd "${project}" || return 1
 
     # The bundled ContactCenter installer is also invoked by the web license
