@@ -1,5 +1,5 @@
 #!/bin/bash
-# VOIZ 6.0.4 Setup Script
+# VOIZ 6.0.5 Setup Script
 # Modular installer for VOIZ - Persian Unified Communication
 
 set -euo pipefail
@@ -750,14 +750,6 @@ main() {
                 sleep 1
             fi
 
-            if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
-                gauge_msg "Customizing Issabel Menus..."
-                cp /var/www/db/menu.db /var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db 2>/dev/null || log "WARNING: menu.db backup failed"
-                sqlite3 /var/www/db/menu.db "DELETE FROM menu WHERE id IN ('betachannel','currency','extras','meet');" >> "${LOG_FILE}" 2>&1 || log "WARNING: menu cleanup failed"
-                COUNTER=$((COUNTER + step_increment))
-                sleep 1
-            fi
-
             if [[ "${INSTALL_VTIGER}" == "true" ]]; then
                 gauge_msg "Installing Vtiger CRM..."
                  run_module_non_blocking "11-vtiger-crm.sh" "Vtiger CRM"
@@ -870,12 +862,6 @@ main() {
         if [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]]; then
             log "Installing VOIZ CDR Recording..."
             bash -c 'curl -sSL https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh | bash' >> "${LOG_FILE}" 2>&1 || log "WARNING: VOIZ CDR Recording installation failed"
-        fi
-        
-        if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
-            log "Customizing Issabel Menus..."
-            cp /var/www/db/menu.db /var/www/db/menu_backup_$(date +%Y%m%d_%H%M%S).db 2>/dev/null || log "WARNING: menu.db backup failed"
-            sqlite3 /var/www/db/menu.db "DELETE FROM menu WHERE id IN ('betachannel','currency','extras','meet');" >> "${LOG_FILE}" 2>&1 || log "WARNING: menu cleanup failed"
         fi
         
         if [[ "${INSTALL_VTIGER}" == "true" ]]; then

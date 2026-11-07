@@ -2,6 +2,14 @@
 
 تمام تغییرات مهم VOIZ در این فایل ثبت می‌شوند. قالب این فایل بر اساس [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) و نسخه‌گذاری پروژه بر اساس [Semantic Versioning](https://semver.org/) تنظیم شده است.
 
+## [6.0.5] - 2026-11-07
+
+### Changed
+
+- Added timeouts to Asternic repository and installer operations to prevent indefinite installation waits.
+- Improved ChanSpy installation status handling when the Asterisk configuration is present despite a non-zero installer exit code.
+- Removed direct `menu.db` backup, replacement, and cleanup logic from the VOIZ installation flow while preserving module-specific menu merge commands.
+
 ## [6.0.4] - 2026-11-04
 
 ### Changed
@@ -45,4 +53,5 @@
 
 [6.0.3]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.3
 [6.0.4]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.4
+[6.0.5]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.5
 [6.0.0]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.0
