@@ -5,6 +5,7 @@ set -euo pipefail
 
 CHANSPY_LOG="${LOG_FILE:-voiz-installation.log}"
 CHANSPY_REPOSITORY="${VOIZ_CHANSPY_REPOSITORY:-https://github.com/voipiran/voiz-asterisk-chanspy.git}"
+CHANSPY_INSTALL_TIMEOUT_SECONDS="${VOIZ_CHANSPY_TIMEOUT_SECONDS:-600}"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "${CHANSPY_LOG}"
@@ -35,7 +36,8 @@ main() {
     local installer_status=0
     if (
         cd "${checkout_dir}"
-        ./install.sh -y 2>&1 | tee -a "${CHANSPY_LOG}"
+        timeout --foreground "${CHANSPY_INSTALL_TIMEOUT_SECONDS}" \
+            ./install.sh -y </dev/null 2>&1 | tee -a "${CHANSPY_LOG}"
     ); then
         installer_status=0
     else
@@ -47,6 +49,9 @@ main() {
             grep -qF "include => voipiran-chanspypro" /etc/asterisk/extensions_custom.conf 2>/dev/null; then
             log "WARNING: ChanSpy installer returned ${installer_status}, but its Asterisk configuration is present"
         else
+            if [[ "${installer_status}" -eq 124 ]]; then
+                log "ERROR: ChanSpy installer timed out after ${CHANSPY_INSTALL_TIMEOUT_SECONDS} seconds"
+            fi
             log "ERROR: ChanSpy installer failed with exit code ${installer_status}"
             return "${installer_status}"
         fi
