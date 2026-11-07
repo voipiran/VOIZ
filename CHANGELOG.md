@@ -2,23 +2,26 @@
 
 تمام تغییرات مهم VOIZ در این فایل ثبت می‌شوند. قالب این فایل بر اساس [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) و نسخه‌گذاری پروژه بر اساس [Semantic Versioning](https://semver.org/) تنظیم شده است.
 
-## [6.0.2] - 2026-11-01
+## [6.0.5] - 2026-11-07
 
-### Fixed
+### Changed
 
-- اصلاح ساخت مسیر فایل لاگ نصب برای اجرا در مسیرهای مختلف.
-- پایدارتر شدن اجرای مرحله نصب VOIZ ContactCenter و ثبت خطاهای آن.
-- اصلاح نمایش وضعیت دو مرحله پایانی نصب، همگام‌سازی تیک‌ها با لاگ و ثبت صحیح هشدارها.
-- اصلاح نصب مستقل ماژول VOIZ CDR Recording با دریافت کامل مخزن و فایل‌های همراه آن.
-- فعال‌شدن نصب انتخابی پایگاه‌داده‌ی منوهای سفارشی Issabel با پشتیبان‌گیری و reload محدودشده.
+- Added timeouts to Asternic repository and installer operations to prevent indefinite installation waits.
+- Improved ChanSpy installation status handling when the Asterisk configuration is present despite a non-zero installer exit code.
+- Removed direct `menu.db` backup, replacement, and cleanup logic from the VOIZ installation flow while preserving module-specific menu merge commands.
 
-## [6.0.1] - 2026-11-01
+## [6.0.4] - 2026-11-04
 
-### Fixed
+### Changed
 
-- اصلاح ساخت مسیر فایل لاگ نصب برای اجرا در مسیرهای مختلف.
-- پایدارتر شدن اجرای مرحله نصب VOIZ ContactCenter و ثبت خطاهای آن.
-- اصلاح نمایش وضعیت دو مرحله پایانی نصب، همگام‌سازی تیک‌ها با لاگ و ثبت صحیح هشدارها.
+- به‌روزرسانی دستور نصب VOIZ ContactCenter برای استفاده از repository جدید `voiz-console`.
+
+## [6.0.3] - 2026-11-03
+
+### Changed
+
+- به‌روزرسانی نسخه VOIZ به 6.0.3 در بسته نصب و فایل‌های پیکربندی.
+- مخفی‌سازی گزینه Custom Menu از گزینه‌های نصب و جلوگیری از اجرای آن، با حفظ کدهای مربوطه برای اصلاحات بعدی.
 
 ## [6.0.0] - 2026-10-21
 
@@ -48,6 +51,7 @@
 
 تغییرات آماده انتشار نسخه بعدی در این بخش ثبت می‌شوند.
 
-[6.0.2]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.2
-[6.0.1]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.1
+[6.0.3]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.3
+[6.0.4]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.4
+[6.0.5]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.5
 [6.0.0]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.0

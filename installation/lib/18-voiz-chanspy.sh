@@ -32,10 +32,25 @@ main() {
 
     chmod 755 "${checkout_dir}/install.sh"
     log "Running the ChanSpy installer..."
-    (
+    local installer_status=0
+    if (
         cd "${checkout_dir}"
-        ./install.sh 2>&1 | tee -a "${CHANSPY_LOG}" || true
-    )
+        ./install.sh -y 2>&1 | tee -a "${CHANSPY_LOG}"
+    ); then
+        installer_status=0
+    else
+        installer_status=$?
+    fi
+
+    if [[ "${installer_status}" -ne 0 ]]; then
+        if grep -qF "[voipiran-chanspypro]" /etc/asterisk/extensions_custom.conf 2>/dev/null &&
+            grep -qF "include => voipiran-chanspypro" /etc/asterisk/extensions_custom.conf 2>/dev/null; then
+            log "WARNING: ChanSpy installer returned ${installer_status}, but its Asterisk configuration is present"
+        else
+            log "ERROR: ChanSpy installer failed with exit code ${installer_status}"
+            return "${installer_status}"
+        fi
+    fi
 
     log "=== VOIZ Asterisk ChanSpy Installation Complete ==="
 }

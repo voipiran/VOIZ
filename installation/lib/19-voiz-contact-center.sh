@@ -4,7 +4,7 @@
 set -euo pipefail
 
 CC_LOG="${LOG_FILE:-voiz-installation.log}"
-CC_REPOSITORY="${VOIZ_CONTACT_CENTER_REPOSITORY:-https://github.com/voipiran/voiz-contact-center.git}"
+CC_REPOSITORY="${VOIZ_CONTACT_CENTER_REPOSITORY:-https://github.com/voipiran/voiz-console.git}"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "${CC_LOG}"

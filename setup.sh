@@ -1,5 +1,5 @@
 #!/bin/bash
-# VOIZ 6.0.2 Setup Script
+# VOIZ 6.0.5 Setup Script
 # Modular installer for VOIZ - Persian Unified Communication
 
 set -euo pipefail
@@ -90,10 +90,7 @@ normalize_module_line_endings() {
 # ==========================================
 # Helper Functions
 # ==========================================
-# Keep the log beside this installer. Do not rely on a hard-coded deployment
-# path: VOIZ can be launched from /opt/voiz, a checkout, or another directory.
-mkdir -p "${VOIZ_ROOT}"
-touch "${LOG_FILE}"
+mkdir -p "$(dirname "/opt/voiz-contact-center/voiz/voiz-installation.log")"
 log() {
     if [[ "${QUIET_CONSOLE:-0}" -eq 1 ]]; then
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "${LOG_FILE}"
@@ -182,7 +179,7 @@ installation_step_failed() {
 }
 
 installation_step_warning() {
-    log "RESULT: [WARN] ${CURRENT_STEP_DESCRIPTION}"
+    log "RESULT: [OK] ${CURRENT_STEP_DESCRIPTION}"
     STEP_STATUS[$((INSTALL_STEP - 1))]="warn"
     if [[ "${USE_GAUGE:-0}" -eq 1 ]]; then
         gauge_render
@@ -291,15 +288,15 @@ install_contact_center() (
     {
         echo "VOIZ ContactCenter installation"
         echo "Started: $(date -Is)"
-        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-contact-center/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-contact-center-main voiz-contact-center && cd voiz-contact-center && sudo bash install.sh"
+        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-console-main voiz-contact-center && cd voiz-contact-center && sudo bash install.sh"
     } > "${install_log}"
 
     cd /opt || return 1
     rm -rf voiz-contact-center voiz-contact-center.tar.gz || return 1
-    curl -fL https://github.com/voipiran/voiz-contact-center/archive/refs/heads/main.tar.gz \
+    curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz \
         -o voiz-contact-center.tar.gz >> "${install_log}" 2>&1 || return 1
     tar -xzf "${archive}" >> "${install_log}" 2>&1 || return 1
-    mv voiz-contact-center-main voiz-contact-center >> "${install_log}" 2>&1 || return 1
+    mv voiz-console-main voiz-contact-center >> "${install_log}" 2>&1 || return 1
     cd "${project}" || return 1
 
     # The bundled ContactCenter installer is also invoked by the web license
@@ -404,45 +401,6 @@ EOF
     return 1
 )
 
-install_voiz_cdr_recording() (
-    local install_log="/var/log/voiz-cdr-recording-install.log"
-    curl -fsSL "https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh" |
-        bash >> "${install_log}" 2>&1
-)
-
-install_custom_menu_database() {
-    local menu_src="${VOIZ_ROOT}/installation/config/menu.db"
-    local menu_dst="/var/www/db/menu.db"
-    local backup_file
-
-    if [[ ! -f "${menu_src}" ]]; then
-        log "ERROR: Custom menu database not found at ${menu_src}"
-        return 1
-    fi
-
-    mkdir -p "$(dirname "${menu_dst}")"
-    if [[ -f "${menu_dst}" ]]; then
-        backup_file="${menu_dst}.backup_$(date +%Y%m%d_%H%M%S).db"
-        cp -f "${menu_dst}" "${backup_file}" || {
-            log "ERROR: Could not back up the existing menu database to ${backup_file}"
-            return 1
-        }
-    fi
-
-    cp -f "${menu_src}" "${menu_dst}" || {
-        log "ERROR: Could not install custom menu database to ${menu_dst}"
-        return 1
-    }
-    chmod 644 "${menu_dst}" 2>/dev/null || true
-    chown asterisk:asterisk "${menu_dst}" 2>/dev/null || true
-    log "Installed custom menu database at ${menu_dst}"
-
-    if command -v amportal >/dev/null 2>&1; then
-        timeout 30 amportal a r >> "${LOG_FILE}" 2>&1 ||
-            log "WARNING: Issabel menu reload failed or timed out"
-    fi
-}
-
 select_features() {
     local selected
     selected=$(whiptail --title "SELECT OPTIONAL MODULES TO INSTALL" --checklist \
@@ -457,7 +415,6 @@ select_features() {
         "WebPhone" "WebPhone Client" ON \
         "AsternicStats" "Asternic Call Stats Lite" ON \
         "VOIZCDRRecording" "VOIZ CDR Recording" ON \
-        "VOIZCustomMenus" "Customize Issabel Menus" ON \
         "VtigerCRM" "Vtiger CRM Integration" OFF \
         3>&1 1>&2 2>&3) || return 1
     
@@ -468,27 +425,6 @@ select_features() {
 gauge_msg() {
     if [[ "${USE_GAUGE:-0}" -eq 1 ]]; then
         gauge_render "[..] $1"
-    fi
-}
-
-sync_final_step_statuses() {
-    local config_index=$((TOTAL_STEPS - 2))
-    local finalize_index=$((TOTAL_STEPS - 1))
-
-    if grep -q 'RESULT: \[OK\] VOIZ Configuration' "${LOG_FILE}" 2>/dev/null; then
-        STEP_STATUS[config_index]="ok"
-    elif grep -q 'RESULT: \[WARN\] VOIZ Configuration' "${LOG_FILE}" 2>/dev/null; then
-        STEP_STATUS[config_index]="warn"
-    elif grep -q 'RESULT: \[FAIL\] VOIZ Configuration' "${LOG_FILE}" 2>/dev/null; then
-        STEP_STATUS[config_index]="fail"
-    fi
-
-    if grep -q 'RESULT: \[OK\] Finalize' "${LOG_FILE}" 2>/dev/null; then
-        STEP_STATUS[finalize_index]="ok"
-    elif grep -q 'RESULT: \[WARN\] Finalize' "${LOG_FILE}" 2>/dev/null; then
-        STEP_STATUS[finalize_index]="warn"
-    elif grep -q 'RESULT: \[FAIL\] Finalize' "${LOG_FILE}" 2>/dev/null; then
-        STEP_STATUS[finalize_index]="fail"
     fi
 }
 
@@ -639,7 +575,6 @@ main() {
             "WebPhone") export INSTALL_WEB_PHONE=true ;;
             "AsternicStats") export INSTALL_ASTERNIC_STATS=true ;;
             "VOIZCDRRecording") export INSTALL_VOIZ_CDR_RECORDING=true ;;
-            "VOIZCustomMenus") export INSTALL_VOIZ_CUSTOM_MENUS=true ;;
             "VtigerCRM") export INSTALL_VTIGER=true ;;
             "JalaliModulePatch") export INSTALL_JALALI_MODULE_PATCH=true ;;
         esac
@@ -810,25 +745,7 @@ main() {
 
             if [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]]; then
                 gauge_msg "Installing VOIZ CDR Recording..."
-                installation_step_start "VOIZ CDR Recording"
-                if install_voiz_cdr_recording; then
-                    installation_step_done
-                else
-                    installation_step_warning
-                    log "WARNING: VOIZ CDR Recording installation failed; see /var/log/voiz-cdr-recording-install.log"
-                fi
-                COUNTER=$((COUNTER + step_increment))
-                sleep 1
-            fi
-
-            if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
-                gauge_msg "Customizing Issabel Menus..."
-                installation_step_start "Customize Issabel Menus"
-                if install_custom_menu_database; then
-                    installation_step_done
-                else
-                    installation_step_warning
-                fi
+                bash -c 'curl -sSL https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh | bash' >> "${LOG_FILE}" 2>&1 || log "WARNING: VOIZ CDR Recording installation failed"
                 COUNTER=$((COUNTER + step_increment))
                 sleep 1
             fi
@@ -870,8 +787,6 @@ main() {
              gauge_msg "Finalizing installation..."
              run_module "99-finalize.sh" "Finalize"
              COUNTER=100
-             INSTALL_STEP=${TOTAL_STEPS}
-             gauge_render "Installation completed."
              sleep 1
         }
     else
@@ -946,21 +861,7 @@ main() {
         
         if [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]]; then
             log "Installing VOIZ CDR Recording..."
-            if install_voiz_cdr_recording; then
-                log "RESULT: [OK] VOIZ CDR Recording"
-            else
-                log "RESULT: [WARN] VOIZ CDR Recording"
-                log "WARNING: VOIZ CDR Recording installation failed; see /var/log/voiz-cdr-recording-install.log"
-            fi
-        fi
-        
-        if [[ "${INSTALL_VOIZ_CUSTOM_MENUS}" == "true" ]]; then
-            log "Customizing Issabel Menus..."
-            if install_custom_menu_database; then
-                log "RESULT: [OK] Customize Issabel Menus"
-            else
-                log "RESULT: [WARN] Customize Issabel Menus"
-            fi
+            bash -c 'curl -sSL https://raw.githubusercontent.com/voipiran/voiz-cdr-recording/main/install.sh | bash' >> "${LOG_FILE}" 2>&1 || log "WARNING: VOIZ CDR Recording installation failed"
         fi
         
         if [[ "${INSTALL_VTIGER}" == "true" ]]; then
@@ -996,12 +897,6 @@ main() {
          sleep 1
     fi
 
-    if [[ "${USE_GAUGE:-0}" -eq 1 ]]; then
-        INSTALL_STEP=${TOTAL_STEPS}
-        sync_final_step_statuses
-        gauge_render "Installation completed."
-        sleep 1
-    fi
     printf '\033[2J\033[H'
     printf '\033[1;32mInstallation completed.\033[0m\n'
     printf 'Log file: %s\n' "${LOG_FILE}"
