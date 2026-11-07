@@ -8,6 +8,7 @@
 
 - Added timeouts to Asternic repository and installer operations to prevent indefinite installation waits.
 - Improved ChanSpy installation status handling when the Asterisk configuration is present despite a non-zero installer exit code.
+- Added an NVM archive fallback for ContactCenter installation when `raw.githubusercontent.com` is unavailable.
 - Removed direct `menu.db` backup, replacement, and cleanup logic from the VOIZ installation flow while preserving module-specific menu merge commands.
 
 ## [6.0.4] - 2026-11-04

@@ -284,6 +284,8 @@ install_contact_center() (
     local install_log="/var/log/voiz-contact-center-install.log"
     local archive="/opt/voiz-contact-center.tar.gz"
     local project="/opt/voiz-contact-center"
+    local nvm_dir="${NVM_DIR:-${HOME}/.nvm}"
+    local nvm_archive="/tmp/voiz-nvm-0.40.3.tar.gz"
 
     {
         echo "VOIZ ContactCenter installation"
@@ -310,13 +312,29 @@ fi' install.sh
         echo "[INFO] Patched non-interactive terminal handling in ContactCenter installer." >> "${install_log}"
     fi
 
+    if [[ ! -s "${nvm_dir}/nvm.sh" ]]; then
+        echo "[INFO] Preparing NVM fallback from the GitHub archive." >> "${install_log}"
+        rm -f "${nvm_archive}"
+        if curl -fL --connect-timeout 15 --max-time 120 \
+            "https://github.com/nvm-sh/nvm/archive/refs/tags/v0.40.3.tar.gz" \
+            -o "${nvm_archive}" >> "${install_log}" 2>&1 &&
+            mkdir -p "${nvm_dir}" &&
+            tar -xzf "${nvm_archive}" --strip-components=1 -C "${nvm_dir}" >> "${install_log}" 2>&1 &&
+            [[ -s "${nvm_dir}/nvm.sh" ]]; then
+            echo "[OK] NVM fallback prepared at ${nvm_dir}." >> "${install_log}"
+        else
+            echo "[WARN] NVM archive fallback failed; the original ContactCenter installer will try its standard method." >> "${install_log}"
+        fi
+        rm -f "${nvm_archive}"
+    fi
+
     local started_at
     local elapsed
     local installer_pid
     local installer_status
     local last_log_line
     started_at=$(date +%s)
-    bash install.sh >> "${install_log}" 2>&1 &
+    NVM_DIR="${nvm_dir}" bash install.sh >> "${install_log}" 2>&1 &
     installer_pid=$!
     echo "[INFO] ContactCenter installer started. PID=${installer_pid}" >> "${install_log}"
 
