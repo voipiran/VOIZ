@@ -25,16 +25,16 @@ main() {
     log "Cloning ${CC_REPOSITORY}..."
     git clone --depth 1 "${CC_REPOSITORY}" "${checkout_dir}" 2>&1 | tee -a "${CC_LOG}"
 
-    if [[ ! -f "${checkout_dir}/install.sh" ]]; then
+    if [[ ! -f "${checkout_dir}/contactcenter.sh" ]]; then
         log "ERROR: Contact Center installer was not found in the repository"
         return 1
     fi
 
-    chmod 755 "${checkout_dir}/install.sh"
+    chmod 755 "${checkout_dir}/contactcenter.sh"
     log "Running the Contact Center installer..."
     (
         cd "${checkout_dir}"
-        bash ./install.sh 2>&1 | tee -a "${CC_LOG}"
+        bash ./contactcenter.sh 2>&1 | tee -a "${CC_LOG}"
     )
 
     log "=== VOIZ Contact Center Installation Complete ==="

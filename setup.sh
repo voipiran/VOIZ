@@ -288,9 +288,9 @@ install_contact_center() (
     local nvm_archive="/tmp/voiz-nvm-0.40.3.tar.gz"
 
     {
-        echo "VOIZ ContactCenter installation"
+        echo "VOIZ Console installation"
         echo "Started: $(date -Is)"
-        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-console-main voiz-contact-center && cd voiz-contact-center && sudo bash install.sh"
+        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-console-main voiz-contact-center && cd voiz-contact-center && sudo bash contactcenter.sh"
     } > "${install_log}"
 
     cd /opt || return 1
@@ -304,11 +304,11 @@ install_contact_center() (
     # The bundled ContactCenter installer is also invoked by the web license
     # flow, where no terminal or TERM variable is available. Keep older
     # published bundles from aborting on their unconditional `clear`.
-    if grep -qx 'clear' install.sh 2>/dev/null; then
+    if grep -qx 'clear' contactcenter.sh 2>/dev/null; then
         sed -i '/^clear$/c\
 if [[ -t 1 \&\& -n "${TERM:-}" ]] \&\& command -v clear >/dev/null 2>\&1; then\
     clear || true\
-fi' install.sh
+fi' contactcenter.sh
         echo "[INFO] Patched non-interactive terminal handling in ContactCenter installer." >> "${install_log}"
     fi
 
@@ -334,7 +334,7 @@ fi' install.sh
     local installer_status
     local last_log_line
     started_at=$(date +%s)
-    NVM_DIR="${nvm_dir}" bash install.sh >> "${install_log}" 2>&1 &
+    NVM_DIR="${nvm_dir}" bash contactcenter.sh >> "${install_log}" 2>&1 &
     installer_pid=$!
     echo "[INFO] ContactCenter installer started. PID=${installer_pid}" >> "${install_log}"
 
@@ -349,7 +349,7 @@ fi' install.sh
 
     wait "${installer_pid}"
     installer_status=$?
-    echo "[EXIT] bash install.sh returned ${installer_status}" >> "${install_log}"
+    echo "[EXIT] bash contactcenter.sh returned ${installer_status}" >> "${install_log}"
     if [[ "${installer_status}" -ne 0 ]]; then
         log "ERROR: ContactCenter installer failed with exit code ${installer_status}; see ${install_log}"
         return "${installer_status}"
@@ -635,7 +635,7 @@ main() {
     [[ "${INSTALL_VOIZ_MONITORING}" == "true" ]] && STEP_LABELS+=("VOIZ Issabel Monitoring")
     [[ "${INSTALL_CALLERID_FORMATTER}" == "true" ]] && STEP_LABELS+=("Caller ID Formatter")
     [[ "${INSTALL_CHANSPY}" == "true" ]] && STEP_LABELS+=("Chanspy")
-    [[ "${INSTALL_CONTACT_CENTER}" == "true" ]] && STEP_LABELS+=("VOIZ ContactCenter")
+    [[ "${INSTALL_CONTACT_CENTER}" == "true" ]] && STEP_LABELS+=("VOIZ Console")
     [[ "${INSTALL_WEB_PHONE}" == "true" ]] && STEP_LABELS+=("WebPhone")
     [[ "${INSTALL_ASTERNIC_STATS}" == "true" ]] && STEP_LABELS+=("Asternic Call Stats Lite")
     [[ "${INSTALL_VOIZ_CDR_RECORDING}" == "true" ]] && STEP_LABELS+=("VOIZ CDR Recording")
@@ -734,8 +734,8 @@ main() {
             fi
             
             if [[ "${INSTALL_CONTACT_CENTER}" == "true" ]]; then
-                gauge_msg "Installing VOIZ ContactCenter..."
-                installation_step_start "Installing VOIZ ContactCenter"
+                gauge_msg "Installing VOIZ Console..."
+                installation_step_start "Installing VOIZ Console"
                 if install_contact_center; then
                     installation_step_done
                 else
@@ -858,8 +858,8 @@ main() {
         fi
         
         if [[ "${INSTALL_CONTACT_CENTER}" == "true" ]]; then
-            log "Installing VOIZ ContactCenter..."
-            installation_step_start "Installing VOIZ ContactCenter"
+            log "Installing VOIZ Console..."
+            installation_step_start "Installing VOIZ Console"
             if install_contact_center; then
                 installation_step_done
             else
