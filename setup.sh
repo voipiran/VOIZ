@@ -283,50 +283,44 @@ update_issabel() {
 install_contact_center() (
     local install_log="/var/log/voiz-contact-center-install.log"
     local archive="/opt/voiz-contact-center.tar.gz"
+    local checksum_file="/opt/voiz-contact-center.tar.gz.sha256"
     local project="/opt/voiz-contact-center"
-    local nvm_dir="${NVM_DIR:-${HOME}/.nvm}"
-    local nvm_archive="/tmp/voiz-nvm-0.40.3.tar.gz"
+    local archive_url="${VOIZ_CONTACT_CENTER_ARCHIVE_URL:-https://voipiran.io/clover/voiz-console.tar.gz}"
+    local expected_checksum
+    local actual_checksum
 
     {
         echo "VOIZ Console installation"
         echo "Started: $(date -Is)"
-        echo "[COMMAND] cd /opt && rm -rf voiz-contact-center voiz-contact-center.tar.gz && curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz -o voiz-contact-center.tar.gz && tar -xzf voiz-contact-center.tar.gz && mv voiz-console-main voiz-contact-center && cd voiz-contact-center && sudo bash contactcenter.sh"
+        echo "[COMMAND] download ${archive_url} to ${archive}, extract to ${project}, and run install-console.sh"
     } > "${install_log}"
 
     cd /opt || return 1
     rm -rf voiz-contact-center voiz-contact-center.tar.gz || return 1
-    curl -fL https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz \
+    curl -fL --connect-timeout 15 --max-time 300 "${archive_url}" \
         -o voiz-contact-center.tar.gz >> "${install_log}" 2>&1 || return 1
-    tar -xzf "${archive}" >> "${install_log}" 2>&1 || return 1
-    mv voiz-console-main voiz-contact-center >> "${install_log}" 2>&1 || return 1
+    if curl -fL --connect-timeout 15 --max-time 120 "${archive_url}.sha256" \
+        -o "${checksum_file}" >> "${install_log}" 2>&1; then
+        expected_checksum=$(awk 'NR == 1 {print $1; exit}' "${checksum_file}")
+        actual_checksum=$(sha256sum "${archive}" | awk '{print $1}')
+        if [[ ! "${expected_checksum}" =~ ^[[:xdigit:]]{64}$ ||
+            "${expected_checksum}" != "${actual_checksum}" ]]; then
+            log "ERROR: Contact Center archive checksum verification failed"
+            return 1
+        fi
+        rm -f "${checksum_file}"
+    else
+        log "WARNING: Contact Center archive checksum file is not published; HTTPS transfer was used"
+    fi
+    mkdir -p "${project}" || return 1
+    tar -xzf "${archive}" --strip-components=1 -C "${project}" >> "${install_log}" 2>&1 || return 1
     cd "${project}" || return 1
 
-    # The bundled ContactCenter installer is also invoked by the web license
-    # flow, where no terminal or TERM variable is available. Keep older
-    # published bundles from aborting on their unconditional `clear`.
-    if grep -qx 'clear' contactcenter.sh 2>/dev/null; then
-        sed -i '/^clear$/c\
-if [[ -t 1 \&\& -n "${TERM:-}" ]] \&\& command -v clear >/dev/null 2>\&1; then\
-    clear || true\
-fi' contactcenter.sh
-        echo "[INFO] Patched non-interactive terminal handling in ContactCenter installer." >> "${install_log}"
+    if [[ ! -f install-console.sh ]]; then
+        log "ERROR: Console installer was not found in the downloaded package"
+        return 1
     fi
-
-    if [[ ! -s "${nvm_dir}/nvm.sh" ]]; then
-        echo "[INFO] Preparing NVM fallback from the GitHub archive." >> "${install_log}"
-        rm -f "${nvm_archive}"
-        if curl -fL --connect-timeout 15 --max-time 120 \
-            "https://github.com/nvm-sh/nvm/archive/refs/tags/v0.40.3.tar.gz" \
-            -o "${nvm_archive}" >> "${install_log}" 2>&1 &&
-            mkdir -p "${nvm_dir}" &&
-            tar -xzf "${nvm_archive}" --strip-components=1 -C "${nvm_dir}" >> "${install_log}" 2>&1 &&
-            [[ -s "${nvm_dir}/nvm.sh" ]]; then
-            echo "[OK] NVM fallback prepared at ${nvm_dir}." >> "${install_log}"
-        else
-            echo "[WARN] NVM archive fallback failed; the original ContactCenter installer will try its standard method." >> "${install_log}"
-        fi
-        rm -f "${nvm_archive}"
-    fi
+    chmod 755 install-console.sh
 
     local started_at
     local elapsed
@@ -334,24 +328,24 @@ fi' contactcenter.sh
     local installer_status
     local last_log_line
     started_at=$(date +%s)
-    NVM_DIR="${nvm_dir}" bash contactcenter.sh >> "${install_log}" 2>&1 &
+    bash install-console.sh >> "${install_log}" 2>&1 &
     installer_pid=$!
-    echo "[INFO] ContactCenter installer started. PID=${installer_pid}" >> "${install_log}"
+    echo "[INFO] VOIZ Console installer started. PID=${installer_pid}" >> "${install_log}"
 
     while kill -0 "${installer_pid}" 2>/dev/null; do
         elapsed=$(( $(date +%s) - started_at ))
         last_log_line=$(tail -n 1 "${install_log}" 2>/dev/null | tr '\r\n' ' ')
         [[ -n "${last_log_line}" ]] || last_log_line="waiting for installer output"
-        log "ContactCenter still running (${elapsed}s, PID=${installer_pid}): ${last_log_line}"
-        gauge_msg "ContactCenter running (${elapsed}s): ${last_log_line:0:90}"
+        log "VOIZ Console still running (${elapsed}s, PID=${installer_pid}): ${last_log_line}"
+        gauge_msg "VOIZ Console running (${elapsed}s): ${last_log_line:0:90}"
         sleep 5
     done
 
     wait "${installer_pid}"
     installer_status=$?
-    echo "[EXIT] bash contactcenter.sh returned ${installer_status}" >> "${install_log}"
+    echo "[EXIT] bash install-console.sh returned ${installer_status}" >> "${install_log}"
     if [[ "${installer_status}" -ne 0 ]]; then
-        log "ERROR: ContactCenter installer failed with exit code ${installer_status}; see ${install_log}"
+        log "ERROR: VOIZ Console installer failed with exit code ${installer_status}; see ${install_log}"
         return "${installer_status}"
     fi
 
