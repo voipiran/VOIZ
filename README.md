@@ -55,7 +55,7 @@ chmod +x install.sh && \
 
 ### بسته VOIZ Console
 
-اگر گزینه VOIZ Console انتخاب شود، نصب‌کننده آرشیو را از `https://voipiran.io/clover/voiz-console.tar.gz` دریافت می‌کند و در صورت انتشار فایل `.sha256` کنار آن، صحت آرشیو را نیز بررسی می‌کند. آرشیو Console و فایل checksum را پیش از نصب در این مسیر روی سایت ویپ ایران قرار دهید؛ برای تغییر مسیر می‌توان متغیر `VOIZ_CONTACT_CENTER_ARCHIVE_URL` را تنظیم کرد.
+اگر گزینه VOIZ Console انتخاب شود، نصب‌کننده آرشیو رسمی را از شاخه `main` مخزن `https://github.com/voipiran/voiz-console` دریافت می‌کند. برای استفاده از mirror یا آرشیو داخلی، می‌توان متغیر `VOIZ_CONTACT_CENTER_ARCHIVE_URL` را تنظیم کرد.
 
 ## امکانات آماده و پشتیبانی‌شده
 

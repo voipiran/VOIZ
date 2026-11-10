@@ -285,7 +285,7 @@ install_contact_center() (
     local archive="/opt/voiz-contact-center.tar.gz"
     local checksum_file="/opt/voiz-contact-center.tar.gz.sha256"
     local project="/opt/voiz-contact-center"
-    local archive_url="${VOIZ_CONTACT_CENTER_ARCHIVE_URL:-https://voipiran.io/clover/voiz-console.tar.gz}"
+    local archive_url="${VOIZ_CONTACT_CENTER_ARCHIVE_URL:-https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz}"
     local expected_checksum
     local actual_checksum
 

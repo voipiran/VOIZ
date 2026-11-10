@@ -1,10 +1,10 @@
 #!/bin/bash
-# Install VOIZ Contact Center from the VoIPiran mirror
+# Install VOIZ Contact Center from the voiz-console repository
 
 set -euo pipefail
 
 CC_LOG="${LOG_FILE:-voiz-installation.log}"
-CC_ARCHIVE_URL="${VOIZ_CONTACT_CENTER_ARCHIVE_URL:-https://voipiran.io/clover/voiz-console.tar.gz}"
+CC_ARCHIVE_URL="${VOIZ_CONTACT_CENTER_ARCHIVE_URL:-https://github.com/voipiran/voiz-console/archive/refs/heads/main.tar.gz}"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "${CC_LOG}"
