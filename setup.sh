@@ -728,8 +728,8 @@ main() {
             fi
             
             if [[ "${INSTALL_CONTACT_CENTER}" == "true" ]]; then
-                gauge_msg "Installing VOIZ Console..."
                 installation_step_start "Installing VOIZ Console"
+                gauge_msg "Installing VOIZ Console..."
                 if install_contact_center; then
                     installation_step_done
                 else
