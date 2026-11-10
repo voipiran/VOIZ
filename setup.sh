@@ -1,5 +1,5 @@
 #!/bin/bash
-# VOIZ 6.0.5 Setup Script
+# VOIZ 6.0.6 Setup Script
 # Modular installer for VOIZ - Persian Unified Communication
 
 set -euo pipefail
