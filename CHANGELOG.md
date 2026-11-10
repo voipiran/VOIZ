@@ -12,6 +12,13 @@
 - Updated the VOIZ Console installer to download the verified installation archive from the `voiz-console` GitHub repository by default.
 - Removed direct `menu.db` backup, replacement, and cleanup logic from the VOIZ installation flow while preserving module-specific menu merge commands.
 
+## [6.0.6] - 2026-11-10
+
+### Fixed
+
+- Prevented ChanSpy installation from blocking the remaining installation steps.
+- Improved ChanSpy validation by checking the required feature codes before reporting a successful installation.
+
 ## [6.0.4] - 2026-11-04
 
 ### Changed
@@ -56,4 +63,5 @@
 [6.0.3]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.3
 [6.0.4]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.4
 [6.0.5]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.5
+[6.0.6]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.6
 [6.0.0]: https://github.com/voipiran/VOIZ/releases/tag/v6.0.0
